@@ -9,7 +9,20 @@ GET http://localhost:4000/post
 
 ###
 
+GET http://localhost:4000/post/621e41b8f9437160dd879501
+
+
+###
+
+
 POST http://localhost:4000/post
+Content-Type: application/json
+
+{
+    "message" : "this is my new post",
+    "sender" : "Eliav"
+
+}
 
 
 
