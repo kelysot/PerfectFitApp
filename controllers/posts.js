@@ -36,10 +36,11 @@ const getPostById = async (req, res) => {
 const addNewPost = (req, res) => {
 
     console.log('addNewPost ' + req.body.message)
+    sender = req.user.id
 
     const post  = Post({
         message: req.body.message,
-        sender: req.body.sender
+        sender: sender
     }) 
 
     post.save((error,newPost) =>{

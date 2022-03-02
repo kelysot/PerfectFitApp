@@ -6,7 +6,7 @@ GET http://localhost:4000/
 ###
 
 GET http://localhost:4000/post
-
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMWYyOTgzOGM5Mjg2OWFmZjc5MDc4ZSIsImlhdCI6MTY0NjIyNTg4OSwiZXhwIjoxNjQ2MjI5NDg5fQ.OMY-8T9aJEYsYkFQRNI8gHjsnY0Jpbjc2eVjuot63PA
 ###
 
 GET http://localhost:4000/post/621e41b8f9437160dd879501
@@ -16,10 +16,11 @@ GET http://localhost:4000/post/621e41b8f9437160dd879501
 
 
 POST http://localhost:4000/post
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMWYyOTgzOGM5Mjg2OWFmZjc5MDc4ZSIsImlhdCI6MTY0NjIyNTg4OSwiZXhwIjoxNjQ2MjI5NDg5fQ.OMY-8T9aJEYsYkFQRNI8gHjsnY0Jpbjc2eVjuot63PA
 Content-Type: application/json
 
 {
-    "message" : "this is my new post",
+    "message" : "this is my authorized new post",
     "sender" : "Eliav"
 
 }
