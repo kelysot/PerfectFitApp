@@ -4,6 +4,27 @@ const app = express();
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 
+
+if (process.env.NODE_ENV == "development") {
+    const swaggerUI = require("swagger-ui-express")
+    const swaggerJsDoc = require("swagger-jsdoc")
+    const options = {
+    definition: {
+    openapi: "3.0.0",
+    info: {
+    title: "Perfect Fit API",
+    version: "1.0.0",
+    description: "A simple Express Library API",
+    },
+    servers: [{url: "http://localhost:"+process.env.port,},],
+    },
+    apis: ["./routes/*.js"],
+    };
+    const specs = swaggerJsDoc(options);
+    app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
+   }
+   
+
 app.use(bodyParser.urlencoded({extended:true, limit: '1m'}))
 app.use(bodyParser.json())
 
