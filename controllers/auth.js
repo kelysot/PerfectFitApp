@@ -84,31 +84,31 @@ const login = async (req, res) => {
         return sendError(res, 400, err.message)
     }
 }
+//TODO: logout not working.
+// const logout = async (req, res) => {
+//     const authHeaders = req.headers['authorization']
+//     const token = authHeaders && authHeaders.split(' ')[1]
+//     if (token == null) return res.sendStatus('401')
 
-const logout = async (req, res) => {
-    const authHeaders = req.headers['authorization']
-    const token = authHeaders && authHeaders.split(' ')[1]
-    if (token == null) return res.sendStatus('401')
-
-    jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, async (err, userInfo) => {
-        if (err) return res.status(403).send(err.message)
-        const userId = userInfo._id
-        try {
-            user = await User.findById(userId)
-            if (user == null) return res.status(403).send('invalid request')
-            if (!user.tokens.includes(token)) {
-                user.tokens = [] //invalidate all user token
-                await user.save()
-                return res.status(403).send('invalid request')
-            }
-            user.tokens.splice(user.tokens.indexOf(token), 1)
-            await user.save()
-            res.status(200).send();
-        } catch (err) {
-            res.status(403).send(err.message)
-        }
-    })
-}
+//     jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, async (err, userInfo) => {
+//         if (err) return res.status(403).send(err.message)
+//         const userId = userInfo._id
+//         try {
+//             user = await User.findById(userId)
+//             if (user == null) return res.status(403).send('invalid request')
+//             if (!user.tokens.includes(token)) {
+//                 user.tokens = [] //invalidate all user token
+//                 await user.save()
+//                 return res.status(403).send('invalid request')
+//             }
+//             user.tokens.splice(user.tokens.indexOf(token), 1)
+//             await user.save()
+//             res.status(200).send();
+//         } catch (err) {
+//             res.status(403).send(err.message)
+//         }
+//     })
+// }
 
 
 const refreshToken = async (req, res) => {
@@ -149,7 +149,7 @@ const refreshToken = async (req, res) => {
 
 module.exports = {
     login,
-    register,
-    logout,
-    refreshToken
+    register
+    // logout,
+    // refreshToken
 }
