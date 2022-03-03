@@ -33,7 +33,8 @@ const register = async (req, res) => {
         const hashPwd = await bcrypt.hash(password, salt)
         const user = User({
             'email': email,
-            'password': hashPwd
+            'password': hashPwd,
+            'type': "client" //need to think how we create admin account.
         })
         newUser = await user.save();
         res.status(200).send(newUser);

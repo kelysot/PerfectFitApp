@@ -6,7 +6,7 @@ GET http://localhost:4000/
 ###
 
 GET http://localhost:4000/post
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMWYyOTgzOGM5Mjg2OWFmZjc5MDc4ZSIsImlhdCI6MTY0NjIyNTg4OSwiZXhwIjoxNjQ2MjI5NDg5fQ.OMY-8T9aJEYsYkFQRNI8gHjsnY0Jpbjc2eVjuot63PA
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjBhM2JlN2QwY2FmNzlmNjAxOTcyNCIsImlhdCI6MTY0NjMwNjM4MiwiZXhwIjoxNjQ2MzkyNzgyfQ.3VDzYqwnpLMqQXF22HDJxQaRa3lcSqEeEHCaxA6k5aQ
 ###
 
 GET http://localhost:4000/post/621e41b8f9437160dd879501
@@ -16,13 +16,27 @@ GET http://localhost:4000/post/621e41b8f9437160dd879501
 
 
 POST http://localhost:4000/post
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMWYyOTgzOGM5Mjg2OWFmZjc5MDc4ZSIsImlhdCI6MTY0NjIyNTg4OSwiZXhwIjoxNjQ2MjI5NDg5fQ.OMY-8T9aJEYsYkFQRNI8gHjsnY0Jpbjc2eVjuot63PA
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjBhM2JlN2QwY2FmNzlmNjAxOTcyNCIsImlhdCI6MTY0NjMwNjM4MiwiZXhwIjoxNjQ2MzkyNzgyfQ.3VDzYqwnpLMqQXF22HDJxQaRa3lcSqEeEHCaxA6k5aQ
 Content-Type: application/json
 
 {
-    "message" : "this is my authorized new post",
-    "sender" : "Eliav"
-
+        "description": "this is my test post",
+        "profileId": "1234",
+        "productName": "shirt",
+        "sku": "abc",
+        "size": "L",
+        "company": "Zara",
+        "price": "100",
+        "color": "black",
+        "categoryId": "1",
+        "subCategoryId": "2",
+        "date": "3/3/22",
+        "link": "www.example.com",
+        "sizeAdjustment": "4",
+        "rating": "5",
+        "picturesUrl": ["pic1", "pic2"],
+        "likes": null,
+        "comments": null
 }
 
 ###
@@ -33,7 +47,8 @@ Content-Type: application/json
 
 {
     "email" : "a@a.com",
-    "password" : "12345"
+    "password" : "12345",
+    "type" : "client"
 }
 
 ###
@@ -44,7 +59,8 @@ Content-Type: application/json
 
 {
     "email" : "a@a.com",
-    "password" : "12345"
+    "password" : "12345",
+    "type" : "client"
 }
 
 ###
@@ -54,8 +70,23 @@ POST http://localhost:4000/auth/logout
 Content-Type: application/json
 
 {
-    "message" : "this is my new post",
-    "sender" : "Eliav"
+    "description": "this is my test post",
+    "profileId": "1234",
+    "productName": "shirt",
+    "sku": "abc",
+    "size": "L",
+    "company": "Zara",
+    "price": "100",
+    "color": "black",
+    "categoryId": "1",
+    "subCategoryId": "2",
+    "date": "3/3/22",
+    "link": "www.example.com",
+    "sizeAdjustment": "4",
+    "rating": "5",
+    "picturesUrl": ["pic1", "pic2"],
+    "likes": null,
+    "comments": null
 
 }
 

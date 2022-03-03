@@ -1,77 +1,94 @@
-const { ObjectID } = require("bson")
-const { Int32 } = require("mongodb")
 const mongoose = require("mongoose")
-const profile_model = require("./profile_model")
 
-const postSchema = new mongoose.Schema({
-    profileId: {
+const profileSchema = new mongoose.Schema({
+    userId: {
         type: String,
         required: true
     },
-    productName: {
+    firstName: {
         type: String,
         required: true
     },
-    sku: {
+    lastName: {
         type: String,
         required: true
     },
-    size: {
+    gender: {
         type: String,
         required: true
     },
-    company: {
+    userName: {
         type: String,
         required: true
     },
-    price: {
+    birthday: {
         type: String,
         required: true
     },
-    color: {
+    pictureUrl: {
         type: String,
         required: true
     },
-    categoryId: {
+    shoulder: {
         type: String,
         required: true
     },
-    subCategoryId: {
+    chest: {
         type: String,
         required: true
     },
-    description: {
+    basin: {
         type: String,
         required: true
     },
-    date: {
+    waist: {
         type: String,
         required: true
     },
-    link: {
+    hips: {
         type: String,
         required: true
     },
-    sizeAdjustment: {
+    foot: {
         type: String,
         required: true
     },
-    rating: {
+    height: {
         type: String,
         required: true
     },
-    picturesUrl: [{
-        type: String
-    }],
-    likes: [{
+    weight: {
+        type: String,
+        required: true
+    },
+    bodyType: {
+        type: String,
+        required: true
+    },
+    status: {
+        type: Boolean,
+        required: true
+    },
+    similarProfile: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Profile'
     }],
-    comments: [{
+    followers: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Profile'
-    }]
-
+    }],
+    trackers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Profile'
+    }],
+    notifications: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Notification'
+    }],
+    wishlist: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post'
+    }],
 })
 
-module.exports = mongoose.model('Post', postSchema)
+module.exports = mongoose.model('Profile', profileSchema)

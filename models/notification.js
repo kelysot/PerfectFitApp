@@ -1,18 +1,18 @@
 const mongoose = require("mongoose")
 
-const userSchema = new mongoose.Schema({
-    email: {
+const notificationSchema = new mongoose.Schema({
+    profileId: {
         type: String,
         required: true
     },
-    password: {
+    notificationType: {
         type: String,
         required: true
     },
-    type: {
+    date: {
         type: String,
         required: true
     }
 })
 
-module.exports = mongoose.model('user', userSchema)
+module.exports = mongoose.model('Notification', notificationSchema)
