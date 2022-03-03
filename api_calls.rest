@@ -6,17 +6,16 @@ GET http://localhost:4000/
 ###
 
 GET http://localhost:4000/post
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjBhM2JlN2QwY2FmNzlmNjAxOTcyNCIsImlhdCI6MTY0NjMwNjM4MiwiZXhwIjoxNjQ2MzkyNzgyfQ.3VDzYqwnpLMqQXF22HDJxQaRa3lcSqEeEHCaxA6k5aQ
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjBkYTRhNDgxODMxNDZlZDdmOGUzMCIsImlhdCI6MTY0NjMyNTg5NSwiZXhwIjoxNjQ2NDEyMjk1fQ.W6g-iISVEVKMPiFpzuQABbvufAfjcJX1Jh5DPyyAskY
 ###
 
-GET http://localhost:4000/post/621e41b8f9437160dd879501
-
-
+GET http://localhost:4000/post/6220a47a7d0caf79f6019729
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjBkYTRhNDgxODMxNDZlZDdmOGUzMCIsImlhdCI6MTY0NjMyNTg5NSwiZXhwIjoxNjQ2NDEyMjk1fQ.W6g-iISVEVKMPiFpzuQABbvufAfjcJX1Jh5DPyyAskY
 ###
 
 
 POST http://localhost:4000/post
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjBhM2JlN2QwY2FmNzlmNjAxOTcyNCIsImlhdCI6MTY0NjMwNjM4MiwiZXhwIjoxNjQ2MzkyNzgyfQ.3VDzYqwnpLMqQXF22HDJxQaRa3lcSqEeEHCaxA6k5aQ
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjBkNmQ1NWYwYmI4N2ViMjBmYzQ4NCIsImlhdCI6MTY0NjMyMDA0NiwiZXhwIjoxNjQ2NDA2NDQ2fQ.b2YFf_4hBwszH07Qb-L20Fov_XYPC_POhgr9Bf4wl9g
 Content-Type: application/json
 
 {
@@ -46,7 +45,7 @@ POST http://localhost:4000/auth/register
 Content-Type: application/json
 
 {
-    "email" : "a@a.com",
+    "email" : "b@a.com",
     "password" : "12345",
     "type" : "client"
 }
@@ -58,37 +57,27 @@ POST http://localhost:4000/auth/login
 Content-Type: application/json
 
 {
-    "email" : "a@a.com",
+    "email" : "b@a.com",
     "password" : "12345",
     "type" : "client"
 }
 
 ###
 
+//TODO: logout not working.
+# POST http://localhost:4000/auth/logout
+# # Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjBkYTRhNDgxODMxNDZlZDdmOGUzMCIsImlhdCI6MTY0NjMyODU4OH0.WIVzzshuKMWLM8NNY-cvGtK76IFW98uAMyRBkXtSNIo
+# Content-Type: application/json
 
-POST http://localhost:4000/auth/logout
-Content-Type: application/json
+# {
+#     "email" : "b@a.com",
+#     "password" : "12345",
+#     "type" : "client"
+# }
 
-{
-    "description": "this is my test post",
-    "profileId": "1234",
-    "productName": "shirt",
-    "sku": "abc",
-    "size": "L",
-    "company": "Zara",
-    "price": "100",
-    "color": "black",
-    "categoryId": "1",
-    "subCategoryId": "2",
-    "date": "3/3/22",
-    "link": "www.example.com",
-    "sizeAdjustment": "4",
-    "rating": "5",
-    "picturesUrl": ["pic1", "pic2"],
-    "likes": null,
-    "comments": null
+###
 
-}
+//TODO: refreshToken not working.
 
-
-
+# GET http://localhost:4000/auth/refreshToken
+# Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjBkNmQ1NWYwYmI4N2ViMjBmYzQ4NCIsImlhdCI6MTY0NjMyMDA0NiwiZXhwIjoxNjQ2NDA2NDQ2fQ.b2YFf_4hBwszH07Qb-L20Fov_XYPC_POhgr9Bf4wl9g
