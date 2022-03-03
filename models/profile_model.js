@@ -45,10 +45,6 @@ const profileSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    hips: {
-        type: String,
-        required: true
-    },
     foot: {
         type: String,
         required: true
@@ -69,7 +65,7 @@ const profileSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
-    similarProfile: [{
+    similarProfileId: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Profile'
     }],
@@ -89,6 +85,10 @@ const profileSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post'
     }],
+    myPostsListId: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post'
+    }]
 })
 
 module.exports = mongoose.model('Profile', profileSchema)

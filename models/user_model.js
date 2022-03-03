@@ -13,9 +13,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    profilesId: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Profile'
+    }],
     tokens: {
         type: [String]
     }
+
 })
 
 module.exports = mongoose.model('User', userSchema)
