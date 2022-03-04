@@ -12,15 +12,15 @@ const authenticate = require('../common/auth_middleware')
 *   description: The Post API
 */
 
-/**
-* @swagger
-* components:
-*   securitySchemes:
-*       bearerAuth:
-*           type: http
-*           scheme: bearer
-*           bearerFormat: JWT
-*/
+// /**
+// * @swagger
+// * components:
+// *   securitySchemes:
+// *       bearerAuth:
+// *           type: http
+// *           scheme: bearer
+// *           bearerFormat: JWT
+// */
 
 /**
 * @swagger
