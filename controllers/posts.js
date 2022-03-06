@@ -143,12 +143,42 @@ const editPost = async(req, res) => {
     }
 }
 
-
+const deletePost = async(req, res) => {
+    if (req.params.id == null | req.params.id == undefined) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+    try {
+        const PostToDelete = await Post.findById(req.params.id)        
+        PostToDelete.remove((error)=>{
+            if (error) {
+                res.status(400).send({
+                    'status': 'fail',
+                    'error': error.message
+                })
+            }
+            else {
+                res.status(200).send({
+                    'status': 'OK',
+                    'message': 'The post was deleted successfully'
+                })
+            }
+        })
+    }catch (err) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        }) 
+    }
+}
 
 module.exports = {
     getPosts,
     getPostById,
     addNewPost,
-    editPost
+    editPost,
+    deletePost
 }
 

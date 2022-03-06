@@ -189,4 +189,7 @@ router.post('/', authenticate, Post.addNewPost)
 
 router.patch('/:id', authenticate, Post.editPost)
 
+
+router.delete('/:id', authenticate, Post.deletePost)
+
 module.exports = router
