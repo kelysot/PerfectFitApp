@@ -187,4 +187,6 @@ router.get('/:id', authenticate,  Post.getPostById)
 router.post('/', authenticate, Post.addNewPost)
 
 
+router.patch('/:id', authenticate, Post.editPost)
+
 module.exports = router

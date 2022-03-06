@@ -6,16 +6,16 @@ GET http://localhost:4000/
 ###
 
 GET http://localhost:4000/post
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NjM4NzY5NywiZXhwIjoxNjQ2NDc0MDk3fQ.U9rdtTaSCBL1uWJNjckPTibPCALemDkOo8Cnqd0Z7Uk
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NjYwNjUxMywiZXhwIjoxNjQ2NjkyOTEzfQ.67bV2VOjfg-p-bLSB3Qef4eXXUPy6ZNulRWuzsJjzfk
 ###
 
-GET http://localhost:4000/post/6220a47a7d0caf79f6019729
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NjM4NzY5NywiZXhwIjoxNjQ2NDc0MDk3fQ.U9rdtTaSCBL1uWJNjckPTibPCALemDkOo8Cnqd0Z7Uk
+GET http://localhost:4000/post/62253a28d9208e0a9fa5035b
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NjYwNjUxMywiZXhwIjoxNjQ2NjkyOTEzfQ.67bV2VOjfg-p-bLSB3Qef4eXXUPy6ZNulRWuzsJjzfk
 ###
 
 
 POST http://localhost:4000/post
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NjM4NzY5NywiZXhwIjoxNjQ2NDc0MDk3fQ.U9rdtTaSCBL1uWJNjckPTibPCALemDkOo8Cnqd0Z7Uk
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NjYwNjUxMywiZXhwIjoxNjQ2NjkyOTEzfQ.67bV2VOjfg-p-bLSB3Qef4eXXUPy6ZNulRWuzsJjzfk
 Content-Type: application/json
 
 {
@@ -34,10 +34,34 @@ Content-Type: application/json
         "sizeAdjustment": "4",
         "rating": "5",
         "picturesUrl": ["pic1", "pic2"],
-        "likes": null,
-        "comments": null
+        "likes": [],
+        "comments": []
 }
 
+###
+PATCH  http://localhost:4000/post/62253a28d9208e0a9fa5035b/
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NjYwNjUxMywiZXhwIjoxNjQ2NjkyOTEzfQ.67bV2VOjfg-p-bLSB3Qef4eXXUPy6ZNulRWuzsJjzfk
+Content-Type: application/json
+
+{
+        "description": "this is my edited post",
+        "profileId": "edited profileId",
+        "productName": "edited productName",
+        "sku": "edited sku",
+        "size": "edited size",
+        "company": "edited company",
+        "price": "edited price",
+        "color": "edited color",
+        "categoryId": "edited categoryId",
+        "subCategoryId": "edited subCategoryId",
+        "date": "edited date",
+        "link": "edited link",
+        "sizeAdjustment": "edited sizeAdjustment",
+        "rating": "edited rating",
+        "picturesUrl": ["edited imgUrl1", "edited imgUrl2"],
+        "likes": [],
+        "comments": []
+}
 ###
 
 
