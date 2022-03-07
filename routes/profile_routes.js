@@ -165,5 +165,29 @@ const authenticate = require('../common/auth_middleware')
 
 router.post('/', authenticate, Profile.addNewProfile)
 
+/**
+* @swagger
+* /profile/{id}:
+*   get:
+*     summary: get profile by id
+*     tags: [Profile Api]
+*     parameters:
+*       - in: path
+*         name: id
+*         schema:
+*           type: string
+*         required: true
+*         description: The profile id
+*     responses:
+*       200:
+*         description: the profile
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/Profile'
+*/
+
+router.get('/:id', authenticate, Profile.getProfileById)
+
 module.exports = router
 

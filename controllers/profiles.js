@@ -48,6 +48,27 @@ const addNewProfile = (req, res) => {
     })
 }
 
+const getProfileById = async (req, res) => {
+
+    if (req.params.id == null | req.params.id == undefined) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+    try {
+        profiles = await Profile.findById(req.params.id)
+        res.status(200).send(profiles)
+
+    } catch (err) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+}
+
 module.exports = {
-    addNewProfile
+    addNewProfile,
+    getProfileById
 }
