@@ -53,7 +53,7 @@ router.post('/login', Auth.login)
 *         email: 'y@gmail.com'
 *         password: '123456'
 *         type: 'admin'
-*         profilesListId: ["Yarin","Eden","Tal","Lilach","Kelly"]
+*         profilesListId: ["Yarin","Eden","Tal","Lilach","Kely"]
 */
 
 

@@ -161,7 +161,7 @@ router.get('/', authenticate, Post.getPosts)
 *               $ref: '#/components/schemas/Post'
 */
 
-router.get('/:id', authenticate,  Post.getPostById)
+router.get('/:id', authenticate, Post.getPostById)
 
 /**
 * @swagger
