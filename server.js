@@ -52,4 +52,7 @@ app.use('/profile', profileRouter)
 const categoryRouter = require('./routes/category_routes')
 app.use('/category', categoryRouter)
 
+const subCategoryRouter = require('./routes/subCategory_routes')
+app.use('/subCategory', subCategoryRouter)
+
 module.exports = app
