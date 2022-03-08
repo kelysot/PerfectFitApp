@@ -1,22 +1,17 @@
 ###
-
-
 GET http://localhost:4000/
-
 
 //****************************************POST****************************************
 
 ###
-
 GET http://localhost:4000/post
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NjYwNjUxMywiZXhwIjoxNjQ2NjkyOTEzfQ.67bV2VOjfg-p-bLSB3Qef4eXXUPy6ZNulRWuzsJjzfk
-###
 
+###
 GET http://localhost:4000/post/62253a28d9208e0a9fa5035b
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NjYwNjUxMywiZXhwIjoxNjQ2NjkyOTEzfQ.67bV2VOjfg-p-bLSB3Qef4eXXUPy6ZNulRWuzsJjzfk
+
 ###
-
-
 POST http://localhost:4000/post
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NjYwNjUxMywiZXhwIjoxNjQ2NjkyOTEzfQ.67bV2VOjfg-p-bLSB3Qef4eXXUPy6ZNulRWuzsJjzfk
 Content-Type: application/json
@@ -73,7 +68,6 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 //****************************************USER****************************************
 
 ###
-
 POST http://localhost:4000/auth/register
 Content-Type: application/json
 
@@ -84,8 +78,6 @@ Content-Type: application/json
 }
 
 ###
-
-
 POST http://localhost:4000/auth/login
 Content-Type: application/json
 
@@ -119,7 +111,6 @@ Content-Type: application/json
 //****************************************Profile****************************************
 
 ###
-
 POST http://localhost:4000/profile
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njc3NTQ5NiwiZXhwIjoxNjQ2ODYxODk2fQ.sK13D27tQgJ5Llrwc6kowWbN-Cfw9xE4I3K32w1R7Ig
 Content-Type: application/json
@@ -150,12 +141,10 @@ Content-Type: application/json
 }
 
 ###
-
 GET http://localhost:4000/profile/6225d122b4e3e4eeb42151c3
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NjYwNjUxMywiZXhwIjoxNjQ2NjkyOTEzfQ.67bV2VOjfg-p-bLSB3Qef4eXXUPy6ZNulRWuzsJjzfk
 
 ###
-
 PATCH  http://localhost:4000/profile/6227ccdcb1504d4d6fac7c3b/
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njc3NTQ5NiwiZXhwIjoxNjQ2ODYxODk2fQ.sK13D27tQgJ5Llrwc6kowWbN-Cfw9xE4I3K32w1R7Ig
 Content-Type: application/json
@@ -185,6 +174,35 @@ Content-Type: application/json
 }
 
 ###
-
 DELETE   http://localhost:4000/profile/6227ccdcb1504d4d6fac7c3b/
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njc3NTQ5NiwiZXhwIjoxNjQ2ODYxODk2fQ.sK13D27tQgJ5Llrwc6kowWbN-Cfw9xE4I3K32w1R7Ig
+
+//****************************************Category****************************************
+
+###
+GET http://localhost:4000/category/
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njc3NTQ5NiwiZXhwIjoxNjQ2ODYxODk2fQ.sK13D27tQgJ5Llrwc6kowWbN-Cfw9xE4I3K32w1R7Ig
+
+###
+Post http://localhost:4000/category/
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njc3NTQ5NiwiZXhwIjoxNjQ2ODYxODk2fQ.sK13D27tQgJ5Llrwc6kowWbN-Cfw9xE4I3K32w1R7Ig
+Content-Type: application/json
+
+{
+        "name": "new category"
+}
+
+
+###
+PATCH  http://localhost:4000/category/6227ddc2d2656fdee2ef6f04/
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njc3NTQ5NiwiZXhwIjoxNjQ2ODYxODk2fQ.sK13D27tQgJ5Llrwc6kowWbN-Cfw9xE4I3K32w1R7Ig
+Content-Type: application/json
+
+{
+        "name": "Edit category name"
+}
+
+
+###
+DELETE  http://localhost:4000/category/6227ddc2d2656fdee2ef6f04/
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njc3NTQ5NiwiZXhwIjoxNjQ2ODYxODk2fQ.sK13D27tQgJ5Llrwc6kowWbN-Cfw9xE4I3K32w1R7Ig

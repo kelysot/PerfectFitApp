@@ -49,4 +49,7 @@ app.use('/auth', authRouter)
 const profileRouter = require('./routes/profile_routes')
 app.use('/profile', profileRouter)
 
+const categoryRouter = require('./routes/category_routes')
+app.use('/category', categoryRouter)
+
 module.exports = app
