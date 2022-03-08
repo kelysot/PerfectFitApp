@@ -189,5 +189,9 @@ router.post('/', authenticate, Profile.addNewProfile)
 
 router.get('/:id', authenticate, Profile.getProfileById)
 
+router.patch('/:id', authenticate,Profile.editProfile)
+
+router.delete('/:id', authenticate,Profile.deleteProfile)
+
 module.exports = router
 

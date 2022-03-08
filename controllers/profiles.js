@@ -68,7 +68,92 @@ const getProfileById = async (req, res) => {
     }
 }
 
+const editProfile = async (req, res) => {
+    if (req.params.id == null | req.params.id == undefined) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+    try{
+        const editProfile = await Profile.findById(req.params.id)
+        editProfile.firstName = req.body.firstName
+        editProfile.lastName = req.body.lastName,
+        editProfile.gender = req.body.gender,
+        editProfile.userName = req.body.userName,
+        editProfile.birthday = req.body.birthday,
+        editProfile.pictureUrl = req.body.pictureUrl,
+        editProfile.shoulder = req.body.shoulder,
+        editProfile.chest = req.body.chest,
+        editProfile.basin = req.body.basin,
+        editProfile.waist = req.body.waist,
+        editProfile.foot = req.body.foot,
+        editProfile.height = req.body.height,
+        editProfile.weight = req.body.weight,
+        editProfile.bodyType = req.body.bodyType,
+        editProfile.status = req.body.status,
+        editProfile.similarProfileId = req.body.similarProfileId,
+        editProfile.followers = req.body.followers,
+        editProfile.trackers = req.body.trackers,
+        editProfile.notifications = req.body.notifications,
+        editProfile.wishlist = req.body.wishlist,
+        editProfile.myPostsListId = req.body.myPostsListId
+
+        editProfile.save((error,editProfile)=>{
+            if (error) {
+                res.status(400).send({
+                    'status': 'fail',
+                    'error': error.message
+                })
+            }else{
+                res.status(200).send({
+                    'status': 'OK',
+                    'profile': editProfile
+                })
+            }
+        })
+    }catch (err) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        }) 
+    }
+}
+
+const deleteProfile = async (req, res) => {
+    if (req.params.id == null | req.params.id == undefined) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+    try{
+        const profileToDelete = await Profile.findById(req.params.id)
+        profileToDelete.remove((error)=>{
+            if (error) {
+                res.status(400).send({
+                    'status': 'fail',
+                    'error': error.message
+                })
+            }
+            else {
+                res.status(200).send({
+                    'status': 'OK',
+                    'message': 'The profile was deleted successfully'
+                })
+            }
+        })
+    }catch (err) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        }) 
+    }
+}
+
 module.exports = {
     addNewProfile,
-    getProfileById
+    getProfileById,
+    editProfile,
+    deleteProfile
 }
