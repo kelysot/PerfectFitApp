@@ -1,11 +1,30 @@
 const Post = require('../models/post_model')
 
 const getPosts = async (req, res) => {
+    console.log("1111111111111111")
     try {
+        console.log("22222222222222")
         posts = await Post.find()
-        res.status(200).send(posts)
+           
+        // var result = [];
+        // for (var i in posts) {
+        //     result.push(posts[i]);
+        // }
+
+        //    console.log(posts[0]);
+
+        //    var myJsonString = JSON.stringify(posts);
+        //    console.log(myJsonString)
+
+       
+        // console.log(posts[0])
+        // res.json({posts})
+        // res.status(200).send("helloooo")
+        
+        res.status(200).send({posts})
 
     } catch (err) {
+        console.log("33333333333")
         res.status(400).send({
             'status': 'fail',
             'error': err.message

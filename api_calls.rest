@@ -5,7 +5,7 @@ GET http://localhost:4000/
 
 ###
 GET http://localhost:4000/post
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NjYwNjUxMywiZXhwIjoxNjQ2NjkyOTEzfQ.67bV2VOjfg-p-bLSB3Qef4eXXUPy6ZNulRWuzsJjzfk
+# Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NjYwNjUxMywiZXhwIjoxNjQ2NjkyOTEzfQ.67bV2VOjfg-p-bLSB3Qef4eXXUPy6ZNulRWuzsJjzfk
 
 ###
 GET http://localhost:4000/post/62253a28d9208e0a9fa5035b
@@ -13,7 +13,7 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 
 ###
 POST http://localhost:4000/post
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NjYwNjUxMywiZXhwIjoxNjQ2NjkyOTEzfQ.67bV2VOjfg-p-bLSB3Qef4eXXUPy6ZNulRWuzsJjzfk
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjQ4MmQ0MDA5NmQ5OTUzOGYwZjBhMyIsImlhdCI6MTY0NjgyOTExMCwiZXhwIjoxNjQ2OTE1NTEwfQ.KmG0ydxbs7oFx8-jK2b9t4Oa6-WMMRdDUflNm_55yTI
 Content-Type: application/json
 
 {
@@ -72,8 +72,8 @@ POST http://localhost:4000/auth/register
 Content-Type: application/json
 
 {
-    "email" : "b@a.com",
-    "password" : "12345",
+    "email" : "1",
+    "password" : "1",
     "type" : "client"
 }
 

@@ -136,7 +136,9 @@ const authenticate = require('../common/auth_middleware')
 *                 $ref: '#/components/schemas/Post'
 */
 
-router.get('/', authenticate, Post.getPosts)
+router.get('/', Post.getPosts)
+
+// router.get('/', authenticate, Post.getPosts)
 
 
 /**
