@@ -54,7 +54,7 @@ const login = async (req, res) => {
     try {
 
         const user = await User.findOne({ 'email': email })
-        if (user == null) sendError(res, 400, "wrong email or password")
+        if (!user) return sendError(res, 400, "wrong email or password")
 
         const match = await bcrypt.compare(password, user.password)
         if (!match) return sendError(res, 400, "wrong email or password")
