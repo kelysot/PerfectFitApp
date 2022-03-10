@@ -5,7 +5,7 @@ const getPosts = async (req, res) => {
     try {
         console.log("22222222222222")
         posts = await Post.find()
-           
+
         // var result = [];
         // for (var i in posts) {
         //     result.push(posts[i]);
@@ -16,12 +16,13 @@ const getPosts = async (req, res) => {
         //    var myJsonString = JSON.stringify(posts);
         //    console.log(myJsonString)
 
-       
+
         // console.log(posts[0])
         // res.json({posts})
         // res.status(200).send("helloooo")
-        
-        res.status(200).send({posts})
+        //console.log({ posts })
+
+        res.status(200).send(posts)
 
     } catch (err) {
         console.log("33333333333")
@@ -113,7 +114,7 @@ const addNewPost = (req, res) => {
     // })
 }
 
-const editPost = async(req, res) => {
+const editPost = async (req, res) => {
     if (req.params.id == null | req.params.id == undefined) {
         res.status(400).send({
             'status': 'fail',
@@ -127,20 +128,20 @@ const editPost = async(req, res) => {
         editPost.productName = req.body.productName
         editPost.sku = req.body.sku
         editPost.size = req.body.size,
-        editPost.company = req.body.company,
-        editPost.price = req.body.price,
-        editPost.color = req.body.color,
-        editPost.categoryId = req.body.categoryId,
-        editPost.subCategoryId = req.body.subCategoryId,
-        editPost.date = req.body.date,
-        editPost.link = req.body.link,
-        editPost.sizeAdjustment = req.body.sizeAdjustment,
-        editPost.rating = req.body.rating,
-        editPost.picturesUrl = req.body.picturesUrl,
-        editPost.likes = req.body.likes,
-        editPost.comments = req.body.comments
-        
-        editPost.save((error,editPost)=> {
+            editPost.company = req.body.company,
+            editPost.price = req.body.price,
+            editPost.color = req.body.color,
+            editPost.categoryId = req.body.categoryId,
+            editPost.subCategoryId = req.body.subCategoryId,
+            editPost.date = req.body.date,
+            editPost.link = req.body.link,
+            editPost.sizeAdjustment = req.body.sizeAdjustment,
+            editPost.rating = req.body.rating,
+            editPost.picturesUrl = req.body.picturesUrl,
+            editPost.likes = req.body.likes,
+            editPost.comments = req.body.comments
+
+        editPost.save((error, editPost) => {
             if (error) {
                 res.status(400).send({
                     'status': 'fail',
@@ -154,15 +155,15 @@ const editPost = async(req, res) => {
                 })
             }
         })
-    }catch (err) {
+    } catch (err) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
-        }) 
+        })
     }
 }
 
-const deletePost = async(req, res) => {
+const deletePost = async (req, res) => {
     if (req.params.id == null | req.params.id == undefined) {
         res.status(400).send({
             'status': 'fail',
@@ -170,8 +171,8 @@ const deletePost = async(req, res) => {
         })
     }
     try {
-        const PostToDelete = await Post.findById(req.params.id)        
-        PostToDelete.remove((error)=>{
+        const PostToDelete = await Post.findById(req.params.id)
+        PostToDelete.remove((error) => {
             if (error) {
                 res.status(400).send({
                     'status': 'fail',
@@ -185,11 +186,11 @@ const deletePost = async(req, res) => {
                 })
             }
         })
-    }catch (err) {
+    } catch (err) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
-        }) 
+        })
     }
 }
 
