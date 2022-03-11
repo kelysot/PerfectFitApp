@@ -126,18 +126,18 @@ const editPost = async (req, res) => {
         editPost.productName = req.body.productName
         editPost.sku = req.body.sku
         editPost.size = req.body.size,
-            editPost.company = req.body.company,
-            editPost.price = req.body.price,
-            editPost.color = req.body.color,
-            editPost.categoryId = req.body.categoryId,
-            editPost.subCategoryId = req.body.subCategoryId,
-            editPost.date = req.body.date,
-            editPost.link = req.body.link,
-            editPost.sizeAdjustment = req.body.sizeAdjustment,
-            editPost.rating = req.body.rating,
-            editPost.picturesUrl = req.body.picturesUrl,
-            editPost.likes = req.body.likes,
-            editPost.comments = req.body.comments
+        editPost.company = req.body.company,
+        editPost.price = req.body.price,
+        editPost.color = req.body.color,
+        editPost.categoryId = req.body.categoryId,
+        editPost.subCategoryId = req.body.subCategoryId,
+        editPost.date = req.body.date,
+        editPost.link = req.body.link,
+        editPost.sizeAdjustment = req.body.sizeAdjustment,
+        editPost.rating = req.body.rating,
+        editPost.picturesUrl = req.body.picturesUrl,
+        editPost.likes = req.body.likes,
+        editPost.comments = req.body.comments
 
         editPost.save((error, editPost) => {
             if (error) {
