@@ -55,4 +55,7 @@ app.use('/category', categoryRouter)
 const subCategoryRouter = require('./routes/subCategory_routes')
 app.use('/subCategory', subCategoryRouter)
 
+const commentRouter = require('./routes/comment_routes')
+app.use('/comment', commentRouter)
+
 module.exports = app

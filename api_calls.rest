@@ -13,7 +13,7 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 
 ###
 POST http://localhost:4000/post
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjQ4MmQ0MDA5NmQ5OTUzOGYwZjBhMyIsImlhdCI6MTY0NjgyOTExMCwiZXhwIjoxNjQ2OTE1NTEwfQ.KmG0ydxbs7oFx8-jK2b9t4Oa6-WMMRdDUflNm_55yTI
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njk0NzkzOSwiZXhwIjoxNjQ3MDM0MzM5fQ._9dREYzI8JAznD6ShMrWCIhEfHm0f29x7ya_qwuGyoE
 Content-Type: application/json
 
 {
@@ -37,8 +37,8 @@ Content-Type: application/json
 }
 
 ###
-PATCH  http://localhost:4000/post/62253a28d9208e0a9fa5035b/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NjYwNjUxMywiZXhwIjoxNjQ2NjkyOTEzfQ.67bV2VOjfg-p-bLSB3Qef4eXXUPy6ZNulRWuzsJjzfk
+PATCH  http://localhost:4000/post/622a6ec75afdc688ae7036f3/
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njk0NzkzOSwiZXhwIjoxNjQ3MDM0MzM5fQ._9dREYzI8JAznD6ShMrWCIhEfHm0f29x7ya_qwuGyoE
 Content-Type: application/json
 
 {
@@ -58,10 +58,10 @@ Content-Type: application/json
         "rating": "edited rating",
         "picturesUrl": ["edited imgUrl1", "edited imgUrl2"],
         "likes": [],
-        "comments": []
+        "comments": ["6221e1328c6617aec927afb3"]
 }
 ###
-DELETE   http://localhost:4000/post/62253a28d9208e0a9fa5035b/
+DELETE   http://localhost:4000/post/622a6ec75afdc688ae7036f3/
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NjYwNjUxMywiZXhwIjoxNjQ2NjkyOTEzfQ.67bV2VOjfg-p-bLSB3Qef4eXXUPy6ZNulRWuzsJjzfk
 
 
@@ -237,3 +237,18 @@ Content-Type: application/json
 DELETE  http://localhost:4000/subcategory/6227e66aff08c3354c905af6/
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njc3NTQ5NiwiZXhwIjoxNjQ2ODYxODk2fQ.sK13D27tQgJ5Llrwc6kowWbN-Cfw9xE4I3K32w1R7Ig
 
+//****************************************Comment****************************************
+
+###
+GET http://localhost:4000/comment/622a6ec75afdc688ae7036f3/
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njk0NzkzOSwiZXhwIjoxNjQ3MDM0MzM5fQ._9dREYzI8JAznD6ShMrWCIhEfHm0f29x7ya_qwuGyoE
+
+###
+Post http://localhost:4000/comment/622a6ec75afdc688ae7036f3
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njk0NzkzOSwiZXhwIjoxNjQ3MDM0MzM5fQ._9dREYzI8JAznD6ShMrWCIhEfHm0f29x7ya_qwuGyoE
+Content-Type: application/json
+
+{
+        "date" : "11/03/2022",
+        "text" : "Add new comment 2"
+}

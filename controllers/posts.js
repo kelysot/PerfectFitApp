@@ -79,7 +79,6 @@ const addNewPost = (req, res) => {
     })
 
     post.save((error, newPost) => {
-
         if (error) {
             res.status(400).send({
                 'status': 'fail',
@@ -91,7 +90,6 @@ const addNewPost = (req, res) => {
                 'status': 'OK',
                 'post': newPost
             })
-
         }
     })
     // res.send("adding new post");
