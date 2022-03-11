@@ -187,11 +187,11 @@ router.post('/', authenticate, Profile.addNewProfile)
 *               $ref: '#/components/schemas/Profile'
 */
 
-router.get('/:id', authenticate, Profile.getProfileById)
+router.get('/:id', Profile.getProfileById)
 
-router.patch('/:id', authenticate,Profile.editProfile)
+router.patch('/:id', authenticate, Profile.editProfile)
 
-router.delete('/:id', authenticate,Profile.deleteProfile)
+router.delete('/:id', authenticate, Profile.deleteProfile)
 
 module.exports = router
 

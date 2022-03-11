@@ -57,10 +57,16 @@ const getProfileById = async (req, res) => {
         })
     }
     try {
-        profiles = await Profile.findById(req.params.id)
+        console.log(req.params.id)
+        var profileId = req.params.id
+        profileId = profileId.substring(1)
+        console.log(profileId)
+        profiles = await Profile.findById(profileId)
+        console.log(profiles)
         res.status(200).send(profiles)
 
     } catch (err) {
+
         res.status(400).send({
             'status': 'fail',
             'error': err.message
@@ -75,48 +81,48 @@ const editProfile = async (req, res) => {
             'error': err.message
         })
     }
-    try{
+    try {
         const editProfile = await Profile.findById(req.params.id)
         editProfile.firstName = req.body.firstName
         editProfile.lastName = req.body.lastName,
-        editProfile.gender = req.body.gender,
-        editProfile.userName = req.body.userName,
-        editProfile.birthday = req.body.birthday,
-        editProfile.pictureUrl = req.body.pictureUrl,
-        editProfile.shoulder = req.body.shoulder,
-        editProfile.chest = req.body.chest,
-        editProfile.basin = req.body.basin,
-        editProfile.waist = req.body.waist,
-        editProfile.foot = req.body.foot,
-        editProfile.height = req.body.height,
-        editProfile.weight = req.body.weight,
-        editProfile.bodyType = req.body.bodyType,
-        editProfile.status = req.body.status,
-        editProfile.similarProfileId = req.body.similarProfileId,
-        editProfile.followers = req.body.followers,
-        editProfile.trackers = req.body.trackers,
-        editProfile.notifications = req.body.notifications,
-        editProfile.wishlist = req.body.wishlist,
-        editProfile.myPostsListId = req.body.myPostsListId
+            editProfile.gender = req.body.gender,
+            editProfile.userName = req.body.userName,
+            editProfile.birthday = req.body.birthday,
+            editProfile.pictureUrl = req.body.pictureUrl,
+            editProfile.shoulder = req.body.shoulder,
+            editProfile.chest = req.body.chest,
+            editProfile.basin = req.body.basin,
+            editProfile.waist = req.body.waist,
+            editProfile.foot = req.body.foot,
+            editProfile.height = req.body.height,
+            editProfile.weight = req.body.weight,
+            editProfile.bodyType = req.body.bodyType,
+            editProfile.status = req.body.status,
+            editProfile.similarProfileId = req.body.similarProfileId,
+            editProfile.followers = req.body.followers,
+            editProfile.trackers = req.body.trackers,
+            editProfile.notifications = req.body.notifications,
+            editProfile.wishlist = req.body.wishlist,
+            editProfile.myPostsListId = req.body.myPostsListId
 
-        editProfile.save((error,editProfile)=>{
+        editProfile.save((error, editProfile) => {
             if (error) {
                 res.status(400).send({
                     'status': 'fail',
                     'error': error.message
                 })
-            }else{
+            } else {
                 res.status(200).send({
                     'status': 'OK',
                     'profile': editProfile
                 })
             }
         })
-    }catch (err) {
+    } catch (err) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
-        }) 
+        })
     }
 }
 
@@ -127,9 +133,9 @@ const deleteProfile = async (req, res) => {
             'error': err.message
         })
     }
-    try{
+    try {
         const profileToDelete = await Profile.findById(req.params.id)
-        profileToDelete.remove((error)=>{
+        profileToDelete.remove((error) => {
             if (error) {
                 res.status(400).send({
                     'status': 'fail',
@@ -143,11 +149,11 @@ const deleteProfile = async (req, res) => {
                 })
             }
         })
-    }catch (err) {
+    } catch (err) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
-        }) 
+        })
     }
 }
 
