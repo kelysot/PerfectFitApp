@@ -249,7 +249,7 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 
 ### //byCmmentID
 Post http://localhost:4000/comment/622a6ec75afdc688ae7036f3
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njk0NzkzOSwiZXhwIjoxNjQ3MDM0MzM5fQ._9dREYzI8JAznD6ShMrWCIhEfHm0f29x7ya_qwuGyoE
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzA2MjI0OCwiZXhwIjoxNjQ3MTQ4NjQ4fQ.6qHiuJkcX8EBuPxiyAv3c9hOu-2r_nCnIID1zp6zfSA
 Content-Type: application/json
 
 {
@@ -258,8 +258,8 @@ Content-Type: application/json
 }
 
 ###
-PATCH  http://localhost:4000/comment/622a99e745c73ec710fa90e5/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njk0NzkzOSwiZXhwIjoxNjQ3MDM0MzM5fQ._9dREYzI8JAznD6ShMrWCIhEfHm0f29x7ya_qwuGyoE
+PATCH  http://localhost:4000/comment/622c2dd2118c77073a01f862/
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzA2MjI0OCwiZXhwIjoxNjQ3MTQ4NjQ4fQ.6qHiuJkcX8EBuPxiyAv3c9hOu-2r_nCnIID1zp6zfSA
 Content-Type: application/json
 
 {
@@ -268,5 +268,5 @@ Content-Type: application/json
 }
 
 ###
-DELETE  http://localhost:4000/comment/622a99e745c73ec710fa90e5/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njk0NzkzOSwiZXhwIjoxNjQ3MDM0MzM5fQ._9dREYzI8JAznD6ShMrWCIhEfHm0f29x7ya_qwuGyoE
+DELETE  http://localhost:4000/comment/622c3a5fdb82d5c2f9a945b7/
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzA2MjI0OCwiZXhwIjoxNjQ3MTQ4NjQ4fQ.6qHiuJkcX8EBuPxiyAv3c9hOu-2r_nCnIID1zp6zfSA

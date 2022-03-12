@@ -60,6 +60,20 @@ const addComment = async (req, res) => {
         text: req.body.text
     })
 
+    const newPostList = post.comments;
+    newPostList.push(newComment._id);
+
+    await post.save((error)=>{
+        if(error){
+            res.status(400).send({
+                'status': 'fail',
+                'error': error.message
+            })
+        }else{
+            res.status(200)
+        }
+    })
+
     newComment.save((error,newComment)=>{
         if (error) {
             res.status(400).send({
@@ -73,22 +87,6 @@ const addComment = async (req, res) => {
             })
         }
     })
-    //TODO: save the comment id in the post comments 
-    // const newPostList = post.comments;
-    // newPostList.push(newComment._id);
-    // post.save((error, newPostList) => {
-    //     if (error) {
-    //         res.status(400).send({
-    //             'status': 'fail',
-    //             'error': error.message
-    //         })
-    //     }else{
-    //         res.status(200).send({
-    //             'status': 'OK',
-    //             'postList': newPostList
-    //         })
-    //     }
-    // })
 }
 
 const editComment = async (req, res) => {
@@ -123,7 +121,6 @@ const editComment = async (req, res) => {
             'error': err.message
         })
     }
-    //TODO: Edit the comment in post comments
 }
 
 const deleteComment = async (req, res) => {
@@ -135,6 +132,25 @@ const deleteComment = async (req, res) => {
     }
     try {
         const commentToDelete = await Comment.findById(req.params.id);
+        const profileId = commentToDelete.profileId
+        const postArray = await Post.find({profileId:{$eq: profileId}}) // over first on who is have the same profile id to improve running time
+        postArray.forEach(async (post) => {
+            if(post.comments.includes(commentToDelete._id)){
+                post.comments.remove(commentToDelete._id)
+                await post.save((error)=>{
+                    if(error){
+                        res.status(400).send({
+                            'status': 'fail',
+                            'error': error.message
+                        })
+                    }else{
+                        res.status(200)
+                        return
+                    }
+                })
+            }
+        })
+        
         commentToDelete.remove((error)=>{
             if (error) {
                 res.status(400).send({
@@ -155,7 +171,6 @@ const deleteComment = async (req, res) => {
             'error': err.message
         })
     }
-    //TODO: remove the comment from post comments
 }
 
 module.exports = {
