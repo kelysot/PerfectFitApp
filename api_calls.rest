@@ -13,7 +13,7 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 
 ###
 POST http://localhost:4000/post
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njk0NzkzOSwiZXhwIjoxNjQ3MDM0MzM5fQ._9dREYzI8JAznD6ShMrWCIhEfHm0f29x7ya_qwuGyoE
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjBkYTRhNDgxODMxNDZlZDdmOGUzMCIsImlhdCI6MTY0NzAwMTcxNCwiZXhwIjoxNjQ3MDg4MTE0fQ.G6Mf9Pvi6f2SBezY__zZ5VzzDnoreviqMldsyQ7u4zk
 Content-Type: application/json
 
 {
