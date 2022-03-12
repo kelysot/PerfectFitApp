@@ -60,8 +60,8 @@ const addComment = async (req, res) => {
         text: req.body.text
     })
 
-    const newPostList = post.comments;
-    newPostList.push(newComment._id);
+    const newPostList = post.comments
+    newPostList.push(newComment._id)
 
     await post.save((error)=>{
         if(error){
@@ -132,8 +132,8 @@ const deleteComment = async (req, res) => {
     }
     try {
         const commentToDelete = await Comment.findById(req.params.id);
-        const profileId = commentToDelete.profileId
-        const postArray = await Post.find({profileId:{$eq: profileId}}) // over first on who is have the same profile id to improve running time
+        const profileId = commentToDelete.profileId // over first on who is have the same profile id to improve running time
+        const postArray = await Post.find({profileId:{$eq: profileId}})
         postArray.forEach(async (post) => {
             if(post.comments.includes(commentToDelete._id)){
                 post.comments.remove(commentToDelete._id)

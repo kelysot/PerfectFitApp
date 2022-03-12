@@ -251,7 +251,7 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 GET http://localhost:4000/comment/byId/622c45b92fae64167198bbec/
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzA2MjI0OCwiZXhwIjoxNjQ3MTQ4NjQ4fQ.6qHiuJkcX8EBuPxiyAv3c9hOu-2r_nCnIID1zp6zfSA
 
-###
+### //byPostID
 Post http://localhost:4000/comment/622a6ec75afdc688ae7036f3
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzA2MjI0OCwiZXhwIjoxNjQ3MTQ4NjQ4fQ.6qHiuJkcX8EBuPxiyAv3c9hOu-2r_nCnIID1zp6zfSA
 Content-Type: application/json
@@ -277,6 +277,38 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 
 //****************************************Notification****************************************
 
+###
+GET http://localhost:4000/notification/
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzA2MjI0OCwiZXhwIjoxNjQ3MTQ4NjQ4fQ.6qHiuJkcX8EBuPxiyAv3c9hOu-2r_nCnIID1zp6zfSA
+
 ### //By profoileId
 GET http://localhost:4000/notification/6227d5852a70347987d0113c/
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzA2MjI0OCwiZXhwIjoxNjQ3MTQ4NjQ4fQ.6qHiuJkcX8EBuPxiyAv3c9hOu-2r_nCnIID1zp6zfSA
+
+### // by NotificationId
+GET http://localhost:4000/notification/byId/622c5c04abb2e3c8928f4910/
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzA2MjI0OCwiZXhwIjoxNjQ3MTQ4NjQ4fQ.6qHiuJkcX8EBuPxiyAv3c9hOu-2r_nCnIID1zp6zfSA
+
+### //By profoileId
+Post http://localhost:4000/notification/6227d5852a70347987d0113c
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzA2MjI0OCwiZXhwIjoxNjQ3MTQ4NjQ4fQ.6qHiuJkcX8EBuPxiyAv3c9hOu-2r_nCnIID1zp6zfSA
+Content-Type: application/json
+
+{
+        "notificationType" : "Like",
+        "date" : "12/03/2022"
+}
+
+### //by notificationID
+PATCH  http://localhost:4000/notification/622c5c04abb2e3c8928f4910/
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzA2MjI0OCwiZXhwIjoxNjQ3MTQ4NjQ4fQ.6qHiuJkcX8EBuPxiyAv3c9hOu-2r_nCnIID1zp6zfSA
+Content-Type: application/json
+
+{
+        "notificationType" : "Comment",
+        "date" : "12/03/2022"
+}
+
+### 
+DELETE  http://localhost:4000/notification/622c616a33383e291b68d86b/
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzA2MjI0OCwiZXhwIjoxNjQ3MTQ4NjQ4fQ.6qHiuJkcX8EBuPxiyAv3c9hOu-2r_nCnIID1zp6zfSA
