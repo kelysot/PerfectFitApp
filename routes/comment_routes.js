@@ -8,7 +8,7 @@ router.get('/',authenticate,Comment.getComments)
 
 router.get('/:id', authenticate, Comment.getCommentsListIdsByPostId)
 
-router.get('/:id', authenticate, Comment.getCommentById)
+router.get('/byId/:id', authenticate, Comment.getCommentById)
 
 router.post('/:id', authenticate,Comment.addComment)
 

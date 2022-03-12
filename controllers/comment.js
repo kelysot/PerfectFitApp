@@ -33,14 +33,14 @@ const getCommentsListIdsByPostId = async (req, res) => {
 }
 
 const getCommentById = async (req, res) => {
-    if (req.params.id == null | req.params.id == undefined) {
+    if (req.params.id == null || req.params.id == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
         })
     }
     try {
-        const comment = await Comment.findOne(req.params.id)
+        const comment = await Comment.findById(req.params.id)
         res.status(200).send(comment)
     }catch(err) {
         res.status(400).send({
