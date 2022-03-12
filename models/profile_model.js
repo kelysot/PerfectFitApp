@@ -27,27 +27,27 @@ const profileSchema = new mongoose.Schema({
     },
     pictureUrl: {
         type: String,
-        required: true
+        required: false
     },
     shoulder: {
         type: String,
-        required: true
+        required: false
     },
     chest: {
         type: String,
-        required: true
+        required: false
     },
     basin: {
         type: String,
-        required: true
+        required: false
     },
     waist: {
         type: String,
-        required: true
+        required: false
     },
     foot: {
         type: String,
-        required: true
+        required: false
     },
     height: {
         type: String,

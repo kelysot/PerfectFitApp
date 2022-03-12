@@ -34,7 +34,7 @@ const addCategory = async (req, res) => {
 }
 
 const editCategory = async (req, res) => {
-    if (req.params.id == null | req.params.id == undefined) {
+    if (req.params.id == null || req.params.id == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
@@ -67,7 +67,7 @@ const editCategory = async (req, res) => {
 }
 
 const deleteCategory = async (req, res) => {
-    if (req.params.id == null | req.params.id == undefined) {
+    if (req.params.id == null || req.params.id == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message

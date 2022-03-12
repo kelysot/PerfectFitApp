@@ -1,6 +1,11 @@
 const Profile = require('../models/profile_model')
 
+const User = require('../models/user_model')
+
 const addNewProfile = async (req, res) => {
+
+    const email =  req.body.userId 
+    const user = await User.findOne({email:{$eq:email}})
 
     const profile = Profile({
         userId: req.body.userId,
@@ -35,19 +40,32 @@ const addNewProfile = async (req, res) => {
                 'error': error.message
             })
         }
-        else{
+        else{    
             res.status(200).send({
                 'status': 'OK',
                 'profile': profile
             })
+        }
+    })
 
+    user.profilesId.push(profile.userName)
+
+    await user.save((error)=>{
+        if(error){
+            res.status(400).send({
+                'status': 'fail',
+                'error': error.message
+            })
+        }
+        else{
+            res.status(200)
         }
     })
 }
 
 const getProfileById = async (req, res) => {
 
-    if (req.params.id == null | req.params.id == undefined) {
+    if (req.params.id == null || req.params.id == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
@@ -72,7 +90,7 @@ const getProfileById = async (req, res) => {
 }
 
 const editProfile = async (req, res) => {
-    if (req.params.id == null | req.params.id == undefined) {
+    if (req.params.id == null || req.params.id == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
@@ -124,7 +142,7 @@ const editProfile = async (req, res) => {
 }
 
 const deleteProfile = async (req, res) => {
-    if (req.params.id == null | req.params.id == undefined) {
+    if (req.params.id == null || req.params.id == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message

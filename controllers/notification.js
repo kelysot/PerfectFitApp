@@ -14,7 +14,7 @@ const getNotifications = async(req, res) => {
 }
 
 const getNotificationsListByProfileId = async (req, res) => {
-    if (req.params.id == null | req.params.id == undefined) {
+    if (req.params.id == null || req.params.id == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
@@ -33,7 +33,7 @@ const getNotificationsListByProfileId = async (req, res) => {
 }
 
 const getNotificationById = async (req, res) => {
-    if (req.params.id == null | req.params.id == undefined) {
+    if (req.params.id == null || req.params.id == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
@@ -90,7 +90,7 @@ const addNotification = async (req, res) => {
 }
 
 const editNotification = async (req, res) => {
-    if (req.params.id == null | req.params.id == undefined) {
+    if (req.params.id == null || req.params.id == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
@@ -123,7 +123,7 @@ const editNotification = async (req, res) => {
 }
 
 const deleteNotification = async (req, res) => {
-    if (req.params.id == null | req.params.id == undefined) {
+    if (req.params.id == null || req.params.id == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message

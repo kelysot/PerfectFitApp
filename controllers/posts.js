@@ -19,7 +19,7 @@ const getPosts = async (req, res) => {
 
 const getPostById = async (req, res) => {
 
-    if (req.params.id == null | req.params.id == undefined) {
+    if (req.params.id == null || req.params.id == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
@@ -97,19 +97,19 @@ const addNewPost = (req, res) => {
 }
 
 const editPost = async (req, res) => {
-    if (req.params.id == null | req.params.id == undefined) {
+    if (req.params.id == null || req.params.id == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
         })
     }
     try {
-        const editPost = await Post.findById(req.params.id)
-        editPost.profileId = req.body.profileId
-        editPost.description = req.body.description
-        editPost.productName = req.body.productName
-        editPost.sku = req.body.sku
-        editPost.size = req.body.size,
+            const editPost = await Post.findById(req.params.id)
+            editPost.profileId = req.body.profileId
+            editPost.description = req.body.description
+            editPost.productName = req.body.productName
+            editPost.sku = req.body.sku
+            editPost.size = req.body.size,
             editPost.company = req.body.company,
             editPost.price = req.body.price,
             editPost.color = req.body.color,
@@ -123,7 +123,7 @@ const editPost = async (req, res) => {
             editPost.likes = req.body.likes,
             editPost.comments = req.body.comments
 
-        editPost.save((error, editPost) => {
+            editPost.save((error, editPost) => {
             if (error) {
                 res.status(400).send({
                     'status': 'fail',
@@ -146,7 +146,7 @@ const editPost = async (req, res) => {
 }
 
 const deletePost = async (req, res) => {
-    if (req.params.id == null | req.params.id == undefined) {
+    if (req.params.id == null || req.params.id == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message

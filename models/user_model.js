@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     profilesId: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'Profile'
     }],
     tokens: {

@@ -14,7 +14,7 @@ const getComments = async(req, res) => {
 }
 
 const getCommentsListIdsByPostId = async (req, res) => {
-    if (req.params.id == null | req.params.id == undefined) {
+    if (req.params.id == null || req.params.id == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
@@ -90,7 +90,7 @@ const addComment = async (req, res) => {
 }
 
 const editComment = async (req, res) => {
-    if (req.params.id == null | req.params.id == undefined) {
+    if (req.params.id == null || req.params.id == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
@@ -124,7 +124,7 @@ const editComment = async (req, res) => {
 }
 
 const deleteComment = async (req, res) => {
-    if (req.params.id == null | req.params.id == undefined) {
+    if (req.params.id == null || req.params.id == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
