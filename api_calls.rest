@@ -112,11 +112,10 @@ Content-Type: application/json
 
 ###
 POST http://localhost:4000/profile
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njc3NTQ5NiwiZXhwIjoxNjQ2ODYxODk2fQ.sK13D27tQgJ5Llrwc6kowWbN-Cfw9xE4I3K32w1R7Ig
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjQ4MmQ0MDA5NmQ5OTUzOGYwZjBhMyIsImlhdCI6MTY0NzA5MTEzNywiZXhwIjoxNjQ3MTc3NTM3fQ.Q_qqv71XDPFG8pTErucn2pb3fKE9JEndUth25_bVJyg
 Content-Type: application/json
 
 {
-        "userId": "1234",
         "firstName": "Yuval",
         "lastName": "Levi",
         "gender": "female",

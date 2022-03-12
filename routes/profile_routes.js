@@ -163,7 +163,8 @@ const authenticate = require('../common/auth_middleware')
 *               $ref: '#/components/schemas/Profile'
 */
 
-router.post('/', authenticate, Profile.addNewProfile)
+router.post('/', Profile.addNewProfile)
+// router.post('/', authenticate, Profile.addNewProfile)
 
 /**
 * @swagger
