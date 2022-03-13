@@ -84,6 +84,30 @@ const login = async (req, res) => {
         return sendError(res, 400, err.message)
     }
 }
+
+const getUser = async (req, res) => {
+
+    const email = req.params.email
+    if (email == null || email == undefined) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+    try {
+        const user = await User.findOne({ 'email': email })
+        const senduser = user._doc
+        res.status(200).send(senduser)
+    } catch (err) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+        console.log("--------------- " + err.message)
+    }
+}
+
+
 //TODO: logout not working.
 // const logout = async (req, res) => {
 //     const authHeaders = req.headers['authorization']
@@ -149,7 +173,8 @@ const refreshToken = async (req, res) => {
 
 module.exports = {
     login,
-    register
+    register,
+    getUser
     // logout,
     // refreshToken
 }

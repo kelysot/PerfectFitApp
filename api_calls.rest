@@ -87,6 +87,10 @@ Content-Type: application/json
     "type" : "client"
 }
 
+### 
+
+GET http://localhost:4000/auth/getUser/1
+
 ###
 
 //TODO: logout not working.

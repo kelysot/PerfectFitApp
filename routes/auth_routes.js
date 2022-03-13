@@ -81,4 +81,8 @@ router.post('/login', Auth.login)
 router.post('/register', Auth.register)
 
 
+
+router.get('/getUser/:email', Auth.getUser)
+
+
 module.exports = router
