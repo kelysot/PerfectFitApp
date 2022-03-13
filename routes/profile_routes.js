@@ -194,5 +194,9 @@ router.patch('/:id', authenticate, Profile.editProfile)
 
 router.delete('/:id', authenticate, Profile.deleteProfile)
 
+router.get('/getProfile/:email/:userName', Profile.getProfile)
+
+
+
 module.exports = router
 

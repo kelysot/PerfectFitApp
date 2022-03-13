@@ -114,6 +114,10 @@ GET http://localhost:4000/auth/getUser/1
 
 //****************************************Profile****************************************
 
+### 
+
+GET http://localhost:4000/profile/getProfile/1/lilach
+
 ###
 POST http://localhost:4000/profile
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjQ4MmQ0MDA5NmQ5OTUzOGYwZjBhMyIsImlhdCI6MTY0NzA5MTEzNywiZXhwIjoxNjQ3MTc3NTM3fQ.Q_qqv71XDPFG8pTErucn2pb3fKE9JEndUth25_bVJyg
@@ -144,7 +148,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:4000/profile/6225d122b4e3e4eeb42151c3
+GET http://localhost:4000/profile/622dc115e2a3eccfccaf0451
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NjYwNjUxMywiZXhwIjoxNjQ2NjkyOTEzfQ.67bV2VOjfg-p-bLSB3Qef4eXXUPy6ZNulRWuzsJjzfk
 
 ###

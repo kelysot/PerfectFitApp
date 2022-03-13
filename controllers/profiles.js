@@ -2,6 +2,46 @@ const Profile = require('../models/profile_model')
 
 const User = require('../models/user_model')
 
+
+
+const getProfile = async (req, res) => {
+
+    const email = req.params.email
+    const userName = req.params.userName
+
+    console.log("the email: " + email)
+    console.log("the userName: " + userName)
+
+
+    if (email == null || email == undefined || userName == null || userName == undefined) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+    try {
+        const profileArr = await Profile.find({ 'userId': email })
+        var profile; 
+
+        profileArr.forEach(element => {
+            if(element._doc.userName == userName){
+                profile = element._doc
+            }
+        });
+
+        const sendprofile = profile
+        res.status(200).send(sendprofile)
+    } catch (err) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+        console.log("--------------- " + err.message)
+    }
+
+
+}
+
 const addNewProfile = async (req, res) => {
 
     const email =  req.body.userId 
@@ -176,5 +216,6 @@ module.exports = {
     addNewProfile,
     getProfileById,
     editProfile,
-    deleteProfile
+    deleteProfile,
+    getProfile
 }
