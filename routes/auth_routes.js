@@ -81,6 +81,27 @@ router.post('/login', Auth.login)
 router.post('/register', Auth.register)
 
 
+/**
+* @swagger
+* /auth/getUser/{email}:
+*   get:
+*     summary: get user by email
+*     tags: [Auth Api]
+*     parameters:
+*       - in: path
+*         name: email
+*         schema:
+*           type: string
+*         required: true
+*         description: The user email
+*     responses:
+*       200:
+*         description: the user
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/User'
+*/
 
 router.get('/getUser/:email', Auth.getUser)
 

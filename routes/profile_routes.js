@@ -194,7 +194,36 @@ router.patch('/:id', authenticate, Profile.editProfile)
 
 router.delete('/:id', authenticate, Profile.deleteProfile)
 
-router.get('/getProfile/:email/:userName', Profile.getProfile)
+
+/**
+* @swagger
+* /profile/{email}/{userName}:
+*   get:
+*     summary: get profile by user-email and profile-userName
+*     tags: [Profile Api]
+*     parameters:
+*       - in: path
+*         name: email
+*         schema:
+*           type: string
+*         required: true
+*         description: user email
+*       - in: path
+*         name: userName
+*         schema:
+*           type: string
+*           required: true
+*           description: profile userName
+*     responses:
+*       200:
+*         description: the profile
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/Profile'
+*/
+
+router.get('/getProfile/:email/:userName', authenticate, Profile.getProfile)
 
 
 

@@ -35,6 +35,20 @@ const register = async (req, res) => {
             'password': hashPwd,
             'type': "client" //need to think how we create admin account.
         })
+        const accessToken = await jwt.sign(
+            { 'id': user._id },
+            process.env.ACCESS_TOKEN_SECRET,
+            { expiresIn: process.env.JWT_TOKEN_EXPIRATION }
+        )
+
+        const refreshToken = await jwt.sign(
+            { 'id': user._id },
+            process.env.REFRESH_TOKEN_SECRET
+        )
+
+        console.log("the token: " + accessToken)
+        user.tokens = [accessToken] 
+        
         newUser = await user.save();
         res.status(200).send(newUser);
     } catch (err) {
@@ -71,8 +85,13 @@ const login = async (req, res) => {
             process.env.REFRESH_TOKEN_SECRET
         )
 
-        if (user.tokens == null) user.tokens = [refreshToken]
-        else user.tokens.push(refreshToken)
+        
+
+        console.log("the token: " + accessToken)
+        // if (user.tokens == null)
+        //TODO: send the two tokens: access and refresh
+        user.tokens = [accessToken] 
+        // else user.tokens.push(refreshToken)
         await user.save()
 
         res.status(200).send({
