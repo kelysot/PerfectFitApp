@@ -29,23 +29,23 @@ const authenticate = require('../common/auth_middleware')
 *     Post:
 *       type: object
 *       required:
-*         -profileId
-*         -productName
-*         -sku
-*         -size
-*         -company
-*         -price
-*         -color
-*         -categoryId
-*         -subCategoryId
-*         -description
-*         -date
-*         -link
-*         -sizeAdjustment
-*         -rating
-*         -picturesUrl
-*         -likes
-*         -comments
+*         - profileId
+*         - productName
+*         - sku
+*         - size
+*         - company
+*         - price
+*         - color
+*         - categoryId
+*         - subCategoryId
+*         - description
+*         - date
+*         - link
+*         - sizeAdjustment
+*         - rating
+*         - picturesUrl
+*         - likes
+*         - comments
 *       properties:
 *        profileId:
 *           type: String
@@ -123,11 +123,11 @@ const authenticate = require('../common/auth_middleware')
 * @swagger
 * /post:
 *   get:
-*     summary: get all posts
+*     summary: Return the list of all the posts
 *     tags: [Post Api]
 *     responses:
 *       200:
-*         description: The posts list
+*         description: The list of all the categories
 *         content:
 *           application/json:
 *             schema:
@@ -142,55 +142,108 @@ router.get('/', Post.getPosts)
 
 
 /**
-* @swagger
-* /post/{id}:
-*   get:
-*     summary: get post by id
-*     tags: [Post Api]
-*     parameters:
-*       - in: path
-*         name: id
-*         schema:
-*           type: string
-*         required: true
-*         description: The post id
-*     responses:
-*       200:
-*         description: the post
-*         content:
-*           application/json:
-*             schema:
-*               $ref: '#/components/schemas/Post'
-*/
+ * @swagger
+ * /post/{id}:
+ *  get:
+ *    summary: Return the post by id
+ *    tags: [Post Api]
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: The post id
+ *    responses:
+ *      200:
+ *          description: The post description by id
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Post'
+ *      404:
+ *         description: The post was not found 
+ */
 
 router.get('/:id', authenticate, Post.getPostById)
 
+
 /**
-* @swagger
-* /post:
-*   post:
-*     summary: add new post
-*     tags: [Post Api]
-*     requestBody:
-*       required: true
-*       content:
-*         application/json:
-*           schema:
-*             $ref: '#/components/schemas/Post'
-*     responses:
-*       200:
-*         description: The posts list
-*         content:
-*           application/json:
-*             schema:
-*               $ref: '#/components/schemas/Post'
-*/
+ * @swagger
+ * /post:
+ *  post:
+ *    summary: Create a new post
+ *    tags: [Post Api]
+ *    requestBody:
+ *      required: true
+ *      content:
+ *         application/json:
+ *          schema:
+ *             $ref: '#/components/schemas/Post'
+ *    responses:
+ *      200:
+ *          description: The post was successfully create
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Post'
+ *      400:
+ *         description: Some server error 
+ */
 
 router.post('/', authenticate, Post.addNewPost)
 
+/**
+ * @swagger
+ * /post/{id}:
+ *  patch:
+ *    summary: Update the post by id
+ *    tags: [Post Api]
+ *    parameters:
+ *      - in: path
+ *        name: id   
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: The post id
+ *    requestBody:
+ *      required: true
+ *      content:
+ *          application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/Post'
+ *    responses:
+ *      200:
+ *          description: The post was updated successfully
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/Post'
+ *      400:
+ *          description: Some error 
+ */
 
 router.patch('/:id', authenticate, Post.editPost)
 
+/**
+ * @swagger
+ * /post/{id}:
+ *  delete:
+ *    summary: Remove the post by id
+ *    tags: [Post Api]
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        schema:
+ *         type: string 
+ *        required: true
+ *        description: The post id
+ *    responses:
+ *      200:
+ *          description: The post was deleted successfully
+ *      400:
+ *          description: Some error     
+ */
 
 router.delete('/:id', authenticate, Post.deletePost)
 

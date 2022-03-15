@@ -32,10 +32,10 @@ router.post('/login', Auth.login)
 *     User:
 *       type: object
 *       required:
-*         -email
-*         -password
-*         -type
-*         -profilesListId
+*         - email
+*         - password
+*         - type
+*         - profilesListId
 *       properties:
 *        email:
 *           type: String

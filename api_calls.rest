@@ -189,25 +189,33 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 
 ###
 GET http://localhost:4000/category/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njc3NTQ5NiwiZXhwIjoxNjQ2ODYxODk2fQ.sK13D27tQgJ5Llrwc6kowWbN-Cfw9xE4I3K32w1R7Ig
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzM3NzE4MywiZXhwIjoxNjQ3NDYzNTgzfQ.UF6lJEKURZrs4LQp24d0pB6iFC7GgxZl5csVu6NIGD0
+
+###
+GET http://localhost:4000/category/6230fb4ae68fb223cdc6d5f3
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzM3NzE4MywiZXhwIjoxNjQ3NDYzNTgzfQ.UF6lJEKURZrs4LQp24d0pB6iFC7GgxZl5csVu6NIGD0
 
 ###
 Post http://localhost:4000/category/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njc3NTQ5NiwiZXhwIjoxNjQ2ODYxODk2fQ.sK13D27tQgJ5Llrwc6kowWbN-Cfw9xE4I3K32w1R7Ig
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzM3NzE4MywiZXhwIjoxNjQ3NDYzNTgzfQ.UF6lJEKURZrs4LQp24d0pB6iFC7GgxZl5csVu6NIGD0
 Content-Type: application/json
 
 {
-        "name": "new category"
+        "name": "new category",
+        "menSubCategory": [],
+        "womenSubCategory":[]
 }
 
 
 ###
-PATCH  http://localhost:4000/category/6227ddc2d2656fdee2ef6f04/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njc3NTQ5NiwiZXhwIjoxNjQ2ODYxODk2fQ.sK13D27tQgJ5Llrwc6kowWbN-Cfw9xE4I3K32w1R7Ig
+PATCH  http://localhost:4000/category/6230fb4ae68fb223cdc6d5f3/
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzM3NzE4MywiZXhwIjoxNjQ3NDYzNTgzfQ.UF6lJEKURZrs4LQp24d0pB6iFC7GgxZl5csVu6NIGD0
 Content-Type: application/json
 
 {
-        "name": "Edit category name"
+        "name": "Edit category name",
+        "menSubCategory": [],
+        "womenSubCategory":[]
 }
 
 

@@ -10,11 +10,31 @@ const getCategories = async (req, res) => {
             'error': err.message
         })
     }
-} 
+}
+
+const getCategoryById = async (req, res) => {
+    if (req.params.id == null || req.params.id == undefined) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+    try{
+        const category = await Category.findById(req.params.id)
+        res.status(200).send(category)
+    }catch(err){
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+}
 
 const addCategory = async (req, res) => {
     const newCategory = Category({
-        "name": req.body.name
+        "name": req.body.name,
+        "menSubCategory" : req.body.menSubCategory,
+        "womenSubCategory": req.body.womenSubCategory
     })
 
     newCategory.save((error, newCategory) => {
@@ -43,6 +63,8 @@ const editCategory = async (req, res) => {
     try{
         const editCategory = await Category.findById(req.params.id)
         editCategory.name = req.body.name
+        editCategory.menSubCategory = req.body.menSubCategory
+        editCategory.womenSubCategory = req.body.womenSubCategory
 
         editCategory.save((error,editCategory)=>{
             if (error) {
@@ -102,5 +124,6 @@ module.exports = {
     getCategories,
     addCategory,
     editCategory,
-    deleteCategory
+    deleteCategory,
+    getCategoryById
 }
