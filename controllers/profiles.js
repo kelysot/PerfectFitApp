@@ -1,8 +1,5 @@
 const Profile = require('../models/profile_model')
-
 const User = require('../models/user_model')
-
-
 
 const getProfile = async (req, res) => {
 
@@ -46,7 +43,7 @@ const addNewProfile = async (req, res) => {
 
     const email =  req.body.userId 
     const user = await User.findOne({email:{$eq:email}})
-
+    
     const profile = Profile({
         userId: req.body.userId,
         firstName: req.body.firstName,

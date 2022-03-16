@@ -28,28 +28,28 @@ const authenticate = require('../common/auth_middleware')
 *     Profile:
 *       type: object
 *       required:
-*         - userId
-*         - firstName
-*         - lastName
-*         - gender
-*         - userName
-*         - birthday
-*         - pictureUrl
-*         - shoulder
-*         - chest
-*         - basin
-*         - waist
-*         - foot
-*         - height
-*         - weight
-*         - bodyType
-*         - status
-*         - similarProfileId
-*         - followers
-*         - trackers
-*         - notifications
-*         - wishlist
-*         - myPostsListId
+*         -userId
+*         -firstName
+*         -lastName
+*         -gender
+*         -userName
+*         -birthday
+*         -pictureUrl
+*         -shoulder
+*         -chest
+*         -basin
+*         -waist
+*         -foot
+*         -height
+*         -weight
+*         -bodyType
+*         -status
+*         -similarProfileId
+*         -followers
+*         -trackers
+*         -notifications
+*         -wishlist
+*         -myPostsListId
 *       properties:
 *        userId:
 *           type: String

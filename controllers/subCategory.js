@@ -12,6 +12,24 @@ const getSubCategories = async (req, res) => {
     }
 }
 
+const getSubCategoryById = async (req, res) => {
+    if (req.params.id == null || req.params.id == undefined) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+    try{
+        const subCategory = await SubCategory.findById(req.params.id)
+        res.status(200).send(subCategory)
+    }catch(err){
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+}
+
 const addSubCategory = async (req, res) => {
     const categoryId = req.params.id
     const newSubCategory = SubCategory({
@@ -103,5 +121,6 @@ module.exports = {
     getSubCategories,
     addSubCategory,
     editSubCategory,
-    deleteSubCategory
+    deleteSubCategory,
+    getSubCategoryById
 }
