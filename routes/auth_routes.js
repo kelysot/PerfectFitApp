@@ -4,7 +4,7 @@ const router = express.Router()
 
 const Auth = require('../controllers/auth')
 
-router.post('/login', Auth.login)
+// router.post('/login', Auth.login)
 // router.post('/logout', authenticate, Auth.logout)
 // router.post('/refreshToken', Auth.refreshToken)
 
@@ -80,6 +80,28 @@ router.post('/login', Auth.login)
 
 router.post('/register', Auth.register)
 
+/**
+ * @swagger
+ * /auth/login:
+ *  post:
+ *    summary: registers a new user
+ *    tags: [Auth Api]
+ *    requestBody:
+ *      required: true
+ *      content:
+ *         application/json:
+ *          schema:
+ *              $ref: '#/components/schemas/User'
+ *    responses:
+ *       200:
+ *          description: The access & refresh tokens
+ *          content:
+ *            application/json:
+ *              schema:
+ *                 $ref: '#/components/schemas/Tokens'
+ */
+
+router.post('/login', Auth.login)
 
 /**
 * @swagger
