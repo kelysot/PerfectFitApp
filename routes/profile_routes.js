@@ -225,6 +225,7 @@ router.delete('/:id', authenticate, Profile.deleteProfile)
 
 router.get('/getProfile/:email/:userName', authenticate, Profile.getProfile)
 
+router.get('/checkIfUserNameExist/:userName', Profile.checkIfUserNameExist)
 
 
 module.exports = router
