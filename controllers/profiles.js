@@ -18,10 +18,10 @@ const getProfile = async (req, res) => {
     }
     try {
         const profileArr = await Profile.find({ 'userId': email })
-        var profile; 
+        var profile;
 
         profileArr.forEach(element => {
-            if(element._doc.userName == userName){
+            if (element._doc.userName == userName) {
                 profile = element._doc
             }
         });
@@ -41,9 +41,9 @@ const getProfile = async (req, res) => {
 
 const addNewProfile = async (req, res) => {
 
-    const email =  req.body.userId 
-    const user = await User.findOne({email:{$eq:email}})
-    
+    const email = req.body.userId
+    const user = await User.findOne({ email: { $eq: email } })
+
     const profile = Profile({
         userId: req.body.userId,
         firstName: req.body.firstName,
@@ -69,15 +69,15 @@ const addNewProfile = async (req, res) => {
         myPostsListId: []
     })
 
-    profile.save((error, profile)=>{
+    profile.save((error, profile) => {
 
-        if(error){
+        if (error) {
             res.status(400).send({
                 'status': 'fail',
                 'error': error.message
             })
         }
-        else{    
+        else {
             res.status(200).send({
                 'status': 'OK',
                 'profile': profile
@@ -87,14 +87,14 @@ const addNewProfile = async (req, res) => {
 
     user.profilesId.push(profile.userName)
 
-    await user.save((error)=>{
-        if(error){
+    await user.save((error) => {
+        if (error) {
             res.status(400).send({
                 'status': 'fail',
                 'error': error.message
             })
         }
-        else{
+        else {
             res.status(200)
         }
     })
@@ -178,6 +178,22 @@ const editProfile = async (req, res) => {
     }
 }
 
+const checkIfUserNameExist = async (req, res) => {
+    const userName = req.params.userName
+    const exist = await Profile.findOne({ 'userName': userName })
+    if (exist != null) {
+        return res.status(400).send({
+            'status': 'fail',
+            'error': 'userName exist'
+        })
+    }
+    else {
+        res.status(200).send({
+            'status': 'OK'
+        })
+    }
+}
+
 const deleteProfile = async (req, res) => {
     if (req.params.id == null || req.params.id == undefined) {
         res.status(400).send({
@@ -214,5 +230,6 @@ module.exports = {
     getProfileById,
     editProfile,
     deleteProfile,
-    getProfile
+    getProfile,
+    checkIfUserNameExist
 }
