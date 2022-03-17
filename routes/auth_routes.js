@@ -127,5 +127,7 @@ router.post('/login', Auth.login)
 
 router.get('/getUser/:email', Auth.getUser)
 
+router.get('/checkIfEmailExist/:email', Auth.checkIfEmailExist)
+
 
 module.exports = router

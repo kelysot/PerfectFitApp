@@ -47,8 +47,8 @@ const register = async (req, res) => {
         )
 
         console.log("the token: " + accessToken)
-        user.tokens = [accessToken] 
-        
+        user.tokens = [accessToken]
+
         newUser = await user.save();
         res.status(200).send(newUser);
     } catch (err) {
@@ -85,12 +85,12 @@ const login = async (req, res) => {
             process.env.REFRESH_TOKEN_SECRET
         )
 
-        
+
 
         console.log("the token: " + accessToken)
         // if (user.tokens == null)
         //TODO: send the two tokens: access and refresh
-        user.tokens = [accessToken] 
+        user.tokens = [accessToken]
         // else user.tokens.push(refreshToken)
         await user.save()
 
@@ -189,11 +189,27 @@ const refreshToken = async (req, res) => {
     })
 }
 
+const checkIfEmailExist = async (req, res) => {
+    const email = req.params.email
+    const exist = await User.findOne({ 'email': email })
+    if (exist != null) {
+        return res.status(400).send({
+            'status': 'fail',
+            'error': 'email exist'
+        })
+    }
+    else {
+        res.status(200).send({
+            'status': 'OK'
+        })
+    }
+}
 
 module.exports = {
     login,
     register,
-    getUser
+    getUser,
+    checkIfEmailExist
     // logout,
     // refreshToken
 }
