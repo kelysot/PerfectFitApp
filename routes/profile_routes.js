@@ -190,8 +190,6 @@ router.post('/', Profile.addNewProfile)
 
 router.get('/:id', Profile.getProfileById)
 
-router.patch('/:id', authenticate, Profile.editProfile)
-
 router.delete('/:id', authenticate, Profile.deleteProfile)
 
 
@@ -222,6 +220,8 @@ router.delete('/:id', authenticate, Profile.deleteProfile)
 *             schema:
 *               $ref: '#/components/schemas/Profile'
 */
+
+router.patch('/', Profile.editProfile)
 
 router.get('/getProfile/:email/:userName', authenticate, Profile.getProfile)
 
