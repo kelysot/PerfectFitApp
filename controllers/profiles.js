@@ -109,12 +109,9 @@ const getProfileById = async (req, res) => {
         })
     }
     try {
-        console.log(req.params.id)
         var profileId = req.params.id
         profileId = profileId.substring(1)
-        console.log(profileId)
         profiles = await Profile.findById(profileId)
-        console.log(profiles)
         res.status(200).send(profiles)
 
     } catch (err) {
@@ -127,37 +124,38 @@ const getProfileById = async (req, res) => {
 }
 
 const editProfile = async (req, res) => {
-    if (req.params.id == null || req.params.id == undefined) {
+    const userName = req.body.userName
+    if (userName == null || userName == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
         })
     }
     try {
-        const editProfile = await Profile.findById(req.params.id)
-        editProfile.firstName = req.body.firstName
-        editProfile.lastName = req.body.lastName,
-            editProfile.gender = req.body.gender,
-            editProfile.userName = req.body.userName,
-            editProfile.birthday = req.body.birthday,
-            editProfile.pictureUrl = req.body.pictureUrl,
-            editProfile.shoulder = req.body.shoulder,
-            editProfile.chest = req.body.chest,
-            editProfile.basin = req.body.basin,
-            editProfile.waist = req.body.waist,
-            editProfile.foot = req.body.foot,
-            editProfile.height = req.body.height,
-            editProfile.weight = req.body.weight,
-            editProfile.bodyType = req.body.bodyType,
-            editProfile.status = req.body.status,
-            editProfile.similarProfileId = req.body.similarProfileId,
-            editProfile.followers = req.body.followers,
-            editProfile.trackers = req.body.trackers,
-            editProfile.notifications = req.body.notifications,
-            editProfile.wishlist = req.body.wishlist,
-            editProfile.myPostsListId = req.body.myPostsListId
+        const newEditProfile = await Profile.findOne({ 'userName': userName })
+        newEditProfile.firstName = req.body.firstName
+        newEditProfile.lastName = req.body.lastName
+        newEditProfile.gender = req.body.gender
+        newEditProfile.userName = req.body.userName
+        newEditProfile.birthday = req.body.birthday
+        newEditProfile.pictureUrl = req.body.pictureUrl
+        newEditProfile.shoulder = req.body.shoulder
+        newEditProfile.chest = req.body.chest
+        newEditProfile.basin = req.body.basin
+        newEditProfile.waist = req.body.waist
+        newEditProfile.foot = req.body.foot
+        newEditProfile.height = req.body.height
+        newEditProfile.weight = req.body.weight
+        newEditProfile.bodyType = req.body.bodyType
+        newEditProfile.status = req.body.status
+        newEditProfile.similarProfileId = req.body.similarProfileId
+        newEditProfile.followers = req.body.followers
+        newEditProfile.trackers = req.body.trackers
+        newEditProfile.notifications = req.body.notifications
+        newEditProfile.wishlist = req.body.wishlist
+        newEditProfile.myPostsListId = req.body.myPostsListId
 
-        editProfile.save((error, editProfile) => {
+        newEditProfile.save((error, newEditProfile) => {
             if (error) {
                 res.status(400).send({
                     'status': 'fail',
@@ -166,7 +164,7 @@ const editProfile = async (req, res) => {
             } else {
                 res.status(200).send({
                     'status': 'OK',
-                    'profile': editProfile
+                    'profile': newEditProfile
                 })
             }
         })
