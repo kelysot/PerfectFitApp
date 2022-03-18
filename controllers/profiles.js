@@ -203,6 +203,7 @@ const deleteProfile = async (req, res) => {
     }
     try {
         const profileToDelete = await Profile.findOne({'userName' : req.params.userName})
+        const email = profileToDelete.userId
         profileToDelete.remove((error) => {
             if (error) {
                 res.status(400).send({
@@ -217,6 +218,29 @@ const deleteProfile = async (req, res) => {
                 })
             }
         })
+
+        //TODO: remove from the user itself!
+
+        const newUser = await User.findOne({'email' : email})
+        newUser.profilesId.forEach(element => {
+            if(element == profileToDelete.userName){
+                newUser.profilesId.remove(element)
+            }
+        });
+
+        
+        newUser.save((error, newUser) => {
+            if (error) {
+                res.status(400).send({
+                    'status': 'fail',
+                    'error': error.message
+                })
+            } else {
+                res.status(200)
+            }
+
+        })
+
     } catch (err) {
         res.status(400).send({
             'status': 'fail',

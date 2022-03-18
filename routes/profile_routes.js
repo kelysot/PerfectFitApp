@@ -163,7 +163,7 @@ const authenticate = require('../common/auth_middleware')
 *               $ref: '#/components/schemas/Profile'
 */
 
-router.post('/', Profile.addNewProfile)
+router.post('/',authenticate, Profile.addNewProfile)
 // router.post('/', authenticate, Profile.addNewProfile)
 
 /**
@@ -191,7 +191,7 @@ router.post('/', Profile.addNewProfile)
 router.get('/:id', Profile.getProfileById)
 
 // router.delete('/{userName}', authenticate, Profile.deleteProfile)
-router.delete('/:userName', Profile.deleteProfile)
+router.delete('/:userName', authenticate, Profile.deleteProfile)
 
 
 /**
@@ -222,11 +222,11 @@ router.delete('/:userName', Profile.deleteProfile)
 *               $ref: '#/components/schemas/Profile'
 */
 
-router.patch('/', Profile.editProfile)
+router.patch('/',authenticate, Profile.editProfile)
 
 router.get('/getProfile/:email/:userName', authenticate, Profile.getProfile)
 
-router.get('/checkIfUserNameExist/:userName', Profile.checkIfUserNameExist)
+router.get('/checkIfUserNameExist/:userName',authenticate, Profile.checkIfUserNameExist)
 
 
 module.exports = router
