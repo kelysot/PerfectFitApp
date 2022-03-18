@@ -130,4 +130,5 @@ router.get('/getUser/:email', Auth.getUser)
 router.get('/checkIfEmailExist/:email', Auth.checkIfEmailExist)
 
 
+//try
 module.exports = router
