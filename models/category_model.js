@@ -5,12 +5,16 @@ const categorySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    menSubCategory: [{
+    pictureUrl: {
         type: String,
+        required: true
+    },
+    menSubCategory: [{
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'SubCategory'
     }],
     womenSubCategory: [{
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'SubCategory'
     }]
 })
