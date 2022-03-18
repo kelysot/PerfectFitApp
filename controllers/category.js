@@ -4,7 +4,7 @@ const getCategories = async (req, res) => {
     try {
         const categoriesList = await Category.find()
         res.status(200).send(categoriesList)
-    }catch(err) {
+    } catch (err) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
@@ -19,10 +19,10 @@ const getCategoryById = async (req, res) => {
             'error': err.message
         })
     }
-    try{
+    try {
         const category = await Category.findById(req.params.id)
         res.status(200).send(category)
-    }catch(err){
+    } catch (err) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
@@ -33,7 +33,8 @@ const getCategoryById = async (req, res) => {
 const addCategory = async (req, res) => {
     const newCategory = Category({
         "name": req.body.name,
-        "menSubCategory" : req.body.menSubCategory,
+        "pictureUrl": req.body.pictureUrl,
+        "menSubCategory": req.body.menSubCategory,
         "womenSubCategory": req.body.womenSubCategory
     })
 
@@ -60,13 +61,13 @@ const editCategory = async (req, res) => {
             'error': err.message
         })
     }
-    try{
+    try {
         const editCategory = await Category.findById(req.params.id)
         editCategory.name = req.body.name
         editCategory.menSubCategory = req.body.menSubCategory
         editCategory.womenSubCategory = req.body.womenSubCategory
 
-        editCategory.save((error,editCategory)=>{
+        editCategory.save((error, editCategory) => {
             if (error) {
                 res.status(400).send({
                     'status': 'fail',
@@ -80,11 +81,11 @@ const editCategory = async (req, res) => {
                 })
             }
         })
-    }catch(err){
+    } catch (err) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
-        }) 
+        })
     }
 }
 
@@ -95,9 +96,9 @@ const deleteCategory = async (req, res) => {
             'error': err.message
         })
     }
-    try{
+    try {
         const categoryToDelete = await Category.findById(req.params.id)
-        categoryToDelete.remove((error)=>{
+        categoryToDelete.remove((error) => {
             if (error) {
                 res.status(400).send({
                     'status': 'fail',
@@ -111,11 +112,11 @@ const deleteCategory = async (req, res) => {
                 })
             }
         })
-    }catch(err){
+    } catch (err) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
-        }) 
+        })
     }
 }
 

@@ -197,11 +197,12 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 
 ###
 Post http://localhost:4000/category/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzM3NzE4MywiZXhwIjoxNjQ3NDYzNTgzfQ.UF6lJEKURZrs4LQp24d0pB6iFC7GgxZl5csVu6NIGD0
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjBkYTRhNDgxODMxNDZlZDdmOGUzMCIsImlhdCI6MTY0NzYxMTY2OCwiZXhwIjoxNjQ3Njk4MDY4fQ.EJ8cWgatTnEYaNlziWtAg2wpaoDvDzmWv4cl3j3u3FI
 Content-Type: application/json
 
 {
-        "name": "new category",
+        "name": "Shirt",
+        "pictureUrl": "https://pyxis.nymag.com/v1/imgs/803/418/897442cca4768b481ecb726a98553ae22e-04-shirt.2x.rdeep-vertical.w245.jpg",
         "menSubCategory": [],
         "womenSubCategory":[]
 }
