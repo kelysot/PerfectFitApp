@@ -192,15 +192,17 @@ const checkIfUserNameExist = async (req, res) => {
     }
 }
 
+//TODO: delete from user too
+
 const deleteProfile = async (req, res) => {
-    if (req.params.id == null || req.params.id == undefined) {
+    if (req.params.userName == null || req.params.userName == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
         })
     }
     try {
-        const profileToDelete = await Profile.findById(req.params.id)
+        const profileToDelete = await Profile.findOne({'userName' : req.params.userName})
         profileToDelete.remove((error) => {
             if (error) {
                 res.status(400).send({

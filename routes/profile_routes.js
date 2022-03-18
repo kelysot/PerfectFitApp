@@ -190,7 +190,8 @@ router.post('/', Profile.addNewProfile)
 
 router.get('/:id', Profile.getProfileById)
 
-router.delete('/:id', authenticate, Profile.deleteProfile)
+// router.delete('/{userName}', authenticate, Profile.deleteProfile)
+router.delete('/:userName', Profile.deleteProfile)
 
 
 /**
