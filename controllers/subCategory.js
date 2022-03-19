@@ -1,10 +1,10 @@
 const SubCategory = require('../models/sub_category_model')
 
 const getSubCategories = async (req, res) => {
-    try{
+    try {
         const subCategoriesList = await SubCategory.find()
         res.status(200).send(subCategoriesList)
-    }catch(err){
+    } catch (err) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
@@ -19,10 +19,10 @@ const getSubCategoryById = async (req, res) => {
             'error': err.message
         })
     }
-    try{
+    try {
         const subCategory = await SubCategory.findById(req.params.id)
         res.status(200).send(subCategory)
-    }catch(err){
+    } catch (err) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
@@ -34,10 +34,11 @@ const addSubCategory = async (req, res) => {
     const categoryId = req.params.id
     const newSubCategory = SubCategory({
         "name": req.body.name,
-        "categoryId" : categoryId
+        "pictureUrl": req.body.pictureUrl,
+        "categoryId": categoryId
     })
 
-    newSubCategory.save((error,newSubCategory) => {
+    newSubCategory.save((error, newSubCategory) => {
         if (error) {
             res.status(400).send({
                 'status': 'fail',
@@ -60,11 +61,12 @@ const editSubCategory = async (req, res) => {
             'error': err.message
         })
     }
-    try{
+    try {
         const editSubCategory = await SubCategory.findById(req.params.id)
         editSubCategory.name = req.body.name
+        editSubCategory.pictureUrl = req.body.pictureUrl
 
-        editSubCategory.save((error,editSubCategory)=>{
+        editSubCategory.save((error, editSubCategory) => {
             if (error) {
                 res.status(400).send({
                     'status': 'fail',
@@ -78,11 +80,11 @@ const editSubCategory = async (req, res) => {
                 })
             }
         })
-    }catch(err){
+    } catch (err) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
-        }) 
+        })
     }
 }
 
@@ -93,9 +95,9 @@ const deleteSubCategory = async (req, res) => {
             'error': err.message
         })
     }
-    try{
+    try {
         const subCategoryToDelete = await SubCategory.findById(req.params.id)
-        subCategoryToDelete.remove((error)=>{
+        subCategoryToDelete.remove((error) => {
             if (error) {
                 res.status(400).send({
                     'status': 'fail',
@@ -109,11 +111,11 @@ const deleteSubCategory = async (req, res) => {
                 })
             }
         })
-    }catch(err){
+    } catch (err) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
-        }) 
+        })
     }
 }
 
