@@ -75,7 +75,8 @@ router.get('/',authenticate,SubCategory.getSubCategories)
  *         description: The subCategory was not found 
  */
 
-router.get('/:id',authenticate,SubCategory.getSubCategoryById)
+//router.get('/:id',authenticate,SubCategory.getSubCategoryById)
+router.get('/:id',SubCategory.getSubCategoryById)
 
 /**
  * @swagger
@@ -162,5 +163,10 @@ router.patch('/:id', authenticate,SubCategory.editSubCategory)
  */
 
 router.delete('/:id', authenticate,SubCategory.deleteSubCategory)
+
+//TODO: add to Swagger API
+//router.get('/:id/:gender',authenticate,SubCategory.getSubCategoriesByCategoryId)
+
+router.get('/:id/:gender',SubCategory.getSubCategoriesByCategoryId)
 
 module.exports = router

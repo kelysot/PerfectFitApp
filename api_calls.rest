@@ -232,13 +232,16 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 GET http://localhost:4000/subcategory/
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzUwMjQ1ZmU4M2VmMGI1MjlkZTU1NCIsImlhdCI6MTY0NzY1Mzg4OSwiZXhwIjoxNjQ3NzQwMjg5fQ.gnYb1HtyZZRbdr45Z4_ooP0FrX-ck_YCkZ-Nr-LwBrI
 
-###
-GET http://localhost:4000/subcategory/623140b788797871d7966219
+### // By SubCategoryId
+GET http://localhost:4000/subcategory/623657d250b57eb161511982
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzM5NDkyMywiZXhwIjoxNjQ3NDgxMzIzfQ.M8DdN4S0zMw84aOHGbxoLYdvxhWMP0Qgw7l_j-LDj-o
 
+###
+GET http://localhost:4000/subcategory/623657d250b57eb161511982/Male/
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzUwMjQ1ZmU4M2VmMGI1MjlkZTU1NCIsImlhdCI6MTY0NzczMjA0NCwiZXhwIjoxNjQ3ODE4NDQ0fQ.L7ViHN5dYZQohLvInio1co6H7aHq_f6Qrk8OHrbv-HU
 
 ###
-Post http://localhost:4000/subcategory/6227e578295940794ab8c524
+Post http://localhost:4000/subcategory/623657d250b57eb161511982
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjBkYTRhNDgxODMxNDZlZDdmOGUzMCIsImlhdCI6MTY0NzcxNTA5NSwiZXhwIjoxNjQ3ODAxNDk1fQ.MRx3Jf_CDfz57I3aAcG8d40822CTyWfk4vRESMIZU84
 Content-Type: application/json
 

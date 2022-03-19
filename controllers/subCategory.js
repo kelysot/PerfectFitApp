@@ -1,4 +1,5 @@
 const SubCategory = require('../models/sub_category_model')
+const Category = require('../models/category_model')
 
 const getSubCategories = async (req, res) => {
     try {
@@ -28,6 +29,39 @@ const getSubCategoryById = async (req, res) => {
             'error': err.message
         })
     }
+}
+
+//TODO: return list of SubCategory by Category id + gender
+const getSubCategoriesByCategoryId = async (req, res)=>{
+    const categoryId = req.params.id
+    const gender = req.params.gender
+    
+    if(categoryId == null || categoryId == undefined || gender == null || gender == undefined){
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+    try{
+        const category = await Category.findById(categoryId)
+        if(gender === "Male"){
+            res.status(200).send({
+                'status': 'OK',
+                'subCategory': category.menSubCategory
+            })
+        }else{
+            res.status(200).send({
+                'status': 'OK',
+                'subCategory': category.womenSubCategory
+            })
+        }
+    }catch(err){
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+
 }
 
 const addSubCategory = async (req, res) => {
@@ -124,5 +158,6 @@ module.exports = {
     addSubCategory,
     editSubCategory,
     deleteSubCategory,
-    getSubCategoryById
+    getSubCategoryById,
+    getSubCategoriesByCategoryId
 }
