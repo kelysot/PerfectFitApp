@@ -201,8 +201,8 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzUwMjQ1Zm
 Content-Type: application/json
 
 {
-        "name": "Shirt",
-        "pictureUrl": "https://pyxis.nymag.com/v1/imgs/803/418/897442cca4768b481ecb726a98553ae22e-04-shirt.2x.rdeep-vertical.w245.jpg",
+        "name": "Pants",
+        "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8L_1DoXQIel6wBXpSZvLAaVv1Mplo5ttu6A&usqp=CAU",
         "menSubCategory": [],
         "womenSubCategory":[]
 }
@@ -239,11 +239,12 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 
 ###
 Post http://localhost:4000/subcategory/6227e578295940794ab8c524
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzUwMjQ1ZmU4M2VmMGI1MjlkZTU1NCIsImlhdCI6MTY0NzY0NjI2OCwiZXhwIjoxNjQ3NzMyNjY4fQ.soqoHdYsDQSsM_ENStRJgxgLIT_40tJ2uRDFSObMWsg
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjBkYTRhNDgxODMxNDZlZDdmOGUzMCIsImlhdCI6MTY0NzcxNTA5NSwiZXhwIjoxNjQ3ODAxNDk1fQ.MRx3Jf_CDfz57I3aAcG8d40822CTyWfk4vRESMIZU84
 Content-Type: application/json
 
 {
-        "name": "subcategory new name"
+        "name": "Summer shirts",
+        "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6niBNcUfbA8p6YOz6NWy8fXe5KkupgFwXGg&usqp=CAU"
 }
 
 ###
@@ -252,7 +253,9 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 Content-Type: application/json
 
 {
-        "name": "Edit SubCategory name"
+        "name": "Edit SubCategory name",        
+        "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8L_1DoXQIel6wBXpSZvLAaVv1Mplo5ttu6A&usqp=CAU"
+
 }
 
 ###
