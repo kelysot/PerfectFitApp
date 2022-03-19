@@ -6,10 +6,6 @@ const getProfile = async (req, res) => {
     const email = req.params.email
     const userName = req.params.userName
 
-    console.log("the email: " + email)
-    console.log("the userName: " + userName)
-
-
     if (email == null || email == undefined || userName == null || userName == undefined) {
         res.status(400).send({
             'status': 'fail',
@@ -26,17 +22,14 @@ const getProfile = async (req, res) => {
             }
         });
 
-        const sendprofile = profile
-        res.status(200).send(sendprofile)
+        const sendProfile = profile
+        res.status(200).send(sendProfile)
     } catch (err) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
         })
-        console.log("--------------- " + err.message)
     }
-
-
 }
 
 const addNewProfile = async (req, res) => {
@@ -133,72 +126,41 @@ const editProfile = async (req, res) => {
             'error': err.message
         })
     }
-    console.log("the user nameeeeeee: " + userName)
     if(previousName != null && previousName != undefined){
        userName = previousName
-       console.log("previousName: " + userName)
     }
-
-
-    console.log("**********************************************************")
 
     try {
         const newEditProfile = await Profile.findOne({ 'userName': userName })
         newEditProfile.firstName = req.body.firstName
-        console.log("--- " + newEditProfile.firstName)
         newEditProfile.lastName = req.body.lastName
-        console.log("--- " + newEditProfile.lastName)
         newEditProfile.gender = req.body.gender
-        console.log("--- " + newEditProfile.gender)
         newEditProfile.userName = req.body.userName
-        console.log("--- " + newEditProfile.userName)
         newEditProfile.birthday = req.body.birthday
-        console.log("--- " + newEditProfile.birthday)
         newEditProfile.pictureUrl = req.body.pictureUrl
-        console.log("--- " + newEditProfile.pictureUrl)
         newEditProfile.shoulder = req.body.shoulder
-        console.log("--- " + newEditProfile.shoulder)
         newEditProfile.chest = req.body.chest
-        console.log("--- " + newEditProfile.chest)
         newEditProfile.basin = req.body.basin
-        console.log("--- " + newEditProfile.basin)
         newEditProfile.waist = req.body.waist
-        console.log("--- " + newEditProfile.waist)
         newEditProfile.foot = req.body.foot
-        console.log("--- " + newEditProfile.foot)
         newEditProfile.height = req.body.height
-        console.log("--- " + newEditProfile.height)
         newEditProfile.weight = req.body.weight
-        console.log("--- " + newEditProfile.weight)
         newEditProfile.bodyType = req.body.bodyType
-        console.log("--- " + newEditProfile.bodyType)
         newEditProfile.status = req.body.status
-        console.log("--- " + newEditProfile.status)
         newEditProfile.similarProfileId = req.body.similarProfileId
-        console.log("--- " + newEditProfile.similarProfileId)
         newEditProfile.followers = req.body.followers
-        console.log("--- " + newEditProfile.followers)
         newEditProfile.trackers = req.body.trackers
-        console.log("--- " + newEditProfile.trackers)
         newEditProfile.notifications = req.body.notifications
-        console.log("--- " + newEditProfile.notifications)
         newEditProfile.wishlist = req.body.wishlist
-        console.log("--- " + newEditProfile.wishlist)
         newEditProfile.myPostsListId = req.body.myPostsListId 
-        console.log("--- " + newEditProfile.myPostsListId)
-
-        console.log("****************************************************")
 
         newEditProfile.save((error, newEditProfile) => {
             if (error) {
-                console.log("hereeeeeeeeeee3333333")
-                console.log("error: " + error)
                 res.status(400).send({
                     'status': 'fail',
                     'error': error.message
                 })
             } else {
-                console.log("hereeeeeeeeeee44444444")
                 res.status(200).send({
                     'status': 'OK',
                     'profile': newEditProfile
@@ -224,23 +186,6 @@ const editProfile = async (req, res) => {
             })
 
             user.profilesId = arr
-
-            // user._doc.profilesId.forEach(element => {
-            //     if(element == previousName){
-
-            //         element = userName 
-                    
-
-                    
-            //         // user.profileId.get(element) = userName
-            //         // element = userName
-            //         // let index = user.profilesId.getIndexOf(element)
-            //         // console.log("the index = " +  index)
-            //         // user.get(index) = userNsme
-            //         // console.log("!!!!!!!!!!!!!!!")
-            //     }
-            // });
-
             user.save((error) => {
                 if (error) {
                     res.status(400).send({
@@ -260,11 +205,6 @@ const editProfile = async (req, res) => {
             'error': err.message
         })
     }
-
-
-    
-
-  
 }
 
 const checkIfUserNameExist = async (req, res) => {
@@ -282,8 +222,6 @@ const checkIfUserNameExist = async (req, res) => {
         })
     }
 }
-
-//TODO: delete from user too
 
 const deleteProfile = async (req, res) => {
     if (req.params.userName == null || req.params.userName == undefined) {
