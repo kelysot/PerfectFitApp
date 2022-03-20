@@ -31,11 +31,10 @@ const getSubCategoryById = async (req, res) => {
     }
 }
 
-//TODO: return list of SubCategory by Category id + gender
 const getSubCategoriesByCategoryId = async (req, res)=>{
-    const categoryId = req.params.id
+    const categoryId = req.params.categoryId
     const gender = req.params.gender
-    
+
     if(categoryId == null || categoryId == undefined || gender == null || gender == undefined){
         res.status(400).send({
             'status': 'fail',
@@ -45,11 +44,13 @@ const getSubCategoriesByCategoryId = async (req, res)=>{
     try{
         const category = await Category.findOne({'categoryId' : categoryId})
         if(gender === "Male"){
+            console.log(category.menSubCategory);
             res.status(200).send({
                 'status': 'OK',
                 'subCategory': category.menSubCategory
             })
         }else{
+            console.log(category.womenSubCategory);
             res.status(200).send({
                 'status': 'OK',
                 'subCategory': category.womenSubCategory
