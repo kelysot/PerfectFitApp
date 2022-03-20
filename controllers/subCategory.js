@@ -43,7 +43,7 @@ const getSubCategoriesByCategoryId = async (req, res)=>{
         })
     }
     try{
-        const category = await Category.findById(categoryId)
+        const category = await Category.findOne({'categoryId' : categoryId})
         if(gender === "Male"){
             res.status(200).send({
                 'status': 'OK',
@@ -61,7 +61,6 @@ const getSubCategoriesByCategoryId = async (req, res)=>{
             'error': err.message
         })
     }
-
 }
 
 const addSubCategory = async (req, res) => {

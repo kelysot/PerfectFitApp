@@ -167,6 +167,6 @@ router.delete('/:id', authenticate,SubCategory.deleteSubCategory)
 //TODO: add to Swagger API
 //router.get('/:id/:gender',authenticate,SubCategory.getSubCategoriesByCategoryId)
 
-router.get('/:id/:gender',SubCategory.getSubCategoriesByCategoryId)
+router.get('/:id/:gender',authenticate,SubCategory.getSubCategoriesByCategoryId)
 
 module.exports = router
