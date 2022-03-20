@@ -1,4 +1,6 @@
 const Post = require('../models/post_model')
+const Profile = require('../models/profile_model')
+
 
 const getPosts = async (req, res) => {
     console.log("1111111111111111")
@@ -37,13 +39,14 @@ const getPostById = async (req, res) => {
     }
 }
 
-const addNewPost = (req, res) => {
+const addNewPost = async (req, res) => {
 
-    console.log('addNewPost ' + req.body.description)
-    profileId = req.user.id
+    profileId = req.body.profileId
+    const profile = await Profile.findOne({ profileId: { $eq: profileId } })
 
+    //TODO: After we will send sizeAdjustment and rating change them to get the info from client.
     const post = Post({
-        profileId: profileId,
+        profileId: profile._id,
         description: req.body.description,
         productName: req.body.productName,
         sku: req.body.sku,
@@ -55,14 +58,14 @@ const addNewPost = (req, res) => {
         subCategoryId: req.body.subCategoryId,
         date: req.body.date,
         link: req.body.link,
-        sizeAdjustment: req.body.sizeAdjustment,
-        rating: req.body.rating,
+        sizeAdjustment: '4',
+        rating: '6',
         picturesUrl: req.body.picturesUrl,
         likes: [],
         comments: []
     })
 
-    post.save((error, newPost) => {
+    post.save((error, post) => {
         if (error) {
             res.status(400).send({
                 'status': 'fail',
@@ -72,28 +75,10 @@ const addNewPost = (req, res) => {
         else {
             res.status(200).send({
                 'status': 'OK',
-                'post': newPost
+                'post': post
             })
         }
     })
-    // res.send("adding new post");
-    // sender = req.user.id
-
-    // const post = Post({
-    //     message: req.body.message,
-    //     sender: sender
-    // })
-
-    // post.save((error, newPost) => {
-    //     if (error) {
-    //         res.status(400).send({
-    //             'status': 'fail',
-    //             'error': error.message
-    //         })
-    //     } else {
-    //         res.status(200).send(newPost)
-    //     }
-    // })
 }
 
 const editPost = async (req, res) => {
@@ -104,12 +89,12 @@ const editPost = async (req, res) => {
         })
     }
     try {
-            const editPost = await Post.findById(req.params.id)
-            editPost.profileId = req.body.profileId
-            editPost.description = req.body.description
-            editPost.productName = req.body.productName
-            editPost.sku = req.body.sku
-            editPost.size = req.body.size,
+        const editPost = await Post.findById(req.params.id)
+        editPost.profileId = req.body.profileId
+        editPost.description = req.body.description
+        editPost.productName = req.body.productName
+        editPost.sku = req.body.sku
+        editPost.size = req.body.size,
             editPost.company = req.body.company,
             editPost.price = req.body.price,
             editPost.color = req.body.color,
@@ -123,7 +108,7 @@ const editPost = async (req, res) => {
             editPost.likes = req.body.likes,
             editPost.comments = req.body.comments
 
-            editPost.save((error, editPost) => {
+        editPost.save((error, editPost) => {
             if (error) {
                 res.status(400).send({
                     'status': 'fail',
