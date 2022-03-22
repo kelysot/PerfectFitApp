@@ -245,4 +245,7 @@ router.patch('/:id', authenticate, Post.editPost)
 
 router.delete('/:id', authenticate, Post.deletePost)
 
+
+router.get('/getWishList/:wishListId',authenticate, Post.getWishList)
+
 module.exports = router

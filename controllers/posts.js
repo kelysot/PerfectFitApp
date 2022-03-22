@@ -161,11 +161,25 @@ const deletePost = async (req, res) => {
     }
 }
 
+const getWishList = async (req, res) => {
+
+    const wishListId = req.params.wishListId
+    console.log("we are hereeeeeee")
+    var list = await Post.find()
+
+    const array = await list.find({_id: {$in:wishListId}});// can't reach the postId
+    //TODO: return all the relevant posts
+    
+    console.log("we are hereeeeeee")
+
+}
+
 module.exports = {
     getPosts,
     getPostById,
     addNewPost,
     editPost,
-    deletePost
+    deletePost,
+    getWishList
 }
 
