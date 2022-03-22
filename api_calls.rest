@@ -229,18 +229,22 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 
 ###
 GET http://localhost:4000/subcategory/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzUwMjQ1ZmU4M2VmMGI1MjlkZTU1NCIsImlhdCI6MTY0NzY1Mzg4OSwiZXhwIjoxNjQ3NzQwMjg5fQ.gnYb1HtyZZRbdr45Z4_ooP0FrX-ck_YCkZ-Nr-LwBrI
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzUwMjQ1ZmU4M2VmMGI1MjlkZTU1NCIsImlhdCI6MTY0NzkxMDk5MywiZXhwIjoxNjQ3OTk3MzkzfQ.AzeTRO3bdBkLU9SFPiRIh_W9Q9KEAesKPPntMe8wJug
 
 ### // By SubCategoryId
-GET http://localhost:4000/subcategory/623657d250b57eb161511982
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzM5NDkyMywiZXhwIjoxNjQ3NDgxMzIzfQ.M8DdN4S0zMw84aOHGbxoLYdvxhWMP0Qgw7l_j-LDj-o
+GET http://localhost:4000/subcategory/62391da72338ee166239b2c1
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzUwMjQ1ZmU4M2VmMGI1MjlkZTU1NCIsImlhdCI6MTY0NzkxMDk5MywiZXhwIjoxNjQ3OTk3MzkzfQ.AzeTRO3bdBkLU9SFPiRIh_W9Q9KEAesKPPntMe8wJug
 
 ###
-GET http://localhost:4000/subCategory/623657d250b57eb161511982/Male/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzUwMjQ1ZmU4M2VmMGI1MjlkZTU1NCIsImlhdCI6MTY0NzczMjA0NCwiZXhwIjoxNjQ3ODE4NDQ0fQ.L7ViHN5dYZQohLvInio1co6H7aHq_f6Qrk8OHrbv-HU
+GET http://localhost:4000/subCategory/62391da72338ee166239b2c1/Male/
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzUwMjQ1ZmU4M2VmMGI1MjlkZTU1NCIsImlhdCI6MTY0NzkxMDk5MywiZXhwIjoxNjQ3OTk3MzkzfQ.AzeTRO3bdBkLU9SFPiRIh_W9Q9KEAesKPPntMe8wJug
+Content-Type: application/json
 
+{
+        "currentUserGender": ["Male"]
+}
 ###
-Post http://localhost:4000/subcategory/6239096c3614fe8682b4c546
+Post http://localhost:4000/subcategory/62391da72338ee166239b2c1
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzUwMjQ1ZmU4M2VmMGI1MjlkZTU1NCIsImlhdCI6MTY0Nzg5OTk5NywiZXhwIjoxNjQ3OTg2Mzk3fQ.1uEl7AR1LAQjQ04LMl6UFY2XoCbzY_8hhJ9gqWh-g3I
 Content-Type: application/json
 
