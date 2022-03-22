@@ -9,6 +9,10 @@ const subCategorySchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    belongsTo: [{
+        type: String,
+        ref:'category'
+    }],
     categoryId: {
         type: String,
         required: true

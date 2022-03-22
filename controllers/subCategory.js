@@ -69,7 +69,8 @@ const addSubCategory = async (req, res) => {
     const newSubCategory = SubCategory({
         "name": req.body.name,
         "pictureUrl": req.body.pictureUrl,
-        "categoryId": categoryId
+        "categoryId": categoryId,
+        "belongsTo": req.body.belongsTo
     })
 
     newSubCategory.save((error, newSubCategory) => {
@@ -84,6 +85,28 @@ const addSubCategory = async (req, res) => {
                 'status': 'OK',
                 'subCategory': newSubCategory
             })
+        }
+    })
+
+    const category = await Category.findOne({'categoryId' : categoryId})
+    const subCategory = await SubCategory.findOne({'name' : req.body.name})
+
+    if(req.body.belongsTo.includes("Male")){
+        category.menSubCategory.push(subCategory._id)
+    }
+    if(req.body.belongsTo.includes("Female")){
+        category.womenSubCategory.push(subCategory._id)
+    }
+
+    await category.save((error) =>{
+        if (error) {
+            res.status(400).send({
+                'status': 'fail',
+                'error': error.message
+            })
+        }
+        else{
+            res.status(200)
         }
     })
 }
@@ -131,6 +154,29 @@ const deleteSubCategory = async (req, res) => {
     }
     try {
         const subCategoryToDelete = await SubCategory.findById(req.params.id)
+        const fromWhoToDelete = req.body.fromWhoToDelete
+        const category = await Category.findById(subCategoryToDelete.categoryId)
+
+        if(fromWhoToDelete.includes("Male")){
+            category.menSubCategory.remove(subCategoryToDelete._id)
+            console.log("Male deleted")
+        }
+        if(fromWhoToDelete.includes("Female")){
+            console.log("Female deleted")
+            category.womenSubCategory.remove(subCategoryToDelete._id)
+            await category.save((error)=>{
+                if (error) {
+                    res.status(400).send({
+                        'status': 'fail',
+                        'error': error.message
+                    })
+                }
+                else{
+                    res.status(200)
+                }
+            })
+        }
+
         subCategoryToDelete.remove((error) => {
             if (error) {
                 res.status(400).send({

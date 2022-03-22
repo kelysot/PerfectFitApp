@@ -197,7 +197,7 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 
 ###
 Post http://localhost:4000/category/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzUwMjQ1ZmU4M2VmMGI1MjlkZTU1NCIsImlhdCI6MTY0NzY0NDk4MSwiZXhwIjoxNjQ3NzMxMzgxfQ.xYNnRVqjGg5dmS3pNYOav7IdSNKcVxTtYEvtA5G3Woo
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzUwMjQ1ZmU4M2VmMGI1MjlkZTU1NCIsImlhdCI6MTY0Nzg5OTk5NywiZXhwIjoxNjQ3OTg2Mzk3fQ.1uEl7AR1LAQjQ04LMl6UFY2XoCbzY_8hhJ9gqWh-g3I
 Content-Type: application/json
 
 {
@@ -240,29 +240,34 @@ GET http://localhost:4000/subCategory/623657d250b57eb161511982/Male/
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzUwMjQ1ZmU4M2VmMGI1MjlkZTU1NCIsImlhdCI6MTY0NzczMjA0NCwiZXhwIjoxNjQ3ODE4NDQ0fQ.L7ViHN5dYZQohLvInio1co6H7aHq_f6Qrk8OHrbv-HU
 
 ###
-Post http://localhost:4000/subcategory/623657d250b57eb161511982
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjBkYTRhNDgxODMxNDZlZDdmOGUzMCIsImlhdCI6MTY0NzcxNTA5NSwiZXhwIjoxNjQ3ODAxNDk1fQ.MRx3Jf_CDfz57I3aAcG8d40822CTyWfk4vRESMIZU84
+Post http://localhost:4000/subcategory/6239096c3614fe8682b4c546
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzUwMjQ1ZmU4M2VmMGI1MjlkZTU1NCIsImlhdCI6MTY0Nzg5OTk5NywiZXhwIjoxNjQ3OTg2Mzk3fQ.1uEl7AR1LAQjQ04LMl6UFY2XoCbzY_8hhJ9gqWh-g3I
 Content-Type: application/json
 
 {
         "name": "Summer shirts",
-        "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6niBNcUfbA8p6YOz6NWy8fXe5KkupgFwXGg&usqp=CAU"
+        "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6niBNcUfbA8p6YOz6NWy8fXe5KkupgFwXGg&usqp=CAU",
+        "belongsTo": ["Male"]
 }
 
 ###
-PATCH  http://localhost:4000/subcategory/6227e66aff08c3354c905af6/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njc3NTQ5NiwiZXhwIjoxNjQ2ODYxODk2fQ.sK13D27tQgJ5Llrwc6kowWbN-Cfw9xE4I3K32w1R7Ig
+PATCH  http://localhost:4000/subcategory/62390cd809e22f9eca0ca482/
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzUwMjQ1ZmU4M2VmMGI1MjlkZTU1NCIsImlhdCI6MTY0Nzg5OTk5NywiZXhwIjoxNjQ3OTg2Mzk3fQ.1uEl7AR1LAQjQ04LMl6UFY2XoCbzY_8hhJ9gqWh-g3I
 Content-Type: application/json
 
 {
         "name": "Edit SubCategory name",        
         "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8L_1DoXQIel6wBXpSZvLAaVv1Mplo5ttu6A&usqp=CAU"
-
 }
 
 ###
-DELETE  http://localhost:4000/subcategory/6227e66aff08c3354c905af6/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njc3NTQ5NiwiZXhwIjoxNjQ2ODYxODk2fQ.sK13D27tQgJ5Llrwc6kowWbN-Cfw9xE4I3K32w1R7Ig
+DELETE  http://localhost:4000/subcategory/62390bb70e6cfb8f83845bc4/
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzUwMjQ1ZmU4M2VmMGI1MjlkZTU1NCIsImlhdCI6MTY0Nzg5OTk5NywiZXhwIjoxNjQ3OTg2Mzk3fQ.1uEl7AR1LAQjQ04LMl6UFY2XoCbzY_8hhJ9gqWh-g3I
+Content-Type: application/json
+
+{
+        "fromWhoToDelete": ["Female"]     
+}
 
 //****************************************Comment****************************************
 
