@@ -129,18 +129,16 @@ const getUser = async (req, res) => {
 
 //TODO: logout not working.
 const logout = async (req, res) => {
-    console.log("token: " + "111111")
     const authHeaders = req.headers['authorization']
     const token = authHeaders && authHeaders.split(' ')[1]
     if (token == null) return res.sendStatus('401')
-    console.log("token: " + token)
 
-    jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, async (err, userInfo) => {
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, userInfo) => {
         if (err) return res.status(403).send(err.message)
-        const userId = userInfo._id
-        console.log("token: " + "2222")
+        const userId = userInfo.id
         try {
-            user = await User.findById(userId)
+            const user = await User.findById(userId)
+            console.log("user: " + user)
             if (user == null) return res.status(403).send('invalid request')
             if (!user.tokens.includes(token)) {
                 user.tokens = [] //invalidate all user token
