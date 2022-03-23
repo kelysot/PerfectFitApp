@@ -37,6 +37,9 @@ db.once('open', () => { console.log('db connected!') })
 
 const port = process.env.PORT
 
+const dashboardRouter = require('./routes/dashboard_routes')
+app.use('/dashboard',dashboardRouter)
+
 const indexRouter = require('./routes/index')
 app.use('/', indexRouter)
 
