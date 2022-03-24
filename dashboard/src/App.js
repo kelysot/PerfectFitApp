@@ -1,23 +1,31 @@
 import React from "react"
-import logo from './logo.svg';
-import './App.css';
+import GlobalStyle from './components/GlobalStyle'
 
 function App() {
 
-  const [data, setData] = React.useState(null)
+  const [data, setData] = React.useState("");
+  const [numOfUsers, setNumOfUsers] = React.useState(0);
+  const [numOfProfiles, setNumOfProfiles] = React.useState(0)
+  const [numOfPosts, setNumOfPosts] = React.useState(0)
 
   React.useEffect(() => {
     fetch("/dashboard")
       .then((res) => res.json())
-      .then((data) => setData(data.message))
+      .then((data) => {
+          setData(data.message)
+          setNumOfUsers(data.numOfUsers)
+          setNumOfProfiles(data.numOfProfiles)
+          setNumOfPosts(data.numOfPosts)
+        })
   }, [])
  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{!data ? "Loading..." : data}</p>
-      </header>
+      <GlobalStyle />
+        <h1>{!data ? "Loading..." : data}</h1>
+        <p>{!numOfUsers ? "Number of users: --- " : "Number of users: " + numOfUsers}</p>
+        <p>{!numOfProfiles ? "Number of profiles: --- " : "Number of profiles: " + numOfProfiles}</p>
+        <p>{!numOfPosts ? "Number of posts: --- " : "Number of posts: " + numOfPosts}</p>
     </div>
   );
 }
