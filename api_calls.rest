@@ -201,10 +201,10 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzM5YTk1OW
 Content-Type: application/json
 
 {
-        "name": "Pants",
+        "name": "S Male",
         "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8L_1DoXQIel6wBXpSZvLAaVv1Mplo5ttu6A&usqp=CAU",
-        "menSubCategory": [],
-        "womenSubCategory":[]
+        "gender": "Male",
+        "subCategory": []
 }
 
 
@@ -215,8 +215,9 @@ Content-Type: application/json
 
 {
         "name": "Edit category name",
-        "menSubCategory": [],
-        "womenSubCategory":[]
+        "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8L_1DoXQIel6wBXpSZvLAaVv1Mplo5ttu6A&usqp=CAU",
+        "gender": "Female",
+        "subCategory": []
 }
 
 
@@ -244,14 +245,13 @@ Content-Type: application/json
         "currentUserGender": ["Male"]
 }
 ###
-Post http://localhost:4000/subcategory/623c9ee8d8fd8667958348d6
+Post http://localhost:4000/subcategory/623cb750564f46efb25e83c6
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzM5YTk1OWZiYWM1ODliZGIxMjc3MyIsImlhdCI6MTY0ODEzOTc5NywiZXhwIjoxNjQ4MjI2MTk3fQ.giZ2-M00YMjnTWAX1HevQ_31O-Rv2yHciEV1xrnd6Sg
 Content-Type: application/json
 
 {
-        "name": "Summer shirts",
-        "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6niBNcUfbA8p6YOz6NWy8fXe5KkupgFwXGg&usqp=CAU",
-        "belongsTo": ["Female"]
+        "name": "Male shirts11111112",
+        "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6niBNcUfbA8p6YOz6NWy8fXe5KkupgFwXGg&usqp=CAU"
 }
 
 ###

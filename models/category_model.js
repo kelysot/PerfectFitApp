@@ -9,11 +9,11 @@ const categorySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    menSubCategory: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'SubCategory'
-    }],
-    womenSubCategory: [{
+    gender: {
+        type: String,
+        required: true
+    },
+    subCategory: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'SubCategory'
     }]

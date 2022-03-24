@@ -23,16 +23,16 @@ const authenticate = require('../common/auth_middleware')
 *        name:
 *           type: String
 *           description: The name of the category
-*        menSubCategory:
+*        gender:
+*           type: String
+*           description: The gender 
+*        subCategory:
 *           type: mongoose.Schema.Types.ObjectId
-*           description: An array of subCategories for men
-*        womenSubCategory:
-*           type: mongoose.Schema.Types.ObjectId
-*           description: An array of subCategories for women
+*           description: An array of subCategories 
 *       example:
 *         name: 'Shirt'
-*         menSubCategory: ['T-shirt','Polo']
-*         womenSubCategory: ['T-shirt','belly shirt']
+*         gender: 'Female'
+*         subCategory: ['T-shirt','Polo']
 */
 
 /**
@@ -52,7 +52,7 @@ const authenticate = require('../common/auth_middleware')
 *                 $ref: '#/components/schemas/Category'
 */
 
-router.get('/',authenticate,Category.getCategories)
+router.get('/', authenticate, Category.getCategories)
 
 /**
  * @swagger
@@ -78,7 +78,7 @@ router.get('/',authenticate,Category.getCategories)
  *         description: The category was not found 
  */
 
-router.get('/:id', authenticate,Category.getCategoryById)
+router.get('/:id', authenticate, Category.getCategoryById)
 
 /**
  * @swagger
@@ -103,7 +103,7 @@ router.get('/:id', authenticate,Category.getCategoryById)
  *         description: Some server error 
  */
 
-router.post('/',authenticate,Category.addCategory)
+router.post('/', authenticate, Category.addCategory)
 
 /**
  * @swagger
@@ -135,7 +135,7 @@ router.post('/',authenticate,Category.addCategory)
  *          description: Some error 
  */
 
-router.patch('/:id', authenticate,Category.editCategory)
+router.patch('/:id', authenticate, Category.editCategory)
 
 /**
  * @swagger
@@ -157,6 +157,6 @@ router.patch('/:id', authenticate,Category.editCategory)
  *          description: Some error     
  */
 
-router.delete('/:id', authenticate,Category.deleteCategory)
+router.delete('/:id', authenticate, Category.deleteCategory)
 
 module.exports = router
