@@ -42,22 +42,9 @@ const getSubCategoriesByCategoryId = async (req, res) => {
         })
     }
     try {
-        const category = await Category.findOne({ 'categoryId': categoryId })
-        if (gender === "Male") {
-            const subCategories = await SubCategory.find({ '_id': { $in: category.menSubCategory } })
-            console.log(category.menSubCategory);
-            res.status(200).send({
-                'status': 'OK',
-                'subCategory': subCategories
-            })
-        } else {
-            const subCategories = await SubCategory.find({ '_id': { $in: category.womenSubCategory } })
-            console.log(category.womenSubCategory);
-            res.status(200).send({
-                'status': 'OK',
-                'subCategory': subCategories
-            })
-        }
+        const category = await Category.findById(categoryId)
+        const subCategories = await SubCategory.find({ '_id': { $in: category.subCategory } })
+        res.status(200).send(subCategories)
     } catch (err) {
         res.status(400).send({
             'status': 'fail',
@@ -68,11 +55,11 @@ const getSubCategoriesByCategoryId = async (req, res) => {
 
 const addSubCategory = async (req, res) => {
     const categoryId = req.params.id
+    console.log("categoryId " + categoryId)
     const newSubCategory = SubCategory({
         "name": req.body.name,
         "pictureUrl": req.body.pictureUrl,
-        "categoryId": categoryId,
-        "belongsTo": req.body.belongsTo
+        "categoryId": categoryId
     })
 
     newSubCategory.save((error, newSubCategory) => {
@@ -90,15 +77,9 @@ const addSubCategory = async (req, res) => {
         }
     })
 
-    const category = await Category.findOne({ 'categoryId': categoryId })
-    const subCategory = await SubCategory.findOne({ 'name': req.body.name })
+    const category = await Category.findById(newSubCategory.categoryId)
 
-    if (req.body.belongsTo.includes("Male")) {
-        category.menSubCategory.push(subCategory._id)
-    }
-    if (req.body.belongsTo.includes("Female")) {
-        category.womenSubCategory.push(subCategory._id)
-    }
+    category.subCategory.push(newSubCategory._id)
 
     await category.save((error) => {
         if (error) {
@@ -159,25 +140,20 @@ const deleteSubCategory = async (req, res) => {
         const fromWhoToDelete = req.body.fromWhoToDelete
         const category = await Category.findById(subCategoryToDelete.categoryId)
 
-        if (fromWhoToDelete.includes("Male")) {
-            category.menSubCategory.remove(subCategoryToDelete._id)
-            console.log("Male deleted")
-        }
-        if (fromWhoToDelete.includes("Female")) {
-            console.log("Female deleted")
-            category.womenSubCategory.remove(subCategoryToDelete._id)
-            await category.save((error) => {
-                if (error) {
-                    res.status(400).send({
-                        'status': 'fail',
-                        'error': error.message
-                    })
-                }
-                else {
-                    res.status(200)
-                }
-            })
-        }
+        category.subCategory.remove(subCategoryToDelete._id)
+
+        await category.save((error) => {
+            if (error) {
+                res.status(400).send({
+                    'status': 'fail',
+                    'error': error.message
+                })
+            }
+            else {
+                res.status(200)
+            }
+        })
+
 
         subCategoryToDelete.remove((error) => {
             if (error) {

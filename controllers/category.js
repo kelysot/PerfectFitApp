@@ -34,8 +34,8 @@ const addCategory = async (req, res) => {
     const newCategory = Category({
         "name": req.body.name,
         "pictureUrl": req.body.pictureUrl,
-        "menSubCategory": req.body.menSubCategory,
-        "womenSubCategory": req.body.womenSubCategory
+        "gender": req.body.gender,
+        "subCategory": req.body.subCategory
     })
 
     newCategory.save((error, newCategory) => {
@@ -64,8 +64,9 @@ const editCategory = async (req, res) => {
     try {
         const editCategory = await Category.findById(req.params.id)
         editCategory.name = req.body.name
-        editCategory.menSubCategory = req.body.menSubCategory
-        editCategory.womenSubCategory = req.body.womenSubCategory
+        editCategory.pictureUrl = req.body.pictureUrl
+        editCategory.gender = req.body.gender
+        editCategory.subCategory = req.body.subCategory
 
         editCategory.save((error, editCategory) => {
             if (error) {
