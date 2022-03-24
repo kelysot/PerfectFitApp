@@ -31,32 +31,34 @@ const getSubCategoryById = async (req, res) => {
     }
 }
 
-const getSubCategoriesByCategoryId = async (req, res)=>{
+const getSubCategoriesByCategoryId = async (req, res) => {
     const categoryId = req.params.categoryId
     const gender = req.params.gender
 
-    if(categoryId == null || categoryId == undefined || gender == null || gender == undefined){
+    if (categoryId == null || categoryId == undefined || gender == null || gender == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
         })
     }
-    try{
-        const category = await Category.findOne({'categoryId' : categoryId})
-        if(gender === "Male"){
+    try {
+        const category = await Category.findOne({ 'categoryId': categoryId })
+        if (gender === "Male") {
+            const subCategories = await SubCategory.find({ '_id': { $in: category.menSubCategory } })
             console.log(category.menSubCategory);
             res.status(200).send({
                 'status': 'OK',
-                'subCategory': category.menSubCategory
+                'subCategory': subCategories
             })
-        }else{
+        } else {
+            const subCategories = await SubCategory.find({ '_id': { $in: category.womenSubCategory } })
             console.log(category.womenSubCategory);
             res.status(200).send({
                 'status': 'OK',
-                'subCategory': category.womenSubCategory
+                'subCategory': subCategories
             })
         }
-    }catch(err){
+    } catch (err) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
@@ -88,24 +90,24 @@ const addSubCategory = async (req, res) => {
         }
     })
 
-    const category = await Category.findOne({'categoryId' : categoryId})
-    const subCategory = await SubCategory.findOne({'name' : req.body.name})
+    const category = await Category.findOne({ 'categoryId': categoryId })
+    const subCategory = await SubCategory.findOne({ 'name': req.body.name })
 
-    if(req.body.belongsTo.includes("Male")){
+    if (req.body.belongsTo.includes("Male")) {
         category.menSubCategory.push(subCategory._id)
     }
-    if(req.body.belongsTo.includes("Female")){
+    if (req.body.belongsTo.includes("Female")) {
         category.womenSubCategory.push(subCategory._id)
     }
 
-    await category.save((error) =>{
+    await category.save((error) => {
         if (error) {
             res.status(400).send({
                 'status': 'fail',
                 'error': error.message
             })
         }
-        else{
+        else {
             res.status(200)
         }
     })
@@ -157,21 +159,21 @@ const deleteSubCategory = async (req, res) => {
         const fromWhoToDelete = req.body.fromWhoToDelete
         const category = await Category.findById(subCategoryToDelete.categoryId)
 
-        if(fromWhoToDelete.includes("Male")){
+        if (fromWhoToDelete.includes("Male")) {
             category.menSubCategory.remove(subCategoryToDelete._id)
             console.log("Male deleted")
         }
-        if(fromWhoToDelete.includes("Female")){
+        if (fromWhoToDelete.includes("Female")) {
             console.log("Female deleted")
             category.womenSubCategory.remove(subCategoryToDelete._id)
-            await category.save((error)=>{
+            await category.save((error) => {
                 if (error) {
                     res.status(400).send({
                         'status': 'fail',
                         'error': error.message
                     })
                 }
-                else{
+                else {
                     res.status(200)
                 }
             })
