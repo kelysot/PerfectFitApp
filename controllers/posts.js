@@ -161,17 +161,50 @@ const deletePost = async (req, res) => {
     }
 }
 
+// const getWishList = async (req, res) => {
+
+//     const wishListId = req.params.wishListId
+//     console.log("we are hereeeeeee")
+//     var list = await Post.find()
+
+//     const array = await list.find({_id: {$in:wishListId}});// can't reach the postId
+//     //TODO: return all the relevant posts
+    
+//     console.log("we are hereeeeeee")
+
+// }
+
 const getWishList = async (req, res) => {
 
-    const wishListId = req.params.wishListId
-    console.log("we are hereeeeeee")
-    var list = await Post.find()
+    const userName = req.params.userName
 
-    const array = await list.find({_id: {$in:wishListId}});// can't reach the postId
-    //TODO: return all the relevant posts
-    
-    console.log("we are hereeeeeee")
+    if(userName == null || userName == undefined){
+        res.status(400).send({
+        'status': 'fail',
+        'error': err.message
+        })
+    }
+    try {
 
+        const profile = await Profile.findOne({ userName: { $eq: userName } })
+        const theList = profile.wishlist
+
+        // let i = 0
+        // var theArr = []
+        // let size = theList.length
+        // for(i=0; i<size; i++){
+        //     theArr.push(mongoose.Types.ObjectId(theList[i]))
+        // }
+
+        var theReturnList = await Post.find({'_id': {$in: theList}})
+        res.status(200).send(theReturnList)
+
+    } catch (err) {
+        res.status(400).send({
+        'status': 'fail',
+        'error': err.message
+        })
+    }
 }
 
 module.exports = {
