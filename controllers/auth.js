@@ -47,7 +47,7 @@ const register = async (req, res) => {
         )
 
         console.log("the token: " + accessToken)
-        user.tokens = [accessToken]
+        user.tokens = [accessToken, refreshToken]
 
         newUser = await user.save();
         res.status(200).send(newUser);
@@ -90,7 +90,7 @@ const login = async (req, res) => {
         console.log("the token: " + accessToken)
         // if (user.tokens == null)
         //TODO: send the two tokens: access and refresh
-        user.tokens = [accessToken]
+        user.tokens = [accessToken, refreshToken]
         // else user.tokens.push(refreshToken)
         await user.save()
 
