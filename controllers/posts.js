@@ -41,12 +41,13 @@ const getPostById = async (req, res) => {
 
 const addNewPost = async (req, res) => {
 
-    profileId = req.body.profileId
+    const profileId = req.body.profileId
     const profile = await Profile.findOne({ profileId: { $eq: profileId } })
 
     //TODO: After we will send sizeAdjustment and rating change them to get the info from client.
     const post = Post({
-        profileId: profile._id,
+        // profileId: profile._id,
+        profileId: req.body.profileId, // the profileId here it's the userName of the ptofile!
         description: req.body.description,
         productName: req.body.productName,
         sku: req.body.sku,
