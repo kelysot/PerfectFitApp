@@ -1,31 +1,26 @@
 import React from "react"
 import GlobalStyle from './components/GlobalStyle'
+import Home from "./pages/home/Home";
+import Login from "./pages/login/Login";
+import Categories from "./pages/categories/Categories"; 
+import NewCategory from "./pages/new category/NewCategory";
+import SingleCategory from "./pages/single category/SingleCategory";
+import {BrowserRouter,Routes,Route} from "react-router-dom";
 
 function App() {
-
-  const [data, setData] = React.useState("");
-  const [numOfUsers, setNumOfUsers] = React.useState(0);
-  const [numOfProfiles, setNumOfProfiles] = React.useState(0)
-  const [numOfPosts, setNumOfPosts] = React.useState(0)
-
-  React.useEffect(() => {
-    fetch("/dashboard")
-      .then((res) => res.json())
-      .then((data) => {
-          setData(data.message)
-          setNumOfUsers(data.numOfUsers)
-          setNumOfProfiles(data.numOfProfiles)
-          setNumOfPosts(data.numOfPosts)
-        })
-  }, [])
- 
   return (
     <div className="App">
       <GlobalStyle />
-        <h1>{!data ? "Loading..." : data}</h1>
-        <p>{!numOfUsers ? "Number of users: --- " : "Number of users: " + numOfUsers}</p>
-        <p>{!numOfProfiles ? "Number of profiles: --- " : "Number of profiles: " + numOfProfiles}</p>
-        <p>{!numOfPosts ? "Number of posts: --- " : "Number of posts: " + numOfPosts}</p>
+      <Routes path="/">
+        <Route index element={<Home/>}></Route>
+        <Route path="/login" element={<Login/>} ></Route>
+        <Route path="categories">
+          <Route index element={<Categories/>}></Route>
+          <Route path=":categoryId" element={<SingleCategory/>}></Route>
+          <Route path="newCategory" element={<NewCategory/>}></Route>
+        </Route>
+      </Routes>
+      //TODO: option to add more routes for example to users
     </div>
   );
 }
