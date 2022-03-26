@@ -221,7 +221,7 @@ router.post('/', authenticate, Post.addNewPost)
  *          description: Some error 
  */
 
-router.patch('/:id', authenticate, Post.editPost)
+router.patch('/', authenticate, Post.editPost)
 
 /**
  * @swagger
