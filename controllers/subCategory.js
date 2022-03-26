@@ -33,9 +33,7 @@ const getSubCategoryById = async (req, res) => {
 
 const getSubCategoriesByCategoryId = async (req, res) => {
     const categoryId = req.params.categoryId
-    const gender = req.params.gender
-
-    if (categoryId == null || categoryId == undefined || gender == null || gender == undefined) {
+    if (categoryId == null || categoryId == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message

@@ -197,7 +197,7 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 
 ###
 Post http://localhost:4000/category/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzUwMjQ1ZmU4M2VmMGI1MjlkZTU1NCIsImlhdCI6MTY0ODE1NTcyMCwiZXhwIjoxNjQ4MjQyMTIwfQ.eBJGSIss_2N_aw9gv00yda1i4UIPmG1qOwmaqPEqaBE
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjQ4MmQ0MDA5NmQ5OTUzOGYwZjBhMyIsImlhdCI6MTY0ODI3ODMzNiwiZXhwIjoxNjQ4MzY0NzM2fQ.gE-srkpqWbt7STyBnDA4J0z4QQW_RNX5yuUaU2oQPBc
 Content-Type: application/json
 
 {
@@ -245,12 +245,12 @@ Content-Type: application/json
         "currentUserGender": ["Male"]
 }
 ###
-Post http://localhost:4000/subcategory/623cdd1fdb4a612e1a7c6f33
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzUwMjQ1ZmU4M2VmMGI1MjlkZTU1NCIsImlhdCI6MTY0ODE1NTcyMCwiZXhwIjoxNjQ4MjQyMTIwfQ.eBJGSIss_2N_aw9gv00yda1i4UIPmG1qOwmaqPEqaBE
+Post http://localhost:4000/subcategory/623ebb6d2e6b848bb991cdcd
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjQ4MmQ0MDA5NmQ5OTUzOGYwZjBhMyIsImlhdCI6MTY0ODI3ODMzNiwiZXhwIjoxNjQ4MzY0NzM2fQ.gE-srkpqWbt7STyBnDA4J0z4QQW_RNX5yuUaU2oQPBc
 Content-Type: application/json
 
 {
-        "name": "Male shirts11111112",
+        "name": "T-Shirts",
         "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6niBNcUfbA8p6YOz6NWy8fXe5KkupgFwXGg&usqp=CAU"
 }
 

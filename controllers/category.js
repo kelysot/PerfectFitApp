@@ -1,8 +1,12 @@
 const Category = require('../models/category_model')
 
 const getCategories = async (req, res) => {
+
+    const gender = req.params.gender
+
     try {
-        const categoriesList = await Category.find()
+        // { profileId: { $eq: profileId } }
+        const categoriesList = await Category.find({ 'gender': gender })
         res.status(200).send(categoriesList)
     } catch (err) {
         res.status(400).send({

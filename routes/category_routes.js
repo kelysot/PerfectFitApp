@@ -52,7 +52,7 @@ const authenticate = require('../common/auth_middleware')
 *                 $ref: '#/components/schemas/Category'
 */
 
-router.get('/', authenticate, Category.getCategories)
+router.get('/:gender', authenticate, Category.getCategories)
 
 /**
  * @swagger
