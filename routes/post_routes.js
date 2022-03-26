@@ -243,7 +243,7 @@ router.patch('/:id', authenticate, Post.editPost)
  *          description: Some error     
  */
 
-router.delete('/:id', authenticate, Post.deletePost)
+router.delete('/:postId', authenticate, Post.deletePost)
 
 
 // router.get('/getWishList/:wishListId',authenticate, Post.getWishList)

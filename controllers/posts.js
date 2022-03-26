@@ -42,7 +42,7 @@ const getPostById = async (req, res) => {
 const addNewPost = async (req, res) => {
 
     const profileId = req.body.profileId
-    const profile = await Profile.findOne({ profileId: { $eq: profileId } })
+    const profile = await Profile.findOne({ userName: { $eq: profileId } })
 
     //TODO: After we will send sizeAdjustment and rating change them to get the info from client.
     const post = Post({
@@ -80,6 +80,23 @@ const addNewPost = async (req, res) => {
             })
         }
     })
+
+
+    var array = profile.myPostsListId
+    array.push(post._id)
+    profile.myPostsListId = array
+ 
+    profile.save((error) => {
+        if (error) {
+            res.status(400).send({
+                'status': 'fail',
+                'error': error.message
+            })
+        } else {
+            res.status(200)
+        }
+    })
+
 }
 
 const editPost = async (req, res) => {
@@ -132,14 +149,17 @@ const editPost = async (req, res) => {
 }
 
 const deletePost = async (req, res) => {
-    if (req.params.id == null || req.params.id == undefined) {
+
+    const thePostId = req.params.postId
+    if (thePostId == null || thePostId == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
         })
     }
+    const PostToDelete = await Post.findById(thePostId)
+    const profileId = PostToDelete.profileId
     try {
-        const PostToDelete = await Post.findById(req.params.id)
         PostToDelete.remove((error) => {
             if (error) {
                 res.status(400).send({
@@ -160,6 +180,28 @@ const deletePost = async (req, res) => {
             'error': err.message
         })
     }
+
+    // const profile = await Profile.findOne({ userName: PostToDelete.profileId })
+    const profile = await Profile.findOne({userName: profileId})
+    var array = profile.myPostsListId
+    let index = array.indexOf(thePostId)
+    if(index > 0){
+        array.splice(index, 1);
+    }
+  
+    // array.remove(PostToDelete._id)
+    profile.myPostsListId = array
+ 
+    profile.save((error) => {
+        if (error) {
+            res.status(400).send({
+                'status': 'fail',
+                'error': error.message
+            })
+        } else {
+            res.status(200)
+        }
+    })
 }
 
 // const getWishList = async (req, res) => {
