@@ -20,8 +20,16 @@ function SideBar() {
               <h3>Categories</h3>
             </li>
             <li>
+            <span class="material-icons-sharp">person</span>
+              <h3>Profile</h3>
+            </li>
+            <li>
               <span class="material-icons-sharp">settings</span>
               <h3>Setting</h3>
+            </li>
+            <li>
+            <span class="material-icons-sharp">logout</span>
+              <h3>Log Out</h3>
             </li>
           </ul>
         </CenterStyle>
