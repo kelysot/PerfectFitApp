@@ -21,15 +21,15 @@ const getPosts = async (req, res) => {
 
 const getPostById = async (req, res) => {
 
-    if (req.params.id == null || req.params.id == undefined) {
+    if (req.params.postId == null || req.params.postId == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
         })
     }
     try {
-        posts = await Post.findById(req.params.id)
-        res.status(200).send(posts)
+        const post = await Post.findById(req.params.postId)
+        res.status(200).send(post)
 
     } catch (err) {
         res.status(400).send({
@@ -41,8 +41,8 @@ const getPostById = async (req, res) => {
 
 const addNewPost = async (req, res) => {
 
-    const profileId = req.body.profileId
-    const profile = await Profile.findOne({ userName: { $eq: profileId } })
+    const profileUserName = req.body.profileId
+    const profile = await Profile.findOne({ userName: { $eq: profileUserName } })
 
     //TODO: After we will send sizeAdjustment and rating change them to get the info from client.
     const post = Post({
@@ -68,6 +68,7 @@ const addNewPost = async (req, res) => {
 
     post.save((error, post) => {
         if (error) {
+            console.log("the error: " + error.message)
             res.status(400).send({
                 'status': 'fail',
                 'error': error.message
@@ -82,7 +83,7 @@ const addNewPost = async (req, res) => {
     })
 
 
-    var array = profile.myPostsListId
+    var array = profile._doc.myPostsListId
     array.push(post._id)
     profile.myPostsListId = array
  
@@ -162,7 +163,7 @@ const deletePost = async (req, res) => {
         })
     }
     const PostToDelete = await Post.findById(thePostId)
-    const profileId = PostToDelete.profileId
+    const profileId = PostToDelete.profileId // userName
     try {
         PostToDelete.remove((error) => {
             if (error) {
@@ -254,12 +255,38 @@ const getWishList = async (req, res) => {
     }
 }
 
+
+const getProfilePosts = async (req, res) =>{
+
+    const userName = req.params.userName
+    if(userName == null || userName == undefined){
+        res.status(400).send({
+        'status': 'fail',
+        'error': err.message
+        })
+    }
+    try {
+
+        const profile = await Profile.findOne({ userName: { $eq: userName } })
+        const theList = profile.myPostsListId
+        var theProfilePostsList = await Post.find({'_id': {$in: theList}})
+        res.status(200).send(theProfilePostsList)
+
+    } catch (err) {
+        res.status(400).send({
+        'status': 'fail',
+        'error': err.message
+        })
+    }
+}
+
 module.exports = {
     getPosts,
     getPostById,
     addNewPost,
     editPost,
     deletePost,
-    getWishList
+    getWishList,
+    getProfilePosts
 }
 
