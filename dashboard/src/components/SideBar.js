@@ -12,31 +12,45 @@ function SideBar() {
         <CenterStyle>
           <ul>
             <li>
-              <span class="material-icons-sharp">dashboard</span>
+              <span className="material-icons-sharp">dashboard</span>
               <h3>Dashboard</h3>
             </li>
             <li>
-              <span class="material-icons-sharp">category</span>
+              <span className="material-icons-sharp">category</span>
               <h3>Categories</h3>
             </li>
             <li>
-              <span class="material-icons-sharp">person</span>
+              <span className="material-icons-sharp">person</span>
               <h3>Profile</h3>
             </li>
             <li>
-              <span class="material-icons-sharp">settings</span>
+              <span className="material-icons-sharp">settings</span>
               <h3>Setting</h3>
             </li>
             <li>
-              <span class="material-icons-sharp">logout</span>
+              <span className="material-icons-sharp">logout</span>
               <h3>Log Out</h3>
             </li>
           </ul>
         </CenterStyle>
-        <div className="bottom">user and themes</div>
+        <BottomStyle>
+          <div className="color-option"></div>
+          <div className="color-option"></div>
+        </BottomStyle>
     </SideBarStyle>
   )
 }
+
+const SideBarStyle = styled.div`
+  flex:1.2;
+  min-height:82vh;
+  background-color: #f8f0e8;
+  position :relative;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  box-shadow: -15px 10px 20px rgb(0 0 0 / 8%);
+  min-width: 14rem;
+`;
 
 const TopStyle = styled.div`
   color:  var(--color-primary-purple);
@@ -53,19 +67,12 @@ const TopStyle = styled.div`
   }
 `;
 
-const SideBarStyle = styled.div`
-  flex:1.2;
-  min-height:82vh;
-  background-color: #f8f0e8;
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
-  box-shadow: 0px 0px 15px rgb(0 0 0 / 36%);
-  min-width: 14rem;
-`;
-
 const CenterStyle = styled.div`
   ul{
     list-style: none;
+    padding-top:1.5rem;
+    display: flex;
+    flex-direction: column;
   }
 
   li:hover:before{
@@ -80,7 +87,7 @@ const CenterStyle = styled.div`
     gap: 0.8rem;
     min-height:0.5rem;
     align-items: center;
-    padding:1rem;
+    padding:1rem 1.5rem;
     cursor: pointer;
     transition: all 300ms ease;
 
@@ -96,7 +103,38 @@ const CenterStyle = styled.div`
       }
     }
   }
+`;
 
+const BottomStyle = styled.div`
+  display:flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 2rem 3.8rem;
+  position: absolute;
+  bottom: 0;
+  gap: 2rem;
+
+  .color-option{
+    width: 35px;
+    height: 35px;
+    border-radius: 30%;
+    cursor: pointer;
+    border: 1.5px solid var( --color-dark-variant);
+    transition: all 0.3s ease;
+    
+    &:nth-child(1){
+      background-color: #f8f0e8;
+    }
+
+    &:nth-child(2){
+      background-color: #333;
+    }
+
+    &:hover{
+      transform: scale(1.1);
+      border: 1.8px solid var( --color-dark-variant);
+    }
+  }
 `;
 
 export default SideBar

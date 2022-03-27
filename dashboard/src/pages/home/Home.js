@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import Sidebar from "../../components/SideBar";
+import TopBar from "../../components/TopBar";
 
 function Home() {
 
@@ -27,7 +28,10 @@ function Home() {
         <p>{!numOfProfiles ? "Number of profiles: --- " : "Number of profiles: " + numOfProfiles}</p>
         <p>{!numOfPosts ? "Number of posts: --- " : "Number of posts: " + numOfPosts}</p> */}
         <Sidebar />
-        <div className="homeContainer">container</div>
+        <div className="homeContainer">
+          <TopBar />
+          home container
+        </div>
     </HomeStyle>
   )
 }
