@@ -20,7 +20,7 @@ function SideBar() {
               <h3>Categories</h3>
             </li>
             <li>
-            <span class="material-icons-sharp">person</span>
+              <span class="material-icons-sharp">person</span>
               <h3>Profile</h3>
             </li>
             <li>
@@ -28,7 +28,7 @@ function SideBar() {
               <h3>Setting</h3>
             </li>
             <li>
-            <span class="material-icons-sharp">logout</span>
+              <span class="material-icons-sharp">logout</span>
               <h3>Log Out</h3>
             </li>
           </ul>
@@ -39,7 +39,7 @@ function SideBar() {
 }
 
 const TopStyle = styled.div`
-  color: #896584;
+  color:  var(--color-primary-purple);
   min-height:50px;
   display:flex;
   align-items: center;
@@ -60,13 +60,21 @@ const SideBarStyle = styled.div`
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   box-shadow: 0px 0px 15px rgb(0 0 0 / 36%);
+  min-width: 14rem;
 `;
 
 const CenterStyle = styled.div`
   ul{
     list-style: none;
-
   }
+
+  li:hover:before{
+    content:"";
+    height:1.6rem;
+    width:2.5px;
+    background-color:var(--color-primary-purple) ;
+  }
+
   li{
     display:flex;
     gap: 0.8rem;
@@ -74,11 +82,21 @@ const CenterStyle = styled.div`
     align-items: center;
     padding:1rem;
     cursor: pointer;
+    transition: all 300ms ease;
+
+    h3,span{
+      color:var(--color-dark-variant);
+    }
 
     &:hover{
-      background-color:#475ba1;
+      background: linear-gradient(to right,#7380ec5e 0%,#475ba105 100%);
+      transform: translateX(1rem);
+      h3,span{
+        color:var(--color-primary-purple);
+      }
     }
   }
+
 `;
 
 export default SideBar
