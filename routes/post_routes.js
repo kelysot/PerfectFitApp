@@ -163,7 +163,7 @@ router.get('/',authenticate, Post.getPosts)
  *         description: The post was not found 
  */
 
-router.get('/:id', authenticate, Post.getPostById)
+// router.get('/:id', authenticate, Post.getPostById)
 
 
 /**
@@ -249,6 +249,11 @@ router.delete('/:postId', authenticate, Post.deletePost)
 // router.get('/getWishList/:wishListId',authenticate, Post.getWishList)
 
 router.get('/getWishList/:userName',authenticate, Post.getWishList)
+
+router.get('/getProfilePosts/:userName',authenticate, Post.getProfilePosts)
+
+router.get('/getPostById/:postId',authenticate, Post.getPostById)
+
 
 
 module.exports = router
