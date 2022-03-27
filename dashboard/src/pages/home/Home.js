@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import Sidebar from "../../components/SideBar";
 
 function Home() {
 
@@ -20,13 +21,22 @@ function Home() {
     }, [])
 
   return (
-    <div>
-        <h1>{!data ? "Loading..." : data}</h1>
+    <HomeStyle>
+        {/* <h1>{!data ? "Loading..." : data}</h1>
         <p>{!numOfUsers ? "Number of users: --- " : "Number of users: " + numOfUsers}</p>
         <p>{!numOfProfiles ? "Number of profiles: --- " : "Number of profiles: " + numOfProfiles}</p>
-        <p>{!numOfPosts ? "Number of posts: --- " : "Number of posts: " + numOfPosts}</p>
-    </div>
+        <p>{!numOfPosts ? "Number of posts: --- " : "Number of posts: " + numOfPosts}</p> */}
+        <Sidebar />
+        <div className="homeContainer">container</div>
+    </HomeStyle>
   )
 }
+
+const HomeStyle = styled.div`
+  display:flex;
+  .homeContainer{
+    flex:6 ;
+  }
+`;
 
 export default Home;

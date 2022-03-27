@@ -6,10 +6,11 @@ import Categories from "./pages/categories/Categories";
 import NewCategory from "./pages/new category/NewCategory";
 import SingleCategory from "./pages/single category/SingleCategory";
 import {BrowserRouter,Routes,Route} from "react-router-dom";
+import styled from "styled-components";
 
 function App() {
   return (
-    <div className="App">
+    <AppStyle className="App">
       <GlobalStyle />
       <Routes path="/">
         <Route index element={<Home/>}></Route>
@@ -20,9 +21,15 @@ function App() {
           <Route path="newCategory" element={<NewCategory/>}></Route>
         </Route>
       </Routes>
-      //TODO: option to add more routes for example to users
-    </div>
+    </AppStyle>
+          //TODO: option to add more routes for example to users
   );
 }
+
+const AppStyle = styled.div`
+    padding:4rem;
+    background: linear-gradient(to right,#f3af6ba6 0%,#cc66ffa3  100%);
+    min-height:100vh;
+`;
 
 export default App;
