@@ -190,7 +190,7 @@ const deletePost = async (req, res) => {
     const profile = await Profile.findOne({userName: profileId})
     var array = profile.myPostsListId
     let index = array.indexOf(thePostId)
-    if(index > 0){
+    if(index > -1){
         array.splice(index, 1);
     }
   
