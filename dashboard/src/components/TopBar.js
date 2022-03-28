@@ -7,7 +7,7 @@ function TopBar() {
         <WrapperStyle>
            <div className="search">
                <input className="search" placeholder="Search..."></input>
-               <span class="material-icons-sharp">search</span>
+               <span className="material-icons-sharp">search</span>
            </div>
            <div className="adminDetails">
                <img src="https://cdn.pixabay.com/photo/2020/04/15/16/58/smile-5047506_960_720.jpg"></img>
@@ -19,9 +19,7 @@ function TopBar() {
 };
 
 const TopBarStyle = styled.div`
-    background-color: #f8f0e8;
-    border-top-right-radius: 15px;
-    height: 11%;
+    padding: 0.5rem;
     display: flex;
 `;
 

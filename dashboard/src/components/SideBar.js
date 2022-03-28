@@ -48,7 +48,6 @@ const SideBarStyle = styled.div`
   position :relative;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
-  box-shadow: -15px 10px 20px rgb(0 0 0 / 8%);
   min-width: 14rem;
 `;
 

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import Sidebar from "../../components/SideBar";
 import TopBar from "../../components/TopBar";
+import CardDetails from "../../components/CardDetails";
 
 function Home() {
 
@@ -30,7 +31,12 @@ function Home() {
         <Sidebar />
         <div className="homeContainer">
           <TopBar />
-          home container
+          <div className="cardsDetails">
+            <CardDetails />
+            <CardDetails />
+            <CardDetails />
+            <CardDetails />
+          </div>
         </div>
     </HomeStyle>
   )
@@ -38,9 +44,14 @@ function Home() {
 
 const HomeStyle = styled.div`
   display:flex;
+  box-shadow:-15px 20px 20px rgb(0 0 0 / 12%);
+  border-radius:15px;
   .homeContainer{
     flex:6 ;
+    background-color: #f8f0e8a6;
+    border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
   }
-`;
+`
 
 export default Home;
