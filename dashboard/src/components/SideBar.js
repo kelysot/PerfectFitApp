@@ -1,8 +1,16 @@
-import React from 'react'
+import React ,{useState} from 'react'
 import styled from 'styled-components';
 
 //TODO: add image to the logo div
 function SideBar() {
+  //TODO: example to add className to element 
+  // render() {
+  //   let className = 'menu';
+  //   if (this.props.isActive) {
+  //     className += ' menu-active';
+  //   }
+  //   return <span className={className}>Menu</span>
+  // }
   return (
     <SideBarStyle>
         <TopStyle>
@@ -42,7 +50,7 @@ function SideBar() {
 }
 
 const SideBarStyle = styled.div`
-  flex:1.2;
+  flex:1;
   min-height:82vh;
   background-color: #f8f0e8;
   position :relative;
@@ -92,6 +100,7 @@ const CenterStyle = styled.div`
 
     h3,span{
       color:var(--color-dark-variant);
+      pointer-events:none
     }
 
     &:hover{
@@ -102,6 +111,14 @@ const CenterStyle = styled.div`
       }
     }
   }
+
+  .active-item{
+    transform: translateX(1rem);
+    h3,span{
+      color:var(--color-primary-purple);
+    }
+  }
+
 `;
 
 const BottomStyle = styled.div`
