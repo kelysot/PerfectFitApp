@@ -1,16 +1,27 @@
-import React ,{useState} from 'react'
+import React,{useEffect,useState}  from 'react';
 import styled from 'styled-components';
 
 //TODO: add image to the logo div
 function SideBar() {
-  //TODO: example to add className to element 
-  // render() {
-  //   let className = 'menu';
-  //   if (this.props.isActive) {
-  //     className += ' menu-active';
-  //   }
-  //   return <span className={className}>Menu</span>
-  // }
+
+  const menuitems = document.querySelectorAll("li");
+  const[currentIndex,setCurrentIndex] = useState(0);
+
+  menuitems.forEach((item,index) =>{
+    if(index == 0 && currentIndex ==0)
+      item.classList.add("active-item");
+  });
+
+  const handlerSelectItem = (index)=>{
+    if(index !== currentIndex){
+      menuitems.forEach((item)=>{
+        item.classList.remove("active-item");
+      })
+      setCurrentIndex(index);
+      menuitems[index].classList.add("active-item");
+    }
+  };
+
   return (
     <SideBarStyle>
         <TopStyle>
@@ -19,23 +30,23 @@ function SideBar() {
         </TopStyle>
         <CenterStyle>
           <ul>
-            <li>
+            <li onClick={()=> handlerSelectItem(0)}>
               <span className="material-icons-sharp">dashboard</span>
               <h3>Dashboard</h3>
             </li>
-            <li>
+            <li onClick={()=> handlerSelectItem(1)}>
               <span className="material-icons-sharp">category</span>
               <h3>Categories</h3>
             </li>
-            <li>
+            <li onClick={()=> handlerSelectItem(2)}>
               <span className="material-icons-sharp">person</span>
               <h3>Profile</h3>
             </li>
-            <li>
+            <li onClick={()=> handlerSelectItem(3)}>
               <span className="material-icons-sharp">settings</span>
               <h3>Setting</h3>
             </li>
-            <li>
+            <li onClick={()=> handlerSelectItem(4)}>
               <span className="material-icons-sharp">logout</span>
               <h3>Log Out</h3>
             </li>
@@ -116,6 +127,13 @@ const CenterStyle = styled.div`
     transform: translateX(1rem);
     h3,span{
       color:var(--color-primary-purple);
+    }
+
+    &:before{
+      content:"";
+      height:1.6rem;
+      width:2.5px;
+      background-color:var(--color-primary-purple);
     }
   }
 
