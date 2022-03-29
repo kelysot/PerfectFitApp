@@ -32,10 +32,10 @@ function Home() {
         <div className="homeContainer">
           <TopBar />
           <div className="cardsDetails">
-            <CardDetails />
-            <CardDetails />
-            <CardDetails />
-            <CardDetails />
+            <CardDetails type="onlineUsers"/>
+            <CardDetails type="newProfiles"/>
+            <CardDetails type="totalUsers"/>
+            <CardDetails type="totalPosts"/>
           </div>
         </div>
     </HomeStyle>
@@ -50,7 +50,15 @@ const HomeStyle = styled.div`
     flex:6 ;
     background-color: #f8f0e8a6;
     border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+
+    .cardsDetails{
+      display: flex;
+      padding: 20px; 
+      gap: 20px;
+      justify-content: space-around;
+      padding-top: 30px;
+    }
   }
 `
 
