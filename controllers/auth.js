@@ -33,7 +33,8 @@ const register = async (req, res) => {
         const user = User({
             'email': email,
             'password': hashPwd,
-            'type': "client" //need to think how we create admin account.
+            'type': "client", //need to think how we create admin account.
+            'isConnected': "true"
         })
         const accessToken = await jwt.sign(
             { 'id': user._id },
@@ -73,6 +74,17 @@ const login = async (req, res) => {
         const match = await bcrypt.compare(password, user.password)
         if (!match) return sendError(res, 400, "wrong email or password")
 
+
+        user.isConnected = "true"
+        await user.save()
+        // user.save((error, user) => {
+        //     if (error) {
+        //         res.status(400).send({
+        //             'status': 'fail',
+        //             'error': error.message
+        //         })
+        //     }
+        // })
 
         const accessToken = await jwt.sign(
             { 'id': user._id },
@@ -126,8 +138,6 @@ const getUser = async (req, res) => {
     }
 }
 
-
-//TODO: logout not working.
 const logout = async (req, res) => {
     const authHeaders = req.headers['authorization']
     const token = authHeaders && authHeaders.split(' ')[1]
@@ -141,9 +151,14 @@ const logout = async (req, res) => {
             console.log("user: " + user)
             if (user == null) return res.status(403).send('invalid request')
             if (!user.tokens.includes(token)) {
+                user.isConnected = "false"
                 user.tokens = [] //invalidate all user token
                 await user.save()
                 return res.status(403).send('invalid request')
+            }
+            else {
+                user.isConnected = "false"
+                await user.save()
             }
             user.tokens.splice(user.tokens.indexOf(token), 1)
             await user.save()
