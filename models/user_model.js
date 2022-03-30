@@ -13,6 +13,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    isConnected: {
+        type: String,
+        required: true
+    },
     profilesId: [{
         type: String,
         ref: 'Profile'

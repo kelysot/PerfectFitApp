@@ -75,7 +75,8 @@ Content-Type: application/json
 {
     "email" : "1",
     "password" : "1",
-    "type" : "client"
+    "type" : "client",
+    "isConnected": "true"
 }
 
 ###
@@ -85,7 +86,8 @@ Content-Type: application/json
 {
     "email" : "b@a.com",
     "password" : "12345",
-    "type" : "client"
+    "type" : "client",
+    "isConnected": "true"
 }
 
 ### 
