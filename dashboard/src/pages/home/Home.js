@@ -6,7 +6,6 @@ import CardDetails from "../../components/CardDetails";
 
 function Home() {
 
-    const [data, setData] = React.useState("");
     const [numOfUsers, setNumOfUsers] = React.useState(0);
     const [numOfProfiles, setNumOfProfiles] = React.useState(0)
     const [numOfPosts, setNumOfPosts] = React.useState(0)
@@ -15,7 +14,6 @@ function Home() {
       fetch("/dashboard")
         .then((res) => res.json())
         .then((data) => {
-            setData(data.message)
             setNumOfUsers(data.numOfUsers)
             setNumOfProfiles(data.numOfProfiles)
             setNumOfPosts(data.numOfPosts)

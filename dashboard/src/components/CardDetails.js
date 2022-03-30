@@ -1,43 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
+let data;
+
 function CardDetails({type}) {
-  let data;
 
-  switch(type){
-    case "onlineUsers":
-      data={
-        title:"Online Users",
-        counter:"1",
-        icon:"person_outline",
-      };
-      break;
-      case "newProfiles":
-      data={
-        title:"New Profiles",
-        counter:"2",
-        icon:"account_circle",
-      };
-      break;
-      case "totalUsers":
-      data={
-        title:"Total Users",
-        counter:"3",
-        icon:"group",
-      };
-      break;
-      case "totalPosts":
-      data={
-        title:"Total Posts",
-        counter:"4",
-        icon:"post_add",
-      };
-      break;
-    default:
-      break;
-  }
-
-
+  data = dataToCard(type,data);
 
   return (
     <CardStyle>
@@ -57,6 +25,41 @@ function CardDetails({type}) {
   )
 };
 
+function dataToCard(type,data) {
+  switch(type){
+    case "onlineUsers":
+      data={
+        title:"Online Users",
+        counter:"--",
+        icon:"person_outline",
+      };
+      break;
+      case "newProfiles":
+      data={
+        title:"New Profiles",
+        counter:"--",
+        icon:"account_circle",
+      };
+      break;
+      case "totalUsers":
+      data={
+        title:"Total Users",
+        counter:"--",
+        icon:"group",
+      };
+      break;
+      case "totalPosts":
+      data={
+        title:"Total Posts",
+        counter:"--",
+        icon:"post_add",
+      };
+      break;
+    default:
+      break;
+  }
+  return data;
+} 
 
 const CardStyle = styled.div`
   display: flex;
