@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import styled from "styled-components";
 import Sidebar from "../../components/SideBar";
 import TopBar from "../../components/TopBar";
@@ -6,29 +6,32 @@ import CardDetails from "../../components/CardDetails";
 
 function Home() {
 
-    const [numOfUsers, setNumOfUsers] = React.useState(0);
-    const [numOfProfiles, setNumOfProfiles] = React.useState(0)
-    const [numOfPosts, setNumOfPosts] = React.useState(0)
+    // const [numOfUsers, setNumOfUsers] = React.useState(0);
+    // const [numOfProfiles, setNumOfProfiles] = React.useState(0)
+    // const [numOfPosts, setNumOfPosts] = React.useState(0)
+    const[nameOfAdmin,setNameOfAdmin] = useState("");
   
-    React.useEffect(() => {
-      fetch("/dashboard")
+    useEffect(() => {
+      fetch("/dashboard",{
+        headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+         }
+      })
         .then((res) => res.json())
         .then((data) => {
-            setNumOfUsers(data.numOfUsers)
-            setNumOfProfiles(data.numOfProfiles)
-            setNumOfPosts(data.numOfPosts)
+          setNameOfAdmin(data.adminName);
+            // setNumOfUsers(data.numOfUsers)
+            // setNumOfProfiles(data.numOfProfiles)
+            // setNumOfPosts(data.numOfPosts)
           })
-    }, [])
+    },[])
 
   return (
     <HomeStyle>
-        {/* <h1>{!data ? "Loading..." : data}</h1>
-        <p>{!numOfUsers ? "Number of users: --- " : "Number of users: " + numOfUsers}</p>
-        <p>{!numOfProfiles ? "Number of profiles: --- " : "Number of profiles: " + numOfProfiles}</p>
-        <p>{!numOfPosts ? "Number of posts: --- " : "Number of posts: " + numOfPosts}</p> */}
         <Sidebar />
         <div className="homeContainer">
-          <TopBar />
+          <TopBar nameOfAdmin={nameOfAdmin}/>
           <div className="cardsDetails">
             <CardDetails type="onlineUsers"/>
             <CardDetails type="newProfiles"/>

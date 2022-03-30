@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function TopBar() {
+function TopBar({nameOfAdmin}) {
   return (
     <TopBarStyle>
         <WrapperStyle>
@@ -11,7 +11,7 @@ function TopBar() {
            </div>
            <div className="adminDetails">
                <img src="https://cdn.pixabay.com/photo/2020/04/15/16/58/smile-5047506_960_720.jpg"></img>
-               <h3>Admin Name</h3>
+               <h3>{nameOfAdmin}</h3>
            </div>
         </WrapperStyle>
     </TopBarStyle>

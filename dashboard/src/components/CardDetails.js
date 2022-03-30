@@ -1,11 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 
 let data;
 
 function CardDetails({type}) {
-
+  
   data = dataToCard(type,data);
+  
+  useEffect(() =>{
+    //TODO: use the data from server function amounts
+  },[]);
+
 
   return (
     <CardStyle>

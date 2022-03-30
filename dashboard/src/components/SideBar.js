@@ -8,7 +8,7 @@ function SideBar() {
   const[currentIndex,setCurrentIndex] = useState(0);
 
   menuitems.forEach((item,index) =>{
-    if(index == 0 && currentIndex ==0)
+    if(index === 0 && currentIndex === 0)
       item.classList.add("active-item");
   });
 
