@@ -115,7 +115,7 @@ const CenterStyle = styled.div`
     }
 
     &:hover{
-      background: linear-gradient(to right,#7380ec5e 0%,#475ba105 100%);
+      background: linear-gradient(to right,#7380ec47 0%,#475ba105 50%);
       transform: translateX(1rem);
       h3,span{
         color:var(--color-primary-purple);

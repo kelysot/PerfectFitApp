@@ -62,6 +62,11 @@ const HomeStyle = styled.div`
       justify-content: space-around;
       padding-top: 30px;
     }
+
+    .charts{
+      height: 55vh;
+      padding-top: 10px ;
+    }
     
   }
 `
