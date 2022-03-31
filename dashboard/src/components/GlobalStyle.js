@@ -7,6 +7,7 @@ const GlobalStyle = createGlobalStyle`
         --color-dark-variant : #677483;
         --color-downIcon-red : #d92b2ba6;
         --color-upIcon-green :#73c177;
+        --color-flatIcon-blue : #5ea6dfd9;
         --color-iconCard-purple: #896584;
     }
 

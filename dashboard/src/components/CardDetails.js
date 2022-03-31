@@ -1,16 +1,31 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 
 let data;
 
 function CardDetails({type}) {
   
-  data = dataToCard(type,data);
+  const [numOfPosts,setNumOfPosts]=useState(null);
+  const [numOfUsers,setNumOfUsers]=useState(null);
+  const [numOnlineProfiles,setNumOnlineProfiles]=useState(null);
+  data = dataToCard(type,data , numOfPosts , numOfUsers ,numOnlineProfiles);
   
   useEffect(() =>{
     //TODO: use the data from server function amounts
+    
+      fetch("/dashboard/amounts" ,{
+        headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
+      .then((res) => res.json())
+          .then((data) => {
+            setNumOfPosts(data.numOfPosts);
+            setNumOfUsers(data.numOfUsers);
+            setNumOnlineProfiles(data.numOnlineProfiles);
+            })
   },[]);
-
 
   return (
     <CardStyle>
@@ -30,12 +45,13 @@ function CardDetails({type}) {
   )
 };
 
-function dataToCard(type,data) {
+function dataToCard(type,data, numOfPosts , numOfUsers ,numOnlineProfiles) {
+  //todo : add no change icon "trending_flat" + use the relevet class name + compre to last week
   switch(type){
     case "onlineUsers":
       data={
-        title:"Online Users",
-        counter:"--",
+        title:"Online Profiles",
+        counter:numOnlineProfiles ? numOnlineProfiles : "--",
         icon:"person_outline",
       };
       break;
@@ -49,14 +65,14 @@ function dataToCard(type,data) {
       case "totalUsers":
       data={
         title:"Total Users",
-        counter:"--",
+        counter:numOfUsers ? numOfUsers : "--",
         icon:"group",
       };
       break;
       case "totalPosts":
       data={
         title:"Total Posts",
-        counter:"--",
+        counter:numOfPosts ? numOfPosts : "--",
         icon:"post_add",
       };
       break;
@@ -116,6 +132,9 @@ const RightStyled = styled.div`
     }
     &.negative{
       color:var(--color-downIcon-red);
+    }
+    &.flat{
+      color:var(--color-flatIcon-blue);
     }
   }
   #icon{
