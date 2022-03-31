@@ -3,12 +3,12 @@ import styled from "styled-components";
 import Sidebar from "../../components/SideBar";
 import TopBar from "../../components/TopBar";
 import CardDetails from "../../components/CardDetails";
+import TopUserChart from "../../components/TopUserChart";
+import PostUploadChart from '../../components/PostUploadChart';
+import PopularCategoriesChart from "../../components/PopularCategoriesChart";
 
 function Home() {
 
-    // const [numOfUsers, setNumOfUsers] = React.useState(0);
-    // const [numOfProfiles, setNumOfProfiles] = React.useState(0)
-    // const [numOfPosts, setNumOfPosts] = React.useState(0)
     const[nameOfAdmin,setNameOfAdmin] = useState("");
   
     useEffect(() => {
@@ -21,9 +21,6 @@ function Home() {
         .then((res) => res.json())
         .then((data) => {
           setNameOfAdmin(data.adminName);
-            // setNumOfUsers(data.numOfUsers)
-            // setNumOfProfiles(data.numOfProfiles)
-            // setNumOfPosts(data.numOfPosts)
           })
     },[])
 
@@ -37,6 +34,11 @@ function Home() {
             <CardDetails type="newProfiles"/>
             <CardDetails type="totalUsers"/>
             <CardDetails type="totalPosts"/>
+          </div>
+          <div className="charts">
+            <TopUserChart />
+            <PostUploadChart />
+            <PopularCategoriesChart />
           </div>
         </div>
     </HomeStyle>
@@ -53,13 +55,14 @@ const HomeStyle = styled.div`
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
 
-    .cardsDetails{
+    .cardsDetails , .charts{
       display: flex;
       padding: 20px; 
       gap: 20px;
       justify-content: space-around;
       padding-top: 30px;
     }
+    
   }
 `
 
