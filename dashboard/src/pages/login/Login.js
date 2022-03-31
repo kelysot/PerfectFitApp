@@ -3,47 +3,39 @@ import styled from "styled-components";
 
 function Login() {
   return (
-    <LoginStyle>
       <ContainerStyle>
         <h1>Perfect<span>Fit</span></h1>
-        <h2>Log In</h2>
+        <h3>Log In</h3>
         <InputStyle type="text" id="userName" placeholder="User Name" autocomplete="off" />
         <InputStyle type="text" id="password" placeholder="Password" autocomplete="off"/>
         <ButtonStyle>Log In</ButtonStyle>
       </ContainerStyle>
-    </LoginStyle>
   )
-
-  
 }
 
-const LoginStyle = styled.div`
-   display:flex;
-  box-shadow:-15px 20px 20px rgb(0 0 0 / 12%);
-  border-radius:15px;
-`;
-
 const ContainerStyle = styled.div`
-   flex:6 ;
-    background-color: #f8f0e8a6;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
-    min-height:50px;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction:column ;
-    color:var(--color-iconCard-purple);
-    h1{
+  background: #f8f0e8a6;;
+  margin: auto;
+  width: fit-content;
+  padding: 40px 60px;
+  border-radius: 15px;
+  flex-direction: column;
+  display: flex;
+  color:var(--color-iconCard-purple);
+  margin:auto ;
+  align-items: center;
+  h1{
     font-size:2.5rem;
-    padding-top:1rem;
+    padding-top:3px;
     color: var(--color-primary-purple);
-    span{
-      color: #f3af6b;
-    }
   }
+  span {
+    color: #f3af6b;
+  }
+  h3{
+    margin-bottom: 0.7rem;
+  }
+  
 `;
 const InputStyle = styled.input`
   margin: 0.7rem;
@@ -54,24 +46,27 @@ const InputStyle = styled.input`
   border-bottom-color: var(--color-primary-purple);
   font-size: 18px;
   padding: 0.5rem;
-
+  width:18rem ;
 `;
-const ButtonStyle = styled.div`
-  padding: 0.5rem;
-  margin:15px;
+
+const ButtonStyle = styled.button`
+  padding: 0.5rem 2rem ;
   font-size: 16px;
+  font-weight:bolder ;
   cursor: pointer;
   transition: 0.5s all ease;
   border-radius: 10px;
   border: 1px solid;
-  background: #f8f0e8a6;
-  color:var(--color-primary-purple) ;
-  border: 1px solid var(--color-primary-purple) ;
+  background: var(--color-primary-purple) ;
+  color:#f8f0e8a6 ;
+  border: 1px solid #f8f0e8a6 ;
+  margin-top:1rem ;
 
   :hover {
-    background: var(--color-primary-purple) ;
-    color:#f8f0e8a6 ;
-    border: 1px solid #f8f0e8a6 ;
+    background: #f8f0e8a6;
+    color:var(--color-primary-purple) ;
+    border: 1px solid var(--color-primary-purple) ;
+    transform: scale(1.02) ;
   }
 `
 
