@@ -12,7 +12,6 @@ const getAmounts = async (req, res) => {
     const usersList = await User.find()
     const postsList = await Post.find()
     const profileList = await Profile.find({ status: { $eq: true } })
-    console.log(profileList)
     res.json({
         numOfPosts: postsList.length,
         numOfUsers: usersList.length,
