@@ -18,6 +18,28 @@ const getPosts = async (req, res) => {
     }
 }
 
+const getPostsBySubCategoryId = async (req, res) => {
+    if (req.params.subCategoryId == null) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+
+    const category = await SubCategory.findById(req.params.subCategoryId)
+    const subCategoryPosts = await Post.find({ '_id': category.posts })
+
+    try {
+
+        res.status(200).send(subCategoryPosts)
+    } catch (err) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+}
+
 const getPostById = async (req, res) => {
 
     if (req.params.postId == null || req.params.postId == undefined) {
@@ -316,6 +338,7 @@ const getProfilePosts = async (req, res) => {
 
 module.exports = {
     getPosts,
+    getPostsBySubCategoryId,
     getPostById,
     addNewPost,
     editPost,
