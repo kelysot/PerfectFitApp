@@ -53,11 +53,11 @@ const getSubCategoriesByCategoryId = async (req, res) => {
 
 const addSubCategory = async (req, res) => {
     const categoryId = req.params.id
-    console.log("categoryId " + categoryId)
     const newSubCategory = SubCategory({
         "name": req.body.name,
         "pictureUrl": req.body.pictureUrl,
-        "categoryId": categoryId
+        "categoryId": categoryId,
+        "posts": []
     })
 
     newSubCategory.save((error, newSubCategory) => {
@@ -103,6 +103,7 @@ const editSubCategory = async (req, res) => {
         const editSubCategory = await SubCategory.findById(req.params.id)
         editSubCategory.name = req.body.name
         editSubCategory.pictureUrl = req.body.pictureUrl
+        editSubCategory.posts = req.body.posts
 
         editSubCategory.save((error, editSubCategory) => {
             if (error) {

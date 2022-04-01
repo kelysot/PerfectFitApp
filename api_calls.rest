@@ -199,20 +199,20 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 
 ###
 Post http://localhost:4000/category/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjQ4MmQ0MDA5NmQ5OTUzOGYwZjBhMyIsImlhdCI6MTY0ODI3ODMzNiwiZXhwIjoxNjQ4MzY0NzM2fQ.gE-srkpqWbt7STyBnDA4J0z4QQW_RNX5yuUaU2oQPBc
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDQxNmY3NDBhMGJmY2YxODFhZDk0MSIsImlhdCI6MTY0ODgwNDA4MSwiZXhwIjoxNjQ4ODkwNDgxfQ.vZMmsY8S5MaCz78zr4lxjG_ekuoEnPQPeacSEktsm4E
 Content-Type: application/json
 
 {
-        "name": "S Male",
-        "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8L_1DoXQIel6wBXpSZvLAaVv1Mplo5ttu6A&usqp=CAU",
-        "gender": "Male",
+        "name": "Winter Male",
+        "pictureUrl": "https://cdn.shopify.com/s/files/1/0970/4540/products/Lynn-Button-Back-Cotton-Dress-2_256x.jpg?v=1647997123",
+        "gender": "Female",
         "subCategory": []
 }
 
 
 ###
 PATCH  http://localhost:4000/category/6230fb4ae68fb223cdc6d5f3/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzM3NzE4MywiZXhwIjoxNjQ3NDYzNTgzfQ.UF6lJEKURZrs4LQp24d0pB6iFC7GgxZl5csVu6NIGD0
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDQxNmY3NDBhMGJmY2YxODFhZDk0MSIsImlhdCI6MTY0ODc5ODQxNiwiZXhwIjoxNjQ4ODg0ODE2fQ.O5O_D2rTEWUbQLOcMbvldjkA2STIhGLwMh55OekuryU
 Content-Type: application/json
 
 {
@@ -247,23 +247,25 @@ Content-Type: application/json
         "currentUserGender": ["Male"]
 }
 ###
-Post http://localhost:4000/subcategory/623ebb6d2e6b848bb991cdcd
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjQ4MmQ0MDA5NmQ5OTUzOGYwZjBhMyIsImlhdCI6MTY0ODI3ODMzNiwiZXhwIjoxNjQ4MzY0NzM2fQ.gE-srkpqWbt7STyBnDA4J0z4QQW_RNX5yuUaU2oQPBc
+Post http://localhost:4000/subcategory/6246c35bd4fe399b3bdf5ece
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDQxNmY3NDBhMGJmY2YxODFhZDk0MSIsImlhdCI6MTY0ODgwNDA4MSwiZXhwIjoxNjQ4ODkwNDgxfQ.vZMmsY8S5MaCz78zr4lxjG_ekuoEnPQPeacSEktsm4E
 Content-Type: application/json
 
 {
-        "name": "T-Shirts",
-        "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6niBNcUfbA8p6YOz6NWy8fXe5KkupgFwXGg&usqp=CAU"
+        "name": "T-Shirts Summer",
+        "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6niBNcUfbA8p6YOz6NWy8fXe5KkupgFwXGg&usqp=CAU",
+        "posts": []
 }
 
 ###
-PATCH  http://localhost:4000/subcategory/62390cd809e22f9eca0ca482/
+PATCH  http://localhost:4000/subcategory/6242dde053c8199822f9efe9/
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzUwMjQ1ZmU4M2VmMGI1MjlkZTU1NCIsImlhdCI6MTY0Nzg5OTk5NywiZXhwIjoxNjQ3OTg2Mzk3fQ.1uEl7AR1LAQjQ04LMl6UFY2XoCbzY_8hhJ9gqWh-g3I
 Content-Type: application/json
 
 {
         "name": "Edit SubCategory name",        
-        "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8L_1DoXQIel6wBXpSZvLAaVv1Mplo5ttu6A&usqp=CAU"
+        "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8L_1DoXQIel6wBXpSZvLAaVv1Mplo5ttu6A&usqp=CAU",
+        "posts": []
 }
 
 ###
