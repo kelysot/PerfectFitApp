@@ -49,7 +49,7 @@ const authenticate = require('../common/auth_middleware')
 *                 $ref: '#/components/schemas/SubCategory'
 */
 
-router.get('/',authenticate,SubCategory.getSubCategories)
+router.get('/', authenticate, SubCategory.getSubCategories)
 
 /**
  * @swagger
@@ -75,8 +75,7 @@ router.get('/',authenticate,SubCategory.getSubCategories)
  *         description: The subCategory was not found 
  */
 
-//router.get('/:id',authenticate,SubCategory.getSubCategoryById)
-router.get('/:id',SubCategory.getSubCategoryById)
+router.get('/getSubCategoryById/:id', authenticate, SubCategory.getSubCategoryById)
 
 /**
  * @swagger
@@ -108,7 +107,7 @@ router.get('/:id',SubCategory.getSubCategoryById)
  *         description: Some server error 
  */
 
-router.post('/:id', authenticate,SubCategory.addSubCategory)
+router.post('/:id', authenticate, SubCategory.addSubCategory)
 
 /**
  * @swagger
@@ -140,7 +139,7 @@ router.post('/:id', authenticate,SubCategory.addSubCategory)
  *          description: Some error 
  */
 
-router.patch('/:id', authenticate,SubCategory.editSubCategory)
+router.patch('/:id', authenticate, SubCategory.editSubCategory)
 
 /**
  * @swagger
@@ -162,9 +161,9 @@ router.patch('/:id', authenticate,SubCategory.editSubCategory)
  *          description: Some error     
  */
 
-router.delete('/:id', authenticate,SubCategory.deleteSubCategory)
+router.delete('/:id', authenticate, SubCategory.deleteSubCategory)
 
 //TODO: add to Swagger API
-router.get('/:categoryId/:gender',authenticate,SubCategory.getSubCategoriesByCategoryId)
+router.get('/:categoryId/:gender', authenticate, SubCategory.getSubCategoriesByCategoryId)
 
 module.exports = router

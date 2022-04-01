@@ -136,7 +136,7 @@ const authenticate = require('../common/auth_middleware')
 *                 $ref: '#/components/schemas/Post'
 */
 
-router.get('/',authenticate, Post.getPosts)
+router.get('/', authenticate, Post.getPosts)
 
 
 /**
@@ -248,12 +248,12 @@ router.delete('/:postId', authenticate, Post.deletePost)
 
 // router.get('/getWishList/:wishListId',authenticate, Post.getWishList)
 
-router.get('/getWishList/:userName',authenticate, Post.getWishList)
+router.get('/getWishList/:userName', authenticate, Post.getWishList)
 
-router.get('/getProfilePosts/:userName',authenticate, Post.getProfilePosts)
+router.get('/getProfilePosts/:userName', authenticate, Post.getProfilePosts)
 
-router.get('/getPostById/:postId',authenticate, Post.getPostById)
+router.get('/getPostById/:postId', authenticate, Post.getPostById)
 
-
+router.get('/getPostsBySubCategoryId/:subCategoryId', authenticate, Post.getPostsBySubCategoryId)
 
 module.exports = router
