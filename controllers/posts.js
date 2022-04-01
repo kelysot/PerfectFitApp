@@ -1,17 +1,16 @@
 const Post = require('../models/post_model')
 const Profile = require('../models/profile_model')
+const Category = require('../models/category_model')
+const SubCategory = require('../models/sub_category_model')
 
 
 const getPosts = async (req, res) => {
-    console.log("1111111111111111")
     try {
-        console.log("22222222222222")
         posts = await Post.find()
 
         res.status(200).send(posts)
 
     } catch (err) {
-        console.log("33333333333")
         res.status(400).send({
             'status': 'fail',
             'error': err.message
@@ -66,6 +65,41 @@ const addNewPost = async (req, res) => {
         comments: []
     })
 
+    const categoryArr = await Category.find({ 'gender': profile.gender, name: post.categoryId })
+
+    const subCategories = await SubCategory.find({ 'name': post.subCategoryId })
+
+    var mySubCategory
+    let size = subCategories.length
+    if (size == 1) {
+        mySubCategory = subCategories
+    }
+    else {
+        for (let i = 0; i < size; i++) {
+            for (let j = 0; j < size; j++) {
+
+                var temp1 = (categoryArr[0].subCategory[i]._id).toString()
+                var temp2 = (subCategories[j]._id).toString()
+
+                if (temp1 == temp2) {
+                    mySubCategory = subCategories[j]
+                    break
+                }
+            }
+        }
+    }
+
+    mySubCategory.posts.push(post._id)
+
+    mySubCategory.save((error) => {
+        if (error) {
+            res.status(400).send({
+                'status': 'fail',
+                'error': error.message
+            })
+        }
+    })
+
     post.save((error, post) => {
         if (error) {
             console.log("the error: " + error.message)
@@ -86,7 +120,7 @@ const addNewPost = async (req, res) => {
     var array = profile._doc.myPostsListId
     array.push(post._id)
     profile.myPostsListId = array
- 
+
     profile.save((error) => {
         if (error) {
             res.status(400).send({
@@ -118,18 +152,18 @@ const editPost = async (req, res) => {
         editPost.productName = post.productName
         editPost.sku = post.sku
         editPost.size = post.size,
-        editPost.company = post.company,
-        editPost.price = post.price,
-        editPost.color = post.color,
-        editPost.categoryId = post.categoryId,
-        editPost.subCategoryId = post.subCategoryId,
-        editPost.date = post.date,
-        editPost.link = post.link,
-        editPost.sizeAdjustment = post.sizeAdjustment,
-        editPost.rating = post.rating,
-        editPost.picturesUrl = post.picturesUrl,
-        editPost.likes = post.likes,
-        editPost.comments = post.comments
+            editPost.company = post.company,
+            editPost.price = post.price,
+            editPost.color = post.color,
+            editPost.categoryId = post.categoryId,
+            editPost.subCategoryId = post.subCategoryId,
+            editPost.date = post.date,
+            editPost.link = post.link,
+            editPost.sizeAdjustment = post.sizeAdjustment,
+            editPost.rating = post.rating,
+            editPost.picturesUrl = post.picturesUrl,
+            editPost.likes = post.likes,
+            editPost.comments = post.comments
 
         editPost.save((error, editPost) => {
             if (error) {
@@ -187,16 +221,16 @@ const deletePost = async (req, res) => {
     }
 
     // const profile = await Profile.findOne({ userName: PostToDelete.profileId })
-    const profile = await Profile.findOne({userName: profileId})
+    const profile = await Profile.findOne({ userName: profileId })
     var array = profile.myPostsListId
     let index = array.indexOf(thePostId)
-    if(index > -1){
+    if (index > -1) {
         array.splice(index, 1);
     }
-  
+
     // array.remove(PostToDelete._id)
     profile.myPostsListId = array
- 
+
     profile.save((error) => {
         if (error) {
             res.status(400).send({
@@ -217,7 +251,7 @@ const deletePost = async (req, res) => {
 
 //     const array = await list.find({_id: {$in:wishListId}});// can't reach the postId
 //     //TODO: return all the relevant posts
-    
+
 //     console.log("we are hereeeeeee")
 
 // }
@@ -226,10 +260,10 @@ const getWishList = async (req, res) => {
 
     const userName = req.params.userName
 
-    if(userName == null || userName == undefined){
+    if (userName == null || userName == undefined) {
         res.status(400).send({
-        'status': 'fail',
-        'error': err.message
+            'status': 'fail',
+            'error': err.message
         })
     }
     try {
@@ -244,38 +278,38 @@ const getWishList = async (req, res) => {
         //     theArr.push(mongoose.Types.ObjectId(theList[i]))
         // }
 
-        var theReturnList = await Post.find({'_id': {$in: theList}})
+        var theReturnList = await Post.find({ '_id': { $in: theList } })
         res.status(200).send(theReturnList)
 
     } catch (err) {
         res.status(400).send({
-        'status': 'fail',
-        'error': err.message
+            'status': 'fail',
+            'error': err.message
         })
     }
 }
 
 
-const getProfilePosts = async (req, res) =>{
+const getProfilePosts = async (req, res) => {
 
     const userName = req.params.userName
-    if(userName == null || userName == undefined){
+    if (userName == null || userName == undefined) {
         res.status(400).send({
-        'status': 'fail',
-        'error': err.message
+            'status': 'fail',
+            'error': err.message
         })
     }
     try {
 
         const profile = await Profile.findOne({ userName: { $eq: userName } })
         const theList = profile.myPostsListId
-        var theProfilePostsList = await Post.find({'_id': {$in: theList}})
+        var theProfilePostsList = await Post.find({ '_id': { $in: theList } })
         res.status(200).send(theProfilePostsList)
 
     } catch (err) {
         res.status(400).send({
-        'status': 'fail',
-        'error': err.message
+            'status': 'fail',
+            'error': err.message
         })
     }
 }
