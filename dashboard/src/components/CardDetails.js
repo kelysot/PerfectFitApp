@@ -10,9 +10,7 @@ function CardDetails({type}) {
   const [numOnlineProfiles,setNumOnlineProfiles]=useState(null);
   data = dataToCard(type,data , numOfPosts , numOfUsers ,numOnlineProfiles);
   
-  useEffect(() =>{
-    //TODO: use the data from server function amounts
-    
+  useEffect(() =>{    
       fetch("/dashboard/amounts" ,{
         headers : { 
           'Content-Type': 'application/json',

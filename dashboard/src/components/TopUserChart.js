@@ -1,14 +1,18 @@
 import React from 'react';
 import styled from "styled-components";
+import TopUserCard from "../components/TopUserCard";
 
 function TopUserChart() {
   return (
     <TopUserChartStyle>
-        <TopStyle className="top">
+        <TopStyle>
             <h3 className="title">Top Users</h3>
         </TopStyle>
-        <BottomStyle className="bottom">
-
+        <BottomStyle>
+          <TopUserCard type="firstPlace"/>
+          <TopUserCard  type="secondPlace"/>
+          <TopUserCard  type="thirdPlace"/>
+          <TopUserCard  type="anotherPlace"/>
         </BottomStyle>
     </TopUserChartStyle>
   )
@@ -17,9 +21,7 @@ function TopUserChart() {
 const TopUserChartStyle = styled.div`
     background-color: #ffffffe8;
     border-radius: 8px;
-    box-shadow: 0px -12px 15px rgb(0 0 0 / 10%);
     padding: 10px;
-    /* height: 55vh; // ?? */
     flex: 3;
 `;
 
@@ -27,6 +29,7 @@ const TopStyle = styled.div`
     font-weight: bold;
     font-size: 14px;
     color: var(--color-dark-variant);
+    margin-bottom:2.5rem ;
 `;
 
 const BottomStyle = styled.div`
