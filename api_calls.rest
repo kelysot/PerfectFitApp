@@ -13,7 +13,7 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjQ4MmQ0MD
 
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjQ4MmQ0MDA5NmQ5OTUzOGYwZjBhMyIsImlhdCI6MTY0NzI2NDE4MH0.pHxfvF60CAMsPBrVCPoX67GrIgDjqmC7WxwEylloF7w
 ###
-POST http://localhost:4000/post
+POST http://localhost:4000/post/y@gmail.com
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjBkYTRhNDgxODMxNDZlZDdmOGUzMCIsImlhdCI6MTY0NzAwMTcxNCwiZXhwIjoxNjQ3MDg4MTE0fQ.G6Mf9Pvi6f2SBezY__zZ5VzzDnoreviqMldsyQ7u4zk
 Content-Type: application/json
 
@@ -38,7 +38,7 @@ Content-Type: application/json
 }
 
 ###
-PATCH  http://localhost:4000/post/622a6ec75afdc688ae7036f3/
+PATCH  http://localhost:4000/post/y@gmail.com/
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0Njk0NzkzOSwiZXhwIjoxNjQ3MDM0MzM5fQ._9dREYzI8JAznD6ShMrWCIhEfHm0f29x7ya_qwuGyoE
 Content-Type: application/json
 
@@ -84,8 +84,8 @@ POST http://localhost:4000/auth/login
 Content-Type: application/json
 
 {
-    "email" : "b@a.com",
-    "password" : "12345",
+    "email" : "y@gmail.com",
+    "password" : "123456",
     "type" : "client",
     "isConnected": "true"
 }

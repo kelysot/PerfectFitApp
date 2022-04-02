@@ -1,9 +1,23 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 
 //TODO: According to the type use the colors wgo relevant to place
 
 function TopUserCard({type}) {
+    
+    useEffect(() =>{
+        fetch("/dashboard/topProfiles" ,{
+            headers : { 
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            }
+          })
+          .then((res) => res.json())
+              .then((data) => {
+                console.log(data.topUsers)
+            })
+    },[])
+
   return (
     <CardStyle>
         <div className="line"></div>
@@ -15,11 +29,11 @@ function TopUserCard({type}) {
 
 const CardStyle = styled.div`
     display: flex;
-    margin-top:2rem;
     align-items: center;
     border-radius:8px;
     background:#e4cb912e;
-    
+    margin:0.3rem 0rem;
+
     .line{
         flex: 0.3;
         background-color:#E4CB91;
@@ -43,5 +57,6 @@ const CardStyle = styled.div`
         color:#d7b25e;
     }
 `;
+
 
 export default TopUserCard;

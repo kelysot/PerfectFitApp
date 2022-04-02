@@ -6,12 +6,13 @@ function TopUserChart() {
   return (
     <TopUserChartStyle>
         <TopStyle>
-            <h3 className="title">Top Users</h3>
+          <h3 className="title">Top Users</h3>
         </TopStyle>
         <BottomStyle>
           <TopUserCard type="firstPlace"/>
           <TopUserCard  type="secondPlace"/>
           <TopUserCard  type="thirdPlace"/>
+          <TopUserCard  type="anotherPlace"/>
           <TopUserCard  type="anotherPlace"/>
         </BottomStyle>
     </TopUserChartStyle>
@@ -33,6 +34,9 @@ const TopStyle = styled.div`
 `;
 
 const BottomStyle = styled.div`
+  position: relative;
+  display:flex;
+  flex-direction: column;
 `;
 
 export default TopUserChart;

@@ -7,4 +7,6 @@ router.get('/',Dashboard.getHello)
 
 router.get('/amounts',Dashboard.getAmounts)
 
+router.get('/topProfiles',Dashboard.getTopProfiles)
+
 module.exports = router

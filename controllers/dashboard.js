@@ -19,7 +19,45 @@ const getAmounts = async (req, res) => {
     });
 }
 
+//TODO: check if work and bring the 5 users with the most of post  
+const getTopProfiles = async (req, res) => {
+
+    const profileList = await Profile.find()
+    const orderListOfUsers = {
+        userId: [],
+        amountOfPosts: []
+    }
+
+    profileList.forEach(user => {
+        if(!orderListOfUsers.userId.includes(user.userId)){
+            orderListOfUsers.userId.push(user.userId)
+            orderListOfUsers.amountOfPosts.push(1)
+        }else{
+            let index = orderListOfUsers.userId.indexOf(user.userId)
+            orderListOfUsers.amountOfPosts[index]++
+        }
+    })
+
+    sortTogether(orderListOfUsers.amountOfPosts, orderListOfUsers.userId)
+    topUsers = orderListOfUsers.userId.slice(0,5)
+
+    const finalResults = await User.find({ 'email': { $in: topUsers } });
+
+    res.json({
+        topUsers: finalResults
+    })
+}
+
+
+function sortTogether(array1, array2) {
+    var merged = [];
+    for(var i=0; i<array1.length; i++) { merged.push({'a1': array1[i], 'a2': array2[i]}); }
+    merged.sort(function(o1, o2) { return ((o1.a1 > o2.a1) ? -1 : ((o1.a1 == o2.a1) ? 0 : 1)); });
+    for(var i=0; i<merged.length; i++) { array1[i] = merged[i].a1; array2[i] = merged[i].a2; }
+}
+
 module.exports = {
     getHello,
-    getAmounts
+    getAmounts,
+    getTopProfiles
 }
