@@ -10,6 +10,7 @@ import PopularCategoriesChart from "../../components/PopularCategoriesChart";
 function Home() {
 
     const[nameOfAdmin,setNameOfAdmin] = useState("");
+    const [topUsers,setTopUsers]=useState(null);
   
     useEffect(() => {
       fetch("/dashboard",{
@@ -22,7 +23,21 @@ function Home() {
         .then((data) => {
           setNameOfAdmin(data.adminName);
           })
+
+
+      fetch("/dashboard/topProfiles" , {
+        headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+         }
+      }) 
+        .then((res) => res.json())
+          .then((data) => {
+            setTopUsers(data.topUsers);
+          })
+          
     },[])
+
 
   return (
     <HomeStyle>
@@ -36,7 +51,7 @@ function Home() {
             <CardDetails type="totalPosts"/>
           </div>
           <div className="charts">
-            <TopUserChart />
+            <TopUserChart topUsers={topUsers} />
             <PostUploadChart />
             <PopularCategoriesChart />
           </div>

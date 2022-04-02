@@ -1,27 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 
 //TODO: According to the type use the colors wgo relevant to place
 
-function TopUserCard({type}) {
-    
-    useEffect(() =>{
-        fetch("/dashboard/topProfiles" ,{
-            headers : { 
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            }
-          })
-          .then((res) => res.json())
-              .then((data) => {
-                console.log(data.topUsers)
-            })
-    },[])
-
+function TopUserCard({mainProfile ,index}) {
+  console.log(index);  
   return (
     <CardStyle>
-        <div className="line"></div>
-        <h3>Name Of First Place User</h3>
+        <div className="lines line1"></div>
+        <h3>{mainProfile}</h3>
         <span className="material-icons-sharp">workspace_premium</span>
     </CardStyle>
   )
@@ -34,14 +21,22 @@ const CardStyle = styled.div`
     background:#e4cb912e;
     margin:0.3rem 0rem;
 
-    .line{
+    .lines{
         flex: 0.3;
-        background-color:#E4CB91;
         height: initial;
         padding: 1.5rem 2px;
         border-top-left-radius: 6px;
         border-bottom-left-radius: 6px;
         margin-right:0.5rem ;
+    }
+    .line1{
+      background-color:#E4CB91;
+    }
+    .line2{
+      background-color:#A6A6A6;
+    }
+    .line3{
+      background-color: #D99771;
     }
 
     h3{
