@@ -16,9 +16,26 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         font-family: 'Nunito', sans-serif;
+        scrollbar-width:thin;
+        scrollbar-color:rgba(155,155,155,0.5) transparent;
     }
+
     *:focus {
      outline: none;
+    }
+
+    *::-webkit-scrollbar{
+        width:5px;
+    }
+
+    *::-webkit-scrollbar-track{
+        background: transparent;
+    }
+
+    *::-webkit-scrollbar-thumb{
+        background-color:rgba(155,155,155,0.5);
+        border-radius: 20px;
+        border:transparent;
     }
 `;
 

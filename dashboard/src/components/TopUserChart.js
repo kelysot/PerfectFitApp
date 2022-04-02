@@ -24,6 +24,7 @@ const TopUserChartStyle = styled.div`
     border-radius: 8px;
     padding: 10px;
     flex: 3;
+    overflow: auto;
 `;
 
 const TopStyle = styled.div`

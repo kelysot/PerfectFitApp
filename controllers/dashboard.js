@@ -39,7 +39,7 @@ const getTopProfiles = async (req, res) => {
     })
 
     sortTogether(orderListOfUsers.amountOfPosts, orderListOfUsers.userId)
-    topUsers = orderListOfUsers.userId.slice(0,5)
+    topUsers = orderListOfUsers.userId.slice(0,10)
 
     const finalResults = await User.find({ 'email': { $in: topUsers } });
 
