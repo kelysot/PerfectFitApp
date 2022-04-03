@@ -5,7 +5,7 @@ import TopBar from "../../components/TopBar";
 import CardDetails from "../../components/CardDetails";
 import TopProfilesChart from "../../components/TopProfilesChart";
 import PostUploadChart from '../../components/PostUploadChart';
-import PopularCategoriesChart from "../../components/PopularCategoriesChart";
+import StatusConnectedProfiles from "../../components/StatusConnectedProfiles";
 
 function Home() {
 
@@ -53,7 +53,7 @@ function Home() {
           <div className="charts">
             <TopProfilesChart topProfiles={topProfiles} />
             <PostUploadChart />
-            <PopularCategoriesChart />
+            <StatusConnectedProfiles />
           </div>
         </div>
     </HomeStyle>
