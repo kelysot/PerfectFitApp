@@ -3,45 +3,47 @@ import styled from "styled-components";
 import {CircularProgressbar,buildStyles } from 'react-circular-progressbar';
 import "react-circular-progressbar/dist/styles.css";
 
-function StatusConnectedProfiles() {
+function StatusConnectedProfiles({chartConnectData}) {
   return (
     <StatusConnectedProfilesStyle>
         <TopStyle>
             <h3 className="title">Status Of Connected Profiles</h3>
         </TopStyle>
         <BottomStyle>
-          <div className="chart">
-            <CircularProgressbar 
-            value={70} text= {"70%"} 
-            strokeWidth={1.7} 
-            styles={buildStyles({
-            pathColor: `rgb(255 136 136 / 60%)`,
-            textColor: '#f88'})}/>
-          </div>
-          <p>Of The Profiles Are Conected Now</p>
-          <div className="summery">
-            <div className="item">
-              <div className="itemTitle">
-                <span className="material-icons-sharp">person_outline</span>
-                <div className="title">Total</div>
-              </div>
-             <div className="resultAmount">40</div>
+          { chartConnectData && (<>
+            <div className="chart">
+              <CircularProgressbar 
+              value={chartConnectData.percentageOfConnect} text= {`${chartConnectData.percentageOfConnect}%`} 
+              strokeWidth={1.7} 
+              styles={buildStyles({
+                pathColor: `rgb(255 136 136 / 60%)`,
+                textColor: '#f88'})} />
             </div>
+            <p>Of The Profiles Are Connected Now</p>
+            <div className="summery">
+              <div className="item">
+                <div className="itemTitle">
+                  <span className="material-icons-sharp">person_outline</span>
+                  <div className="title">Total</div>
+                </div>
+              <div className="resultAmount">{chartConnectData.total}</div>
+              </div>
             <div className="item">
               <div className="itemTitle">
                 <span className="material-icons-sharp">male</span>
                 <div className="title">Male</div>
               </div>
-             <div className="resultAmount">17</div>
+             <div className="resultAmount">{chartConnectData.sumOfMale}</div>
             </div>
             <div className="item">
               <div className="itemTitle">
                 <span className="material-icons-sharp">female</span>
                 <div className="title">Female</div>
               </div>
-             <div className="resultAmount">23</div>
+             <div className="resultAmount">{chartConnectData.sumOfFemale}</div>
             </div>
           </div>
+          </>) }
         </BottomStyle>
     </StatusConnectedProfilesStyle>
   )
@@ -53,6 +55,7 @@ const StatusConnectedProfilesStyle = styled.div`
     box-shadow: 0px -12px 15px rgb(0 0 0 / 10%);
     padding: 10px;
     flex:4;
+    min-width: 20rem ;
 `;
 
 const TopStyle = styled.div`
@@ -76,6 +79,7 @@ const BottomStyle = styled.div`
     height: 200px ;
     margin:20px ;
   }
+
   .summery{
     width:90% ;
     display: flex ;
@@ -102,6 +106,19 @@ const BottomStyle = styled.div`
       }
     }
   }
+
+  @media (min-width: 520px){
+    .chart{
+      width : 150px;
+      height: 180px ;
+      margin-bottom:5px ;
+    }
+    p{
+      padding-bottom: 20px;
+      padding-top: 0px;
+    }
+  }
+  
 `;
 
 export default StatusConnectedProfiles;

@@ -42,6 +42,36 @@ const getTopProfiles = async (req, res) => {
     })
 }
 
+//TODO: max one or two digits after dot
+const getPercentage = async (req, res) => {
+
+    const profileList = await Profile.find()
+    let connectProfileSize = 0
+    let sumOfFemale = 0
+    let sumOfMale = 0
+
+    profileList.forEach((profile) => {
+        if(profile.status === "true")
+            connectProfileSize++
+
+        if(profile.gender === "Female")
+            sumOfFemale++
+        else
+            sumOfMale++
+    })
+
+    const percentageOfConnect = (connectProfileSize / profileList.length)*100
+
+    res.json({
+        data: {
+            percentageOfConnect: percentageOfConnect,
+            sumOfFemale:sumOfFemale,
+            sumOfMale:sumOfMale,
+            total: profileList.length
+        }
+    });
+}
+
 function sortTogether(array1, array2) {
     var merged = [];
     for(var i=0; i<array1.length; i++) { merged.push({'a1': array1[i], 'a2': array2[i]}); }
@@ -52,5 +82,6 @@ function sortTogether(array1, array2) {
 module.exports = {
     getHello,
     getAmounts,
-    getTopProfiles
+    getTopProfiles,
+    getPercentage
 }

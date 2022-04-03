@@ -10,7 +10,8 @@ import StatusConnectedProfiles from "../../components/StatusConnectedProfiles";
 function Home() {
 
     const[nameOfAdmin,setNameOfAdmin] = useState("");
-    const [topProfiles,setTopProfiles]=useState(null);
+    const[topProfiles,setTopProfiles]=useState(null);
+    const[chartConnectData,setChartConnectData] = useState(null);
   
     useEffect(() => {
       fetch("/dashboard",{
@@ -35,6 +36,17 @@ function Home() {
           .then((data) => {
             setTopProfiles(data.topProfiles)
           })
+
+      fetch("/dashboard/percentage",{
+        headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+          }
+      })
+        .then((res) => res.json())
+          .then((data) => {
+            setChartConnectData(data.data);
+          })
           
     },[])
 
@@ -53,7 +65,7 @@ function Home() {
           <div className="charts">
             <TopProfilesChart topProfiles={topProfiles} />
             <PostUploadChart />
-            <StatusConnectedProfiles />
+            <StatusConnectedProfiles chartConnectData={chartConnectData} />
           </div>
         </div>
     </HomeStyle>
