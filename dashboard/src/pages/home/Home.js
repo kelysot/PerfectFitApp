@@ -12,6 +12,7 @@ function Home() {
     const[nameOfAdmin,setNameOfAdmin] = useState("");
     const[topProfiles,setTopProfiles]=useState(null);
     const[chartConnectData,setChartConnectData] = useState(null);
+    const[percentage,setPercentage] = useState(0);
   
     useEffect(() => {
       fetch("/dashboard",{
@@ -46,6 +47,7 @@ function Home() {
         .then((res) => res.json())
           .then((data) => {
             setChartConnectData(data.data);
+            setPercentage(data.percentageOfConnect);
           })
           
     },[])
@@ -65,7 +67,7 @@ function Home() {
           <div className="charts">
             <TopProfilesChart topProfiles={topProfiles} />
             <PostUploadChart />
-            <StatusConnectedProfiles chartConnectData={chartConnectData} />
+            <StatusConnectedProfiles percentage={percentage} chartConnectData={chartConnectData} />
           </div>
         </div>
     </HomeStyle>

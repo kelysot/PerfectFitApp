@@ -64,11 +64,11 @@ const getPercentage = async (req, res) => {
 
     res.json({
         data: {
-            percentageOfConnect: percentageOfConnect,
             sumOfFemale:sumOfFemale,
             sumOfMale:sumOfMale,
             total: profileList.length
-        }
+        },
+        percentageOfConnect: percentageOfConnect
     });
 }
 

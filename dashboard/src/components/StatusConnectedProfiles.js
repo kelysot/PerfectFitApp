@@ -3,22 +3,23 @@ import styled from "styled-components";
 import {CircularProgressbar,buildStyles } from 'react-circular-progressbar';
 import "react-circular-progressbar/dist/styles.css";
 
-function StatusConnectedProfiles({chartConnectData}) {
+function StatusConnectedProfiles({chartConnectData , percentage}) {
+  console.log(percentage);
   return (
     <StatusConnectedProfilesStyle>
         <TopStyle>
             <h3 className="title">Status Of Connected Profiles</h3>
         </TopStyle>
         <BottomStyle>
-          { chartConnectData && (<>
             <div className="chart">
               <CircularProgressbar 
-              value={chartConnectData.percentageOfConnect} text= {`${chartConnectData.percentageOfConnect}%`} 
+              value={percentage ? percentage : 0 } text= {`${percentage ? percentage : 0}%`} 
               strokeWidth={1.7} 
               styles={buildStyles({
                 pathColor: `rgb(255 136 136 / 60%)`,
                 textColor: '#f88'})} />
             </div>
+          { chartConnectData && (<>
             <p>Of The Profiles Are Connected Now</p>
             <div className="summery">
               <div className="item">
