@@ -22,21 +22,21 @@ function StatusConnectedProfiles() {
           <div className="summery">
             <div className="item">
               <div className="itemTitle">
-                <span class="material-icons-sharp">person_outline</span>
+                <span className="material-icons-sharp">person_outline</span>
                 <div className="title">Total</div>
               </div>
              <div className="resultAmount">40</div>
             </div>
             <div className="item">
               <div className="itemTitle">
-                <span class="material-icons-sharp">male</span>
+                <span className="material-icons-sharp">male</span>
                 <div className="title">Male</div>
               </div>
              <div className="resultAmount">17</div>
             </div>
             <div className="item">
               <div className="itemTitle">
-                <span class="material-icons-sharp">female</span>
+                <span className="material-icons-sharp">female</span>
                 <div className="title">Female</div>
               </div>
              <div className="resultAmount">23</div>
