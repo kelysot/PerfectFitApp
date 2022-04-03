@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 //TODO: According to the type use the colors wgo relevant to place
 let data ="";
 
-function TopUserCard({mainProfile ,index}) {
+function TopProfileCard({profile ,index}) {
 
   data = dataToCard(index);
 
@@ -12,7 +12,7 @@ function TopUserCard({mainProfile ,index}) {
     <CardStyle style={{backgroundColor:`${data.background}`}}>
         <div className={data.lineClassName}></div>
         <h2 className="place">{index+1}</h2>
-        <h3>{mainProfile}</h3>
+        <h3>{profile}</h3>
         {data.icon ? 
           <span className={"material-icons-sharp"} style={{color:`${data.iconColor}`}}>workspace_premium</span>
           : ""
@@ -103,4 +103,4 @@ function dataToCard(index){
   return data;
 }
 
-export default TopUserCard;
+export default TopProfileCard;

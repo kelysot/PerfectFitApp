@@ -19,35 +19,56 @@ const getAmounts = async (req, res) => {
     });
 }
 
-//TODO: check if work and bring the 5 users with the most of post  
+//TODO: check if work and delete all comments
 const getTopProfiles = async (req, res) => {
 
     const profileList = await Profile.find()
-    const orderListOfUsers = {
-        userId: [],
+
+    const topProfiles = {
+        profileUserName:[],
         amountOfPosts: []
     }
 
-    profileList.forEach(user => {
-        if(!orderListOfUsers.userId.includes(user.userId)){
-            orderListOfUsers.userId.push(user.userId)
-            orderListOfUsers.amountOfPosts.push(1)
+    profileList.forEach(profile => {
+        if(!topProfiles.profileUserName.includes(profile.userName)){
+            topProfiles.profileUserName.push(profile.userName)
+            topProfiles.amountOfPosts.push(1)
         }else{
-            let index = orderListOfUsers.userId.indexOf(user.userId)
-            orderListOfUsers.amountOfPosts[index]++
+            let index = topProfiles.profileUserName.indexOf(profile.userName)
+            topProfiles.amountOfPosts[index]++
         }
     })
 
-    sortTogether(orderListOfUsers.amountOfPosts, orderListOfUsers.userId)
-    topUsers = orderListOfUsers.userId.slice(0,10)
-
-    const finalResults = await User.find({ 'email': { $in: topUsers } });
-
+    sortTogether(topProfiles.amountOfPosts,topProfiles.profileUserName)
+    const tenTopProfiles = topProfiles.profileUserName.slice(0,10)
+    
     res.json({
-        topUsers: finalResults
+        topProfiles: tenTopProfiles
     })
-}
+    // const orderListOfUsers = {
+    //     userId: [],
+    //     amountOfPosts: []
+    // }
 
+    // profileList.forEach(user => {
+    //     if(!orderListOfUsers.userId.includes(user.userId)){
+    //         orderListOfUsers.userId.push(user.userId)
+    //         orderListOfUsers.amountOfPosts.push(1)
+    //     }else{
+    //         let index = orderListOfUsers.userId.indexOf(user.userId)
+    //         orderListOfUsers.amountOfPosts[index]++
+    //     }
+    // })
+
+    // sortTogether(orderListOfUsers.amountOfPosts, orderListOfUsers.userId)
+    // topUsers = orderListOfUsers.userId.slice(0,10)
+
+    // const finalResults = await User.find({ 'email': { $in: topUsers } });
+
+    // res.json({
+    //     topUsers: finalResults
+    // })
+}
 
 function sortTogether(array1, array2) {
     var merged = [];

@@ -89,6 +89,7 @@ const CardStyle = styled.div`
   border-radius: 8px;
   box-shadow: 0px -12px 15px rgb(0 0 0 / 10%);
   height:100px; //?
+  min-width: 11rem;
 `;
 
 const LeftStyled = styled.div`

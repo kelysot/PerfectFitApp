@@ -1,18 +1,16 @@
 import React from 'react';
 import styled from "styled-components";
-import TopUserCard from "../components/TopUserCard";
+import TopProfileCard from "./TopProfileCard";
 
-//TODO: change the list to the profiles not users
-
-function TopUserChart({topUsers}) {
+function TopProfilesChart({topProfiles}) {
   return (
     <TopUserChartStyle>
         <TopStyle>
-          <h3 className="title">Top Users</h3>
+          <h3 className="title">Top Profiles</h3>
         </TopStyle>
         <BottomStyle>
-          {topUsers && topUsers.map((user,index) =>(
-            <TopUserCard mainProfile = {user.profilesId[0]} key = {index} index = {index}/>
+          {topProfiles && topProfiles.map((profile,index) =>(
+            <TopProfileCard profile={profile} key = {index} index = {index}/>
           ))}
         </BottomStyle>
     </TopUserChartStyle>
@@ -25,6 +23,7 @@ const TopUserChartStyle = styled.div`
     padding: 10px;
     flex: 3;
     overflow: auto;
+    min-width: 12rem;
 `;
 
 const TopStyle = styled.div`
@@ -40,4 +39,4 @@ const BottomStyle = styled.div`
   flex-direction: column;
 `;
 
-export default TopUserChart;
+export default TopProfilesChart;

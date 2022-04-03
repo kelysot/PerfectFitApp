@@ -3,14 +3,14 @@ import styled from "styled-components";
 import Sidebar from "../../components/SideBar";
 import TopBar from "../../components/TopBar";
 import CardDetails from "../../components/CardDetails";
-import TopUserChart from "../../components/TopUserChart";
+import TopProfilesChart from "../../components/TopProfilesChart";
 import PostUploadChart from '../../components/PostUploadChart';
 import PopularCategoriesChart from "../../components/PopularCategoriesChart";
 
 function Home() {
 
     const[nameOfAdmin,setNameOfAdmin] = useState("");
-    const [topUsers,setTopUsers]=useState(null);
+    const [topProfiles,setTopProfiles]=useState(null);
   
     useEffect(() => {
       fetch("/dashboard",{
@@ -33,7 +33,7 @@ function Home() {
       }) 
         .then((res) => res.json())
           .then((data) => {
-            setTopUsers(data.topUsers);
+            setTopProfiles(data.topProfiles)
           })
           
     },[])
@@ -51,7 +51,7 @@ function Home() {
             <CardDetails type="totalPosts"/>
           </div>
           <div className="charts">
-            <TopUserChart topUsers={topUsers} />
+            <TopProfilesChart topProfiles={topProfiles} />
             <PostUploadChart />
             <PopularCategoriesChart />
           </div>
