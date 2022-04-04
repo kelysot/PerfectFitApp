@@ -42,7 +42,7 @@ const getTopProfiles = async (req, res) => {
     })
 }
 
-//TODO: max one or two digits after dot
+//TODO: edit the data according to the connected profiles and not Total  
 const getPercentage = async (req, res) => {
 
     const profileList = await Profile.find()
@@ -72,6 +72,24 @@ const getPercentage = async (req, res) => {
     });
 }
 
+//FIXME: example how to give data for top Categories chart
+const getCategoriesData = async (req, res) => {
+    res.json({
+        data: [
+            {
+                name: "name1",
+                male: "5",
+                female: "10"
+            },
+            {
+                name: "name2",
+                male: "2",
+                female: "13"
+            }
+        ]
+    });
+}
+
 function sortTogether(array1, array2) {
     var merged = [];
     for(var i=0; i<array1.length; i++) { merged.push({'a1': array1[i], 'a2': array2[i]}); }
@@ -83,5 +101,6 @@ module.exports = {
     getHello,
     getAmounts,
     getTopProfiles,
-    getPercentage
+    getPercentage,
+    getCategoriesData
 }

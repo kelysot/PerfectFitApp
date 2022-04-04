@@ -15,43 +15,8 @@ function Home() {
     const[percentage,setPercentage] = useState(0);
   
     useEffect(() => {
-      fetch("/dashboard",{
-        headers : { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-         }
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setNameOfAdmin(data.adminName);
-          })
-
-
-      fetch("/dashboard/topProfiles" , {
-        headers : { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-         }
-      }) 
-        .then((res) => res.json())
-          .then((data) => {
-            setTopProfiles(data.topProfiles)
-          })
-
-      fetch("/dashboard/percentage",{
-        headers : { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-          }
-      })
-        .then((res) => res.json())
-          .then((data) => {
-            setChartConnectData(data.data);
-            setPercentage(data.percentageOfConnect);
-          })
-          
+      loadData(setNameOfAdmin,setTopProfiles,setChartConnectData,setPercentage)          
     },[])
-
 
   return (
     <HomeStyle>
@@ -98,5 +63,52 @@ const HomeStyle = styled.div`
     
   }
 `
+
+function loadData(setNameOfAdmin,setTopProfiles,setChartConnectData,setPercentage){
+  fetch("/dashboard",{
+    headers : { 
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+     }
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      setNameOfAdmin(data.adminName);
+      })
+
+  fetch("/dashboard/topProfiles" , {
+    headers : { 
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+     }
+  }) 
+    .then((res) => res.json())
+      .then((data) => {
+        setTopProfiles(data.topProfiles)
+      })
+
+  fetch("/dashboard/percentage",{
+    headers : { 
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+      }
+  })
+    .then((res) => res.json())
+      .then((data) => {
+        setChartConnectData(data.data);
+        setPercentage(data.percentageOfConnect);
+      })
+
+  fetch("/dashboard/topCategories",{
+    headers : { 
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+      }
+  })
+  .then((res) => res.json())
+    .then((data) => {
+      console.log(data)  
+    })
+}
 
 export default Home;

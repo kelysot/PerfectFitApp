@@ -4,7 +4,6 @@ import {CircularProgressbar,buildStyles } from 'react-circular-progressbar';
 import "react-circular-progressbar/dist/styles.css";
 
 function StatusConnectedProfiles({chartConnectData , percentage}) {
-  console.log(percentage);
   return (
     <StatusConnectedProfilesStyle>
         <TopStyle>
