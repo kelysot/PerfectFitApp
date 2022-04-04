@@ -108,7 +108,7 @@ const BottomStyle = styled.div`
     }
   }
 
-  @media (min-width: 520px){
+  @media (max-width: 1600px){
     .chart{
       width : 150px;
       height: 180px ;

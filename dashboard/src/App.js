@@ -27,7 +27,7 @@ function App() {
 }
 
 const AppStyle = styled.div`
-    padding:4rem;
+    padding: 3rem;
     background: linear-gradient(to right,#f3af6ba6 0%,#cc66ffa3  100%);
     min-height:100vh;
 `;

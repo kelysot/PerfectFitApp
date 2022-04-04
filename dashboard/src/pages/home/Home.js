@@ -93,7 +93,6 @@ const HomeStyle = styled.div`
     }
 
     .charts{
-      height: 55vh;
       padding-top: 10px ;
     }
     
