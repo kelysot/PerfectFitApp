@@ -4,7 +4,7 @@ import Sidebar from "../../components/SideBar";
 import TopBar from "../../components/TopBar";
 import CardDetails from "../../components/CardDetails";
 import TopProfilesChart from "../../components/TopProfilesChart";
-import PostUploadChart from '../../components/PostUploadChart';
+import TopCategoriesChart from '../../components/TopCategoriesChart';
 import StatusConnectedProfiles from "../../components/StatusConnectedProfiles";
 
 function Home() {
@@ -66,7 +66,7 @@ function Home() {
           </div>
           <div className="charts">
             <TopProfilesChart topProfiles={topProfiles} />
-            <PostUploadChart />
+            <TopCategoriesChart />
             <StatusConnectedProfiles percentage={percentage} chartConnectData={chartConnectData} />
           </div>
         </div>

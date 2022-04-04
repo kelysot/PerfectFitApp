@@ -30,7 +30,7 @@ const TopStyle = styled.div`
     font-weight: bold;
     font-size: 14px;
     color: var(--color-dark-variant);
-    margin-bottom:2.5rem ;
+    margin-bottom:15px ;
 `;
 
 const BottomStyle = styled.div`

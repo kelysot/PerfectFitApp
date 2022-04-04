@@ -67,7 +67,7 @@ const SideBarStyle = styled.div`
   position :relative;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
-  min-width: 14rem;
+  min-width: 12.5rem;
 `;
 
 const TopStyle = styled.div`

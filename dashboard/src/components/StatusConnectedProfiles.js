@@ -55,7 +55,7 @@ const StatusConnectedProfilesStyle = styled.div`
     border-radius: 8px;
     box-shadow: 0px -12px 15px rgb(0 0 0 / 10%);
     padding: 10px;
-    flex:4;
+    flex:3;
     min-width: 20rem ;
 `;
 
