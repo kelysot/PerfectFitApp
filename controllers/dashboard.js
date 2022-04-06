@@ -1,6 +1,7 @@
 const Profile = require('../models/profile_model')
 const User = require('../models/user_model')
 const Post = require('../models/post_model')
+const Category = require('../models/category_model')
 
 const getHello = async (req, res) => {
     res.json({
@@ -42,7 +43,6 @@ const getTopProfiles = async (req, res) => {
     })
 }
 
-//TODO: edit the data according to the connected profiles and not Total  
 const getPercentage = async (req, res) => {
 
     const profileList = await Profile.find()
@@ -51,13 +51,14 @@ const getPercentage = async (req, res) => {
     let sumOfMale = 0
 
     profileList.forEach((profile) => {
-        if(profile.status === "true")
+        if(profile.status === "true"){
             connectProfileSize++
+            if(profile.gender === "Female")
+                sumOfFemale++
+            else
+                sumOfMale++
+        }
 
-        if(profile.gender === "Female")
-            sumOfFemale++
-        else
-            sumOfMale++
     })
 
     const percentageOfConnect = (connectProfileSize / profileList.length)*100
@@ -66,7 +67,7 @@ const getPercentage = async (req, res) => {
         data: {
             sumOfFemale:sumOfFemale,
             sumOfMale:sumOfMale,
-            total: profileList.length
+            total: connectProfileSize
         },
         percentageOfConnect: percentageOfConnect
     });
@@ -74,6 +75,16 @@ const getPercentage = async (req, res) => {
 
 //FIXME: example how to give data for top Categories chart
 const getCategoriesData = async (req, res) => {
+
+    const categoriesData = []
+
+    const categoriesList = await Category.find()
+    categoriesList.forEach((category)=>{
+        let nameOfCategory = category.name
+        let genderOfCategory = category.gender
+        //TODO: over all the posts that have the same id of category
+    })
+
     res.json({
         data: [
             {
@@ -83,8 +94,18 @@ const getCategoriesData = async (req, res) => {
             },
             {
                 name: "name2",
+                male: "7",
+                female: "3"
+            },
+            {
+                name: "name3",
                 male: "2",
-                female: "13"
+                female: "2"
+            },
+            {
+                name: "name4",
+                male: "7",
+                female: "12"
             }
         ]
     });

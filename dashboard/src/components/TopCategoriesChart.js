@@ -3,7 +3,9 @@ import styled from "styled-components";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 
-function TopCategoriesChart() {
+function TopCategoriesChart({categoriesData}) {
+  if(categoriesData) 
+    console.log(categoriesData);
   return (
     <TopCategoriesChartStyle>
         <TopStyle>

@@ -111,6 +111,10 @@ const addNewPost = async (req, res) => {
         }
     }
 
+    // if(mySubCategory.posts == undefined && mySubCategory.posts == null) {
+    //     mySubCategory.posts = []
+    // }
+
     mySubCategory.posts.push(post._id)
 
     mySubCategory.save((error) => {

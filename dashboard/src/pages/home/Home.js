@@ -13,9 +13,10 @@ function Home() {
     const[topProfiles,setTopProfiles]=useState(null);
     const[chartConnectData,setChartConnectData] = useState(null);
     const[percentage,setPercentage] = useState(0);
+    const[categoriesData,setCategoriesData] = useState(null);
   
     useEffect(() => {
-      loadData(setNameOfAdmin,setTopProfiles,setChartConnectData,setPercentage)          
+      loadData(setNameOfAdmin,setTopProfiles,setChartConnectData,setPercentage,setCategoriesData)          
     },[])
 
   return (
@@ -31,7 +32,7 @@ function Home() {
           </div>
           <div className="charts">
             <TopProfilesChart topProfiles={topProfiles} />
-            <TopCategoriesChart />
+            <TopCategoriesChart categoriesData={categoriesData} />
             <StatusConnectedProfiles percentage={percentage} chartConnectData={chartConnectData} />
           </div>
         </div>
@@ -64,7 +65,7 @@ const HomeStyle = styled.div`
   }
 `
 
-function loadData(setNameOfAdmin,setTopProfiles,setChartConnectData,setPercentage){
+function loadData(setNameOfAdmin,setTopProfiles,setChartConnectData,setPercentage,setCategoriesData){
   fetch("/dashboard",{
     headers : { 
       'Content-Type': 'application/json',
@@ -107,7 +108,7 @@ function loadData(setNameOfAdmin,setTopProfiles,setChartConnectData,setPercentag
   })
   .then((res) => res.json())
     .then((data) => {
-      console.log(data)  
+      setCategoriesData(data.data)
     })
 }
 

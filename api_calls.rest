@@ -13,21 +13,21 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjQ4MmQ0MD
 
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjQ4MmQ0MDA5NmQ5OTUzOGYwZjBhMyIsImlhdCI6MTY0NzI2NDE4MH0.pHxfvF60CAMsPBrVCPoX67GrIgDjqmC7WxwEylloF7w
 ###
-POST http://localhost:4000/post/y@gmail.com
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjBkYTRhNDgxODMxNDZlZDdmOGUzMCIsImlhdCI6MTY0NzAwMTcxNCwiZXhwIjoxNjQ3MDg4MTE0fQ.G6Mf9Pvi6f2SBezY__zZ5VzzDnoreviqMldsyQ7u4zk
+POST http://localhost:4000/post
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDgxN2RlY2ZmNDQxYTFhMTdiZjI2YyIsImlhdCI6MTY0OTIzMzE2OSwiZXhwIjoxNjQ5MzE5NTY5fQ.W62QPE4Rh6JoYeCC6oQQH8Y-YsrQP1GZNJ0IvsX5_w8
 Content-Type: application/json
 
 {
         "description": "this is my test post",
-        "profileId": "1234",
+        "profileId": "matmoni123",
         "productName": "shirt",
         "sku": "abc",
         "size": "L",
         "company": "Zara",
         "price": "100",
         "color": "black",
-        "categoryId": "1",
-        "subCategoryId": "2",
+        "categoryId": "Shirt",
+        "subCategoryId": "T-Shirts Summer",
         "date": "3/3/22",
         "link": "www.example.com",
         "sizeAdjustment": "4",
@@ -199,11 +199,11 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 
 ###
 Post http://localhost:4000/category/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDgxN2RlY2ZmNDQxYTFhMTdiZjI2YyIsImlhdCI6MTY0ODk3OTI2NiwiZXhwIjoxNjQ5MDY1NjY2fQ.59_IaFomrNnZlbPVBloC-UlZWPrfXlhe9H_VwTNUMxA
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDgxN2RlY2ZmNDQxYTFhMTdiZjI2YyIsImlhdCI6MTY0OTIzMDkxMSwiZXhwIjoxNjQ5MzE3MzExfQ.cUyKjKHcpKFbutFmygSppz5Bj3BGASs52YU4es9oE_s
 Content-Type: application/json
 
 {
-        "name": "Winter Male",
+        "name": "Pants",
         "pictureUrl": "https://cdn.shopify.com/s/files/1/0970/4540/products/Lynn-Button-Back-Cotton-Dress-2_256x.jpg?v=1647997123",
         "gender": "Female",
         "subCategory": []
