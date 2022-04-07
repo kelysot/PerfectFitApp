@@ -87,42 +87,46 @@ const addNewPost = async (req, res) => {
         comments: []
     })
 
-    const categoryArr = await Category.find({ 'gender': profile.gender, name: post.categoryId })
+    const categoryArr = await Category.find({ 'gender': profile.gender, 'name': post.categoryId })
+    const subCategories = await SubCategory.find({ 'name': post.subCategoryId, 'gender': profile.gender })
 
-    const subCategories = await SubCategory.find({ 'name': post.subCategoryId })
+    var mySubCategory = subCategories
+    // let size = subCategories.length
+    // if (size == 1) {
+    //     mySubCategory = subCategories
+    // }
+    // else {
+    //     for (let i = 0; i < size; i++) {
+    //         for (let j = 0; j < size; j++) {
 
-    var mySubCategory
-    let size = subCategories.length
-    if (size == 1) {
-        mySubCategory = subCategories
-    }
-    else {
-        for (let i = 0; i < size; i++) {
-            for (let j = 0; j < size; j++) {
+    //             var temp1 = (categoryArr[0].subCategory[i]._id).toString()
+    //             var temp2 = (subCategories[j]._id).toString()
 
-                var temp1 = (categoryArr[0].subCategory[i]._id).toString()
-                var temp2 = (subCategories[j]._id).toString()
-
-                if (temp1 == temp2) {
-                    mySubCategory = subCategories[j]
-                    break
-                }
-            }
-        }
-    }
-
-    // if(mySubCategory.posts == undefined && mySubCategory.posts == null) {
-    //     mySubCategory.posts = []
+    //             if (temp1 == temp2) {
+    //                 mySubCategory = subCategories[j]
+    //                 break
+    //             }
+    //         }
+    //     }
     // }
 
-    mySubCategory.posts.push(post._id)
+    if(mySubCategory.posts == undefined && mySubCategory.posts == null) {
+        mySubCategory.posts = []
+    }
 
-    mySubCategory.save((error) => {
+    let arr = mySubCategory.posts
+ 
+    arr.push(post._id)
+    mySubCategory.posts = arr
+    console.log(mySubCategory)
+    mySubCategory[0].save((error) => {
         if (error) {
             res.status(400).send({
                 'status': 'fail',
                 'error': error.message
             })
+        }else{
+            res.status(200)
         }
     })
 

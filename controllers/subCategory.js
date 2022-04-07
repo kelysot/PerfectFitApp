@@ -59,6 +59,7 @@ const addSubCategory = async (req, res) => {
     const newSubCategory = SubCategory({
         "name": req.body.name,
         "pictureUrl": req.body.pictureUrl,
+        "gender": req.body.gender,
         "categoryId": categoryId,
         "posts": []
     })

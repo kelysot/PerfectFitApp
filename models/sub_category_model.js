@@ -9,6 +9,10 @@ const subCategorySchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    gender: {
+        type: String,
+        required: true
+    },
     categoryId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'category'

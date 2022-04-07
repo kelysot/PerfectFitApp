@@ -246,13 +246,14 @@ Content-Type: application/json
         "currentUserGender": ["Male"]
 }
 ###
-Post http://localhost:4000/subcategory/624e810b921f1fb7dd851fe1
+Post http://localhost:4000/subcategory/624eb305acf1f4d69fc29fbd
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGU3ODYxMmM2OTQwM2ZkNjliMmI2ZiIsImlhdCI6MTY0OTMwOTc5MywiZXhwIjoxNjQ5Mzk2MTkzfQ.uRUQRxi-71tB54HI5qEoGo4fRgZ3eK5Xzq7v4W7_heQ
 Content-Type: application/json
 
 {
-        "name": "T-Shirts Summer",
+        "name": "Pents Summer",
         "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6niBNcUfbA8p6YOz6NWy8fXe5KkupgFwXGg&usqp=CAU",
+        "gender": "Female",
         "posts": []
 }
 
