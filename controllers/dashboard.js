@@ -77,14 +77,16 @@ const getPercentage = async (req, res) => {
 const getCategoriesData = async (req, res) => {
 
     const categoriesData = []
-
     const categoriesList = await Category.find()
-    categoriesList.forEach((category)=>{
+
+    categoriesList.forEach( async (category)=>{
         let nameOfCategory = category.name
         let genderOfCategory = category.gender
-        //TODO: over all the posts that have the same id of category
+        let postsList =  await Post.find({categoryId: category._id})
+        console.log(postsList)
+        let numOfPosts = postsList.length
+        //TODO: over all the posts that have the same id of category + build obj to push in categoriesData
     })
-
     res.json({
         data: [
             {

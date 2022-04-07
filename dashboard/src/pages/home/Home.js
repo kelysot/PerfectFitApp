@@ -43,7 +43,9 @@ function Home() {
 const HomeStyle = styled.div`
   display:flex;
   box-shadow:-15px 20px 20px rgb(0 0 0 / 12%);
+  width: 100%;
   border-radius:15px;
+
   .homeContainer{
     flex:6 ;
     background-color: #f8f0e8a6;
@@ -63,6 +65,7 @@ const HomeStyle = styled.div`
     }
     
   }
+  
 `
 
 function loadData(setNameOfAdmin,setTopProfiles,setChartConnectData,setPercentage,setCategoriesData){

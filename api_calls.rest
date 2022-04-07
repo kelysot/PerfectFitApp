@@ -199,16 +199,15 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 
 ###
 Post http://localhost:4000/category/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDgxN2RlY2ZmNDQxYTFhMTdiZjI2YyIsImlhdCI6MTY0OTIzMDkxMSwiZXhwIjoxNjQ5MzE3MzExfQ.cUyKjKHcpKFbutFmygSppz5Bj3BGASs52YU4es9oE_s
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGU3ODYxMmM2OTQwM2ZkNjliMmI2ZiIsImlhdCI6MTY0OTMwOTc5MywiZXhwIjoxNjQ5Mzk2MTkzfQ.uRUQRxi-71tB54HI5qEoGo4fRgZ3eK5Xzq7v4W7_heQ
 Content-Type: application/json
 
 {
-        "name": "Pants",
+        "name": "Pents",
         "pictureUrl": "https://cdn.shopify.com/s/files/1/0970/4540/products/Lynn-Button-Back-Cotton-Dress-2_256x.jpg?v=1647997123",
-        "gender": "Female",
+        "gender": "Male",
         "subCategory": []
 }
-
 
 ###
 PATCH  http://localhost:4000/category/6230fb4ae68fb223cdc6d5f3/
@@ -247,8 +246,8 @@ Content-Type: application/json
         "currentUserGender": ["Male"]
 }
 ###
-Post http://localhost:4000/subcategory/62496d56772287cb23c7243d
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDgxN2RlY2ZmNDQxYTFhMTdiZjI2YyIsImlhdCI6MTY0ODk3OTI2NiwiZXhwIjoxNjQ5MDY1NjY2fQ.59_IaFomrNnZlbPVBloC-UlZWPrfXlhe9H_VwTNUMxA
+Post http://localhost:4000/subcategory/624e810b921f1fb7dd851fe1
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGU3ODYxMmM2OTQwM2ZkNjliMmI2ZiIsImlhdCI6MTY0OTMwOTc5MywiZXhwIjoxNjQ5Mzk2MTkzfQ.uRUQRxi-71tB54HI5qEoGo4fRgZ3eK5Xzq7v4W7_heQ
 Content-Type: application/json
 
 {
