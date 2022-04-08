@@ -14,7 +14,7 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjQ4MmQ0MD
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjQ4MmQ0MDA5NmQ5OTUzOGYwZjBhMyIsImlhdCI6MTY0NzI2NDE4MH0.pHxfvF60CAMsPBrVCPoX67GrIgDjqmC7WxwEylloF7w
 ###
 POST http://localhost:4000/post
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDgxN2RlY2ZmNDQxYTFhMTdiZjI2YyIsImlhdCI6MTY0OTIzMzE2OSwiZXhwIjoxNjQ5MzE5NTY5fQ.W62QPE4Rh6JoYeCC6oQQH8Y-YsrQP1GZNJ0IvsX5_w8
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY0OTQ1NjYyMywiZXhwIjoxNjQ5NTQzMDIzfQ.mHEQIsxAR8e-PbDd8jPmq-M27UhVo-mIYdY02iiJCRg
 Content-Type: application/json
 
 {
@@ -199,13 +199,13 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 
 ###
 Post http://localhost:4000/category/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGU3ODYxMmM2OTQwM2ZkNjliMmI2ZiIsImlhdCI6MTY0OTMwOTc5MywiZXhwIjoxNjQ5Mzk2MTkzfQ.uRUQRxi-71tB54HI5qEoGo4fRgZ3eK5Xzq7v4W7_heQ
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY0OTQ1NjYyMywiZXhwIjoxNjQ5NTQzMDIzfQ.mHEQIsxAR8e-PbDd8jPmq-M27UhVo-mIYdY02iiJCRg
 Content-Type: application/json
 
 {
-        "name": "Pents",
+        "name": "Jacket",
         "pictureUrl": "https://cdn.shopify.com/s/files/1/0970/4540/products/Lynn-Button-Back-Cotton-Dress-2_256x.jpg?v=1647997123",
-        "gender": "Male",
+        "gender": "Female",
         "subCategory": []
 }
 
@@ -246,12 +246,12 @@ Content-Type: application/json
         "currentUserGender": ["Male"]
 }
 ###
-Post http://localhost:4000/subcategory/624eb305acf1f4d69fc29fbd
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGU3ODYxMmM2OTQwM2ZkNjliMmI2ZiIsImlhdCI6MTY0OTMwOTc5MywiZXhwIjoxNjQ5Mzk2MTkzfQ.uRUQRxi-71tB54HI5qEoGo4fRgZ3eK5Xzq7v4W7_heQ
+Post http://localhost:4000/subcategory/6250b91ba14176137d2b68b5
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY0OTQ1NjYyMywiZXhwIjoxNjQ5NTQzMDIzfQ.mHEQIsxAR8e-PbDd8jPmq-M27UhVo-mIYdY02iiJCRg
 Content-Type: application/json
 
 {
-        "name": "Pents Summer",
+        "name": "jacket latter",
         "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6niBNcUfbA8p6YOz6NWy8fXe5KkupgFwXGg&usqp=CAU",
         "gender": "Female",
         "posts": []

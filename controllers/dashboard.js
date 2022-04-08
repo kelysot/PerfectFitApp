@@ -2,6 +2,7 @@ const Profile = require('../models/profile_model')
 const User = require('../models/user_model')
 const Post = require('../models/post_model')
 const Category = require('../models/category_model')
+const SubCategory = require('../models/sub_category_model')
 
 const getHello = async (req, res) => {
     res.json({
@@ -73,44 +74,81 @@ const getPercentage = async (req, res) => {
     });
 }
 
-//FIXME: example how to give data for top Categories chart
+//FIXME: There is problem - when create new  post its not add in subCategories post list  automatically.
 const getCategoriesData = async (req, res) => {
 
     const categoriesData = []
-    const categoriesList = await Category.find()
+    const maleSubCategoryArray = await SubCategory.find({'gender': 'Male'})
+    const femaleSubCategoryArray = await SubCategory.find({'gender': 'Female'})
 
-    categoriesList.forEach( async (category)=>{
-        let nameOfCategory = category.name
-        let genderOfCategory = category.gender
-        let postsList =  await Post.find({categoryId: category._id})
-        console.log(postsList)
-        let numOfPosts = postsList.length
-        //TODO: over all the posts that have the same id of category + build obj to push in categoriesData
-    })
-    res.json({
-        data: [
-            {
-                name: "name1",
-                male: "5",
-                female: "10"
-            },
-            {
-                name: "name2",
-                male: "7",
-                female: "3"
-            },
-            {
-                name: "name3",
-                male: "2",
-                female: "2"
-            },
-            {
-                name: "name4",
-                male: "7",
-                female: "12"
+    const createData = async (arr) => {
+    
+        let results = []
+
+        for(let i=0; i<arr.length; i++) {
+            let category = await Category.findById(arr[i].categoryId)
+            let mData = {
+                name: category.name,
+                sum : arr[i].posts.length,
+                gender : arr[i].gender
             }
-        ]
-    });
+            results.push(mData)
+        }
+        return results
+    }
+
+    createData(maleSubCategoryArray).then((results) => {
+        results.forEach((m)=>{
+            categoriesData.push(m)
+        })
+    }).then(() => {
+        createData(femaleSubCategoryArray).then((results) => {
+            results.forEach((f)=>{
+                categoriesData.push(f)
+            })
+        }).then(() => {
+            let finalDataArr = []
+            let check = []
+            categoriesData.forEach((category)=>{
+                if(!check.includes(category.name)){
+                    if(category.gender === 'Male'){
+                        let obj = {
+                            name : category.name,
+                            male: category.sum,
+                            female: 0 
+                        }
+                        finalDataArr.push(obj)
+                        check.push(category.name)
+                    }else{
+                        let obj = {
+                            name : category.name,
+                            male: 0,
+                            female: category.sum 
+                        }
+                        finalDataArr.push(obj)
+                        check.push(category.name)
+                    }
+                }else{
+                    if(category.gender === 'Male'){
+                        finalDataArr.forEach((data) => {
+                            if(data.name === category.name){
+                                data.male = category.sum
+                            }
+                        })
+                    }else{
+                        finalDataArr.forEach((data) => {
+                            if(data.name === category.name){
+                                data.female = category.sum
+                            }
+                        })
+                    }
+                }
+            })
+            res.json({
+                data: finalDataArr
+            })
+        })
+    })
 }
 
 function sortTogether(array1, array2) {

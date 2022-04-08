@@ -4,16 +4,15 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 
 
 function TopCategoriesChart({categoriesData}) {
-  if(categoriesData) 
-    console.log(categoriesData);
   return (
     <TopCategoriesChartStyle>
         <TopStyle>
             <h3 className="title">Top Categories</h3>
         </TopStyle>
         <BottomStyle>
+        { categoriesData && (<>
           <ResponsiveContainer width="100%" height="100%">    
-            <AreaChart width={730} height={250} data={data}
+            <AreaChart width={730} height={250} data={categoriesData}
               margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -33,6 +32,7 @@ function TopCategoriesChart({categoriesData}) {
               <Area type="monotone" dataKey="female" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
             </AreaChart>
           </ResponsiveContainer>
+          </>) }
         </BottomStyle>
     </TopCategoriesChartStyle>
   )
@@ -60,43 +60,43 @@ const BottomStyle = styled.div`
 
 //TODO: get the data from server
 
-const data = [
-  {
-    name: 'Page A',
-    male: 4000,
-    female: 2400,
-  },
-  {
-    name: 'Page B',
-    male: 3000,
-    female: 1398,
-  },
-  {
-    name: 'Page C',
-    male: 2000,
-    female: 9800,
-  },
-  {
-    name: 'Page D',
-    male: 2780,
-    female: 3908,
-  },
-  {
-    name: 'Page E',
-    male: 1890,
-    female: 4800,
-  },
-  {
-    name: 'Page F',
-    male: 2390,
-    female: 3800,
-  },
-  {
-    name: 'Page G',
-    male: 3490,
-    female: 4300,
-  },
-];
+// const data = [
+//   {
+//     name: 'Page A',
+//     male: 4000,
+//     female: 2400,
+//   },
+//   {
+//     name: 'Page B',
+//     male: 3000,
+//     female: 1398,
+//   },
+//   {
+//     name: 'Page C',
+//     male: 2000,
+//     female: 9800,
+//   },
+//   {
+//     name: 'Page D',
+//     male: 2780,
+//     female: 3908,
+//   },
+//   {
+//     name: 'Page E',
+//     male: 1890,
+//     female: 4800,
+//   },
+//   {
+//     name: 'Page F',
+//     male: 2390,
+//     female: 3800,
+//   },
+//   {
+//     name: 'Page G',
+//     male: 3490,
+//     female: 4300,
+//   },
+// ];
 
 
 export default TopCategoriesChart;
