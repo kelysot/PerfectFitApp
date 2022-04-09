@@ -26,7 +26,7 @@ function TopCategoriesChart({categoriesData}) {
               </defs>
               <XAxis dataKey="name" />
               <YAxis />
-              <CartesianGrid strokeDasharray="3 3" />
+              <CartesianGrid strokeDasharray="3 3" stroke="lightgray" />
               <Tooltip />
               <Area type="monotone" dataKey="male" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
               <Area type="monotone" dataKey="female" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />

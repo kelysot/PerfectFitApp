@@ -1,7 +1,8 @@
-import React,{useEffect,useState}  from 'react';
+import React,{useState}  from 'react';
+import {Link} from "react-router-dom";
 import styled from 'styled-components';
 
-//TODO: add image to the logo div
+//TODO: add image to the logo div + //TODO: add link to go in profile && setting
 function SideBar() {
 
   const menuitems = document.querySelectorAll("li");
@@ -30,25 +31,35 @@ function SideBar() {
         </TopStyle>
         <CenterStyle>
           <ul>
-            <li onClick={()=> handlerSelectItem(0)}>
-              <span className="material-icons-sharp">dashboard</span>
-              <h3>Dashboard</h3>
+            <li>
+              <Link to="/"  onClick={()=> handlerSelectItem(0)}>
+                <span className="material-icons-sharp">dashboard</span>
+                <h3>Dashboard</h3>
+              </Link>
             </li>
-            <li onClick={()=> handlerSelectItem(1)}>
-              <span className="material-icons-sharp">category</span>
-              <h3>Categories</h3>
+              <li>
+                <Link to="categories" onClick={()=> handlerSelectItem(1)}>
+                  <span className="material-icons-sharp">category</span>
+                  <h3>Categories</h3>
+                </Link>
+              </li>
+            <li>
+              <Link to=""  onClick={()=> handlerSelectItem(2)}>
+                <span className="material-icons-sharp">person</span>
+                <h3>Profile</h3>
+              </Link>
             </li>
-            <li onClick={()=> handlerSelectItem(2)}>
-              <span className="material-icons-sharp">person</span>
-              <h3>Profile</h3>
+            <li>
+              <Link to=""  onClick={()=> handlerSelectItem(3)}>
+                <span className="material-icons-sharp">settings</span>
+                <h3>Setting</h3>
+              </Link>
             </li>
-            <li onClick={()=> handlerSelectItem(3)}>
-              <span className="material-icons-sharp">settings</span>
-              <h3>Setting</h3>
-            </li>
-            <li onClick={()=> handlerSelectItem(4)}>
-              <span className="material-icons-sharp">logout</span>
-              <h3>Log Out</h3>
+            <li>
+              <Link to="/login"  onClick={()=> handlerSelectItem(4)}>
+                <span className="material-icons-sharp">logout</span>
+                <h3>Log Out</h3>
+              </Link>
             </li>
           </ul>
         </CenterStyle>
@@ -93,6 +104,11 @@ const CenterStyle = styled.div`
     flex-direction: column;
   }
 
+  a{
+    display: flex;
+    gap: 0.8rem;
+  }
+
   li:hover:before{
     content:"";
     height:1.6rem;
@@ -109,15 +125,16 @@ const CenterStyle = styled.div`
     cursor: pointer;
     transition: all 300ms ease;
 
-    h3,span{
+    a,h3,span{
       color:var(--color-dark-variant);
-      pointer-events:none
+      /* pointer-events:none; */
+      text-decoration:none; ;
     }
 
     &:hover{
       background: linear-gradient(to right,#7380ec47 0%,#475ba105 50%);
       transform: translateX(1rem);
-      h3,span{
+      a,h3,span{
         color:var(--color-primary-purple);
       }
     }
@@ -125,7 +142,7 @@ const CenterStyle = styled.div`
 
   .active-item{
     transform: translateX(1rem);
-    h3,span{
+    a,h3,span{
       color:var(--color-primary-purple);
     }
 

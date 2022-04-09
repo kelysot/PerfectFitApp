@@ -5,7 +5,7 @@ import Login from "./pages/login/Login";
 import Categories from "./pages/categories/Categories"; 
 import NewCategory from "./pages/new category/NewCategory";
 import SingleCategory from "./pages/single category/SingleCategory";
-import {BrowserRouter,Routes,Route} from "react-router-dom";
+import {Routes,Route} from "react-router-dom";
 import styled from "styled-components";
 
 function App() {
