@@ -6,6 +6,8 @@ import TopBar from "../../components/TopBar";
 
 function Categories({nameOfAdmin}) {
 
+  const[categoriesData,setCategoriesData] = useState(null)
+
   useEffect(()=>{
     fetch("/dashboard/categories" , {
       headers : { 
@@ -15,7 +17,7 @@ function Categories({nameOfAdmin}) {
     }) 
       .then((res) => res.json())
         .then((data) => {
-          console.log(data)
+          setCategoriesData(data.data);
         })
   },[])
 
@@ -25,7 +27,10 @@ function Categories({nameOfAdmin}) {
         <div className="categoryContainer">
           <TopBar  nameOfAdmin={nameOfAdmin} />
           <div className="categoriesList">
-            <CategoriesTable />
+            <CategoriesTable categoriesData={categoriesData} />
+            <div className="categoryOptions">
+              <h3>Options...</h3>
+            </div>
           </div>
         </div>
     </CategoryStyle>
@@ -47,6 +52,12 @@ const CategoryStyle = styled.div`
     .categoriesList{
       padding: 20px; 
       padding-top: 30px;
+      display:flex;
+      align-items: center;
+
+      .categoryOptions{
+        flex: 1;
+      }
     }
 
   }
