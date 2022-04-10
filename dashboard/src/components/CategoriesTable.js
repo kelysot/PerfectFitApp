@@ -9,8 +9,8 @@ function CategoriesTable() {
         <DataGrid style={{ height:'56vh', width: '100%' }}
             rows={rows}
             columns={columns}
-            pageSize={10}
-            rowsPerPageOptions={[10]}
+            pageSize={9}
+            rowsPerPageOptions={[9]}
             checkboxSelection
         />
     </CategoriesTableStyle>
@@ -19,35 +19,22 @@ function CategoriesTable() {
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'firstName', headerName: 'First name', width: 130 },
-    { field: 'lastName', headerName: 'Last name', width: 130 },
-    {
-      field: 'age',
-      headerName: 'Age',
-      type: 'number',
-      width: 90,
-    },
-    {
-      field: 'fullName',
-      headerName: 'Full name',
-      description: 'This column has a value getter and is not sortable.',
-      sortable: false,
-      width: 160,
-      valueGetter: (params) =>
-        `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-    },
+    { field: 'name', headerName: 'Category Name', width: 150},
+    { field: 'gender', headerName: 'Category Gender', width: 160},
+    { field: 'numOfPosts', headerName: 'Total Post', type: 'number', width: 130},
+    { field: 'percent', headerName: 'Percent Of Total Post', width: 180}
   ];
-  
+  //TODO: get the data from server
   const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+    { id: 1, gender: 'Snow', name: 'Jon', numOfPosts: 35 ,percent: '10%' },
+    { id: 2, gender: 'Lannister', name: 'Cersei', numOfPosts: 42 , percent: '10%'},
+    { id: 3, gender: 'Lannister', name: 'Jaime', numOfPosts: 45 , percent: '10%'},
+    { id: 4, gender: 'Stark', name: 'Arya', numOfPosts: 16 , percent: '10%'},
+    { id: 5, gender: 'Targaryen', name: 'Daenerys', numOfPosts: null , percent: '10%'},
+    { id: 6, gender: 'Melisandre', name: null, numOfPosts: 150 , percent: '10%'},
+    { id: 7, gender: 'Clifford', name: 'Ferrara', numOfPosts: 44 , percent: '10%'},
+    { id: 8, gender: 'Frances', name: 'Rossini', numOfPosts: 36 , percent: '10%'},
+    { id: 9, gender: 'Roxie', name: 'Harvey', numOfPosts: 65 , percent: '10%'},
   ];
 
 const CategoriesTableStyle = styled.div`
@@ -55,14 +42,49 @@ const CategoriesTableStyle = styled.div`
     background-color: #ffffffe8;
     border-radius: 8px;
     padding: 10px;
-    max-width:50%; // for now !
+    max-width:51%; // for now !
     box-shadow: 0px -12px 15px rgb(0 0 0 / 10%);
 
     .title{
         font-weight: bold;
-        font-size: 14px;
+        font-size: 16px;
         color: var(--color-dark-variant);
         margin-bottom: 30px;
+    }
+
+    .css-1s0hp0k-MuiDataGrid-columnHeadersInner{ //div all heder of table
+      background-color: #9795ec;
+      width:100% ;
+      display: flex ;
+      align-items:center ;
+    }
+
+    .css-3ihp42-MuiDataGrid-root .MuiDataGrid-columnHeaderTitleContainer,.css-3ihp42-MuiDataGrid-root .MuiDataGrid-cell--textRight{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .css-1jbbcbn-MuiDataGrid-columnHeaderTitle{ // evry cell in heder
+      font-weight: 800;
+      font-size: 1rem ;
+    }
+
+    .css-3ihp42-MuiDataGrid-root .MuiDataGrid-row{ // data row 
+      width:100% ;
+      display: flex ;
+      align-items:center ;
+    }
+
+    .css-3ihp42-MuiDataGrid-root .MuiDataGrid-row:hover{ //data roe hover
+      background-color: #edf2f8 ;
+      cursor: pointer;
+    }
+    
+    .css-3ihp42-MuiDataGrid-root .MuiDataGrid-cell--textLeft{
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 `;
 
