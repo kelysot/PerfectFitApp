@@ -1,20 +1,20 @@
 import React from 'react'
 import styled from "styled-components";
+import CategoriesTable from '../../components/CategoriesTable';
 import SideBar from "../../components/SideBar";
 import TopBar from "../../components/TopBar";
 
-//TODO: work on style and pass relevant data 
+//TODO: work on style
 
-function Categories({ nameOfAdmin}) {
+function Categories({nameOfAdmin}) {
   return (
     <CategoryStyle>
         <SideBar/>
         <div className="categoryContainer">
           <TopBar  nameOfAdmin={nameOfAdmin} />
-          {/* <div className="cardsDetails">
+          <div className="categoriesList">
+            <CategoriesTable />
           </div>
-          <div className="charts">
-          </div> */}
         </div>
     </CategoryStyle>
   )
@@ -32,20 +32,12 @@ const CategoryStyle = styled.div`
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
 
-    .cardsDetails , .charts{
-      display: flex;
+    .categoriesList{
       padding: 20px; 
-      gap: 20px;
-      justify-content: space-around;
       padding-top: 30px;
     }
 
-    .charts{
-      padding-top: 10px ;
-    }
-    
   }
-  
 `
 
 export default Categories

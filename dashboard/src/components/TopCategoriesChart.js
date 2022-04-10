@@ -58,45 +58,5 @@ const BottomStyle = styled.div`
   aspect-ratio: 1.6/1;
 `;
 
-//TODO: get the data from server
-
-// const data = [
-//   {
-//     name: 'Page A',
-//     male: 4000,
-//     female: 2400,
-//   },
-//   {
-//     name: 'Page B',
-//     male: 3000,
-//     female: 1398,
-//   },
-//   {
-//     name: 'Page C',
-//     male: 2000,
-//     female: 9800,
-//   },
-//   {
-//     name: 'Page D',
-//     male: 2780,
-//     female: 3908,
-//   },
-//   {
-//     name: 'Page E',
-//     male: 1890,
-//     female: 4800,
-//   },
-//   {
-//     name: 'Page F',
-//     male: 2390,
-//     female: 3800,
-//   },
-//   {
-//     name: 'Page G',
-//     male: 3490,
-//     female: 4300,
-//   },
-// ];
-
 
 export default TopCategoriesChart;
