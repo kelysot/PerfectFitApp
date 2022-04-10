@@ -1,12 +1,24 @@
-import React from 'react'
+import React , {useState,useEffect} from 'react'
 import styled from "styled-components";
 import CategoriesTable from '../../components/CategoriesTable';
 import SideBar from "../../components/SideBar";
 import TopBar from "../../components/TopBar";
 
-//TODO: work on style
-
 function Categories({nameOfAdmin}) {
+
+  useEffect(()=>{
+    fetch("/dashboard/categories" , {
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
+    }) 
+      .then((res) => res.json())
+        .then((data) => {
+          console.log(data)
+        })
+  },[])
+
   return (
     <CategoryStyle>
         <SideBar/>

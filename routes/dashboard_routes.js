@@ -13,4 +13,6 @@ router.get('/percentage',Dashboard.getPercentage)
 
 router.get('/topCategories',Dashboard.getCategoriesData)
 
+router.get('/categories',Dashboard.categoriesTableData)
+
 module.exports = router

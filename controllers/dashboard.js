@@ -76,15 +76,12 @@ const getPercentage = async (req, res) => {
 
 //FIXME: There is problem - when create new  post its not add in subCategories post list  automatically.
 const getCategoriesData = async (req, res) => {
-
     const categoriesData = []
     const maleSubCategoryArray = await SubCategory.find({'gender': 'Male'})
     const femaleSubCategoryArray = await SubCategory.find({'gender': 'Female'})
 
     const createData = async (arr) => {
-    
         let results = []
-
         for(let i=0; i<arr.length; i++) {
             let category = await Category.findById(arr[i].categoryId)
             let mData = {
@@ -151,6 +148,16 @@ const getCategoriesData = async (req, res) => {
     })
 }
 
+const categoriesTableData = async (req, res) => {
+
+    const categoriesList = await Category.find()
+    
+    //[{ id: 1, gender: 'Snow', name: 'Jon', numOfPosts: 35 ,percent: '10%' }] - exmple how pass data
+    res.json({
+       hey: categoriesList
+    })
+}
+
 function sortTogether(array1, array2) {
     var merged = [];
     for(var i=0; i<array1.length; i++) { merged.push({'a1': array1[i], 'a2': array2[i]}); }
@@ -163,5 +170,6 @@ module.exports = {
     getAmounts,
     getTopProfiles,
     getPercentage,
-    getCategoriesData
+    getCategoriesData,
+    categoriesTableData
 }
