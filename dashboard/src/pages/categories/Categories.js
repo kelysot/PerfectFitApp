@@ -5,12 +5,12 @@ import TopBar from "../../components/TopBar";
 
 //TODO: work on style and pass relevant data 
 
-function Categories() {
+function Categories({ nameOfAdmin}) {
   return (
     <CategoryStyle>
         <SideBar/>
         <div className="categoryContainer">
-          <TopBar/>
+          <TopBar  nameOfAdmin={nameOfAdmin} />
           {/* <div className="cardsDetails">
           </div>
           <div className="charts">

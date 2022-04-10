@@ -7,17 +7,16 @@ import TopProfilesChart from "../../components/TopProfilesChart";
 import TopCategoriesChart from '../../components/TopCategoriesChart';
 import StatusConnectedProfiles from "../../components/StatusConnectedProfiles";
 
-function Home() {
-
-    const[nameOfAdmin,setNameOfAdmin] = useState("");
-    const[topProfiles,setTopProfiles]=useState(null);
-    const[chartConnectData,setChartConnectData] = useState(null);
-    const[percentage,setPercentage] = useState(0);
-    const[categoriesData,setCategoriesData] = useState(null);
+function Home({nameOfAdmin}) {
+    
+  const[topProfiles,setTopProfiles]=useState(null);
+  const[chartConnectData,setChartConnectData] = useState(null);
+  const[percentage,setPercentage] = useState(0);
+  const[categoriesData,setCategoriesData] = useState(null);
   
-    useEffect(() => {
-      loadData(setNameOfAdmin,setTopProfiles,setChartConnectData,setPercentage,setCategoriesData)          
-    },[])
+  useEffect(() => {
+    loadData(setTopProfiles,setChartConnectData,setPercentage,setCategoriesData)          
+  },[])
 
   return (
     <HomeStyle>
@@ -68,17 +67,7 @@ const HomeStyle = styled.div`
   
 `
 
-function loadData(setNameOfAdmin,setTopProfiles,setChartConnectData,setPercentage,setCategoriesData){
-  fetch("/dashboard",{
-    headers : { 
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-     }
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      setNameOfAdmin(data.adminName);
-      })
+function loadData(setTopProfiles,setChartConnectData,setPercentage,setCategoriesData){
 
   fetch("/dashboard/topProfiles" , {
     headers : { 
