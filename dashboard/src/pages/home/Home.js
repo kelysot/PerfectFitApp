@@ -44,6 +44,7 @@ const HomeStyle = styled.div`
   box-shadow:-15px 20px 20px rgb(0 0 0 / 12%);
   width: 100%;
   border-radius:15px;
+  min-height: 41rem;
 
   .homeContainer{
     flex:6 ;

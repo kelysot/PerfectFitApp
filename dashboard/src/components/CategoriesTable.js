@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { DataGrid } from '@mui/x-data-grid';
 
 function CategoriesTable({categoriesData}) {
-  console.log(categoriesData)
   return (
     <CategoriesTableStyle>
       { categoriesData && (<>
@@ -12,6 +11,7 @@ function CategoriesTable({categoriesData}) {
             rows={categoriesData}
             columns={columns}
             pageSize={9}
+            rowsPerPageOptions={[9]}
             checkboxSelection
         />
       </>)}

@@ -148,20 +148,23 @@ const getCategoriesData = async (req, res) => {
     })
 }
 
-//TODO: get the data about num of posts and percents
 const categoriesTableData = async (req, res) => {
 
     const categoriesList = await Category.find({},{_id:0})
+    const categoriesListWithId = await Category.find()
+    const postList = await Post.find()
     const dataToTable = []
 
+    
     const createData = async (arr) => {
         for(let i=0; i<arr.length; i++) {
+            let sub = await SubCategory.find({'categoryId' : categoriesListWithId[i]._id})
             let categoryData = {
                 id: i,
                 gender: arr[i].gender,
                 name: arr[i].name,
-                numOfPosts:0,
-                percent: "100%"
+                numOfPosts: sub[0].posts.length,
+                percent: `${sub[0].posts.length / postList.length}%`
             }
             dataToTable.push(categoryData)
         }
@@ -173,8 +176,6 @@ const categoriesTableData = async (req, res) => {
             data: data
         })
     })
-    
-    //[{ id: 1, gender: 'Snow', name: 'Jon', numOfPosts: 35 ,percent: '10%' }] - example how pass data
 }
 
 function sortTogether(array1, array2) {
