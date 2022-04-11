@@ -164,7 +164,7 @@ const categoriesTableData = async (req, res) => {
                 gender: arr[i].gender,
                 name: arr[i].name,
                 numOfPosts: sub[0].posts.length,
-                percent: `${sub[0].posts.length / postList.length}%`
+                percent: `${(sub[0].posts.length / postList.length)*100}%`
             }
             dataToTable.push(categoryData)
         }
