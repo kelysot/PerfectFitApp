@@ -199,11 +199,11 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 
 ###
 Post http://localhost:4000/category/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY0OTQ1NjYyMywiZXhwIjoxNjQ5NTQzMDIzfQ.mHEQIsxAR8e-PbDd8jPmq-M27UhVo-mIYdY02iiJCRg
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDQxNmY3NDBhMGJmY2YxODFhZDk0MSIsImlhdCI6MTY0OTk1OTM3OCwiZXhwIjoxNjUwMDQ1Nzc4fQ.zJUE8kECALQyrC7X76OVghzBDHb3XI-3HJqOoR2pInc
 Content-Type: application/json
 
 {
-        "name": "Jacket",
+        "name": "Pants",
         "pictureUrl": "https://cdn.shopify.com/s/files/1/0970/4540/products/Lynn-Button-Back-Cotton-Dress-2_256x.jpg?v=1647997123",
         "gender": "Female",
         "subCategory": []
@@ -246,12 +246,12 @@ Content-Type: application/json
         "currentUserGender": ["Male"]
 }
 ###
-Post http://localhost:4000/subcategory/6250b91ba14176137d2b68b5
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY0OTQ1NjYyMywiZXhwIjoxNjQ5NTQzMDIzfQ.mHEQIsxAR8e-PbDd8jPmq-M27UhVo-mIYdY02iiJCRg
+Post http://localhost:4000/subcategory/625866e16a3d8af8a6d9b603
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDQxNmY3NDBhMGJmY2YxODFhZDk0MSIsImlhdCI6MTY0OTk1OTM3OCwiZXhwIjoxNjUwMDQ1Nzc4fQ.zJUE8kECALQyrC7X76OVghzBDHb3XI-3HJqOoR2pInc
 Content-Type: application/json
 
 {
-        "name": "jacket latter",
+        "name": "jacket 11",
         "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6niBNcUfbA8p6YOz6NWy8fXe5KkupgFwXGg&usqp=CAU",
         "gender": "Female",
         "posts": []
@@ -292,13 +292,13 @@ GET http://localhost:4000/comment/byId/622c45b92fae64167198bbec/
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzA2MjI0OCwiZXhwIjoxNjQ3MTQ4NjQ4fQ.6qHiuJkcX8EBuPxiyAv3c9hOu-2r_nCnIID1zp6zfSA
 
 ### //byPostID
-Post http://localhost:4000/comment/622a6ec75afdc688ae7036f3
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzA2MjI0OCwiZXhwIjoxNjQ3MTQ4NjQ4fQ.6qHiuJkcX8EBuPxiyAv3c9hOu-2r_nCnIID1zp6zfSA
+Post http://localhost:4000/comment/625867886a3d8af8a6d9b621
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDQxNmY3NDBhMGJmY2YxODFhZDk0MSIsImlhdCI6MTY0OTk2MDgxNiwiZXhwIjoxNjUwMDQ3MjE2fQ.YK6hI-U6GEqT33K0-0qBhd_AzilfUd2vtydDLcQIRFY
 Content-Type: application/json
 
 {
         "date" : "11/03/2022",
-        "text" : "Add new comment 2"
+        "text" : "Add new comment"
 }
 
 ###
