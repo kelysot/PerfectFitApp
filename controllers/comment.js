@@ -51,12 +51,12 @@ const getCommentById = async (req, res) => {
 }
 
 const addComment = async (req, res) => {
-    const post = await Post.findById(req.params.id)
-    const profileId = post.profileId
+    const post = await Post.findById(req.body.postId)
+    const profileId = req.body.profileId
 
     const newComment = Comment({
         profileId: profileId,
-        postId: req.params.id,
+        postId: req.body.postId,
         date: req.body.date,
         text: req.body.text
     })
@@ -84,7 +84,7 @@ const addComment = async (req, res) => {
         } else {
             res.status(200).send({
                 'status': 'OK',
-                'commit': newComment
+                'comment': newComment
             })
         }
     })

@@ -54,7 +54,7 @@ const authenticate = require('../common/auth_middleware')
 *                 $ref: '#/components/schemas/Comment'
 */
 
-router.get('/',authenticate,Comment.getComments)
+router.get('/', authenticate, Comment.getComments)
 
 /**
  * @swagger
@@ -138,7 +138,7 @@ router.get('/byId/:id', authenticate, Comment.getCommentById)
  *         description: Some server error 
  */
 
-router.post('/:id', authenticate,Comment.addComment)
+router.post('/', authenticate, Comment.addComment)
 
 /**
  * @swagger
@@ -170,7 +170,7 @@ router.post('/:id', authenticate,Comment.addComment)
  *          description: Some error 
  */
 
-router.patch('/:id', authenticate,Comment.editComment)
+router.patch('/:id', authenticate, Comment.editComment)
 
 /**
  * @swagger
@@ -192,6 +192,6 @@ router.patch('/:id', authenticate,Comment.editComment)
  *          description: Some error     
  */
 
-router.delete('/:id', authenticate,Comment.deleteComment)
+router.delete('/:id', authenticate, Comment.deleteComment)
 
 module.exports = router
