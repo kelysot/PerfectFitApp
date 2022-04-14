@@ -14,7 +14,6 @@ const getSubCategories = async (req, res) => {
 }
 
 const getSubCategoryById = async (req, res) => {
-    console.log("1111111111111" + req.params.id)
 
     if (req.params.id == null || req.params.id == undefined) {
         res.status(400).send({
@@ -23,7 +22,6 @@ const getSubCategoryById = async (req, res) => {
         })
     }
     const subCategory = await SubCategory.findById(req.params.id)
-    console.log("subCategory" + subCategory)
     try {
         res.status(200).send(subCategory)
     } catch (err) {
