@@ -13,6 +13,12 @@ function CategoriesTable({categoriesData}) {
             pageSize={9}
             rowsPerPageOptions={[9]}
             checkboxSelection
+            onSelectionModelChange={item => {
+              console.log(item);
+              item.forEach((i) => {
+                console.log(categoriesData[i]);
+              })
+            }}
         />
       </>)}
     </CategoriesTableStyle>
@@ -44,7 +50,7 @@ const CategoriesTableStyle = styled.div`
     }
 
     .css-1s0hp0k-MuiDataGrid-columnHeadersInner{ //div all heder of table
-      background-color: #9795ec;
+      background-color: #9795ec87;
       width:100% ;
       display: flex ;
       align-items:center ;

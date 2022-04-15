@@ -8,10 +8,10 @@ function SideBar() {
   const menuitems = document.querySelectorAll("li");
   const[currentIndex,setCurrentIndex] = useState(0);
 
-  menuitems.forEach((item,index) =>{
-    if(index === 0 && currentIndex === 0)
-      item.classList.add("active-item");
-  });
+  // menuitems.forEach((item,index) =>{
+  //   if(index === 0 && currentIndex === 0)
+  //     item.classList.add("active-item");
+  // });
 
   const handlerSelectItem = (index)=>{
     if(index !== currentIndex){
@@ -140,7 +140,9 @@ const CenterStyle = styled.div`
     }
   }
 
-  .active-item{
+
+  //FIXME: problem when move between pages for now dont show the current page
+  /* .active-item{
     transform: translateX(1rem);
     a,h3,span{
       color:var(--color-primary-purple);
@@ -152,7 +154,7 @@ const CenterStyle = styled.div`
       width:2.5px;
       background-color:var(--color-primary-purple);
     }
-  }
+  } */
 
 `;
 
