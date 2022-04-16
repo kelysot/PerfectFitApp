@@ -33,7 +33,7 @@ function App() {
         <Route path="/login" element={<Login/>} ></Route>
         <Route path="categories">
           <Route index element={<Categories  nameOfAdmin={nameOfAdmin} />}></Route>
-          <Route path=":categoryId" element={<SingleCategory/>}></Route>
+          <Route path=":categoryId" element={<SingleCategory nameOfAdmin={nameOfAdmin} />}></Route>
           <Route path="newCategory" element={<NewCategory/>}></Route>
         </Route>
       </Routes>
