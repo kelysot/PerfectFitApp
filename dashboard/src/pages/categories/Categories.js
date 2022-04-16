@@ -28,9 +28,6 @@ function Categories({nameOfAdmin}) {
           <TopBar  nameOfAdmin={nameOfAdmin} />
           <div className="categoriesList">
             <CategoriesTable categoriesData={categoriesData} />
-            <div className="categoryOptions">
-              <h3>Options...</h3>
-            </div>
           </div>
         </div>
     </CategoryStyle>
@@ -55,10 +52,6 @@ const CategoryStyle = styled.div`
       padding-top: 30px;
       display:flex;
       align-items: center;
-
-      .categoryOptions{
-        flex: 1;
-      }
     }
 
   }

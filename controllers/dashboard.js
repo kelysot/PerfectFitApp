@@ -161,6 +161,7 @@ const categoriesTableData = async (req, res) => {
             let sub = await SubCategory.find({'categoryId' : categoriesListWithId[i]._id})
             let categoryData = {
                 id: i,
+                image: arr[i].pictureUrl,
                 gender: arr[i].gender,
                 name: arr[i].name,
                 numOfPosts: sub[0].posts.length,

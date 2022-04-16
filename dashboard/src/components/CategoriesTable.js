@@ -3,13 +3,24 @@ import styled from "styled-components";
 import { DataGrid } from '@mui/x-data-grid';
 
 function CategoriesTable({categoriesData}) {
+
+  const actionColumn = [{field: 'action', headerName:"Action", width: 250, renderCell: ()=> {
+     return(
+      <div className="cellAction">
+        <div className="view">View</div>
+        <div className="edit">Edit</div>
+        <div className="delete">Delete</div>
+      </div>
+     )
+  }}]
+
   return (
     <CategoriesTableStyle>
       { categoriesData && (<>
         <h3 className="title">Categories List</h3>
         <DataGrid style={{ height:'56vh'}}
             rows={categoriesData}
-            columns={columns}
+            columns={columns.concat(actionColumn)}
             pageSize={9}
             rowsPerPageOptions={[9]}
             checkboxSelection
@@ -27,6 +38,15 @@ function CategoriesTable({categoriesData}) {
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'options' , headerName: 'Image',
+      renderCell: (params) => {
+        return (
+          <div className="image">
+              <img src={params.row.image} alt="categoryImage"></img>
+          </div>
+        )
+      }
+    },
     { field: 'name', headerName: 'Category Name', width: 150},
     { field: 'gender', headerName: 'Category Gender', width: 160},
     { field: 'numOfPosts', headerName: 'Total Post', type: 'number', width: 130},
@@ -37,10 +57,10 @@ const CategoriesTableStyle = styled.div`
     
     background-color: #ffffffe8;
     border-radius: 8px;
-    padding: 10px;
+    padding: 10px 20px;
     box-shadow: 0px -12px 15px rgb(0 0 0 / 10%);
-    flex:2;
-    max-width:49rem;
+    /* max-width:49rem; */
+    width: 100%;
 
     .title{
         font-weight: bold;
@@ -88,6 +108,43 @@ const CategoriesTableStyle = styled.div`
 
     .css-3ihp42-MuiDataGrid-root .MuiDataGrid-columnHeader:focus, .css-3ihp42-MuiDataGrid-root .MuiDataGrid-cell:focus{
       outline:none;
+    }
+
+    .image{
+      display: flex;
+      align-items: center;
+      img{
+        height: 38px;
+        width: 38px;
+        border-radius:50%;
+        object-fit:cover;
+      }
+    }
+
+    .cellAction{
+      display: flex;
+      align-items: center;
+      gap: 25px;
+
+      .view, .edit, .delete {
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-weight: bolder;
+        color: var(--color-dark-variant);
+      }
+
+      .view{
+        background-color:#3e98c766;
+      }
+
+      .edit{
+        background-color:#ffa50042;
+      }
+
+      .delete{
+        background-color:#ff00003b;
+
+      }
     }
 `;
 
