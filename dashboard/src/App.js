@@ -34,7 +34,7 @@ function App() {
         <Route path="categories">
           <Route index element={<Categories  nameOfAdmin={nameOfAdmin} />}></Route>
           <Route path=":categoryId" element={<SingleCategory nameOfAdmin={nameOfAdmin} />}></Route>
-          <Route path="newCategory" element={<NewCategory/>}></Route>
+          <Route path="newCategory" element={<NewCategory nameOfAdmin={nameOfAdmin} />}></Route>
         </Route>
       </Routes>
     </AppStyle>
