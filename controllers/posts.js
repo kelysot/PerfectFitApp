@@ -86,7 +86,11 @@ const addNewPost = async (req, res) => {
         comments: []
     })
 
+    //TODO: findOne instead of find:
     const subCategories = await SubCategory.find({ 'name': post.subCategoryId, 'gender': profile.gender })
+    if(subCategories[0].posts == undefined && subCategories[0].posts == null){
+        subCategories[0].posts = []
+    }
 
     subCategories[0].posts.push(post._id)
     subCategories[0].save((error) => {
