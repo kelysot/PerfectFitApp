@@ -8,7 +8,7 @@ function CategoriesTable({categoriesData}) {
      return(
       <div className="cellAction">
         <div className="view">View</div>
-        <div className="edit">Edit</div>
+        {/* <div className="edit">Edit</div> */}
         <div className="delete">Delete</div>
       </div>
      )
@@ -137,9 +137,9 @@ const CategoriesTableStyle = styled.div`
         background-color:#3e98c766;
       }
 
-      .edit{
+      /* .edit{
         background-color:#ffa50042;
-      }
+      } */
 
       .delete{
         background-color:#ff00003b;
