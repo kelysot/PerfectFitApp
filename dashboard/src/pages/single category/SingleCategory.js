@@ -1,4 +1,6 @@
 import React from 'react';
+import { BarChart, Bar, XAxis, YAxis} from 'recharts';
+import CategoriesTable from '../../components/CategoriesTable';
 import SideBar from "../../components/SideBar";
 import TopBar from "../../components/TopBar";
 import styled from "styled-components";
@@ -36,15 +38,61 @@ function SingleCategory({nameOfAdmin}) {
                 </div>
               </div>
               <div className='right'>
-
+                <h1 className='title'>Partition</h1>
+                <div className='charts'>
+                  <BarChart width={320} height={250} data={data}>
+                    <XAxis dataKey="name" />
+                    <YAxis  padding={{ top: 20, bottom: 2}} />
+                    <Bar dataKey="uv" fill="#8884d8" />
+                  </BarChart>
+                  <BarChart width={400} height={250} data={data2}>
+                    <XAxis dataKey="name" />
+                    <YAxis  padding={{ top: 20, bottom: 2}} />
+                    <Bar dataKey="uv" fill="#8884d8" />
+                  </BarChart>
+                </div>
               </div>
             </div>
-            <div className='bottom'></div>
+            <div className='bottom'>
+              <CategoriesTable categoriesData={subCategoriesData} title={'SubCategory List'} height={30} />
+            </div>
           </div>
         </div>
     </SingleCategoryStyle>
   )
 }
+
+
+//FIXME: Get the data from server
+const data = [
+  {
+    name: 'Male Posts',
+    uv: 10,
+  },
+  {
+    name: 'Female Posts',
+    uv: 20,
+  }
+];
+//TODO: best users in this category
+const data2 = [
+  {
+    name: 'Matmoni123',
+    uv: 10,
+  },
+  {
+    name: 'Eden',
+    uv: 20,
+  },
+  {
+    name: 'Tal',
+    uv: 20,
+  }
+];
+//FIXME: Get data from server + get specific columns data
+const subCategoriesData = [
+  {  id: 0, image: 'https://cdn.shopify.com/s/files/1/0970/4540/produc…-Button-Back-Cotton-Dress-2_256x.jpg?v=1647997123', gender: 'Male', name: 'Shirt', numOfPosts: 1,percent: "25%"}
+];
 
 const SingleCategoryStyle = styled.div`
   display:flex;
@@ -70,20 +118,21 @@ const SingleCategoryStyle = styled.div`
       padding-top: 30px;
       display:flex;
       align-items: center;
+      flex-direction: column;
     }
 
     .top{
       display: flex;
-      padding: 20px;
+      padding: 0px 0px 22px 0px;
+      width: 100%;
+      justify-content: space-evenly;
 
       .left{
-        flex: 1;
         box-shadow: 5px -5px 8px rgb(0 0 0 / 12%);
         border-radius:15px;
         background-color:#ffffffe8;
-        padding: 20px;
         position: relative;
-        min-width: 25rem;
+        padding: 10px 20px;
 
         .editButton{
           position: absolute;
@@ -102,18 +151,20 @@ const SingleCategoryStyle = styled.div`
           display: flex;
           gap: 20px;
           align-items: center;
+          padding: inherit;
+
           img{
-            height: 100px;
-            width: 100px;
+            height: 150px;
+            width: 150px;
             object-fit: cover;
             border-radius: 50%;
           }
 
           .details{
             .category-title{
-              margin: 10px 0px 12px 0px;
+              margin: 10px 0px 30px 0px;
               color: var(--color-dark-variant);
-              font-size:25px;
+              font-size: 30px;
             }
 
             .detailsItem{
@@ -136,8 +187,21 @@ const SingleCategoryStyle = styled.div`
       }
 
       .right{
-        flex: 2;
+        box-shadow: 5px -5px 8px rgb(0 0 0 / 12%);
+        border-radius:15px;
+        background-color:#ffffffe8;
+        align-items: center;
+        padding: 10px 20px;
+
+        .charts{
+          display:flex;
+          gap: 30px;
+        }
       }
+    }
+
+    .bottom{
+      width: 84%;
     }
 
   }

@@ -5,7 +5,7 @@ import SideBar from "../../components/SideBar";
 import TopBar from "../../components/TopBar";
 
 function Categories({nameOfAdmin}) {
-
+  
   const[categoriesData,setCategoriesData] = useState(null)
 
   useEffect(()=>{
@@ -18,6 +18,7 @@ function Categories({nameOfAdmin}) {
       .then((res) => res.json())
         .then((data) => {
           setCategoriesData(data.data);
+          console.log(data.data)
         })
   },[])
 
@@ -27,7 +28,7 @@ function Categories({nameOfAdmin}) {
         <div className="categoryContainer">
           <TopBar  nameOfAdmin={nameOfAdmin} />
           <div className="categoriesList">
-            <CategoriesTable categoriesData={categoriesData} />
+            <CategoriesTable categoriesData={categoriesData} title={'Categories List'} height={56} />
           </div>
         </div>
     </CategoryStyle>

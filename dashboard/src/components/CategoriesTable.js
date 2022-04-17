@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import { DataGrid } from '@mui/x-data-grid';
 
-function CategoriesTable({categoriesData}) {
+function CategoriesTable({categoriesData, title , height}) {
 
   const actionColumn = [{field: 'action', headerName:"Action", width: 250, renderCell: ()=> {
      return(
@@ -17,8 +17,8 @@ function CategoriesTable({categoriesData}) {
   return (
     <CategoriesTableStyle>
       { categoriesData && (<>
-        <h3 className="title">Categories List</h3>
-        <DataGrid style={{ height:'56vh'}}
+        <h3 className="title">{title}</h3>
+        <DataGrid style={{ height:`${height}vh`}}
             rows={categoriesData}
             columns={columns.concat(actionColumn)}
             pageSize={9}
