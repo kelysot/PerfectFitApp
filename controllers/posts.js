@@ -77,13 +77,14 @@ const addNewPost = async (req, res) => {
         color: req.body.color,
         categoryId: req.body.categoryId,
         subCategoryId: req.body.subCategoryId,
-        date: req.body.date,
+        // date: req.body.date,
+        date: new Date(),
         link: req.body.link,
         sizeAdjustment: '4',
         rating: '6',
         picturesUrl: req.body.picturesUrl,
         likes: [],
-        comments: []
+        comments: [],
     })
 
     //TODO: findOne instead of find:
@@ -322,6 +323,21 @@ const getProfilePosts = async (req, res) => {
     }
 }
 
+
+const getDates = async (req, res) => {
+
+    console.log("hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+    console.log( req.params.date )
+    const lastDate = req.params.date 
+
+    const posts = await Post.find({date: {
+        $gte: lastDate,
+        $lt: new Date()
+    }}) 
+
+    console.log(posts)
+}
+
 module.exports = {
     getPosts,
     getPostsBySubCategoryId,
@@ -330,6 +346,7 @@ module.exports = {
     editPost,
     deletePost,
     getWishList,
-    getProfilePosts
+    getProfilePosts,
+    getDates
 }
 
