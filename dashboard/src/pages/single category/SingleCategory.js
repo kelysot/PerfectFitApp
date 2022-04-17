@@ -40,12 +40,12 @@ function SingleCategory({nameOfAdmin}) {
               <div className='right'>
                 <h1 className='title'>Partition</h1>
                 <div className='charts'>
-                  <BarChart width={320} height={250} data={data}>
+                  <BarChart width={320} height={180} data={data}>
                     <XAxis dataKey="name" />
                     <YAxis  padding={{ top: 20, bottom: 2}} />
                     <Bar dataKey="uv" fill="#8884d8" />
                   </BarChart>
-                  <BarChart width={400} height={250} data={data2}>
+                  <BarChart width={400} height={180} data={data2}>
                     <XAxis dataKey="name" />
                     <YAxis  padding={{ top: 20, bottom: 2}} />
                     <Bar dataKey="uv" fill="#8884d8" />
@@ -54,14 +54,13 @@ function SingleCategory({nameOfAdmin}) {
               </div>
             </div>
             <div className='bottom'>
-              <CategoriesTable categoriesData={subCategoriesData} title={'SubCategory List'} height={30} />
+              <CategoriesTable categoriesData={subCategoriesData} title={'SubCategory List'} height={26} />
             </div>
           </div>
         </div>
     </SingleCategoryStyle>
   )
 }
-
 
 //FIXME: Get the data from server
 const data = [
@@ -132,7 +131,7 @@ const SingleCategoryStyle = styled.div`
         border-radius:15px;
         background-color:#ffffffe8;
         position: relative;
-        padding: 10px 20px;
+        padding: 8px;
 
         .editButton{
           position: absolute;
@@ -191,17 +190,16 @@ const SingleCategoryStyle = styled.div`
         border-radius:15px;
         background-color:#ffffffe8;
         align-items: center;
-        padding: 10px 20px;
+        padding: 10px;
 
         .charts{
           display:flex;
-          gap: 30px;
         }
       }
     }
 
     .bottom{
-      width: 84%;
+      width: 97.5%;
     }
 
   }
