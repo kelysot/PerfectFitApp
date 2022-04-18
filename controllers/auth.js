@@ -108,7 +108,8 @@ const login = async (req, res) => {
 
         res.status(200).send({
             'accessToken': accessToken,
-            'refreshToken': refreshToken
+            'refreshToken': refreshToken,
+            'user': user
         });
 
     } catch (err) {
@@ -148,7 +149,6 @@ const logout = async (req, res) => {
         const userId = userInfo.id
         try {
             const user = await User.findById(userId)
-            console.log("user: " + user)
             if (user == null) return res.status(403).send('invalid request')
             if (!user.tokens.includes(token)) {
                 user.isConnected = "false"
