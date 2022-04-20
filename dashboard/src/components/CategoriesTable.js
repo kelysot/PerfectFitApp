@@ -1,14 +1,16 @@
 import React from 'react';
 import styled from "styled-components";
 import { DataGrid } from '@mui/x-data-grid';
+import { Link } from 'react-router-dom';
 
-function CategoriesTable({categoriesData, title , height}) {
+function CategoriesTable({categoriesData, title , height }) {
 
   const actionColumn = [{field: 'action', headerName:"Action", width: 250, renderCell: ()=> {
      return(
       <div className="cellAction">
-        <div className="view">View</div>
-        {/* <div className="edit">Edit</div> */}
+        <Link to={'/categories/test'}>
+          <div className="view">View</div>
+        </Link>
         <div className="delete">Delete</div>
       </div>
      )
@@ -18,6 +20,11 @@ function CategoriesTable({categoriesData, title , height}) {
     <CategoriesTableStyle>
       { categoriesData && (<>
         <h3 className="title">{title}</h3>
+        <div className="add-category">
+          <Link to={'/categories/newCategory'}>
+            <span className="material-icons-sharp">add_circle_outline</span>
+          </Link>
+        </div>
         <DataGrid style={{ height:`${height}vh`}}
             rows={categoriesData}
             columns={columns.concat(actionColumn)}
@@ -59,14 +66,29 @@ const CategoriesTableStyle = styled.div`
     border-radius: 8px;
     padding: 10px 20px;
     box-shadow: 0px -12px 15px rgb(0 0 0 / 10%);
-    /* max-width:49rem; */
     width: 100%;
+
+    .add-category{
+      display: flex;
+      justify-content: end;
+      
+      span{
+        color: var(--color-dark-variant);
+        cursor: pointer;
+        font-size: 40px;
+        margin: 0.4rem;
+
+        &:hover{
+          color: var(--color-primary-purple);
+        }
+      }
+    }
 
     .title{
         font-weight: bold;
         font-size: 16px;
         color: var(--color-dark-variant);
-        margin-bottom: 30px;
+        margin-bottom: 10px;
     }
 
     .css-1s0hp0k-MuiDataGrid-columnHeadersInner{ //div all heder of table
@@ -137,15 +159,12 @@ const CategoriesTableStyle = styled.div`
         background-color:#3e98c766;
       }
 
-      /* .edit{
-        background-color:#ffa50042;
-      } */
-
       .delete{
         background-color:#ff00003b;
 
       }
     }
 `;
+
 
 export default CategoriesTable;

@@ -27,40 +27,40 @@ function SideBar() {
     <SideBarStyle>
         <TopStyle>
           <img src=""></img>
-          <h2>Perfect<span>Fit</span></h2>
+          <StyledLinkLogo to="/"><h2>Perfect<span>Fit</span></h2></StyledLinkLogo>
         </TopStyle>
         <CenterStyle>
           <ul>
-            <li>
-              <Link to="/"  onClick={()=> handlerSelectItem(0)}>
-                <span className="material-icons-sharp">dashboard</span>
-                <h3>Dashboard</h3>
-              </Link>
-            </li>
+            <StyledLink to="/"  onClick={()=> handlerSelectItem(0)}>
               <li>
-                <Link to="categories" onClick={()=> handlerSelectItem(1)}>
-                  <span className="material-icons-sharp">category</span>
-                  <h3>Categories</h3>
-                </Link>
+                  <span className="material-icons-sharp">dashboard</span>
+                  <h3>Dashboard</h3>
               </li>
-            <li>
-              <Link to=""  onClick={()=> handlerSelectItem(2)}>
-                <span className="material-icons-sharp">person</span>
-                <h3>Profile</h3>
-              </Link>
-            </li>
-            <li>
-              <Link to=""  onClick={()=> handlerSelectItem(3)}>
-                <span className="material-icons-sharp">settings</span>
-                <h3>Setting</h3>
-              </Link>
-            </li>
-            <li>
-              <Link to="/login"  onClick={()=> handlerSelectItem(4)}>
-                <span className="material-icons-sharp">logout</span>
-                <h3>Log Out</h3>
-              </Link>
-            </li>
+            </StyledLink>
+              <StyledLink to="/categories" onClick={()=> handlerSelectItem(1)}>
+                <li>
+                    <span className="material-icons-sharp">category</span>
+                    <h3>Categories</h3>
+                </li>
+              </StyledLink>
+            <StyledLink to=""  onClick={()=> handlerSelectItem(2)}>
+              <li>
+                  <span className="material-icons-sharp">person</span>
+                  <h3>Profile</h3>
+              </li>
+            </StyledLink>
+            <StyledLink to=""  onClick={()=> handlerSelectItem(3)}>
+              <li>
+                  <span className="material-icons-sharp">settings</span>
+                  <h3>Setting</h3>
+              </li>
+              </StyledLink>
+            <StyledLink to="/login"  onClick={()=> handlerSelectItem(4)}>
+              <li>
+                  <span className="material-icons-sharp">logout</span>
+                  <h3>Log Out</h3>
+              </li>
+            </StyledLink>
           </ul>
         </CenterStyle>
         <BottomStyle>
@@ -87,6 +87,7 @@ const TopStyle = styled.div`
   display:flex;
   align-items: center;
   justify-content: center;
+  
   h2{
     font-size:2.5rem;
     padding-top:1rem;
@@ -124,15 +125,15 @@ const CenterStyle = styled.div`
     padding:1rem 1.5rem;
     cursor: pointer;
     transition: all 300ms ease;
+    width: 100%;
 
     a,h3,span{
       color:var(--color-dark-variant);
-      /* pointer-events:none; */
       text-decoration:none; ;
     }
 
     &:hover{
-      background: linear-gradient(to right,#7380ec47 0%,#475ba105 50%);
+      background: linear-gradient(to right,#7380ec47 0%,#f8f0e800 90%);
       transform: translateX(1rem);
       a,h3,span{
         color:var(--color-primary-purple);
@@ -189,5 +190,22 @@ const BottomStyle = styled.div`
     }
   }
 `;
+
+const StyledLinkLogo = styled(Link)`
+  text-decoration: none;
+  color:  var(--color-primary-purple);
+
+  &:focus, &:hover, &:visited, &:link, &:active {
+    text-decoration: none;
+  }
+`
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color:  var(--color-dark-variant);
+
+  &:hover {
+    color:var(--color-primary-purple);
+  }
+`
 
 export default SideBar
