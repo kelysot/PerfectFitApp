@@ -179,6 +179,7 @@ const categoriesTableData = async (req, res) => {
     })
 }
 
+
 function sortTogether(array1, array2) {
     var merged = [];
     for(var i=0; i<array1.length; i++) { merged.push({'a1': array1[i], 'a2': array2[i]}); }
@@ -192,5 +193,5 @@ module.exports = {
     getTopProfiles,
     getPercentage,
     getCategoriesData,
-    categoriesTableData
+    categoriesTableData,
 }

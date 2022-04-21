@@ -1,11 +1,11 @@
-import React from 'react';
+import React , {useEffect} from 'react';
 import { BarChart, Bar, XAxis, YAxis} from 'recharts';
 import CategoriesTable from '../../components/CategoriesTable';
 import SideBar from "../../components/SideBar";
 import TopBar from "../../components/TopBar";
 import styled from "styled-components";
 
-//TODO: Add Chart to right + get data from server  
+//TODO: get data from server  
 
 function SingleCategory({nameOfAdmin}) {
   return (
@@ -38,7 +38,7 @@ function SingleCategory({nameOfAdmin}) {
                 </div>
               </div>
               <div className='right'>
-                <h1 className='title'>Partition</h1>
+                <h1 className='title'>Partition  &amp; Top Profiles</h1>
                 <div className='charts'>
                   <BarChart width={320} height={180} data={data}>
                     <XAxis dataKey="name" />

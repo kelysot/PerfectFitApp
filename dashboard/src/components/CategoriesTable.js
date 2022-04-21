@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 
 function CategoriesTable({categoriesData, title , height }) {
 
-  const actionColumn = [{field: 'action', headerName:"Action", width: 250, renderCell: ()=> {
+  const actionColumn = [{field: 'action', headerName:"Action", width: 250, renderCell: (params)=> {
      return(
       <div className="cellAction">
-        <Link to={'/categories/test'}>
+        <Link to={`/categories/${params.row.name}&${params.row.gender}`} className="link">
           <div className="view">View</div>
         </Link>
         <div className="delete">Delete</div>
@@ -30,13 +30,9 @@ function CategoriesTable({categoriesData, title , height }) {
             columns={columns.concat(actionColumn)}
             pageSize={9}
             rowsPerPageOptions={[9]}
-            checkboxSelection
-            onSelectionModelChange={item => {
-              console.log(item);
-              item.forEach((i) => {
-                console.log(categoriesData[i]);
-              })
-            }}
+            // onSelectionModelChange={item => {
+            //   console.log(item);
+            // }}
         />
       </>)}
     </CategoriesTableStyle>
@@ -141,6 +137,7 @@ const CategoriesTableStyle = styled.div`
     .css-3ihp42-MuiDataGrid-root .MuiDataGrid-columnHeader:focus, .css-3ihp42-MuiDataGrid-root .MuiDataGrid-cell:focus{
       outline:none;
     }
+    
 
     .image{
       display: flex;
@@ -167,11 +164,20 @@ const CategoriesTableStyle = styled.div`
 
       .view{
         background-color:#3e98c766;
+        &:hover{
+          color:white;
+        }
       }
 
       .delete{
         background-color:#ff00003b;
+        &:hover{
+          color:white;
+        }
+      }
 
+      .link{
+        text-decoration: none;
       }
     }
 `;
