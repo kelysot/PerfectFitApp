@@ -8,6 +8,23 @@ import styled from "styled-components";
 //TODO: get data from server  
 
 function SingleCategory({nameOfAdmin}) {
+  //TODO: categoryData == categoryName & gender
+  useEffect(() => {
+    let location = window.location.href;
+    let categoryData = location.split("/").slice(-1).pop();
+
+    fetch(`/dashboard/categories/${categoryData}` , {
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
+    })
+      .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        })
+  },[])
+
   return (
     <SingleCategoryStyle>
        <SideBar/>

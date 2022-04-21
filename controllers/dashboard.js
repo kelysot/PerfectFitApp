@@ -179,6 +179,15 @@ const categoriesTableData = async (req, res) => {
     })
 }
 
+const getSingleCategory = async (req, res) => {
+    const data = req.params.categoryData
+    console.log(data)
+
+    res.json({
+        hey: "hey"
+    });
+}
+
 
 function sortTogether(array1, array2) {
     var merged = [];
@@ -194,4 +203,5 @@ module.exports = {
     getPercentage,
     getCategoriesData,
     categoriesTableData,
+    getSingleCategory
 }
