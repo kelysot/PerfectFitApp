@@ -1,4 +1,5 @@
-import React, {useState,useEffect} from "react"
+import React, {useState,useEffect,useContext} from "react"
+import GlobalStyleDark from '../src/style/dark';
 import GlobalStyle from './components/GlobalStyle'
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
@@ -7,10 +8,12 @@ import NewCategory from "./pages/new category/NewCategory";
 import SingleCategory from "./pages/single category/SingleCategory";
 import {Routes,Route} from "react-router-dom";
 import styled from "styled-components";
+import {DarkModeContext} from '../src/context/darkModeContext';
 
 function App() {
 
   const[nameOfAdmin,setNameOfAdmin] = useState("");
+  const {darkMode} = useContext(DarkModeContext);
 
   useEffect(() => {
       fetch("/dashboard",{
@@ -26,8 +29,9 @@ function App() {
   },[])
 
   return (
-    <AppStyle className="App">
+    <AppStyle className={ darkMode ? "App dark" : 'App'}>
       <GlobalStyle />
+      <GlobalStyleDark />
       <Routes path="/">
         <Route index element={<Home nameOfAdmin={nameOfAdmin} />}></Route>
         <Route path="/login" element={<Login/>} ></Route>

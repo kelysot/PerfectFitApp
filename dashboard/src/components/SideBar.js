@@ -63,10 +63,10 @@ function SideBar() {
             </StyledLink>
           </ul>
         </CenterStyle>
-        <BottomStyle>
+        {/* <BottomStyle>
           <div className="color-option"></div>
           <div className="color-option"></div>
-        </BottomStyle>
+        </BottomStyle> */}
     </SideBarStyle>
   )
 }
@@ -159,37 +159,37 @@ const CenterStyle = styled.div`
 
 `;
 
-const BottomStyle = styled.div`
-  display:flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 2rem 3.8rem;
-  position: absolute;
-  bottom: 0;
-  gap: 2rem;
+// const BottomStyle = styled.div`
+//   display:flex;
+//   align-items: center;
+//   justify-content: space-around;
+//   padding: 2rem 3.8rem;
+//   position: absolute;
+//   bottom: 0;
+//   gap: 2rem;
 
-  .color-option{
-    width: 35px;
-    height: 35px;
-    border-radius: 30%;
-    cursor: pointer;
-    border: 1.5px solid var( --color-dark-variant);
-    transition: all 0.3s ease;
+//   .color-option{
+//     width: 35px;
+//     height: 35px;
+//     border-radius: 30%;
+//     cursor: pointer;
+//     border: 1.5px solid var( --color-dark-variant);
+//     transition: all 0.3s ease;
     
-    &:nth-child(1){
-      background-color: #f8f0e8;
-    }
+//     &:nth-child(1){
+//       background-color: #f8f0e8;
+//     }
 
-    &:nth-child(2){
-      background-color: #333;
-    }
+//     &:nth-child(2){
+//       background-color: #333;
+//     }
 
-    &:hover{
-      transform: scale(1.1);
-      border: 1.8px solid var( --color-dark-variant);
-    }
-  }
-`;
+//     &:hover{
+//       transform: scale(1.1);
+//       border: 1.8px solid var( --color-dark-variant);
+//     }
+//   }
+// `;
 
 const StyledLinkLogo = styled(Link)`
   text-decoration: none;

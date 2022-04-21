@@ -1,13 +1,21 @@
-import React from 'react';
+import React , {useContext} from 'react';
 import styled from 'styled-components';
+import {DarkModeContext} from '../../src/context/darkModeContext';
 
 function TopBar({nameOfAdmin}) {
+
+  const {dispatch} = useContext(DarkModeContext);
+
   return (
     <TopBarStyle>
         <WrapperStyle>
            <div className="search">
                <input className="search" placeholder="Search..."></input>
                <span className="material-icons-sharp">search</span>
+           </div>
+           <div className="mode">
+                <span className="material-icons-sharp" id="light" onClick={() => dispatch({type: 'LIGHT'})} >light_mode</span>
+                <span className="material-icons-sharp" id="dark" onClick={() => dispatch({type: 'DARK'})} >dark_mode</span>
            </div>
            <div className="adminDetails">
                <img src="https://cdn.pixabay.com/photo/2020/04/15/16/58/smile-5047506_960_720.jpg"></img>
@@ -65,6 +73,34 @@ const WrapperStyle = styled.div`
             border-radius:50%;
             object-fit: cover;
             border: 0.5px solid var(--color-dark-variant);
+        }
+    }
+
+    .mode{
+        display: flex;
+        align-items: center;
+        gap: 25px;
+
+        #light {
+            color: #d4c930;
+            font-size: 35px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover{
+                transform: scale(1.2) ;
+            }
+        }
+
+        #dark {
+            color: var(--color-dark-variant);
+            font-size: 35px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover{
+                transform: scale(1.2) ;
+            }
         }
     }
 `; 
