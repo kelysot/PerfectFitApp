@@ -19,10 +19,10 @@ function CategoriesTable({categoriesData, title , height }) {
   return (
     <CategoriesTableStyle>
       { categoriesData && (<>
-        <h3 className="title">{title}</h3>
-        <div className="add-category">
-          <Link to={'/categories/newCategory'}>
-            <span className="material-icons-sharp">add_circle_outline</span>
+        <div className="tableTop">
+          <h3 className="title">{title}</h3>
+          <Link to={'/categories/newCategory'} className="link">
+            Add New
           </Link>
         </div>
         <DataGrid style={{ height:`${height}vh`}}
@@ -68,27 +68,37 @@ const CategoriesTableStyle = styled.div`
     box-shadow: 0px -12px 15px rgb(0 0 0 / 10%);
     width: 100%;
 
-    .add-category{
-      display: flex;
-      justify-content: end;
-      
-      span{
-        color: var(--color-dark-variant);
-        cursor: pointer;
-        font-size: 40px;
-        margin: 0.4rem;
-
-        &:hover{
-          color: var(--color-primary-purple);
-        }
-      }
-    }
-
     .title{
         font-weight: bold;
         font-size: 16px;
         color: var(--color-dark-variant);
         margin-bottom: 10px;
+    }
+
+    .tableTop{
+      width: 100%;
+      font-size: 20px;
+      color: var(--color-dark-variant);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .link{
+        text-decoration: none;
+        color: green;
+        font-size: 16px;
+        font-weight: bold;
+        border: 1px solid green;
+        padding: 5px;
+        border-radius: 8px;
+        cursor: pointer;
+
+        &:hover{
+          background-color: #00800038;
+          border-color: #00800038;
+        }
+      }
     }
 
     .css-1s0hp0k-MuiDataGrid-columnHeadersInner{ //div all heder of table
