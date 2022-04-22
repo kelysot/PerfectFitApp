@@ -6,7 +6,7 @@ import TopBar from "../../components/TopBar";
 import styled from "styled-components";
 
 function SingleCategory({nameOfAdmin}) {
-  
+
   const[singleCategory ,setSingleCategory ] = useState("");
   const [amounts, setAmounts] = useState("");
 
@@ -59,17 +59,17 @@ function SingleCategory({nameOfAdmin}) {
                 </div>
               </div>
               <div className='right'>
-                <h1 className='title'>Partition  &amp; Top Profiles</h1>
+                <h1 className='title'>Comparison between a parallel category  &amp; Top Profiles</h1>
                 <div className='charts'>
-                  <BarChart width={320} height={180} data={data}>
+                  <BarChart width={320} height={180} data={amounts.parallelCategory}>
                     <XAxis dataKey="name" />
                     <YAxis  padding={{ top: 20, bottom: 2}} />
-                    <Bar dataKey="uv" fill="#8884d8" />
+                    <Bar dataKey="count" fill="#9665C1" />
                   </BarChart>
                   <BarChart width={400} height={180} data={data2}>
                     <XAxis dataKey="name" />
                     <YAxis  padding={{ top: 20, bottom: 2}} />
-                    <Bar dataKey="uv" fill="#8884d8" />
+                    <Bar dataKey="uv" fill="#9665C1" />
                   </BarChart>
                 </div>
               </div>
@@ -84,17 +84,6 @@ function SingleCategory({nameOfAdmin}) {
   )
 }
 
-//FIXME: Get the data from server
-const data = [
-  {
-    name: 'Male Posts',
-    uv: 10,
-  },
-  {
-    name: 'Female Posts',
-    uv: 20,
-  }
-];
 //TODO: best users in this category
 const data2 = [
   {

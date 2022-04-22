@@ -188,9 +188,34 @@ const getSingleCategory = async (req, res) => {
     
     const categoryData = async (category) => {
         const sub = await SubCategory.findOne({'categoryId' : category._id})
+        let maleCount = 0
+        let femaleCount = 0
+        let parallelCategory = []
+
+        if(categoryGender === 'Male'){
+            maleCount = sub.posts.length
+            const parallelCategory = await Category.findOne({'name' : categoryName , 'gender' : 'Female'})
+            const parallelSub = await SubCategory.findOne({'categoryId' : parallelCategory._id})
+            femaleCount = parallelSub.posts.length
+        }else{
+            femaleCount = sub.posts.length
+            const parallelCategory = await Category.findOne({'name' : categoryName , 'gender' : 'Male'})
+            const parallelSub = await SubCategory.findOne({'categoryId' : parallelCategory._id})
+            maleCount = parallelSub.posts.length
+        }
+
+        parallelCategory.push({
+            name: 'Male Posts',
+            count: maleCount
+        },{
+            name : 'Female Posts',
+            count: femaleCount
+        })
+        
         const categoryData = {
             numOfPosts: sub.posts.length,
-            percent: `${(sub.posts.length / postList.length)*100}%`
+            percent: `${(sub.posts.length / postList.length)*100}%`,
+            parallelCategory: parallelCategory
         }
         return categoryData
     }
