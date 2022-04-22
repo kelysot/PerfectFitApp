@@ -5,11 +5,10 @@ import SideBar from "../../components/SideBar";
 import TopBar from "../../components/TopBar";
 import styled from "styled-components";
 
-//TODO: get data from server  
-
 function SingleCategory({nameOfAdmin}) {
-  //TODO: categoryData == categoryName & gender
+  
   const[singleCategory ,setSingleCategory ] = useState("");
+  const [amounts, setAmounts] = useState("");
 
   useEffect(() => {
     let location = window.location.href;
@@ -23,11 +22,12 @@ function SingleCategory({nameOfAdmin}) {
     })
       .then((res) => res.json())
         .then((data) => {
-          console.log(data.singleCategory);
+          console.log(data);
           setSingleCategory(data.singleCategory);
+          setAmounts(data.amounts);
         })
   },[])
-
+  
   return (
     <SingleCategoryStyle>
        <SideBar/>
@@ -49,11 +49,11 @@ function SingleCategory({nameOfAdmin}) {
                     </div>
                     <div className='detailsItem'>
                       <span className="item-key">Total Posts:</span>
-                      <span className="item-value">1</span>
+                      <span className="item-value">{amounts.numOfPosts}</span>
                     </div>
                     <div className='detailsItem'>
                       <span className="item-key">Percent Of Total Posts:</span>
-                      <span className="item-value">25%</span>
+                      <span className="item-value">{amounts.percent}</span>
                     </div>
                   </div>
                 </div>

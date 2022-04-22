@@ -183,11 +183,24 @@ const getSingleCategory = async (req, res) => {
     const data = req.params.categoryData
     const categoryName = data.split("&")[0]
     const categoryGender = data.split("&")[1]
-    const singleCategory = await Category.find({'name' : categoryName , 'gender' : categoryGender})
-    res.json({
-        singleCategory : singleCategory[0]
-    });
+    const singleCategory = await Category.findOne({'name' : categoryName , 'gender' : categoryGender})
+    const postList = await Post.find()
     
+    const categoryData = async (category) => {
+        const sub = await SubCategory.findOne({'categoryId' : category._id})
+        const categoryData = {
+            numOfPosts: sub.posts.length,
+            percent: `${(sub.posts.length / postList.length)*100}%`
+        }
+        return categoryData
+    }
+
+    categoryData(singleCategory).then((data) => {
+        res.json({
+            singleCategory: singleCategory,
+            amounts: data
+        });
+    })    
 }
 
 
