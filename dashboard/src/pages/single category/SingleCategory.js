@@ -1,4 +1,4 @@
-import React , {useEffect} from 'react';
+import React , {useEffect , useState} from 'react';
 import { BarChart, Bar, XAxis, YAxis} from 'recharts';
 import CategoriesTable from '../../components/CategoriesTable';
 import SideBar from "../../components/SideBar";
@@ -9,6 +9,8 @@ import styled from "styled-components";
 
 function SingleCategory({nameOfAdmin}) {
   //TODO: categoryData == categoryName & gender
+  const[singleCategory ,setSingleCategory ] = useState("");
+
   useEffect(() => {
     let location = window.location.href;
     let categoryData = location.split("/").slice(-1).pop();
@@ -21,7 +23,8 @@ function SingleCategory({nameOfAdmin}) {
     })
       .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          console.log(data.singleCategory);
+          setSingleCategory(data.singleCategory);
         })
   },[])
 
@@ -30,18 +33,19 @@ function SingleCategory({nameOfAdmin}) {
        <SideBar/>
         <div className='singleContainer'>
           <TopBar  nameOfAdmin={nameOfAdmin} />
+          {singleCategory && (<>
           <div className='singleCategoryContainer'>
             <div className='top'>
               <div className='left'>
                 <div className='editButton'>Edit</div>
                 <h1 className='title'>Information</h1>
                 <div className='item'>
-                  <img src='https://cdn.pixabay.com/photo/2022/02/16/18/10/fox-7017260_960_720.jpg' alt=''></img>
+                  <img src={singleCategory.pictureUrl} alt=''></img>
                   <div className='details'>
-                    <h3 className='category-title'>Category Title</h3>
+                    <h3 className='category-title'>{singleCategory.name}</h3>
                     <div className='detailsItem'>
                       <span className="item-key">Category Gender:</span>
-                      <span className="item-value">Male</span>
+                      <span className="item-value">{singleCategory.gender}</span>
                     </div>
                     <div className='detailsItem'>
                       <span className="item-key">Total Posts:</span>
@@ -74,6 +78,7 @@ function SingleCategory({nameOfAdmin}) {
               <CategoriesTable categoriesData={subCategoriesData} title={'SubCategory List'} height={26} />
             </div>
           </div>
+          </>)}
         </div>
     </SingleCategoryStyle>
   )

@@ -181,11 +181,13 @@ const categoriesTableData = async (req, res) => {
 
 const getSingleCategory = async (req, res) => {
     const data = req.params.categoryData
-    console.log(data)
-
+    const categoryName = data.split("&")[0]
+    const categoryGender = data.split("&")[1]
+    const singleCategory = await Category.find({'name' : categoryName , 'gender' : categoryGender})
     res.json({
-        hey: "hey"
+        singleCategory : singleCategory[0]
     });
+    
 }
 
 
