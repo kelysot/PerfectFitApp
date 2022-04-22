@@ -59,7 +59,7 @@ function SingleCategory({nameOfAdmin}) {
                 </div>
               </div>
               <div className='right'>
-                <h1 className='title'>Comparison between a parallel category  &amp; Top Profiles</h1>
+                <h1 className='title'>Comparison between a parallel category  &amp; Top profiles in the category</h1>
                 <div className='charts'>
                   <BarChart width={320} height={180} data={amounts.parallelCategory}>
                     <XAxis dataKey="name" />

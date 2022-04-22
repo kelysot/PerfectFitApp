@@ -199,11 +199,11 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 
 ###
 Post http://localhost:4000/category/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDQxNmY3NDBhMGJmY2YxODFhZDk0MSIsImlhdCI6MTY0OTk1OTM3OCwiZXhwIjoxNjUwMDQ1Nzc4fQ.zJUE8kECALQyrC7X76OVghzBDHb3XI-3HJqOoR2pInc
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MDYzOTExMSwiZXhwIjoxNjUwNzI1NTExfQ.Upj294AdM0rxkyS8DHPxwzjlFShcxJlN8yGtWPmjNC4
 Content-Type: application/json
 
 {
-        "name": "Pants",
+        "name": "Gloves",
         "pictureUrl": "https://cdn.shopify.com/s/files/1/0970/4540/products/Lynn-Button-Back-Cotton-Dress-2_256x.jpg?v=1647997123",
         "gender": "Female",
         "subCategory": []
@@ -246,14 +246,14 @@ Content-Type: application/json
         "currentUserGender": ["Male"]
 }
 ###
-Post http://localhost:4000/subcategory/625866e16a3d8af8a6d9b603
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDQxNmY3NDBhMGJmY2YxODFhZDk0MSIsImlhdCI6MTY0OTk1OTM3OCwiZXhwIjoxNjUwMDQ1Nzc4fQ.zJUE8kECALQyrC7X76OVghzBDHb3XI-3HJqOoR2pInc
+Post http://localhost:4000/subcategory/6262c1340124be7d5f953a3a
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MDYzOTExMSwiZXhwIjoxNjUwNzI1NTExfQ.Upj294AdM0rxkyS8DHPxwzjlFShcxJlN8yGtWPmjNC4
 Content-Type: application/json
 
 {
-        "name": "jacket 11",
-        "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6niBNcUfbA8p6YOz6NWy8fXe5KkupgFwXGg&usqp=CAU",
-        "gender": "Female",
+        "name": "gloves nike",
+        "pictureUrl": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSmNq21_AFczzpbSxSW5K7gR9OtCK3XfPByH69nY5zTRmw0ilkEQ-VlrFOh9tSsyUF7JIM7GV7Cilc&usqp=CAc",
+        "gender": "Male",
         "posts": []
 }
 
