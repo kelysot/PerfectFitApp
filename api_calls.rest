@@ -14,7 +14,7 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjQ4MmQ0MD
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjQ4MmQ0MDA5NmQ5OTUzOGYwZjBhMyIsImlhdCI6MTY0NzI2NDE4MH0.pHxfvF60CAMsPBrVCPoX67GrIgDjqmC7WxwEylloF7w
 ###
 POST http://localhost:4000/post
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY0OTQ1NjYyMywiZXhwIjoxNjQ5NTQzMDIzfQ.mHEQIsxAR8e-PbDd8jPmq-M27UhVo-mIYdY02iiJCRg
+Authorization: barer the token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MDcxMzk3NiwiZXhwIjoxNjUwODAwMzc2fQ.svy4VUz4lYZddJOL7mnHWEjgfUZ2LcLqeWj2t4ehSiE
 Content-Type: application/json
 
 {
@@ -210,13 +210,13 @@ Content-Type: application/json
 }
 
 ###
-PATCH  http://localhost:4000/category/6230fb4ae68fb223cdc6d5f3/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDQxNmY3NDBhMGJmY2YxODFhZDk0MSIsImlhdCI6MTY0ODc5ODQxNiwiZXhwIjoxNjQ4ODg0ODE2fQ.O5O_D2rTEWUbQLOcMbvldjkA2STIhGLwMh55OekuryU
+PATCH  http://localhost:4000/category/6262c13e0124be7d5f953a3c/
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MDYzOTExMSwiZXhwIjoxNjUwNzI1NTExfQ.Upj294AdM0rxkyS8DHPxwzjlFShcxJlN8yGtWPmjNC4
 Content-Type: application/json
 
 {
-        "name": "Edit category name",
-        "pictureUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8L_1DoXQIel6wBXpSZvLAaVv1Mplo5ttu6A&usqp=CAU",
+        "name": "Gloves",
+        "pictureUrl": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSmNq21_AFczzpbSxSW5K7gR9OtCK3XfPByH69nY5zTRmw0ilkEQ-VlrFOh9tSsyUF7JIM7GV7Cilc&usqp=CAc",
         "gender": "Female",
         "subCategory": []
 }
@@ -246,14 +246,14 @@ Content-Type: application/json
         "currentUserGender": ["Male"]
 }
 ###
-Post http://localhost:4000/subcategory/6262c1340124be7d5f953a3a
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MDYzOTExMSwiZXhwIjoxNjUwNzI1NTExfQ.Upj294AdM0rxkyS8DHPxwzjlFShcxJlN8yGtWPmjNC4
+Post http://localhost:4000/subcategory/6262c13e0124be7d5f953a3c
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MDcxMzk3NiwiZXhwIjoxNjUwODAwMzc2fQ.svy4VUz4lYZddJOL7mnHWEjgfUZ2LcLqeWj2t4ehSiE
 Content-Type: application/json
 
 {
         "name": "gloves nike",
         "pictureUrl": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSmNq21_AFczzpbSxSW5K7gR9OtCK3XfPByH69nY5zTRmw0ilkEQ-VlrFOh9tSsyUF7JIM7GV7Cilc&usqp=CAc",
-        "gender": "Male",
+        "gender": "Female",
         "posts": []
 }
 

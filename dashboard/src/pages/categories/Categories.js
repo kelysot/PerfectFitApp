@@ -18,7 +18,6 @@ function Categories({nameOfAdmin}) {
       .then((res) => res.json())
         .then((data) => {
           setCategoriesData(data.data);
-          console.log(data.data)
         })
   },[])
 
@@ -54,7 +53,6 @@ const CategoryStyle = styled.div`
       display:flex;
       align-items: center;
     }
-
   }
 `
 

@@ -66,10 +66,10 @@ function SingleCategory({nameOfAdmin}) {
                     <YAxis  padding={{ top: 20, bottom: 2}} />
                     <Bar dataKey="count" fill="#9665C1" />
                   </BarChart>
-                  <BarChart width={400} height={180} data={data2}>
+                  <BarChart width={400} height={180} data={amounts.topProfilesChart}>
                     <XAxis dataKey="name" />
                     <YAxis  padding={{ top: 20, bottom: 2}} />
-                    <Bar dataKey="uv" fill="#9665C1" />
+                    <Bar dataKey="count" fill="#9665C1" />
                   </BarChart>
                 </div>
               </div>
@@ -84,22 +84,6 @@ function SingleCategory({nameOfAdmin}) {
   )
 }
 
-//TODO: best users in this category
-const data2 = [
-  {
-    name: 'Matmoni123',
-    uv: 10,
-  },
-  {
-    name: 'Eden',
-    uv: 20,
-  },
-  {
-    name: 'Tal',
-    uv: 20,
-  }
-];
-//FIXME: Get data from server + get specific columns data
 const subCategoriesData = [
   {  id: 0, image: 'https://cdn.shopify.com/s/files/1/0970/4540/produc…-Button-Back-Cotton-Dress-2_256x.jpg?v=1647997123', gender: 'Male', name: 'Shirt', numOfPosts: 1,percent: "25%"}
 ];

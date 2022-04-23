@@ -74,7 +74,6 @@ const getPercentage = async (req, res) => {
     });
 }
 
-//FIXME: There is problem - when create new  post its not add in subCategories post list  automatically.
 const getCategoriesData = async (req, res) => {
     const categoriesData = []
     const maleSubCategoryArray = await SubCategory.find({'gender': 'Male'})
@@ -196,7 +195,13 @@ const getSingleCategory = async (req, res) => {
         let femaleCount = 0
         let subPostListSize
         let parallelCategory = []
+        topProfilesChart = []
 
+        const topProfiles = {
+            profileUserName:[],
+            amountOfPosts: []
+        }
+        
         for(let i = 0; i < sub.length; i++) {
             if(categoryGender === 'Male'){
                 maleCount += sub[i].posts.length
@@ -212,28 +217,37 @@ const getSingleCategory = async (req, res) => {
                 const parallelSub = await SubCategory.find({'categoryId' : parallelCategory._id})
                 for(let j = 0; j < sub.length; j++){
                     if(parallelSub[j] === undefined)
-                        maleCount += 0                }
+                        maleCount += 0 
+                    }
+            }
+            
+            for(let j = 0; j < sub[i].posts.length ; j++) {
+                let post = await Post.findById(sub[i].posts[j])
+                let userName = post.profileId
+                if(!topProfiles.profileUserName.includes(userName)) {
+                    topProfiles.profileUserName.push(userName)
+                    topProfiles.amountOfPosts.push(1)
+                    } else{
+                        let index = topProfiles.profileUserName.indexOf(userName)
+                        topProfiles.amountOfPosts[index] = (topProfiles.amountOfPosts.at(index)+1)
+                    }
             }
         }
+        
+        sortTogether(topProfiles.amountOfPosts,topProfiles.profileUserName)
+        const bestProfilesNames = topProfiles.profileUserName.slice(0,3)
+        const bestProfilesNumPosts = topProfiles.amountOfPosts.slice(0,3)
+        
+        createDataToProfilesChat(bestProfilesNames,bestProfilesNumPosts,topProfilesChart)
 
-        parallelCategory.push({
-            name: 'Male Posts',
-            count: maleCount
-        },{
-            name : 'Female Posts',
-            count: femaleCount
-        })
-        
-        if(sub[0] === undefined){
-            subPostListSize = 0
-        }else{
-            subPostListSize = sub[0].posts.length
-        }
-        
+        parallelCategory.push({name: 'Male Posts',count: maleCount},{name : 'Female Posts',count: femaleCount})
+        sub[0] === undefined ? subPostListSize = 0 : subPostListSize = sub[0].posts.length
+
         const categoryData = {
             numOfPosts: subPostListSize,
             percent: `${(subPostListSize / postList.length)*100}%`,
-            parallelCategory: parallelCategory
+            parallelCategory: parallelCategory,
+            topProfilesChart: topProfilesChart
         }
         return categoryData
     }
@@ -243,15 +257,30 @@ const getSingleCategory = async (req, res) => {
             singleCategory: singleCategory,
             amounts: data
         });
-    })    
+    })
 }
-
 
 function sortTogether(array1, array2) {
     var merged = [];
     for(var i=0; i<array1.length; i++) { merged.push({'a1': array1[i], 'a2': array2[i]}); }
     merged.sort(function(o1, o2) { return ((o1.a1 > o2.a1) ? -1 : ((o1.a1 == o2.a1) ? 0 : 1)); });
     for(var i=0; i<merged.length; i++) { array1[i] = merged[i].a1; array2[i] = merged[i].a2; }
+}
+
+function createDataToProfilesChat(bestProfilesNames,bestProfilesNumPosts,topProfilesChart) {
+    if( bestProfilesNames.length > 0){
+        for(let i = 0; i < bestProfilesNames.length; i++){
+            topProfilesChart.push({
+                name: bestProfilesNames[i],
+                count: bestProfilesNumPosts[i]
+            })
+        }
+    } else{
+        topProfilesChart.push({
+            name: "No one post this category ",
+            count: 0
+        })
+    }
 }
 
 module.exports = {
