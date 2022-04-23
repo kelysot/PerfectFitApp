@@ -268,6 +268,28 @@ const getSingleCategory = async (req, res) => {
     })
 }
 
+const getSubCategoriesData = async (req, res) => {
+    const data = req.params.categoryData
+    const categoryName = data.split("&")[0]
+    const categoryGender = data.split("&")[1]
+    const singleCategory = await Category.findOne({'name' : categoryName , 'gender' : categoryGender})
+    const subCategoriesData = []
+
+    for(let i=0;i<singleCategory.subCategory.length;i++){
+        let subCategory = await SubCategory.findById(singleCategory.subCategory[i])
+        subCategoriesData.push({
+            id: i,
+            image: subCategory.pictureUrl,
+            gender: subCategory.gender,
+            name: subCategory.name,
+        })
+    }
+
+    res.json({
+        subCategoriesData : subCategoriesData
+    });
+}
+
 //////////////////////////////////////*Functions*///////////////////////////////////////
 
 function sortTogether(array1, array2) {
@@ -300,5 +322,6 @@ module.exports = {
     getPercentage,
     getCategoriesData,
     categoriesTableData,
-    getSingleCategory
+    getSingleCategory,
+    getSubCategoriesData
 }

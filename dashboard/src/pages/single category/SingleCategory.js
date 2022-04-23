@@ -1,6 +1,6 @@
 import React , {useEffect , useState} from 'react';
 import { BarChart, Bar, XAxis, YAxis} from 'recharts';
-import CategoriesTable from '../../components/CategoriesTable';
+import Table from '../../components/Table';
 import SideBar from "../../components/SideBar";
 import TopBar from "../../components/TopBar";
 import styled from "styled-components";
@@ -9,6 +9,7 @@ function SingleCategory({nameOfAdmin}) {
 
   const[singleCategory ,setSingleCategory ] = useState("");
   const [amounts, setAmounts] = useState("");
+  const[subCategoryData,setSubCategoryData] = useState("");
 
   useEffect(() => {
     let location = window.location.href;
@@ -26,6 +27,17 @@ function SingleCategory({nameOfAdmin}) {
           setSingleCategory(data.singleCategory);
           setAmounts(data.amounts);
         })
+
+        fetch(`/dashboard/categories/${categoryData}/subCategoryData` , {
+          headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+           }
+        })
+          .then((res) => res.json())
+            .then((data) => {
+              setSubCategoryData(data.subCategoriesData)
+            })
   },[])
   
   return (
@@ -33,7 +45,7 @@ function SingleCategory({nameOfAdmin}) {
        <SideBar/>
         <div className='singleContainer'>
           <TopBar  nameOfAdmin={nameOfAdmin} />
-          {singleCategory && (<>
+          {(singleCategory && subCategoryData) && (<>
           <div className='singleCategoryContainer'>
             <div className='top'>
               <div className='left'>
@@ -75,7 +87,7 @@ function SingleCategory({nameOfAdmin}) {
               </div>
             </div>
             <div className='bottom'>
-              <CategoriesTable categoriesData={subCategoriesData} title={'SubCategory List'} height={26} />
+              <Table categoriesData={subCategoryData}  columns={columns} title={'SubCategory List'} height={26} />
             </div>
           </div>
           </>)}
@@ -84,8 +96,19 @@ function SingleCategory({nameOfAdmin}) {
   )
 }
 
-const subCategoriesData = [
-  {  id: 0, image: 'https://cdn.shopify.com/s/files/1/0970/4540/produc…-Button-Back-Cotton-Dress-2_256x.jpg?v=1647997123', gender: 'Male', name: 'Shirt', numOfPosts: 1,percent: "25%"}
+const columns = [
+  { field: 'id', headerName: 'ID', width: 70 },
+  { field: 'options' , headerName: 'Image',
+    renderCell: (params) => {
+      return (
+        <div className="image">
+            <img src={params.row.image} alt="categoryImage"></img>
+        </div>
+      )
+    }
+  },
+  { field: 'name', headerName: 'SubCategory Name', width: 200},
+  { field: 'gender', headerName: 'SubCategory Gender', width: 200}
 ];
 
 const SingleCategoryStyle = styled.div`

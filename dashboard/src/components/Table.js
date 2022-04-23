@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { DataGrid } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
 
-function CategoriesTable({categoriesData, title , height }) {
+function Table({categoriesData, title , height, columns }) {
 
   const actionColumn = [{field: 'action', headerName:"Action", width: 250, renderCell: (params)=> {
      return(
@@ -18,7 +18,7 @@ function CategoriesTable({categoriesData, title , height }) {
 
   return (
     <CategoriesTableStyle>
-      { categoriesData && (<>
+      { (categoriesData && columns) && (<>
         <div className="tableTop">
           <h3 className="title">{title}</h3>
           <Link to={'/categories/newCategory'} className="link">
@@ -30,31 +30,11 @@ function CategoriesTable({categoriesData, title , height }) {
             columns={columns.concat(actionColumn)}
             pageSize={9}
             rowsPerPageOptions={[9]}
-            // onSelectionModelChange={item => {
-            //   console.log(item);
-            // }}
         />
       </>)}
     </CategoriesTableStyle>
   )
 };
-
-const columns = [
-    { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'options' , headerName: 'Image',
-      renderCell: (params) => {
-        return (
-          <div className="image">
-              <img src={params.row.image} alt="categoryImage"></img>
-          </div>
-        )
-      }
-    },
-    { field: 'name', headerName: 'Category Name', width: 150},
-    { field: 'gender', headerName: 'Category Gender', width: 160},
-    { field: 'numOfPosts', headerName: 'Total Post', type: 'number', width: 130},
-    { field: 'percent', headerName: 'Percent Of Total Post', width: 180}
-  ];
   
 const CategoriesTableStyle = styled.div`
     
@@ -183,4 +163,4 @@ const CategoriesTableStyle = styled.div`
 `;
 
 
-export default CategoriesTable;
+export default Table;

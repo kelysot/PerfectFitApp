@@ -1,6 +1,6 @@
 import React , {useState,useEffect} from 'react'
 import styled from "styled-components";
-import CategoriesTable from '../../components/CategoriesTable';
+import Table from '../../components/Table';
 import SideBar from "../../components/SideBar";
 import TopBar from "../../components/TopBar";
 
@@ -27,12 +27,29 @@ function Categories({nameOfAdmin}) {
         <div className="categoryContainer">
           <TopBar  nameOfAdmin={nameOfAdmin} />
           <div className="categoriesList">
-            <CategoriesTable categoriesData={categoriesData} title={'Categories List'} height={56} />
+            <Table categoriesData={categoriesData} columns={columns} title={'Categories List'} height={56} />
           </div>
         </div>
     </CategoryStyle>
   )
 }
+
+const columns = [
+  { field: 'id', headerName: 'ID', width: 70 },
+  { field: 'options' , headerName: 'Image',
+    renderCell: (params) => {
+      return (
+        <div className="image">
+            <img src={params.row.image} alt="categoryImage"></img>
+        </div>
+      )
+    }
+  },
+  { field: 'name', headerName: 'Category Name', width: 150},
+  { field: 'gender', headerName: 'Category Gender', width: 160},
+  { field: 'numOfPosts', headerName: 'Total Post', type: 'number', width: 130},
+  { field: 'percent', headerName: 'Percent Of Total Post', width: 180}
+];
 
 const CategoryStyle = styled.div`
   display:flex;
