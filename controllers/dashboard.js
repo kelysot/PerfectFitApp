@@ -182,6 +182,7 @@ const categoriesTableData = async (req, res) => {
     })
 }
 
+//FIXME: parallel category doesn't working
 const getSingleCategory = async (req, res) => {
     const data = req.params.categoryData
     const categoryName = data.split("&")[0]
@@ -207,18 +208,22 @@ const getSingleCategory = async (req, res) => {
                 maleCount += sub[i].posts.length
                 const parallelCategory = await Category.findOne({'name' : categoryName , 'gender' : 'Female'})
                 const parallelSub = await SubCategory.find({'categoryId' : parallelCategory._id})
-                for(let j = 0; j < sub.length; j++){
+                for(let j = 0; j < parallelSub.length; j++){
                     if(parallelSub[j] === undefined)
                         femaleCount += 0
+                    else
+                        femaleCount += parallelSub[j].posts.length
                 } 
             }else{
                 femaleCount += sub[i].posts.length
                 const parallelCategory = await Category.findOne({'name' : categoryName , 'gender' : 'Male'})
                 const parallelSub = await SubCategory.find({'categoryId' : parallelCategory._id})
-                for(let j = 0; j < sub.length; j++){
+                for(let j = 0; j < parallelSub.length; j++){
                     if(parallelSub[j] === undefined)
-                        maleCount += 0 
-                    }
+                        maleCount += 0
+                    else
+                        maleCount += parallelSub[j].posts.length 
+                }
             }
             
             for(let j = 0; j < sub[i].posts.length ; j++) {
