@@ -182,7 +182,6 @@ const categoriesTableData = async (req, res) => {
     })
 }
 
-//FIXME: parallel category doesn't working
 const getSingleCategory = async (req, res) => {
     const data = req.params.categoryData
     const categoryName = data.split("&")[0]
@@ -202,7 +201,7 @@ const getSingleCategory = async (req, res) => {
             profileUserName:[],
             amountOfPosts: []
         }
-        
+
         for(let i = 0; i < sub.length; i++) {
             if(categoryGender === 'Male'){
                 maleCount += sub[i].posts.length
@@ -245,7 +244,11 @@ const getSingleCategory = async (req, res) => {
         
         createDataToProfilesChat(bestProfilesNames,bestProfilesNumPosts,topProfilesChart)
 
-        parallelCategory.push({name: 'Male Posts',count: maleCount},{name : 'Female Posts',count: femaleCount})
+        if(sub.length !== 0)
+            parallelCategory.push({name: 'Male Posts',count: maleCount},{name : 'Female Posts',count: femaleCount})
+        else
+            parallelCategory.push({name: 'There in no parallel data',count: 0})
+
         sub[0] === undefined ? subPostListSize = 0 : subPostListSize = sub[0].posts.length
 
         const categoryData = {
