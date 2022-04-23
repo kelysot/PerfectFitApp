@@ -4,6 +4,8 @@ const Post = require('../models/post_model')
 const Category = require('../models/category_model')
 const SubCategory = require('../models/sub_category_model')
 
+//////////////////////////////////////*Home Page*///////////////////////////////////////
+
 const getHello = async (req, res) => {
     res.json({
         adminName: "Yarin Admin User",
@@ -23,9 +25,7 @@ const getAmounts = async (req, res) => {
 }
 
 const getTopProfiles = async (req, res) => {
-
     const profileList = await Profile.find()
-
     const topProfiles = {
         profileUserName:[],
         amountOfPosts: []
@@ -45,7 +45,6 @@ const getTopProfiles = async (req, res) => {
 }
 
 const getPercentage = async (req, res) => {
-
     const profileList = await Profile.find()
     let connectProfileSize = 0
     let sumOfFemale = 0
@@ -63,7 +62,6 @@ const getPercentage = async (req, res) => {
     })
 
     const percentageOfConnect = (connectProfileSize / profileList.length)*100
-
     res.json({
         data: {
             sumOfFemale:sumOfFemale,
@@ -147,14 +145,14 @@ const getCategoriesData = async (req, res) => {
     })
 }
 
-const categoriesTableData = async (req, res) => {
+//////////////////////////////////////*Categories Page*///////////////////////////////////////
 
+const categoriesTableData = async (req, res) => {
     const categoriesList = await Category.find({},{_id:0})
     const categoriesListWithId = await Category.find()
     const postList = await Post.find()
     const dataToTable = []
 
-    
     const createData = async (arr) => {
         for(let i=0; i<arr.length; i++) {
             let sub = await SubCategory.find({'categoryId' : categoriesListWithId[i]._id})
@@ -181,6 +179,8 @@ const categoriesTableData = async (req, res) => {
         })
     })
 }
+
+//////////////////////////////////////*Single Category Page*///////////////////////////////////////
 
 const getSingleCategory = async (req, res) => {
     const data = req.params.categoryData
@@ -267,6 +267,8 @@ const getSingleCategory = async (req, res) => {
         });
     })
 }
+
+//////////////////////////////////////*Functions*///////////////////////////////////////
 
 function sortTogether(array1, array2) {
     var merged = [];

@@ -25,7 +25,7 @@ function TopCategoriesChart({categoriesData}) {
                 </linearGradient>
               </defs>
               <XAxis dataKey="name" />
-              <YAxis />
+              <YAxis allowDecimals={false} />
               <CartesianGrid strokeDasharray="3 3" stroke="lightgray" />
               <Tooltip />
               <Area type="monotone" dataKey="male" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />

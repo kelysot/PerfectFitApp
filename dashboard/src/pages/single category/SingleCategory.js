@@ -63,12 +63,12 @@ function SingleCategory({nameOfAdmin}) {
                 <div className='charts'>
                   <BarChart width={320} height={180} data={amounts.parallelCategory}>
                     <XAxis dataKey="name" />
-                    <YAxis  padding={{ top: 20, bottom: 2}} />
+                    <YAxis allowDecimals={false} padding={{ top: 20, bottom: 2}} />
                     <Bar dataKey="count" fill="#9665C1" />
                   </BarChart>
                   <BarChart width={400} height={180} data={amounts.topProfilesChart}>
                     <XAxis dataKey="name" />
-                    <YAxis  padding={{ top: 20, bottom: 2}} />
+                    <YAxis allowDecimals={false}  padding={{ top: 20, bottom: 2}} />
                     <Bar dataKey="count" fill="#9665C1" />
                   </BarChart>
                 </div>
