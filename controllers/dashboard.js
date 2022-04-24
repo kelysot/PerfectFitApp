@@ -76,7 +76,7 @@ const getCategoriesData = async (req, res) => {
     const categoriesData = []
     const maleSubCategoryArray = await SubCategory.find({'gender': 'Male'})
     const femaleSubCategoryArray = await SubCategory.find({'gender': 'Female'})
-
+    
     const createData = async (arr) => {
         let results = []
         for(let i=0; i<arr.length; i++) {
@@ -166,7 +166,7 @@ const categoriesTableData = async (req, res) => {
                 gender: arr[i].gender,
                 name: arr[i].name,
                 numOfPosts: numOfPosts,
-                percent: `${(numOfPosts / postList.length)*100}%`
+                percent: `${((numOfPosts / postList.length)*100).toFixed(2)}%`
             }
             dataToTable.push(categoryData)
         }
@@ -253,7 +253,7 @@ const getSingleCategory = async (req, res) => {
 
         const categoryData = {
             numOfPosts: subPostListSize,
-            percent: `${(subPostListSize / postList.length)*100}%`,
+            percent: `${((subPostListSize / postList.length)*100).toFixed(2)}%`,
             parallelCategory: parallelCategory,
             topProfilesChart: topProfilesChart
         }

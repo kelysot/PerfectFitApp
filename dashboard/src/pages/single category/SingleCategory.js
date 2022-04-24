@@ -11,6 +11,10 @@ function SingleCategory({nameOfAdmin}) {
   const [amounts, setAmounts] = useState("");
   const[subCategoryData,setSubCategoryData] = useState("");
 
+  const editCategoryHandler = (gender,categoryName) => {
+    console.log("hey");
+  }
+
   useEffect(() => {
     let location = window.location.href;
     let categoryData = location.split("/").slice(-1).pop();
@@ -23,7 +27,6 @@ function SingleCategory({nameOfAdmin}) {
     })
       .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           setSingleCategory(data.singleCategory);
           setAmounts(data.amounts);
         })
@@ -49,7 +52,7 @@ function SingleCategory({nameOfAdmin}) {
           <div className='singleCategoryContainer'>
             <div className='top'>
               <div className='left'>
-                <div className='editButton'>Edit</div>
+                <div className='editButton'onClick={()=> editCategoryHandler(singleCategory.gender,singleCategory.name)} >Edit</div>
                 <h1 className='title'>Information</h1>
                 <div className='item'>
                   <img src={singleCategory.pictureUrl} alt=''></img>
@@ -87,7 +90,7 @@ function SingleCategory({nameOfAdmin}) {
               </div>
             </div>
             <div className='bottom'>
-              <Table categoriesData={subCategoryData}  columns={columns} title={'SubCategory List'} height={26} />
+              <Table categoriesData={subCategoryData}  columns={columns} title={'SubCategory List'} height={26} link={''}/>
             </div>
           </div>
           </>)}

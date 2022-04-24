@@ -1,11 +1,40 @@
 import React ,{useState} from 'react';
+import axios from 'axios';
 import SideBar from '../../components/SideBar';
 import TopBar from '../../components/TopBar';
 import styled from "styled-components";
 
 function NewCategory({nameOfAdmin}) {
 
-  const[image,setImage] = useState("");
+  // const[image,setImage] = useState("");
+  const[newCategory,setNewCategory] = useState({
+    name: "",
+    pictureUrl: "",
+    gender: "",
+    subCategory: []
+  })
+
+  function handle(e) { 
+    const newData = {...newCategory};
+    newData[e.target.id] = e.target.value;
+    setNewCategory(newData);
+    console.log(newData);
+  }
+  //TODO: get 401 / 403 - need pass 'token'
+  function submit(e){
+    e.preventDefault();
+    axios
+      .post('/category', newCategory ,{
+        headers : {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MDg0MTQzNCwiZXhwIjoxNjUwOTI3ODM0fQ.sQoN3Gm7HGgHdaEDxMybYjDoZV1LIW6ER81fZgqNwyk'
+        }
+      })
+        .then(() => console.log('New Category Created'))
+        .catch(err => {
+          console.error(err);
+      });
+  }
 
   return (
     <NewCategoryStyle>
@@ -17,26 +46,31 @@ function NewCategory({nameOfAdmin}) {
           </div>
           <div className="bottom">
             <div className="left">
-              <img src= {image ? URL.createObjectURL(image) : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}></img>
+              <img src= {newCategory.pictureUrl ? newCategory.pictureUrl : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}></img>
+              {/* <img src= {image ? URL.createObjectURL(image) : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}></img> */}
             </div>
             <div className="right">
-              <form>
+              <form onSubmit={(e)=>submit(e)}>
                 <div className="formInput">
                   <label>Category Name</label>
-                  <input type="text" placeholder="Shirt"></input>
+                  <input type="text" autoComplete='off' onChange={(e)=>handle(e)} id="name" value={newCategory.name} placeholder="Name"></input>
+                </div>
+                <div className="formInput">
+                  <label>Category Image </label>
+                  <input type="text" autoComplete='off' onChange={(e)=>handle(e)} id="pictureUrl" value={newCategory.pictureUrl} placeholder="www.image.com"></input>
                 </div>
                 <div className="formInput">
                   <label>Category Gender</label>
-                  <select>
-                    <option selected="true" disabled="disabled">Choose Gender</option> 
+                  <select onChange={(e)=>handle(e)} id="gender" value={newCategory.gender}>
+                    <option selected={true}>Choose here</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                   </select>
                 </div>
-                <div className="formInput">
+                {/* <div className="formInput">
                   <label htmlFor="file">Add Image<span className="material-icons-sharp">file_upload</span></label>
                   <input type="file" onChange={(e) => setImage(e.target.files[0])} id="file" style={{display:"none"}}></input>
-                </div>
+                </div> */}
                 <button>Save</button>
               </form>
             </div>
