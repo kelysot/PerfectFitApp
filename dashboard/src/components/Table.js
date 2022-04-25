@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { DataGrid } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
 
-function Table({categoriesData, title , height, columns , link }) {
+function Table({categoriesData, title , height, columns , link , action}) {
 
   const actionColumn = [{field: 'action', headerName:"Action", width: 250, renderCell: (params)=> {
      return(
@@ -27,7 +27,7 @@ function Table({categoriesData, title , height, columns , link }) {
         </div>
         <DataGrid style={{ height:`${height}vh`}}
             rows={categoriesData}
-            columns={columns.concat(actionColumn)}
+            columns={action ? columns.concat(actionColumn) : columns}
             pageSize={10}
             rowsPerPageOptions={[10]}
         />
