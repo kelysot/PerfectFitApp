@@ -206,22 +206,26 @@ const getSingleCategory = async (req, res) => {
             if(categoryGender === 'Male'){
                 maleCount += sub[i].posts.length
                 const parallelCategory = await Category.findOne({'name' : categoryName , 'gender' : 'Female'})
-                const parallelSub = await SubCategory.find({'categoryId' : parallelCategory._id})
-                for(let j = 0; j < parallelSub.length; j++){
-                    if(parallelSub[j] === undefined)
-                        femaleCount += 0
-                    else
-                        femaleCount += parallelSub[j].posts.length
-                } 
+                if(parallelCategory !== null){
+                    const parallelSub = await SubCategory.find({'categoryId' : parallelCategory._id})
+                    for(let j = 0; j < parallelSub.length; j++){
+                        if(parallelSub[j] === undefined)
+                            femaleCount += 0
+                        else
+                            femaleCount += parallelSub[j].posts.length
+                    } 
+                }
             }else{
                 femaleCount += sub[i].posts.length
                 const parallelCategory = await Category.findOne({'name' : categoryName , 'gender' : 'Male'})
-                const parallelSub = await SubCategory.find({'categoryId' : parallelCategory._id})
-                for(let j = 0; j < parallelSub.length; j++){
-                    if(parallelSub[j] === undefined)
-                        maleCount += 0
-                    else
-                        maleCount += parallelSub[j].posts.length 
+                if(parallelCategory !== null){
+                    const parallelSub = await SubCategory.find({'categoryId' : parallelCategory._id})
+                    for(let j = 0; j < parallelSub.length; j++){
+                        if(parallelSub[j] === undefined)
+                            maleCount += 0
+                        else
+                            maleCount += parallelSub[j].posts.length 
+                    }
                 }
             }
             
@@ -266,6 +270,17 @@ const getSingleCategory = async (req, res) => {
             amounts: data
         });
     })
+}
+
+const getCategoryId = async (req, res) => {
+    const data = req.params.categoryData
+    const categoryName = data.split("&")[0]
+    const categoryGender = data.split("&")[1]
+    const singleCategory = await Category.findOne({'name' : categoryName , 'gender' : categoryGender})
+
+    res.json({
+        categoryId : singleCategory._id
+    });
 }
 
 const getSubCategoriesData = async (req, res) => {
@@ -323,5 +338,6 @@ module.exports = {
     getCategoriesData,
     categoriesTableData,
     getSingleCategory,
-    getSubCategoriesData
+    getSubCategoriesData,
+    getCategoryId
 }

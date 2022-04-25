@@ -17,6 +17,8 @@ router.get('/categories',Dashboard.categoriesTableData)
 
 router.get('/categories/:categoryData',Dashboard.getSingleCategory)
 
+router.get('/categories/getId/:categoryData',Dashboard.getCategoryId)
+
 router.get('/categories/:categoryData/subCategoryData',Dashboard.getSubCategoriesData)
 
 module.exports = router

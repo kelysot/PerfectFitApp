@@ -53,6 +53,7 @@ const getSubCategoriesByCategoryId = async (req, res) => {
 }
 
 const addSubCategory = async (req, res) => {
+    console.log(req.params.id)
     const categoryId = req.params.id
     const newSubCategory = SubCategory({
         "name": req.body.name,

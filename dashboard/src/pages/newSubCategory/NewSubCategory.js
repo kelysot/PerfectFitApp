@@ -1,4 +1,4 @@
-import React ,{useState} from 'react';
+import React ,{useState,useEffect} from 'react';
 import axios from 'axios';
 import SideBar from '../../components/SideBar';
 import TopBar from '../../components/TopBar';
@@ -6,30 +6,45 @@ import styled from "styled-components";
 
 function NewCategory({nameOfAdmin}) {
   // const[image,setImage] = useState("");
-  const[newCategory,setNewCategory] = useState({
+  const[categoryId,setCategoryId] = useState("");
+  const[newSubCategory,setNewSubCategory] = useState({
     name: "",
     pictureUrl: "",
     gender: "",
-    subCategory: []
-  })
+    posts: []
+  });
+
+  useEffect(() => {
+    let location = window.location.href;
+    let categoryData = location.split("/").slice(-1).pop();
+    fetch(`/dashboard/categories/getId/${categoryData}` , {
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
+    })
+      .then((res) => res.json())
+        .then((data) => {
+          setCategoryId(data.categoryId);
+        })
+  },[]);
 
   function handle(e) { 
-    const newData = {...newCategory};
+    const newData = {...newSubCategory};
     newData[e.target.id] = e.target.value;
-    setNewCategory(newData);
+    setNewSubCategory(newData);
   }
   //TODO: get 401 / 403 - need pass 'token'
   function submit(e){
     e.preventDefault();
     axios
-      .post('/category', newCategory ,{
+      .post(`/subCategory/${categoryId}`, newSubCategory ,{
         headers : {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MDg0MTQzNCwiZXhwIjoxNjUwOTI3ODM0fQ.sQoN3Gm7HGgHdaEDxMybYjDoZV1LIW6ER81fZgqNwyk'
         }
       })
-        .then(() => window.location.href = `/categories/${newCategory.name}&${newCategory.gender}`
-        )
+        .then(() => window.location.href = '/')
         .catch(err => {
           console.error(err);
       });
@@ -41,26 +56,26 @@ function NewCategory({nameOfAdmin}) {
         <div className="newCategoryContainer">
           <TopBar  nameOfAdmin={nameOfAdmin} />
           <div className="top">
-            <h1>New Category</h1>
+            <h1>New SubCategory</h1>
           </div>
           <div className="bottom">
             <div className="left">
-              <img src= {newCategory.pictureUrl ? newCategory.pictureUrl : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}></img>
+              <img src= {newSubCategory.pictureUrl ? newSubCategory.pictureUrl : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}></img>
               {/* <img src= {image ? URL.createObjectURL(image) : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}></img> */}
             </div>
             <div className="right">
               <form onSubmit={(e)=>submit(e)}>
                 <div className="formInput">
-                  <label>Category Name</label>
-                  <input type="text" autoComplete='off' onChange={(e)=>handle(e)} id="name" value={newCategory.name} placeholder="Name"></input>
+                  <label>SubCategory Name</label>
+                  <input type="text" autoComplete='off' onChange={(e)=>handle(e)} id="name" value={newSubCategory.name} placeholder="Name"></input>
                 </div>
                 <div className="formInput">
-                  <label>Category Image </label>
-                  <input type="text" autoComplete='off' onChange={(e)=>handle(e)} id="pictureUrl" value={newCategory.pictureUrl} placeholder="www.image.com"></input>
+                  <label>SubCategory Image </label>
+                  <input type="text" autoComplete='off' onChange={(e)=>handle(e)} id="pictureUrl" value={newSubCategory.pictureUrl} placeholder="www.image.com"></input>
                 </div>
                 <div className="formInput">
-                  <label>Category Gender</label>
-                  <select onChange={(e)=>handle(e)} id="gender" value={newCategory.gender}>
+                  <label>SubCategory Gender</label>
+                  <select onChange={(e)=>handle(e)} id="gender" value={newSubCategory.gender}>
                     <option selected={true}>Choose here</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>

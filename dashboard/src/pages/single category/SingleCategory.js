@@ -8,6 +8,7 @@ import styled from "styled-components";
 function SingleCategory({nameOfAdmin}) {
 
   const[singleCategory ,setSingleCategory ] = useState("");
+  const[location,setLocation] = useState("");
   const [amounts, setAmounts] = useState("");
   const[subCategoryData,setSubCategoryData] = useState("");
 
@@ -18,7 +19,7 @@ function SingleCategory({nameOfAdmin}) {
   useEffect(() => {
     let location = window.location.href;
     let categoryData = location.split("/").slice(-1).pop();
-
+    setLocation(categoryData);
     fetch(`/dashboard/categories/${categoryData}` , {
       headers : { 
         'Content-Type': 'application/json',
@@ -90,7 +91,7 @@ function SingleCategory({nameOfAdmin}) {
               </div>
             </div>
             <div className='bottom'>
-              <Table categoriesData={subCategoryData}  columns={columns} title={'SubCategory List'} height={26} link={''}/>
+              <Table categoriesData={subCategoryData} columns={columns} title={'SubCategory List'} height={26} link={`/categories/newSubCategory/${location}`}/>
             </div>
           </div>
           </>)}
