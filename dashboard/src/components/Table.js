@@ -28,8 +28,8 @@ function Table({categoriesData, title , height, columns , link }) {
         <DataGrid style={{ height:`${height}vh`}}
             rows={categoriesData}
             columns={columns.concat(actionColumn)}
-            pageSize={9}
-            rowsPerPageOptions={[9]}
+            pageSize={10}
+            rowsPerPageOptions={[10]}
         />
       </>)}
     </CategoriesTableStyle>

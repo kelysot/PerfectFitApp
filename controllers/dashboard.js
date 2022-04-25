@@ -161,7 +161,7 @@ const categoriesTableData = async (req, res) => {
                 numOfPosts += sub[i].posts.length
             }
             let categoryData = {
-                id: i,
+                id: i+1,
                 image: arr[i].pictureUrl,
                 gender: arr[i].gender,
                 name: arr[i].name,
@@ -278,7 +278,7 @@ const getSubCategoriesData = async (req, res) => {
     for(let i=0;i<singleCategory.subCategory.length;i++){
         let subCategory = await SubCategory.findById(singleCategory.subCategory[i])
         subCategoriesData.push({
-            id: i,
+            id: i+1,
             image: subCategory.pictureUrl,
             gender: subCategory.gender,
             name: subCategory.name,

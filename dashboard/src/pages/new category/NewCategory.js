@@ -18,7 +18,6 @@ function NewCategory({nameOfAdmin}) {
     const newData = {...newCategory};
     newData[e.target.id] = e.target.value;
     setNewCategory(newData);
-    console.log(newData);
   }
   //TODO: get 401 / 403 - need pass 'token'
   function submit(e){
@@ -30,7 +29,8 @@ function NewCategory({nameOfAdmin}) {
           'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MDg0MTQzNCwiZXhwIjoxNjUwOTI3ODM0fQ.sQoN3Gm7HGgHdaEDxMybYjDoZV1LIW6ER81fZgqNwyk'
         }
       })
-        .then(() => console.log('New Category Created'))
+        .then(() => window.location.href = `/categories/${newCategory.name}&${newCategory.gender}`
+        )
         .catch(err => {
           console.error(err);
       });
