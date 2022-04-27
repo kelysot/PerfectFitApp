@@ -4,7 +4,6 @@ const app = express();
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 
-
 if (process.env.NODE_ENV == "development") {
     const swaggerUI = require("swagger-ui-express")
     const swaggerJsDoc = require("swagger-jsdoc")

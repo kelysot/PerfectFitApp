@@ -126,6 +126,8 @@ const CenterStyle = styled.div`
     cursor: pointer;
     transition: all 300ms ease;
     width: 100%;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
 
     a,h3,span{
       color:var(--color-dark-variant);

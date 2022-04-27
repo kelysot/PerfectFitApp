@@ -8,7 +8,6 @@ const sendError = (res, code, msg) => {
         'status': 'fail',
         'error': msg
     })
-
 }
 
 const register = async (req, res) => {

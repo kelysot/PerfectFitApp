@@ -18,4 +18,4 @@ const adminSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Admin', categorySchema)
+module.exports = mongoose.model('Admin', adminSchema)
