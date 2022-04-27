@@ -3,7 +3,6 @@ import styled from "styled-components";
 import TopProfileCard from "./TopProfileCard";
 
 function TopProfilesChart({topProfiles}) {
-  console.log(topProfiles)
   return (
     <TopUserChartStyle>
         <TopStyle>

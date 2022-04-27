@@ -34,8 +34,9 @@ function App() {
       <GlobalStyle />
       <GlobalStyleDark />
       <Routes path="/">
-        <Route index element={<Home nameOfAdmin={nameOfAdmin} />}></Route>
-        <Route path="/login" element={<Login/>} ></Route>
+        {/* <Route index element={<Home nameOfAdmin={nameOfAdmin} />}></Route> */}
+        <Route path="/" index element={<Login/>} ></Route>
+        <Route path="home" element={<Home nameOfAdmin={nameOfAdmin} />}></Route>
         <Route path="categories">
           <Route index element={<Categories  nameOfAdmin={nameOfAdmin} />}></Route>
           <Route path=":categoryId" element={<SingleCategory nameOfAdmin={nameOfAdmin} />}></Route>

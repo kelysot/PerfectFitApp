@@ -13,7 +13,7 @@ function SingleCategory({nameOfAdmin}) {
   const[subCategoryData,setSubCategoryData] = useState("");
 
   const editCategoryHandler = (gender,categoryName) => {
-    console.log("hey");
+    console.log('hey');
   }
 
   useEffect(() => {
