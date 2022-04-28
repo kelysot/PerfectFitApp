@@ -6,6 +6,7 @@ import styled from "styled-components";
 
 function NewCategory({nameOfAdmin}) {
   // const[image,setImage] = useState("");
+  //check
   const [categoryGender , setCategoryGender] = useState("");
   const [categoryName , setCategoryName] = useState ("");
   const[categoryId,setCategoryId] = useState("");
