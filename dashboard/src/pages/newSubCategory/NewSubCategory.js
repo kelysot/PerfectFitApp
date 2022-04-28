@@ -6,6 +6,8 @@ import styled from "styled-components";
 
 function NewCategory({nameOfAdmin}) {
   // const[image,setImage] = useState("");
+  const [categoryGender , setCategoryGender] = useState("");
+  const [categoryName , setCategoryName] = useState ("");
   const[categoryId,setCategoryId] = useState("");
   const[newSubCategory,setNewSubCategory] = useState({
     name: "",
@@ -26,6 +28,13 @@ function NewCategory({nameOfAdmin}) {
       .then((res) => res.json())
         .then((data) => {
           setCategoryId(data.categoryId);
+          setCategoryGender(data.categoryGender);
+          setCategoryName(data.categoryName);
+          setNewSubCategory((prevState) => ({
+            ...prevState,
+           gender: data.categoryGender
+          }));
+      
         })
   },[]);
 
@@ -41,15 +50,15 @@ function NewCategory({nameOfAdmin}) {
       .post(`/subCategory/${categoryId}`, newSubCategory ,{
         headers : {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MDg0MTQzNCwiZXhwIjoxNjUwOTI3ODM0fQ.sQoN3Gm7HGgHdaEDxMybYjDoZV1LIW6ER81fZgqNwyk'
+          'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNmE1MmJiYzMyY2MwYmQ5N2I3MmNiMiIsImlhdCI6MTY1MTEzNTE2MywiZXhwIjoxNjUxMjIxNTYzfQ.4hwx91dmXXbKw_C2qFvGrIKXSChhDMKtOfZwugrhaGU'
         }
       })
-        .then(() => window.location.href = '/')
+        .then(() => window.location.href = `/categories/${categoryName}&${categoryGender}`)
         .catch(err => {
           console.error(err);
       });
   }
-
+  console.log(newSubCategory)
   return (
     <NewCategoryStyle>
       <SideBar/>
@@ -74,13 +83,11 @@ function NewCategory({nameOfAdmin}) {
                   <input type="text" autoComplete='off' onChange={(e)=>handle(e)} id="pictureUrl" value={newSubCategory.pictureUrl} placeholder="www.image.com"></input>
                 </div>
                 <div className="formInput">
-                  <label>SubCategory Gender</label>
-                  <select onChange={(e)=>handle(e)} id="gender" value={newSubCategory.gender}>
-                    <option selected={true}>Choose here</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                  </select>
+                  <label>SubCategory gender </label>
+                  <input type="text"  id="gender" disabled placeholder={categoryGender}></input>
                 </div>
+
+                
                 {/* <div className="formInput">
                   <label htmlFor="file">Add Image<span className="material-icons-sharp">file_upload</span></label>
                   <input type="file" onChange={(e) => setImage(e.target.files[0])} id="file" style={{display:"none"}}></input>

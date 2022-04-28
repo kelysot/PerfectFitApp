@@ -279,7 +279,9 @@ const getCategoryId = async (req, res) => {
     const singleCategory = await Category.findOne({'name' : categoryName , 'gender' : categoryGender})
 
     res.json({
-        categoryId : singleCategory._id
+        categoryId : singleCategory._id,
+        categoryGender : categoryGender,
+        categoryName : categoryName , 
     });
 }
 
