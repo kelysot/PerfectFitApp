@@ -12,16 +12,6 @@ const authenticate = require('../common/auth_middleware')
 *   description: The Post API
 */
 
-// /**
-// * @swagger
-// * components:
-// *   securitySchemes:
-// *       bearerAuth:
-// *           type: http
-// *           scheme: bearer
-// *           bearerFormat: JWT
-// */
-
 /**
 * @swagger
 * components:
@@ -167,27 +157,27 @@ router.get('/', authenticate, Post.getPosts)
 
 
 /**
- * @swagger
- * /post:
- *  post:
- *    summary: Create a new post
- *    tags: [Post Api]
- *    requestBody:
- *      required: true
- *      content:
- *         application/json:
- *          schema:
- *             $ref: '#/components/schemas/Post'
- *    responses:
- *      200:
- *          description: The post was successfully create
- *          content:
- *              application/json:
- *                  schema:
- *                      $ref: '#/components/schemas/Post'
- *      400:
- *         description: Some server error 
- */
+* @swagger
+* /post:
+*   post:
+*     summary: Create a new post
+*     tags: [Post Api]
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             $ref: '#/components/schemas/Post'
+*     security:
+*       - bearerAuth: []
+*     responses:
+*       200:
+*         description: The post was successfully create 
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/Post'
+*/
 
 router.post('/', authenticate, Post.addNewPost)
 

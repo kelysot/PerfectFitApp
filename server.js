@@ -15,6 +15,7 @@ if (process.env.NODE_ENV == "development") {
                 version: "1.0.0",
                 description: "A simple Express Library API",
             },
+            bearerAuth: { type: 'apiKey', in: 'header', name: 'authorization' },
             servers: [{ url: "http://localhost:" + process.env.PORT, },],
         },
         apis: ["./routes/*.js"],
@@ -36,8 +37,51 @@ db.once('open', () => { console.log('db connected!') })
 
 const port = process.env.PORT
 
+
+
+
+
+
+// // Include the node file module
+// var fs = require('fs');
+
+// storage = multer.diskStorage({
+//     destination: './uploads/',
+//     filename: function (req, file, cb) {
+//         return crypto.pseudoRandomBytes(16, function (err, raw) {
+//             if (err) {
+//                 return cb(err);
+//             }
+//             return cb(null, "" + (raw.toString('hex')) + (path.extname(file.originalname)));
+//         });
+//     }
+// });
+
+
+// // Post files
+// app.post("/upload/",
+//     multer({
+//         storage: storage
+//     }).single('upload'), function (req, res) {
+//         console.log(req.file);
+//         console.log(req.body);
+//         res.redirect("/uploads/" + req.file.filename);
+//         console.log(req.file.filename);
+//         return res.status(200).end();
+//     });
+
+// app.get('/upload/:upload', function (req, res) {
+//     file = req.params.upload;
+//     console.log(req.params.upload);
+//     var img = fs.readFileSync(__dirname + "/uploads/" + file);
+//     res.writeHead(200, { 'Content-Type': 'image/png' });
+//     res.end(img, 'binary');
+
+// });
+
+
 const dashboardRouter = require('./routes/dashboard_routes')
-app.use('/dashboard',dashboardRouter)
+app.use('/dashboard', dashboardRouter)
 
 const indexRouter = require('./routes/index')
 app.use('/', indexRouter)
@@ -62,5 +106,8 @@ app.use('/comment', commentRouter)
 
 const notificationRouter = require('./routes/notification_routes')
 app.use('/notification', notificationRouter)
+
+const uploadRouter = require('./routes/upload')
+app.use('/upload', uploadRouter)
 
 module.exports = app

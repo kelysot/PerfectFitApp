@@ -163,7 +163,7 @@ const authenticate = require('../common/auth_middleware')
 *               $ref: '#/components/schemas/Profile'
 */
 
-router.post('/',authenticate, Profile.addNewProfile)
+router.post('/', authenticate, Profile.addNewProfile)
 // router.post('/', authenticate, Profile.addNewProfile)
 
 /**
@@ -179,6 +179,8 @@ router.post('/',authenticate, Profile.addNewProfile)
 *           type: string
 *         required: true
 *         description: The profile id
+*     security:
+*       - bearerAuth: []
 *     responses:
 *       200:
 *         description: the profile
@@ -222,11 +224,11 @@ router.delete('/:userName', authenticate, Profile.deleteProfile)
 *               $ref: '#/components/schemas/Profile'
 */
 
-router.patch('/',authenticate, Profile.editProfile)
+router.patch('/', authenticate, Profile.editProfile)
 
 router.get('/getProfile/:email/:userName', authenticate, Profile.getProfile)
 
-router.get('/checkIfUserNameExist/:userName',authenticate, Profile.checkIfUserNameExist)
+router.get('/checkIfUserNameExist/:userName', authenticate, Profile.checkIfUserNameExist)
 
 
 module.exports = router
