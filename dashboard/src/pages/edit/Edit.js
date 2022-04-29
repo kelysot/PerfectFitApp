@@ -1,5 +1,4 @@
 import React ,{useState,useEffect} from 'react';
-import axios from 'axios';
 import SideBar from '../../components/SideBar';
 import TopBar from '../../components/TopBar';
 import styled from "styled-components";
@@ -11,12 +10,16 @@ function Edit({nameOfAdmin}) {
     const[editCategory,setEditCategory] = useState({
         title: 'Edit Category',
         image: "",
-        name: ""
+        name: "",
+        id:"",
+        gender: ""
     });
     const[editSubCategory,setEditSubCategory] = useState({
         title: 'Edit SubCategory',
         image: "",
-        name: ""
+        name: "",
+        id:"",
+        gender: ""
     });
 
     useEffect(() => {
@@ -35,7 +38,9 @@ function Edit({nameOfAdmin}) {
                     setEditCategory((prevState) => ({
                         ...prevState,
                         image: data.category.pictureUrl,
-                        name : data.category.name
+                        name : data.category.name,
+                        id: data.category._id,
+                        gender : data.category.gender
                       }));
                   })
         }else{
@@ -48,7 +53,7 @@ function Edit({nameOfAdmin}) {
         <SideBar/>
             <div className="newCategoryContainer">
                 <TopBar  nameOfAdmin={nameOfAdmin} />
-                <EditForm title={location} name={editCategory.name} image={editCategory.image}/>
+                <EditForm title={location} name={editCategory.name} image={editCategory.image} id={editCategory.id} gender={editCategory.gender}/>
             </div>
         </EditStyle>
     )

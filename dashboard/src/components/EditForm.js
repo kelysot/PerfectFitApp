@@ -1,7 +1,8 @@
 import React , {useState,useEffect} from 'react';
 import styled from "styled-components";
+import axios from 'axios';
 
-function EditForm({title,name,image}) {
+function EditForm({title,name,image,id,gender}) {
   const[edit,setEdit] = useState({
     name: name,
     pictureUrl: image,
@@ -22,7 +23,22 @@ function EditForm({title,name,image}) {
     newData[e.target.id] = e.target.value;
     setEdit(newData);
   }
-  console.log(edit);
+
+  function submit(e){
+    e.preventDefault();
+    axios
+      .patch(`/category/${id}`, edit ,{
+        headers : {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNmI4OGE0N2U5MTQ3Mjk4NjIxMGIyYiIsImlhdCI6MTY1MTIxNDUwMCwiZXhwIjoxNjUxMzAwOTAwfQ.sjv8hCboY7uJ_uzH0dgqw_MbT1A0BDsTGk6E8Us_gdM'
+        }
+      })
+        .then(() =>  window.location.href = `/categories/${edit.name}&${gender}`)
+        .catch(err => {
+          console.error(err);
+      });
+  }
+
   return (
     <EditFormStyle>
         <div className="top">
@@ -34,7 +50,7 @@ function EditForm({title,name,image}) {
               <img src={edit.pictureUrl ? edit.pictureUrl : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}></img>
             </div>
             <div className="right">
-              <form>
+              <form onSubmit={(e)=>submit(e)}>
                 <div className="formInput">
                   <label>Name</label>
                   <input type="text" onChange={(e)=>handle(e)} id="name" autoComplete='off' value={edit.name}></input>
