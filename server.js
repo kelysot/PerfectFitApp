@@ -3,10 +3,6 @@ const express = require('express')
 const app = express();
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
-var multer, storage, path, crypto;
-multer = require('multer')
-path = require('path');
-crypto = require('crypto');
 
 if (process.env.NODE_ENV == "development") {
     const swaggerUI = require("swagger-ui-express")

@@ -27,11 +27,11 @@ function SideBar() {
     <SideBarStyle>
         <TopStyle>
           <img src=""></img>
-          <StyledLinkLogo to="/"><h2>Perfect<span>Fit</span></h2></StyledLinkLogo>
+          <StyledLinkLogo to="/home"><h2>Perfect<span>Fit</span></h2></StyledLinkLogo>
         </TopStyle>
         <CenterStyle>
           <ul>
-            <StyledLink to="/"  onClick={()=> handlerSelectItem(0)}>
+            <StyledLink to="/home"  onClick={()=> handlerSelectItem(0)}>
               <li>
                   <span className="material-icons-sharp">dashboard</span>
                   <h3>Dashboard</h3>
@@ -55,7 +55,7 @@ function SideBar() {
                   <h3>Setting</h3>
               </li>
               </StyledLink>
-            <StyledLink to="/login"  onClick={()=> handlerSelectItem(4)}>
+            <StyledLink to="/"  onClick={()=> handlerSelectItem(4)}>
               <li>
                   <span className="material-icons-sharp">logout</span>
                   <h3>Log Out</h3>
@@ -126,6 +126,8 @@ const CenterStyle = styled.div`
     cursor: pointer;
     transition: all 300ms ease;
     width: 100%;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
 
     a,h3,span{
       color:var(--color-dark-variant);

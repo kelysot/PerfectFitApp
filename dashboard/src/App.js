@@ -5,6 +5,7 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Categories from "./pages/categories/Categories"; 
 import NewCategory from "./pages/new category/NewCategory";
+import NewSubCategory from "./pages/newSubCategory/NewSubCategory";
 import SingleCategory from "./pages/single category/SingleCategory";
 import {Routes,Route} from "react-router-dom";
 import styled from "styled-components";
@@ -33,12 +34,14 @@ function App() {
       <GlobalStyle />
       <GlobalStyleDark />
       <Routes path="/">
-        <Route index element={<Home nameOfAdmin={nameOfAdmin} />}></Route>
-        <Route path="/login" element={<Login/>} ></Route>
+        {/* <Route index element={<Home nameOfAdmin={nameOfAdmin} />}></Route> */}
+        <Route path="/" index element={<Login/>} ></Route>
+        <Route path="home" element={<Home nameOfAdmin={nameOfAdmin} />}></Route>
         <Route path="categories">
           <Route index element={<Categories  nameOfAdmin={nameOfAdmin} />}></Route>
           <Route path=":categoryId" element={<SingleCategory nameOfAdmin={nameOfAdmin} />}></Route>
-          <Route path="newCategory" element={<NewCategory nameOfAdmin={nameOfAdmin} />}></Route>
+          <Route path="newCategory" element={<NewCategory nameOfAdmin={nameOfAdmin}/>}></Route>
+          <Route path="newSubCategory/:id" element={<NewSubCategory nameOfAdmin={nameOfAdmin} />}></Route>
         </Route>
       </Routes>
     </AppStyle>

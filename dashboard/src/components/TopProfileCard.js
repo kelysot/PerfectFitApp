@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-//TODO: According to the type use the colors wgo relevant to place
 let data ="";
 
 function TopProfileCard({profile ,index}) {

@@ -76,7 +76,7 @@ const getCategoriesData = async (req, res) => {
     const categoriesData = []
     const maleSubCategoryArray = await SubCategory.find({'gender': 'Male'})
     const femaleSubCategoryArray = await SubCategory.find({'gender': 'Female'})
-
+    
     const createData = async (arr) => {
         let results = []
         for(let i=0; i<arr.length; i++) {
@@ -161,12 +161,12 @@ const categoriesTableData = async (req, res) => {
                 numOfPosts += sub[i].posts.length
             }
             let categoryData = {
-                id: i,
+                id: i+1,
                 image: arr[i].pictureUrl,
                 gender: arr[i].gender,
                 name: arr[i].name,
                 numOfPosts: numOfPosts,
-                percent: `${(numOfPosts / postList.length)*100}%`
+                percent: `${((numOfPosts / postList.length)*100).toFixed(2)}%`
             }
             dataToTable.push(categoryData)
         }
@@ -206,22 +206,26 @@ const getSingleCategory = async (req, res) => {
             if(categoryGender === 'Male'){
                 maleCount += sub[i].posts.length
                 const parallelCategory = await Category.findOne({'name' : categoryName , 'gender' : 'Female'})
-                const parallelSub = await SubCategory.find({'categoryId' : parallelCategory._id})
-                for(let j = 0; j < parallelSub.length; j++){
-                    if(parallelSub[j] === undefined)
-                        femaleCount += 0
-                    else
-                        femaleCount += parallelSub[j].posts.length
-                } 
+                if(parallelCategory !== null){
+                    const parallelSub = await SubCategory.find({'categoryId' : parallelCategory._id})
+                    for(let j = 0; j < parallelSub.length; j++){
+                        if(parallelSub[j] === undefined)
+                            femaleCount += 0
+                        else
+                            femaleCount += parallelSub[j].posts.length
+                    } 
+                }
             }else{
                 femaleCount += sub[i].posts.length
                 const parallelCategory = await Category.findOne({'name' : categoryName , 'gender' : 'Male'})
-                const parallelSub = await SubCategory.find({'categoryId' : parallelCategory._id})
-                for(let j = 0; j < parallelSub.length; j++){
-                    if(parallelSub[j] === undefined)
-                        maleCount += 0
-                    else
-                        maleCount += parallelSub[j].posts.length 
+                if(parallelCategory !== null){
+                    const parallelSub = await SubCategory.find({'categoryId' : parallelCategory._id})
+                    for(let j = 0; j < parallelSub.length; j++){
+                        if(parallelSub[j] === undefined)
+                            maleCount += 0
+                        else
+                            maleCount += parallelSub[j].posts.length 
+                    }
                 }
             }
             
@@ -253,7 +257,7 @@ const getSingleCategory = async (req, res) => {
 
         const categoryData = {
             numOfPosts: subPostListSize,
-            percent: `${(subPostListSize / postList.length)*100}%`,
+            percent: `${((subPostListSize / postList.length)*100).toFixed(2)}%`,
             parallelCategory: parallelCategory,
             topProfilesChart: topProfilesChart
         }
@@ -268,6 +272,19 @@ const getSingleCategory = async (req, res) => {
     })
 }
 
+const getCategoryId = async (req, res) => {
+    const data = req.params.categoryData
+    const categoryName = data.split("&")[0]
+    const categoryGender = data.split("&")[1]
+    const singleCategory = await Category.findOne({'name' : categoryName , 'gender' : categoryGender})
+
+    res.json({
+        categoryId : singleCategory._id,
+        categoryGender : categoryGender,
+        categoryName : categoryName , 
+    });
+}
+
 const getSubCategoriesData = async (req, res) => {
     const data = req.params.categoryData
     const categoryName = data.split("&")[0]
@@ -278,7 +295,7 @@ const getSubCategoriesData = async (req, res) => {
     for(let i=0;i<singleCategory.subCategory.length;i++){
         let subCategory = await SubCategory.findById(singleCategory.subCategory[i])
         subCategoriesData.push({
-            id: i,
+            id: i+1,
             image: subCategory.pictureUrl,
             gender: subCategory.gender,
             name: subCategory.name,
@@ -323,5 +340,6 @@ module.exports = {
     getCategoriesData,
     categoriesTableData,
     getSingleCategory,
-    getSubCategoriesData
+    getSubCategoriesData,
+    getCategoryId
 }

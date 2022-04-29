@@ -8,13 +8,18 @@ import styled from "styled-components";
 function SingleCategory({nameOfAdmin}) {
 
   const[singleCategory ,setSingleCategory ] = useState("");
+  const[location,setLocation] = useState("");
   const [amounts, setAmounts] = useState("");
   const[subCategoryData,setSubCategoryData] = useState("");
+
+  const editCategoryHandler = (gender,categoryName) => {
+    console.log('hey');
+  }
 
   useEffect(() => {
     let location = window.location.href;
     let categoryData = location.split("/").slice(-1).pop();
-
+    setLocation(categoryData);
     fetch(`/dashboard/categories/${categoryData}` , {
       headers : { 
         'Content-Type': 'application/json',
@@ -23,7 +28,6 @@ function SingleCategory({nameOfAdmin}) {
     })
       .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           setSingleCategory(data.singleCategory);
           setAmounts(data.amounts);
         })
@@ -49,7 +53,7 @@ function SingleCategory({nameOfAdmin}) {
           <div className='singleCategoryContainer'>
             <div className='top'>
               <div className='left'>
-                <div className='editButton'>Edit</div>
+                <div className='editButton'onClick={()=> editCategoryHandler(singleCategory.gender,singleCategory.name)} >Edit</div>
                 <h1 className='title'>Information</h1>
                 <div className='item'>
                   <img src={singleCategory.pictureUrl} alt=''></img>
@@ -65,7 +69,7 @@ function SingleCategory({nameOfAdmin}) {
                     </div>
                     <div className='detailsItem'>
                       <span className="item-key">Percent Of Total Posts:</span>
-                      <span className="item-value">{amounts.percent}</span>
+                      <span className="item-value">{amounts.percent !== "NaN%" ? amounts.percent : "0%"}</span>
                     </div>
                   </div>
                 </div>
@@ -87,7 +91,7 @@ function SingleCategory({nameOfAdmin}) {
               </div>
             </div>
             <div className='bottom'>
-              <Table categoriesData={subCategoryData}  columns={columns} title={'SubCategory List'} height={26} />
+              <Table categoriesData={subCategoryData} action={false} columns={columns} title={'SubCategory List'} height={26} link={`/categories/newSubCategory/${location}`}/>
             </div>
           </div>
           </>)}

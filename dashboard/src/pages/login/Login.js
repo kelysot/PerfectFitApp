@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
 
 function Login() {
@@ -8,7 +9,9 @@ function Login() {
         <h3>Log In</h3>
         <InputStyle type="text" id="userName" placeholder="User Name" autocomplete="off" />
         <InputStyle type="text" id="password" placeholder="Password" autocomplete="off"/>
-        <ButtonStyle>Log In</ButtonStyle>
+        <ButtonStyle>
+          <Link to="/home" className='link'>Log In</Link>
+        </ButtonStyle>
       </ContainerStyle>
   )
 }
@@ -58,15 +61,23 @@ const ButtonStyle = styled.button`
   border-radius: 10px;
   border: 1px solid;
   background: var(--color-primary-purple) ;
-  color:#f8f0e8a6 ;
+
   border: 1px solid #f8f0e8a6 ;
   margin-top:1rem ;
-
+  
   :hover {
     background: #f8f0e8a6;
-    color:var(--color-primary-purple) ;
     border: 1px solid var(--color-primary-purple) ;
     transform: scale(1.02) ;
+  }
+
+  .link{
+    text-decoration: none;
+    color:#f8f0e8a6;
+
+    &:hover{
+      color:var(--color-primary-purple) ;
+    }
   }
 `
 

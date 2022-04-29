@@ -210,15 +210,15 @@ Content-Type: application/json
 }
 
 ###
-PATCH  http://localhost:4000/category/6262c13e0124be7d5f953a3c/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MDYzOTExMSwiZXhwIjoxNjUwNzI1NTExfQ.Upj294AdM0rxkyS8DHPxwzjlFShcxJlN8yGtWPmjNC4
+PATCH  http://localhost:4000/category/626b8a9ad37c22060899109b/
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNmI4OGE0N2U5MTQ3Mjk4NjIxMGIyYiIsImlhdCI6MTY1MTIxNDUwMCwiZXhwIjoxNjUxMzAwOTAwfQ.sjv8hCboY7uJ_uzH0dgqw_MbT1A0BDsTGk6E8Us_gdM
 Content-Type: application/json
 
 {
-        "name": "Gloves",
+        "name": "Glove",
         "pictureUrl": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSmNq21_AFczzpbSxSW5K7gR9OtCK3XfPByH69nY5zTRmw0ilkEQ-VlrFOh9tSsyUF7JIM7GV7Cilc&usqp=CAc",
-        "gender": "Female",
-        "subCategory": []
+        "gender": "",
+        "subCategory": ""
 }
 
 
@@ -258,8 +258,8 @@ Content-Type: application/json
 }
 
 ###
-PATCH  http://localhost:4000/subcategory/6242dde053c8199822f9efe9/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzUwMjQ1ZmU4M2VmMGI1MjlkZTU1NCIsImlhdCI6MTY0Nzg5OTk5NywiZXhwIjoxNjQ3OTg2Mzk3fQ.1uEl7AR1LAQjQ04LMl6UFY2XoCbzY_8hhJ9gqWh-g3I
+PATCH  http://localhost:4000/subcategory/626b8a9ad37c22060899109b/
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNmI4OGE0N2U5MTQ3Mjk4NjIxMGIyYiIsImlhdCI6MTY1MTIxNDUwMCwiZXhwIjoxNjUxMzAwOTAwfQ.sjv8hCboY7uJ_uzH0dgqw_MbT1A0BDsTGk6E8Us_gdM
 Content-Type: application/json
 
 {
