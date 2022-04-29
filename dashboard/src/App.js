@@ -7,6 +7,7 @@ import Categories from "./pages/categories/Categories";
 import NewCategory from "./pages/new category/NewCategory";
 import NewSubCategory from "./pages/newSubCategory/NewSubCategory";
 import SingleCategory from "./pages/single category/SingleCategory";
+import Edit from "./pages/edit/Edit";
 import {Routes,Route} from "react-router-dom";
 import styled from "styled-components";
 import {DarkModeContext} from '../src/context/darkModeContext';
@@ -41,6 +42,7 @@ function App() {
           <Route index element={<Categories  nameOfAdmin={nameOfAdmin} />}></Route>
           <Route path=":categoryId" element={<SingleCategory nameOfAdmin={nameOfAdmin} />}></Route>
           <Route path="newCategory" element={<NewCategory nameOfAdmin={nameOfAdmin}/>}></Route>
+          <Route path="editCategory/:id" element={<Edit nameOfAdmin={nameOfAdmin} />}></Route>
           <Route path="newSubCategory/:id" element={<NewSubCategory nameOfAdmin={nameOfAdmin} />}></Route>
         </Route>
       </Routes>

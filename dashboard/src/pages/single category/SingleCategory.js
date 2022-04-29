@@ -1,4 +1,5 @@
 import React , {useEffect , useState} from 'react';
+import { Link } from 'react-router-dom';
 import { BarChart, Bar, XAxis, YAxis} from 'recharts';
 import Table from '../../components/Table';
 import SideBar from "../../components/SideBar";
@@ -11,10 +12,6 @@ function SingleCategory({nameOfAdmin}) {
   const[location,setLocation] = useState("");
   const [amounts, setAmounts] = useState("");
   const[subCategoryData,setSubCategoryData] = useState("");
-
-  const editCategoryHandler = (gender,categoryName) => {
-    console.log('hey');
-  }
 
   useEffect(() => {
     let location = window.location.href;
@@ -53,7 +50,9 @@ function SingleCategory({nameOfAdmin}) {
           <div className='singleCategoryContainer'>
             <div className='top'>
               <div className='left'>
-                <div className='editButton'onClick={()=> editCategoryHandler(singleCategory.gender,singleCategory.name)} >Edit</div>
+                <Link to={`/categories/editCategory/${singleCategory.name}&${singleCategory.gender}`} className="link">
+                  <div className='editButton'>Edit</div>
+                </Link>
                 <h1 className='title'>Information</h1>
                 <div className='item'>
                   <img src={singleCategory.pictureUrl} alt=''></img>

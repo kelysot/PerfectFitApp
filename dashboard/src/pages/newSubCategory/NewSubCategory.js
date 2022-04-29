@@ -59,14 +59,13 @@ function NewCategory({nameOfAdmin}) {
           console.error(err);
       });
   }
-  console.log(newSubCategory)
   return (
     <NewCategoryStyle>
       <SideBar/>
         <div className="newCategoryContainer">
           <TopBar  nameOfAdmin={nameOfAdmin} />
           <div className="top">
-            <h1>New SubCategory</h1>
+            <h1>{categoryName} &gt; {categoryGender} &gt; New SubCategory</h1>
           </div>
           <div className="bottom">
             <div className="left">

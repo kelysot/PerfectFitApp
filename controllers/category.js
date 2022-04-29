@@ -17,6 +17,14 @@ const getCategories = async (req, res) => {
     }
 }
 
+const getCategoryNameAndGender = async (req, res) => {
+    const categoryData = req.params.data
+    const category = await Category.findOne({ 'name': categoryData.split('&')[0] ,'gender': categoryData.split('&')[1]})
+    res.json({
+        category: category
+    });
+}
+
 const getCategoryById = async (req, res) => {
     if (req.params.id == null || req.params.id == undefined) {
         res.status(400).send({
@@ -131,6 +139,7 @@ const deleteCategory = async (req, res) => {
 
 module.exports = {
     getCategories,
+    getCategoryNameAndGender,
     addCategory,
     editCategory,
     deleteCategory,
