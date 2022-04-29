@@ -107,7 +107,7 @@ app.use('/comment', commentRouter)
 const notificationRouter = require('./routes/notification_routes')
 app.use('/notification', notificationRouter)
 
-const uploadRouter = require('./routes/upload')
-app.use('/upload', uploadRouter)
+const imagesRouter = require('./routes/images')
+app.use('/images', imagesRouter)
 
 module.exports = app
