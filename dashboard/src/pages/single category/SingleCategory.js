@@ -69,7 +69,7 @@ function SingleCategory({nameOfAdmin}) {
                     </div>
                     <div className='detailsItem'>
                       <span className="item-key">Percent Of Total Posts:</span>
-                      <span className="item-value">{amounts.percent}</span>
+                      <span className="item-value">{amounts.percent !== "NaN%" ? amounts.percent : "0%"}</span>
                     </div>
                   </div>
                 </div>

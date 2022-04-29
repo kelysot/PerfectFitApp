@@ -1,4 +1,5 @@
 const Category = require('../models/category_model')
+const SubCategory = require('../models/sub_category_model')
 
 const getCategories = async (req, res) => {
 
@@ -66,11 +67,12 @@ const editCategory = async (req, res) => {
         })
     }
     try {
+        //TODO: edit only the name of the category and the picture + nav to new category page
         const editCategory = await Category.findById(req.params.id)
         editCategory.name = req.body.name
         editCategory.pictureUrl = req.body.pictureUrl
-        editCategory.gender = req.body.gender
-        editCategory.subCategory = req.body.subCategory
+        editCategory.gender = editCategory.gender
+        editCategory.subCategory = editCategory.subCategory
 
         editCategory.save((error, editCategory) => {
             if (error) {
@@ -86,6 +88,7 @@ const editCategory = async (req, res) => {
                 })
             }
         })
+
     } catch (err) {
         res.status(400).send({
             'status': 'fail',
