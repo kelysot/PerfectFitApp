@@ -51,7 +51,7 @@ function EditForm({title,name,image,id,gender}) {
         .patch(`/category/${id}`, edit ,{
           headers : {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNmI4OGE0N2U5MTQ3Mjk4NjIxMGIyYiIsImlhdCI6MTY1MTIxNDUwMCwiZXhwIjoxNjUxMzAwOTAwfQ.sjv8hCboY7uJ_uzH0dgqw_MbT1A0BDsTGk6E8Us_gdM'
+            'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MTMyMTg3OSwiZXhwIjoxNjUxNDA4Mjc5fQ.kbvEoQzAwMPA9VNfuDwfJglVhF30xLkW6JpQdiDITLo'
           }
         })
           .then(() =>  window.location.href = `/categories/${edit.name}&${gender}`)
@@ -63,7 +63,7 @@ function EditForm({title,name,image,id,gender}) {
       .patch(`/subCategory/${id}`, editSub ,{
         headers : {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNmI4OGE0N2U5MTQ3Mjk4NjIxMGIyYiIsImlhdCI6MTY1MTIxNDUwMCwiZXhwIjoxNjUxMzAwOTAwfQ.sjv8hCboY7uJ_uzH0dgqw_MbT1A0BDsTGk6E8Us_gdM'
+          'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MTMyMTg3OSwiZXhwIjoxNjUxNDA4Mjc5fQ.kbvEoQzAwMPA9VNfuDwfJglVhF30xLkW6JpQdiDITLo'
         }
       })
         .then(() =>  window.location.href = `/categories` )
@@ -81,7 +81,7 @@ function EditForm({title,name,image,id,gender}) {
         <div className="bottom">
         {(title && name && image) && (<>
             <div className="left">
-              <img src={ (!edit.pictureUrl && editSub.pictureUrl)  ? (title === 'Edit Category' ? edit.pictureUrl : editSub.pictureUrl) : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg" }></img>
+            <img src={!(edit.pictureUrl || editSub.pictureUrl) ? "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg" : (title === 'Edit Category') ? edit.pictureUrl : editSub.pictureUrl}></img>
             </div>
             <div className="right">
               <form onSubmit={(e)=>submit(e)}>
