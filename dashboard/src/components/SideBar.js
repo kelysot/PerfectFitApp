@@ -43,10 +43,10 @@ function SideBar() {
                     <h3>Categories</h3>
                 </li>
               </StyledLink>
-            <StyledLink to=""  onClick={()=> handlerSelectItem(2)}>
+            <StyledLink to="/users"  onClick={()=> handlerSelectItem(2)}>
               <li>
                   <span className="material-icons-sharp">person</span>
-                  <h3>Profile</h3>
+                  <h3>Profiles</h3>
               </li>
             </StyledLink>
             <StyledLink to=""  onClick={()=> handlerSelectItem(3)}>

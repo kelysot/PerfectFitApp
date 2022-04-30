@@ -90,7 +90,7 @@ function SingleCategory({nameOfAdmin}) {
               </div>
             </div>
             <div className='bottom'>
-              <Table categoriesData={subCategoryData} action={false} columns={columns} title={'SubCategory List'} height={26} link={`/categories/newSubCategory/${location}`}/>
+              <Table categoriesData={subCategoryData} action={'subCategories'} columns={columns} title={'SubCategory List'} height={26} link={`/categories/newSubCategory/${location}`}/>
             </div>
           </div>
           </>)}

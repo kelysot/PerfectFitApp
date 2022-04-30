@@ -11,6 +11,7 @@ import Edit from "./pages/edit/Edit";
 import {Routes,Route} from "react-router-dom";
 import styled from "styled-components";
 import {DarkModeContext} from '../src/context/darkModeContext';
+import Users from "./pages/users/Users";
 
 function App() {
 
@@ -35,8 +36,7 @@ function App() {
       <GlobalStyle />
       <GlobalStyleDark />
       <Routes path="/">
-        {/* <Route index element={<Home nameOfAdmin={nameOfAdmin} />}></Route> */}
-        <Route path="/" index element={<Login/>} ></Route>
+        <Route index element={<Login/>} ></Route>
         <Route path="home" element={<Home nameOfAdmin={nameOfAdmin} />}></Route>
         <Route path="categories">
           <Route index element={<Categories  nameOfAdmin={nameOfAdmin} />}></Route>
@@ -45,6 +45,9 @@ function App() {
           <Route path="editCategory/:id" element={<Edit nameOfAdmin={nameOfAdmin} />}></Route>
           <Route path="newSubCategory/:id" element={<NewSubCategory nameOfAdmin={nameOfAdmin} />}></Route>
           <Route path="editSubCategory/:id" element={<Edit nameOfAdmin={nameOfAdmin} />}></Route>
+        </Route>
+        <Route path="users">
+          <Route index element={<Users  nameOfAdmin={nameOfAdmin} />}></Route>
         </Route>
       </Routes>
     </AppStyle>

@@ -25,6 +25,16 @@ function Table({categoriesData, title , height, columns , link , action}) {
        <div className="delete">Delete</div>
      </div>
     )
+  }}]
+
+  const actionColumnUsers = [{field: 'action', headerName:"Action", width: 250, renderCell: (params)=> {
+    return(
+     <div className="cellAction">
+       <Link to={`/`} className="link">
+         <div className="view">View</div>
+       </Link>
+     </div>
+    )
  }}]
 
   return (
@@ -38,7 +48,7 @@ function Table({categoriesData, title , height, columns , link , action}) {
         </div>
         <DataGrid style={{ height:`${height}vh`}}
             rows={categoriesData}
-            columns={action ? columns.concat(actionColumn) : columns.concat(actionColumnSubCategory)}
+            columns={action === 'categories' ? columns.concat(actionColumn) : action === 'subCategories' ? columns.concat(actionColumnSubCategory) : columns.concat(actionColumnUsers)}
             pageSize={10}
             rowsPerPageOptions={[10]}
         />
