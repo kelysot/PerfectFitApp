@@ -9,34 +9,68 @@ function EditForm({title,name,image,id,gender}) {
     gender: "",
     subCategory: ""
   });
+  const [editSub,setEditSub] = useState({
+    name: name,
+    pictureUrl: image,
+    posts: ""
+  })
 
   useEffect(() => {
-    setEdit((prevState) => ({
-      ...prevState,
-      pictureUrl: image,
-      name : name
-    }));
+    if(title === 'Edit Category'){
+      setEdit((prevState) => ({
+        ...prevState,
+        pictureUrl: image,
+        name : name
+      }));
+    }else{
+      setEditSub((prevState) => ({
+        ...prevState,
+        pictureUrl: image,
+        name : name
+      }));
+    }
   },[name,image]);
 
   function handle(e) { 
-    const newData = {...edit};
-    newData[e.target.id] = e.target.value;
-    setEdit(newData);
+    if(title === 'Edit Category'){
+      const newData = {...edit};
+      newData[e.target.id] = e.target.value;
+      setEdit(newData);
+    }else{
+      const newData = {...editSub};
+      newData[e.target.id] = e.target.value;
+      setEditSub(newData);
+    }
+    
   }
 
   function submit(e){
     e.preventDefault();
-    axios
-      .patch(`/category/${id}`, edit ,{
+    if(title === 'Edit Category'){
+      axios
+        .patch(`/category/${id}`, edit ,{
+          headers : {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNmI4OGE0N2U5MTQ3Mjk4NjIxMGIyYiIsImlhdCI6MTY1MTIxNDUwMCwiZXhwIjoxNjUxMzAwOTAwfQ.sjv8hCboY7uJ_uzH0dgqw_MbT1A0BDsTGk6E8Us_gdM'
+          }
+        })
+          .then(() =>  window.location.href = `/categories/${edit.name}&${gender}`)
+          .catch(err => {
+            console.error(err);
+        });
+    }else{
+      axios
+      .patch(`/subCategory/${id}`, editSub ,{
         headers : {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNmI4OGE0N2U5MTQ3Mjk4NjIxMGIyYiIsImlhdCI6MTY1MTIxNDUwMCwiZXhwIjoxNjUxMzAwOTAwfQ.sjv8hCboY7uJ_uzH0dgqw_MbT1A0BDsTGk6E8Us_gdM'
         }
       })
-        .then(() =>  window.location.href = `/categories/${edit.name}&${gender}`)
+        .then(() =>  window.location.href = `/categories` )
         .catch(err => {
           console.error(err);
       });
+    }
   }
 
   return (
@@ -47,17 +81,29 @@ function EditForm({title,name,image,id,gender}) {
         <div className="bottom">
         {(title && name && image) && (<>
             <div className="left">
-              <img src={edit.pictureUrl ? edit.pictureUrl : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}></img>
+              <img src={ (!edit.pictureUrl && editSub.pictureUrl)  ? (title === 'Edit Category' ? edit.pictureUrl : editSub.pictureUrl) : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg" }></img>
             </div>
             <div className="right">
               <form onSubmit={(e)=>submit(e)}>
                 <div className="formInput">
                   <label>Name</label>
-                  <input type="text" onChange={(e)=>handle(e)} id="name" autoComplete='off' value={edit.name}></input>
+                  <input 
+                    type="text"
+                    onChange={(e)=>handle(e)}
+                    id="name" 
+                    autoComplete='off' 
+                    value={title === 'Edit Category' ? edit.name : editSub.name}>
+                  </input>
                 </div>
                 <div className="formInput">
                   <label>Image</label>
-                  <input type="text" onChange={(e)=>handle(e)} id="pictureUrl" autoComplete='off' value={edit.pictureUrl}></input>
+                  <input 
+                    type="text" 
+                    onChange={(e)=>handle(e)} 
+                    id="pictureUrl" 
+                    autoComplete='off' 
+                    value={title === 'Edit Category' ? edit.pictureUrl : editSub.pictureUrl}>
+                  </input>
                 </div>
                 <button>Save</button>
               </form>

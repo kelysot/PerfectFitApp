@@ -52,6 +52,14 @@ const getSubCategoriesByCategoryId = async (req, res) => {
     }
 }
 
+const getSubCategoriesByNameAndGender = async (req, res) => {
+    const subCategoryData = req.params.data
+    const subCategory = await SubCategory.findOne({ 'name': subCategoryData.split('&')[0] ,'gender': subCategoryData.split('&')[1]})
+    res.json({
+        subCategory: subCategory
+    });
+}
+
 const addSubCategory = async (req, res) => {
     console.log(req.params.id)
     const categoryId = req.params.id
@@ -106,7 +114,7 @@ const editSubCategory = async (req, res) => {
         const editSubCategory = await SubCategory.findById(req.params.id)
         editSubCategory.name = req.body.name
         editSubCategory.pictureUrl = req.body.pictureUrl
-        editSubCategory.posts = req.body.posts
+        editSubCategory.posts = editSubCategory.posts
 
         editSubCategory.save((error, editSubCategory) => {
             if (error) {
@@ -181,6 +189,7 @@ const deleteSubCategory = async (req, res) => {
 
 module.exports = {
     getSubCategories,
+    getSubCategoriesByNameAndGender,
     addSubCategory,
     editSubCategory,
     deleteSubCategory,

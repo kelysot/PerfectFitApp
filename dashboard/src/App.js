@@ -44,6 +44,7 @@ function App() {
           <Route path="newCategory" element={<NewCategory nameOfAdmin={nameOfAdmin}/>}></Route>
           <Route path="editCategory/:id" element={<Edit nameOfAdmin={nameOfAdmin} />}></Route>
           <Route path="newSubCategory/:id" element={<NewSubCategory nameOfAdmin={nameOfAdmin} />}></Route>
+          <Route path="editSubCategory/:id" element={<Edit nameOfAdmin={nameOfAdmin} />}></Route>
         </Route>
       </Routes>
     </AppStyle>

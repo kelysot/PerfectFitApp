@@ -16,6 +16,17 @@ function Table({categoriesData, title , height, columns , link , action}) {
      )
   }}]
 
+  const actionColumnSubCategory = [{field: 'action', headerName:"Action", width: 250, renderCell: (params)=> {
+    return(
+     <div className="cellAction">
+       <Link to={`/categories/editSubCategory/${params.row.name}&${params.row.gender}`} className="link">
+         <div className="edit">Edit</div>
+       </Link>
+       <div className="delete">Delete</div>
+     </div>
+    )
+ }}]
+
   return (
     <CategoriesTableStyle>
       { (categoriesData && columns) && (<>
@@ -27,7 +38,7 @@ function Table({categoriesData, title , height, columns , link , action}) {
         </div>
         <DataGrid style={{ height:`${height}vh`}}
             rows={categoriesData}
-            columns={action ? columns.concat(actionColumn) : columns}
+            columns={action ? columns.concat(actionColumn) : columns.concat(actionColumnSubCategory)}
             pageSize={10}
             rowsPerPageOptions={[10]}
         />
@@ -142,7 +153,7 @@ const CategoriesTableStyle = styled.div`
         color: var(--color-dark-variant);
       }
 
-      .view{
+      .view , .edit{
         background-color:#3e98c766;
         &:hover{
           color:white;

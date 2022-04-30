@@ -4,7 +4,6 @@ import TopBar from '../../components/TopBar';
 import styled from "styled-components";
 import EditForm from '../../components/EditForm';
 
-//FIXME: Use the same page to edit category and subcategory
 function Edit({nameOfAdmin}) {
     const[location,setLocation] = useState("");
     const[editCategory,setEditCategory] = useState({
@@ -43,9 +42,26 @@ function Edit({nameOfAdmin}) {
                         gender : data.category.gender
                       }));
                   })
-        }else{
+        }else if(location.includes('editSubCategory')){
             setLocation(editSubCategory.title);
-        }
+            fetch(`/subCategory/edit/getSubCategoriesByNameAndGender/${categoryData}` , {
+              headers : { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNmI4OGE0N2U5MTQ3Mjk4NjIxMGIyYiIsImlhdCI6MTY1MTIxNDUwMCwiZXhwIjoxNjUxMzAwOTAwfQ.sjv8hCboY7uJ_uzH0dgqw_MbT1A0BDsTGk6E8Us_gdM'
+               }
+            })
+              .then((res) => res.json())
+                .then((data) => {
+                  setEditSubCategory((prevState) => ({
+                    ...prevState,
+                    image: data.subCategory.pictureUrl,
+                    name : data.subCategory.name,
+                    id: data.subCategory._id,
+                    gender : data.subCategory.gender
+                  }));
+                })
+      }
     },[])
 
     return (
@@ -53,7 +69,13 @@ function Edit({nameOfAdmin}) {
         <SideBar/>
             <div className="newCategoryContainer">
                 <TopBar  nameOfAdmin={nameOfAdmin} />
-                <EditForm title={location} name={editCategory.name} image={editCategory.image} id={editCategory.id} gender={editCategory.gender}/>
+                <EditForm 
+                  title={location} 
+                  name={location === 'Edit Category' ? editCategory.name : editSubCategory.name} 
+                  image={location === 'Edit Category' ? editCategory.image : editSubCategory.image} 
+                  id={location === 'Edit Category' ? editCategory.id : editSubCategory.id} 
+                  gender={location === 'Edit Category' ? editCategory.gender : editSubCategory.gender}
+                />
             </div>
         </EditStyle>
     )
