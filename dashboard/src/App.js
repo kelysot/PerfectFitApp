@@ -11,7 +11,7 @@ import Edit from "./pages/edit/Edit";
 import {Routes,Route} from "react-router-dom";
 import styled from "styled-components";
 import {DarkModeContext} from '../src/context/darkModeContext';
-import Users from "./pages/users/Users";
+import Profiles from "./pages/profiles/Profiles";
 
 function App() {
 
@@ -47,7 +47,7 @@ function App() {
           <Route path="editSubCategory/:id" element={<Edit nameOfAdmin={nameOfAdmin} />}></Route>
         </Route>
         <Route path="users">
-          <Route index element={<Users  nameOfAdmin={nameOfAdmin} />}></Route>
+          <Route index element={<Profiles nameOfAdmin={nameOfAdmin} />}></Route>
         </Route>
       </Routes>
     </AppStyle>

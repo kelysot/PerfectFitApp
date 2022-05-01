@@ -230,6 +230,8 @@ router.get('/getProfile/:email/:userName', authenticate, Profile.getProfile)
 
 router.get('/checkIfUserNameExist/:userName', authenticate, Profile.checkIfUserNameExist)
 
+router.get('/profilePage/all',authenticate,Profile.getAllProfiles)
+
 
 module.exports = router
 
