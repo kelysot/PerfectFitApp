@@ -89,7 +89,7 @@ const addNewPost = async (req, res) => {
 
     //TODO: findOne instead of find:
     const subCategories = await SubCategory.find({ 'name': post.subCategoryId, 'gender': profile.gender })
-    if(subCategories[0].posts == undefined && subCategories[0].posts == null){
+    if (subCategories[0].posts == undefined && subCategories[0].posts == null) {
         subCategories[0].posts = []
     }
 
@@ -108,6 +108,7 @@ const addNewPost = async (req, res) => {
 
     var array = profile._doc.myPostsListId
     array.push(post._id)
+
     profile.myPostsListId = array
 
     post.save((error, post) => {
@@ -124,11 +125,6 @@ const addNewPost = async (req, res) => {
             })
         }
     })
-
-
-    var array = profile._doc.myPostsListId
-    array.push(post._id)
-    profile.myPostsListId = array
 
     profile.save((error) => {
         if (error) {
@@ -326,16 +322,14 @@ const getProfilePosts = async (req, res) => {
 
 const getDates = async (req, res) => {
 
-    console.log("hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
-    console.log( req.params.date )
-    const lastDate = req.params.date 
+    const lastDate = req.params.date
 
-    const posts = await Post.find({date: {
-        $gte: lastDate,
-        $lt: new Date()
-    }}) 
-
-    console.log(posts)
+    const posts = await Post.find({
+        date: {
+            $gte: lastDate,
+            $lt: new Date()
+        }
+    })
 }
 
 module.exports = {
