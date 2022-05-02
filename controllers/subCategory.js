@@ -54,14 +54,13 @@ const getSubCategoriesByCategoryId = async (req, res) => {
 
 const getSubCategoriesByNameAndGender = async (req, res) => {
     const subCategoryData = req.params.data
-    const subCategory = await SubCategory.findOne({ 'name': subCategoryData.split('&')[0] ,'gender': subCategoryData.split('&')[1]})
+    const subCategory = await SubCategory.findOne({ 'name': subCategoryData.split('&')[0], 'gender': subCategoryData.split('&')[1] })
     res.json({
         subCategory: subCategory
     });
 }
 
 const addSubCategory = async (req, res) => {
-    console.log(req.params.id)
     const categoryId = req.params.id
     const newSubCategory = SubCategory({
         "name": req.body.name,
