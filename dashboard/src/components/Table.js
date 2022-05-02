@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { DataGrid } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
 
-function Table({categoriesData, title , height, columns , link , action}) {
+function Table({categoriesData, title , height, columns , link , action,addNew}) {
 
   const actionColumn = [{field: 'action', headerName:"Action", width: 250, renderCell: (params)=> {
      return(
@@ -27,10 +27,10 @@ function Table({categoriesData, title , height, columns , link , action}) {
     )
   }}]
 
-  const actionColumnUsers = [{field: 'action', headerName:"Action", width: 250, renderCell: (params)=> {
+  const actionColumnUsers = [{field: 'action', headerName:"Action", width: 180, renderCell: (params)=> {
     return(
      <div className="cellAction">
-       <Link to={`/`} className="link">
+       <Link to={`/users`} className="link">
          <div className="view">View</div>
        </Link>
      </div>
@@ -42,7 +42,7 @@ function Table({categoriesData, title , height, columns , link , action}) {
       { (categoriesData && columns) && (<>
         <div className="tableTop">
           <h3 className="title">{title}</h3>
-          <Link to={link} className="link">
+          <Link to={link} className={addNew ? "link" : "notLink" }>
             Add New
           </Link>
         </div>
@@ -95,6 +95,10 @@ const CategoriesTableStyle = styled.div`
           background-color: #00800038;
           border-color: #00800038;
         }
+      }
+
+      .notLink{
+        display: none;
       }
     }
 

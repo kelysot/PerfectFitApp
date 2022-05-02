@@ -32,7 +32,6 @@ const getProfile = async (req, res) => {
     }
 }
 
-
 const getProfileByUserName = async (req, res) => {
 
     const userName = req.params.userName
@@ -55,6 +54,34 @@ const getProfileByUserName = async (req, res) => {
     }
 }
 
+
+const getAllProfiles = async (req, res) => {
+    const profilesList = await Profile.find()
+    const dataToTable = []
+
+    const createData = async (arr) => {
+        for(let i = 0; i < arr.length; i++) {
+            let profileData = {
+                id: i+1,
+                image: arr[i].pictureUrl,
+                firstName: arr[i].firstName,
+                lastName: arr[i].lastName,
+                userName: arr[i].userName,
+                gender: arr[i].gender,
+                birthday: arr[i].birthday,
+                email: arr[i].userId
+            }
+            dataToTable.push(profileData)
+        }
+        return dataToTable
+    }
+
+    createData(profilesList).then((data) => {
+        res.json({
+            data : data
+        });
+    })
+}
 
 const addNewProfile = async (req, res) => {
 
@@ -305,6 +332,7 @@ const deleteProfile = async (req, res) => {
 module.exports = {
     addNewProfile,
     getProfileById,
+    getAllProfiles,
     editProfile,
     deleteProfile,
     getProfile,

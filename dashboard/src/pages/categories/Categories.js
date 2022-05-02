@@ -27,7 +27,7 @@ function Categories({nameOfAdmin}) {
         <div className="categoryContainer">
           <TopBar  nameOfAdmin={nameOfAdmin} />
           <div className="categoriesList">
-            <Table categoriesData={categoriesData} action={'categories'} columns={columns} title={'Categories List'} height={56} link={'/categories/newCategory'}/>
+            <Table categoriesData={categoriesData} addNew={true} action={'categories'} columns={columns} title={'Categories List'} height={56} link={'/categories/newCategory'}/>
           </div>
         </div>
     </CategoryStyle>
