@@ -44,7 +44,6 @@ const getProfileByUserName = async (req, res) => {
     }
     try {
         const profile = await Profile.findOne({ 'userName': userName })
-        console.log(profile)
         res.status(200).send(profile)
     } catch (err) {
         res.status(400).send({
@@ -60,9 +59,9 @@ const getAllProfiles = async (req, res) => {
     const dataToTable = []
 
     const createData = async (arr) => {
-        for(let i = 0; i < arr.length; i++) {
+        for (let i = 0; i < arr.length; i++) {
             let profileData = {
-                id: i+1,
+                id: i + 1,
                 image: arr[i].pictureUrl,
                 firstName: arr[i].firstName,
                 lastName: arr[i].lastName,
@@ -78,7 +77,7 @@ const getAllProfiles = async (req, res) => {
 
     createData(profilesList).then((data) => {
         res.json({
-            data : data
+            data: data
         });
     })
 }

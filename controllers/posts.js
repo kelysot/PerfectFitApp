@@ -152,23 +152,23 @@ const editPost = async (req, res) => {
     }
     try {
         const editPost = await Post.findById(id)
-        editPost.profileId = post.profileId
-        editPost.description = post.description
-        editPost.productName = post.productName
-        editPost.sku = post.sku
-        editPost.size = post.size,
-            editPost.company = post.company,
-            editPost.price = post.price,
-            editPost.color = post.color,
-            editPost.categoryId = post.categoryId,
-            editPost.subCategoryId = post.subCategoryId,
-            editPost.date = post.date,
-            editPost.link = post.link,
-            editPost.sizeAdjustment = post.sizeAdjustment,
-            editPost.rating = post.rating,
-            editPost.picturesUrl = post.picturesUrl,
-            editPost.likes = post.likes,
-            editPost.comments = post.comments
+        editPost.profileId = req.body.profileId
+        editPost.description = req.body.description
+        editPost.productName = req.body.productName
+        editPost.sku = req.body.sku
+        editPost.size = req.body.size
+        editPost.company = req.body.company
+        editPost.price = req.body.price
+        editPost.color = req.body.color
+        editPost.categoryId = req.body.categoryId
+        editPost.subCategoryId = req.body.subCategoryId
+        editPost.date = req.body.date
+        editPost.link = req.body.link
+        editPost.sizeAdjustment = req.body.sizeAdjustment
+        editPost.rating = req.body.rating
+        editPost.picturesUrl = req.body.picturesUrl
+        editPost.likes = req.body.likes
+        editPost.comments = req.body.comments
 
         editPost.save((error, editPost) => {
             if (error) {
