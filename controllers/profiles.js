@@ -32,6 +32,30 @@ const getProfile = async (req, res) => {
     }
 }
 
+
+const getProfileByUserName = async (req, res) => {
+
+    const userName = req.params.userName
+
+    if (userName == null || userName == undefined) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+    try {
+        const profile = await Profile.findOne({ 'userName': userName })
+        console.log(profile)
+        res.status(200).send(profile)
+    } catch (err) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+}
+
+
 const addNewProfile = async (req, res) => {
 
     const email = req.body.userId
@@ -44,7 +68,7 @@ const addNewProfile = async (req, res) => {
         gender: req.body.gender,
         userName: req.body.userName,
         birthday: req.body.birthday,
-        pictureUrl: "picture",
+        pictureUrl: req.body.pictureUrl,
         shoulder: req.body.shoulder,
         chest: req.body.chest,
         basin: req.body.basin,
@@ -126,8 +150,8 @@ const editProfile = async (req, res) => {
             'error': err.message
         })
     }
-    if(previousName != null && previousName != undefined){
-       userName = previousName
+    if (previousName != null && previousName != undefined) {
+        userName = previousName
     }
 
     try {
@@ -152,7 +176,7 @@ const editProfile = async (req, res) => {
         newEditProfile.trackers = req.body.trackers
         newEditProfile.notifications = req.body.notifications
         newEditProfile.wishlist = req.body.wishlist
-        newEditProfile.myPostsListId = req.body.myPostsListId 
+        newEditProfile.myPostsListId = req.body.myPostsListId
 
         newEditProfile.save((error, newEditProfile) => {
             if (error) {
@@ -169,18 +193,18 @@ const editProfile = async (req, res) => {
         })
 
         userName = req.body.userName
-        if(previousName != null && previousName != undefined){
+        if (previousName != null && previousName != undefined) {
 
             const email = newEditProfile.userId
             const user = await User.findOne({ email: { $eq: email } })
             var array = user.profilesId
             var arr = []
 
-            array.forEach((element)=> {
-                if(element == previousName){
+            array.forEach((element) => {
+                if (element == previousName) {
                     arr.push(userName)
                 }
-                else{
+                else {
                     arr.push(element)
                 }
             })
@@ -231,7 +255,7 @@ const deleteProfile = async (req, res) => {
         })
     }
     try {
-        const profileToDelete = await Profile.findOne({'userName' : req.params.userName})
+        const profileToDelete = await Profile.findOne({ 'userName': req.params.userName })
         const email = profileToDelete.userId
         profileToDelete.remove((error) => {
             if (error) {
@@ -250,14 +274,14 @@ const deleteProfile = async (req, res) => {
 
         //TODO: remove from the user itself!
 
-        const newUser = await User.findOne({'email' : email})
+        const newUser = await User.findOne({ 'email': email })
         newUser.profilesId.forEach(element => {
-            if(element == profileToDelete.userName){
+            if (element == profileToDelete.userName) {
                 newUser.profilesId.remove(element)
             }
         });
 
-        
+
         newUser.save((error, newUser) => {
             if (error) {
                 res.status(400).send({
@@ -284,5 +308,6 @@ module.exports = {
     editProfile,
     deleteProfile,
     getProfile,
-    checkIfUserNameExist
+    checkIfUserNameExist,
+    getProfileByUserName
 }
