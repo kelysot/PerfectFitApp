@@ -228,6 +228,8 @@ router.patch('/', authenticate, Profile.editProfile)
 
 router.get('/getProfile/:email/:userName', authenticate, Profile.getProfile)
 
+router.get('/getProfile/:userName', authenticate, Profile.getProfileByUserName)
+
 router.get('/checkIfUserNameExist/:userName', authenticate, Profile.checkIfUserNameExist)
 
 router.get('/profilePage/all',authenticate,Profile.getAllProfiles)
