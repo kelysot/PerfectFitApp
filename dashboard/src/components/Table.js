@@ -33,7 +33,7 @@ function Table({categoriesData, title , height, columns , link , action,addNew})
        <Link to={`/categories/editSubCategory/${params.row.name}&${params.row.gender}`} className="link">
          <div className="edit">Edit</div>
        </Link>
-       <div className="delete" onClick={() => nameToDelete(params.row.name)}>Delete</div>
+       <div className="delete" onClick={() => nameToDelete(params.row.name,params.row.gender)}>Delete</div>
      </div>
     )
   }}]

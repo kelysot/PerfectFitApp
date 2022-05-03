@@ -2,20 +2,34 @@ import React from 'react';
 import styled from "styled-components";
 
 function PopUp(props) {
-
   const deleteRow = () => {
-      console.log(props.name);
-    fetch(`/category/getByGenderAndName/${props.name}` , {
-        headers : { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-         }
-      })
-        .then((res) => res.json())
-          .then((data) => {
-            console.log(data.category);
-            props.setTrigger(false);
-        })
+    let location = window.location.href;
+    if(!location.includes('&')){
+        fetch(`/category/getByGenderAndName/${props.name}` , {
+            headers : { 
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+             }
+          })
+            .then((res) => res.json())
+              .then((data) => {
+                console.log(data.category);
+                props.setTrigger(false);
+            })
+    }else{
+        fetch(`/subCategory/edit/getSubCategoriesByNameAndGender/${props.name}` , {
+            headers : { 
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+              'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MTU1OTQ3NywiZXhwIjoxNjUxNjQ1ODc3fQ.XyIxQa-OhoUmVcQHEl4MMW0PmEAMQVOO8jgT9DKJixc'
+             }
+          })
+            .then((res) => res.json())
+              .then((data) => {
+                console.log(data.subCategory);
+                props.setTrigger(false);
+            })
+    }
   } 
 
   return (props.trigger) ? (
