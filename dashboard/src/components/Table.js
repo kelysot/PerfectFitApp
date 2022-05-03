@@ -8,10 +8,12 @@ function Table({categoriesData, title , height, columns , link , action,addNew})
 
   const[popUpButton,setPopUpButton] = useState(false);
   const[name,setName] = useState("");
+  const[gender,setGender] = useState("");
 
-  const nameToDelete = (categoryName) => {
+  const nameToDelete = (categoryName,categoryGender) => {
     setPopUpButton(true);
     setName(categoryName);
+    setGender(categoryGender);
   }
 
   const actionColumn = [{field: 'action', headerName:"Action", width: 250, renderCell: (params)=> {
@@ -20,7 +22,7 @@ function Table({categoriesData, title , height, columns , link , action,addNew})
         <Link to={`/categories/${params.row.name}&${params.row.gender}`} className="link">
           <div className="view">View</div>
         </Link>
-        <div className="delete" onClick={() => nameToDelete(params.row.name)}>Delete</div>
+        <div className="delete" onClick={() => nameToDelete(params.row.name,params.row.gender)}>Delete</div>
       </div>
      )
   }}]
@@ -48,8 +50,8 @@ function Table({categoriesData, title , height, columns , link , action,addNew})
 
   return (
     <CategoriesTableStyle>
-      <PopUp trigger={popUpButton} setTrigger={setPopUpButton}>
-        <h3>{`Delete ${name}`}</h3>
+      <PopUp trigger={popUpButton} setTrigger={setPopUpButton} name={`${name}&${gender}`}>
+        <h3>{gender ?  `Delete ${name} from ${gender}` : `Delete ${name}`}</h3>
         <p>Are you sure you want to delete?</p>
       </PopUp>
       { (categoriesData && columns) && (<>

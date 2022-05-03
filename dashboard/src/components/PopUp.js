@@ -2,12 +2,28 @@ import React from 'react';
 import styled from "styled-components";
 
 function PopUp(props) {
+
+  const deleteRow = () => {
+      console.log(props.name);
+    fetch(`/category/getByGenderAndName/${props.name}` , {
+        headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+         }
+      })
+        .then((res) => res.json())
+          .then((data) => {
+            console.log(data.category);
+            props.setTrigger(false);
+        })
+  } 
+
   return (props.trigger) ? (
     <PopUpStyle>
         <div className="popup-inner">
             {props.children}
             <div className="popup-buttons">
-                <button id="delete-button">Delete</button>
+                <button id="delete-button" onClick={deleteRow}>Delete</button>
                 <button id="cancel-button" onClick={()=> props.setTrigger(false)}>Cancel</button>
             </div>
         </div>
