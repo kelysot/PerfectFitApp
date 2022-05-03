@@ -15,7 +15,7 @@ function Profiles({nameOfAdmin}) {
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MTQ0NTM2MiwiZXhwIjoxNjUxNTMxNzYyfQ.yhrX8PYj4MZeNpT996uyMGCY5RnFyNT68Rzg0Y5TEWk'
+        'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MTU1OTQ3NywiZXhwIjoxNjUxNjQ1ODc3fQ.XyIxQa-OhoUmVcQHEl4MMW0PmEAMQVOO8jgT9DKJixc'
        }
     })
       .then((res) => res.json())

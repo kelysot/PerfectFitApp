@@ -1,9 +1,18 @@
-import React from 'react';
+import React , {useState} from 'react';
 import styled from "styled-components";
 import { DataGrid } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
+import PopUp from '../components/PopUp';
 
 function Table({categoriesData, title , height, columns , link , action,addNew}) {
+
+  const[popUpButton,setPopUpButton] = useState(false);
+  const[name,setName] = useState("");
+
+  const nameToDelete = (categoryName) => {
+    setPopUpButton(true);
+    setName(categoryName);
+  }
 
   const actionColumn = [{field: 'action', headerName:"Action", width: 250, renderCell: (params)=> {
      return(
@@ -11,7 +20,7 @@ function Table({categoriesData, title , height, columns , link , action,addNew})
         <Link to={`/categories/${params.row.name}&${params.row.gender}`} className="link">
           <div className="view">View</div>
         </Link>
-        <div className="delete">Delete</div>
+        <div className="delete" onClick={() => nameToDelete(params.row.name)}>Delete</div>
       </div>
      )
   }}]
@@ -22,7 +31,7 @@ function Table({categoriesData, title , height, columns , link , action,addNew})
        <Link to={`/categories/editSubCategory/${params.row.name}&${params.row.gender}`} className="link">
          <div className="edit">Edit</div>
        </Link>
-       <div className="delete">Delete</div>
+       <div className="delete" onClick={() => nameToDelete(params.row.name)}>Delete</div>
      </div>
     )
   }}]
@@ -39,6 +48,10 @@ function Table({categoriesData, title , height, columns , link , action,addNew})
 
   return (
     <CategoriesTableStyle>
+      <PopUp trigger={popUpButton} setTrigger={setPopUpButton}>
+        <h3>{`Delete ${name}`}</h3>
+        <p>Are you sure you want to delete?</p>
+      </PopUp>
       { (categoriesData && columns) && (<>
         <div className="tableTop">
           <h3 className="title">{title}</h3>
