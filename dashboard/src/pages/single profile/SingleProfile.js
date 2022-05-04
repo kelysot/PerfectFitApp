@@ -9,7 +9,10 @@ function SingleProfile({nameOfAdmin}) {
         <SideBar/>
         <div className='singleContainer'>
             <TopBar  nameOfAdmin={nameOfAdmin} />
-            <h1>Single Profile</h1>
+            <div className='cards'>
+              <div className='details-card'>Details Cared</div>
+              <div className='right'>Graph</div>
+            </div>
         </div>
     </SingleProfileStyle>
   )
@@ -26,7 +29,30 @@ const SingleProfileStyle = styled.div`
         flex:6 ;
         background-color: #f8f0e8a6;
         border-top-right-radius: 15px;
-        border-bottom-right-radius: 15px;   
+        border-bottom-right-radius: 15px; 
+        
+        .cards{
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          height: 75vh;
+
+          .details-card{
+            width: 350px;
+            height: 450px;
+            background: #fff;
+            box-shadow: 0 35px 80px rgba(0,0,0,0.15);
+            border-radius: 20px;
+          }
+  
+          .right {
+            width: 350px;
+            height: 450px;
+            background: #fff;
+            box-shadow: 0 35px 80px rgba(0,0,0,0.15);
+            border-radius: 20px;
+          }
+        }
     }
 `
 
