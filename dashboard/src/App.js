@@ -7,11 +7,13 @@ import Categories from "./pages/categories/Categories";
 import NewCategory from "./pages/new category/NewCategory";
 import NewSubCategory from "./pages/newSubCategory/NewSubCategory";
 import SingleCategory from "./pages/single category/SingleCategory";
+import SingleProfile from "./pages/single profile/SingleProfile";
 import Edit from "./pages/edit/Edit";
 import {Routes,Route} from "react-router-dom";
 import styled from "styled-components";
 import {DarkModeContext} from '../src/context/darkModeContext';
 import Profiles from "./pages/profiles/Profiles";
+import Setting from "./pages/admin setting/Setting";
 
 function App() {
 
@@ -48,10 +50,11 @@ function App() {
         </Route>
         <Route path="users">
           <Route index element={<Profiles nameOfAdmin={nameOfAdmin} />}></Route>
+          <Route path=":id" element={<SingleProfile nameOfAdmin={nameOfAdmin} />}></Route>
         </Route>
+        <Route path="setting" element={<Setting nameOfAdmin={nameOfAdmin} />}></Route>
       </Routes>
     </AppStyle>
-    //TODO: option to add more routes for example to users
   );
 }
 

@@ -49,7 +49,7 @@ function SideBar() {
                   <h3>Profiles</h3>
               </li>
             </StyledLink>
-            <StyledLink to=""  onClick={()=> handlerSelectItem(3)}>
+            <StyledLink to="/setting"  onClick={()=> handlerSelectItem(3)}>
               <li>
                   <span className="material-icons-sharp">settings</span>
                   <h3>Setting</h3>

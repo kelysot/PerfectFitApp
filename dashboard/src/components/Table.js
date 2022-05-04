@@ -41,7 +41,7 @@ function Table({categoriesData, title , height, columns , link , action,addNew})
   const actionColumnUsers = [{field: 'action', headerName:"Action", width: 180, renderCell: (params)=> {
     return(
      <div className="cellAction">
-       <Link to={`/users`} className="link">
+       <Link to={`/users/${params.row.userName}`} className="link">
          <div className="view">View</div>
        </Link>
      </div>
