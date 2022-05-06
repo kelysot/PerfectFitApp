@@ -51,7 +51,7 @@ function NewCategory({nameOfAdmin}) {
       .post(`/subCategory/${categoryId}`, newSubCategory ,{
         headers : {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MTY1Njk1MiwiZXhwIjoxNjUxNzQzMzUyfQ.vXy_-vMtWBZGUUkhvqlVwfRwERvrdYpPjlzW0xMTn8g'
+          'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MTg0MDQzNywiZXhwIjoxNjUxOTI2ODM3fQ.Gi3_Tm2zDO7Kzis5w5KTZR8EDprYmre9RYCfEY7dM-g'
         }
       })
         .then(() => window.location.href = `/categories/${categoryName}&${categoryGender}`)
