@@ -2,10 +2,13 @@ import React , {useEffect,useState} from 'react';
 import SideBar from "../../components/SideBar";
 import TopBar from "../../components/TopBar";
 import styled from "styled-components";
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
 
 function SingleProfile({nameOfAdmin}) {
 
   const[profileData,setProfileData] = useState("");
+  const[dataToChart,setDataToChart] = useState("");
+
   useEffect(() => {
     let location = window.location.href;
     let userName = location.split("/").slice(-1).pop();
@@ -13,13 +16,24 @@ function SingleProfile({nameOfAdmin}) {
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MTg0MDQzNywiZXhwIjoxNjUxOTI2ODM3fQ.Gi3_Tm2zDO7Kzis5w5KTZR8EDprYmre9RYCfEY7dM-g'
+        'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MTkyNjk5OSwiZXhwIjoxNjUyMDEzMzk5fQ.f7QjU4nOfecgNP-8dd7C0qMU7rKZgDNSZqmeac-QeU0'
        }
     }) 
       .then((res) => res.json())
         .then((data) => {
           setProfileData(data);
         })
+
+    fetch(`/dashboard/users/${userName}`, {
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        }
+      }) 
+        .then((res) => res.json())
+          .then((data) => {
+            setDataToChart(data.data);
+          })
   },[]);
 
   return (
@@ -28,7 +42,7 @@ function SingleProfile({nameOfAdmin}) {
         <div className='singleContainer'>
             <TopBar  nameOfAdmin={nameOfAdmin} />
             <div className='cards'>
-              { profileData &&(<>
+            { (profileData && dataToChart) &&(<>
                 <div className='details-card'>
                 <div className='image-box'>
                   <img src={profileData.pictureUrl}></img>
@@ -61,13 +75,28 @@ function SingleProfile({nameOfAdmin}) {
                   </div>
                 </div>
               </div>
-              </>)}
-              <div className='right'>Graph</div>
+              <div className='right'>
+              <ResponsiveContainer width="100%" height="100%">
+                <RadarChart cx="50%" cy="60%" outerRadius="90%" data={dataToChart.length < 3 ? data2 : dataToChart}>
+                  {dataToChart.length < 3 ?  "" : <PolarGrid />}
+                  <PolarAngleAxis dataKey="categoryName" />
+                  <PolarRadiusAxis />
+                  <Radar name="Mike" dataKey="amount" stroke="#8884d8" fill="#8884d8" fillOpacity={0.5} />
+                </RadarChart>
+              </ResponsiveContainer>
+              </div>
+            </>)}
             </div>
         </div>
     </SingleProfileStyle>
   )
 };
+
+const data2 = [
+  {
+    categoryName: "There is not enough information about this profile"
+  }
+];
 
 const SingleProfileStyle = styled.div`
   display:flex;
@@ -168,8 +197,8 @@ const SingleProfileStyle = styled.div`
           }
 
           .right {
-            width: 350px;
-            height: 440px;
+            width: 550px;
+            height: 470px;
             background: #fff;
             box-shadow: 0 35px 80px rgba(0,0,0,0.15);
             border-radius: 20px;

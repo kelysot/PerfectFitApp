@@ -307,6 +307,30 @@ const getSubCategoriesData = async (req, res) => {
     });
 }
 
+//////////////////////////////////////*Profile Page*///////////////////////////////////////
+
+const getProfileChartData = async (req, res) => {
+    const userName = req.params.userName
+    const profile = await Profile.findOne({'userName' : userName})
+
+
+    getProfileCategoryData(profile.myPostsListId).then((data) => {
+        const chartData = []
+        for(let i = 0; i < data.categoriesName.length; i++) {
+            let category = {
+                categoryName : data.categoriesName[i],
+                amount : data.amountOfCategories[i]
+            }
+            chartData.push(category)
+        }
+
+        res.json({
+            data: chartData
+        });
+    })
+
+}
+
 //////////////////////////////////////*Functions*///////////////////////////////////////
 
 function sortTogether(array1, array2) {
@@ -332,6 +356,35 @@ function createDataToProfilesChat(bestProfilesNames,bestProfilesNumPosts,topProf
     }
 }
 
+async function getProfileCategoryData(arr){
+    const topCategories = {
+        categoriesName:[],
+        amountOfCategories: []
+    }
+
+    for(let i=0 ; i< arr.length; i++){
+        let currentPost = await Post.findById(arr[i])
+        let categoryName = currentPost.categoryId
+
+        if(!topCategories.categoriesName.includes(categoryName)){
+            topCategories.categoriesName.push(categoryName)
+            topCategories.amountOfCategories.push(1)
+        }else{
+            let index = topCategories.categoriesName.indexOf(categoryName)
+            topCategories.amountOfCategories[index] += 1
+        }
+    }
+
+    sortTogether(topCategories.amountOfCategories,topCategories.categoriesName)
+    const topSixCategories = topCategories.categoriesName.slice(0,6)
+    const topSixAmounts = topCategories.amountOfCategories.slice(0,6)
+
+    topCategories.categoriesName = topSixCategories
+    topCategories.amountOfCategories = topSixAmounts
+
+    return topCategories
+}
+
 module.exports = {
     getHello,
     getAmounts,
@@ -341,5 +394,6 @@ module.exports = {
     categoriesTableData,
     getSingleCategory,
     getSubCategoriesData,
-    getCategoryId
+    getCategoryId,
+    getProfileChartData
 }

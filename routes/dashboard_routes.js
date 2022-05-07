@@ -21,4 +21,6 @@ router.get('/categories/getId/:categoryData',Dashboard.getCategoryId)
 
 router.get('/categories/:categoryData/subCategoryData',Dashboard.getSubCategoriesData)
 
+router.get('/users/:userName',Dashboard.getProfileChartData)
+
 module.exports = router
