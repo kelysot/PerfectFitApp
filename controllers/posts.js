@@ -332,6 +332,57 @@ const getDates = async (req, res) => {
     })
 }
 
+const getSuitablePosts = async (req, res) => { 
+
+    const userName = req.params.profileId
+
+    if(userName == null || userName == undefined){
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+    try {
+
+        // first we find the profile
+        const profile = await Profile.findOne({ userName: { $eq: userName } })
+
+        // second we find the bodyType
+        const bodyType = profile.bodyType
+
+        // find all the profiles with the same bodyType
+        const profiles = await Profile.find({ bodyType: { $eq: bodyType } })
+        let profilesNamesArr = [];
+        for(let j=0; j< profiles.length; j++){
+            profilesNamesArr.push(profiles[j].userName)
+        }
+
+        // now we find all the posts that suitable to the bodyType
+
+        const posts = await Post.find()
+        let postsToSend = []
+       
+        for(let i=0; i < posts.length; i++){
+            if(profilesNamesArr.includes(posts[i].profileId)){
+                postsToSend.push(posts[i])
+                if(postsToSend.length == 50){
+                    break;
+                }
+            }
+        }
+
+        console.log("the number: " + postsToSend.length )
+        console.log("the posts to send: ---------------------------------------- ")
+        console.log(postsToSend)
+
+    } catch (err) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+}
+
 module.exports = {
     getPosts,
     getPostsBySubCategoryId,
@@ -341,6 +392,7 @@ module.exports = {
     deletePost,
     getWishList,
     getProfilePosts,
-    getDates
+    getDates,
+    getSuitablePosts
 }
 

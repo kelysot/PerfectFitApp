@@ -248,5 +248,7 @@ router.get('/getPostsBySubCategoryId/:subCategoryId', authenticate, Post.getPost
 
 router.get('/getDates/:date', authenticate, Post.getDates)
 
+router.get('/getSuitablePosts/:profileId', authenticate, Post.getSuitablePosts)
+
 
 module.exports = router
