@@ -347,26 +347,26 @@ const getSuitablePosts = async (req, res) => {
         // first we find the profile
         const profile = await Profile.findOne({ userName: { $eq: userName } })
 
-        // second we find the bodyType
+        // second we find the bodyType and gender
         const bodyType = profile.bodyType
         const gender = profile.gender
 
         // find all the profiles with the same bodyType and gender
         const profiles = await Profile.find({ bodyType: { $eq: bodyType }, gender: {$eq: gender}  })
-        console.log("************************ " )
+        console.log("************************" )
         console.log(profiles)
         let profilesNamesArr = [];
         for(let j=0; j< profiles.length; j++){
             profilesNamesArr.push(profiles[j].userName)
         }
 
-        // now we find all the posts that suitable to the bodyType
+        // now we find all the posts that suitable to the bodyType and gender
 
         console.log("--------------------------------------------")
         console.log(profilesNamesArr)
 
         let posts = await Post.find( {'profileId': {$in: profilesNamesArr} })
-        console.log("the posts: ========================================== ")
+        // console.log("the posts: ========================================== ")
         posts = posts.reverse()
         console.log(posts) 
 
@@ -380,7 +380,6 @@ const getSuitablePosts = async (req, res) => {
         //     }
         // }
 
-
         // now we got the posts include the profile posts: 
         // now we need to send every post and check the correlation between the two profiles.
         // if there is a correlation (more then the threshhold we choose), the post will be nent to the app.
@@ -388,6 +387,59 @@ const getSuitablePosts = async (req, res) => {
         // in order to do that, we create a map of profile/correlation that in every new profile we check
         // we save it inside the map (so in every post we need to check we first check in the map if we 
         // allready cheked this profile) and then add the posts to the list we send if is ok. 
+
+        let similarProfileId = profile.similarProfileId
+        var similarArr = []
+
+        if(similarProfileId == null || similarProfileId == undefined){ // check if needed
+            similarProfileId = []
+        }
+
+        let postsForSend = []
+
+        let vector1 = createVector(profile);
+        console.log(vector1)
+
+        console.log("the length = " +  posts.length)
+
+        for(let t = 0; t < posts.length; t++){
+
+            let userNameofPost = posts[t].profileId
+            console.log("the userNameofPost = " + userNameofPost)
+            // if the publisher of the post is in the list of "similarProfileId" we can add it immediately to the postsList. 
+            if(similarProfileId.includes(userNameofPost) || (userNameofPost == profile.userName )){
+                console.log("111")
+                postsForSend.push(posts[t])
+            }
+            // if not, we need to check the correlation between the two profiles:
+            else{
+                console.log("222")
+                // let userNameOfPost = posts[t].profileId
+                let profile2 = await Profile.findOne({ userName: { $eq: userNameofPost } })
+                let vector2 = createVector(profile2)
+                let thePearson = pearson(vector1, vector2)
+
+                console.log("the pearson of " + userNameofPost + " is = " + thePearson )
+
+                if(thePearson > 0.965){
+                    postsForSend.push(posts[t])
+                    // similarProfileId.push(userNameOfPost) // TODO: need to fix the schema
+                    similarArr.push(userNameofPost)
+                }
+            }
+        }
+
+        console.log("*******************************************************")
+
+        console.log("postsForSend: ")
+        console.log(postsForSend)
+        // console.log("similarProfileId: ")
+        // console.log(similarProfileId) // need to fix the schema
+        console.log("the similarArr = " + similarArr)
+
+        // need to update the similarProfileId
+        // we can decide that every week or month we delete this list so we could check the people again if 
+        // somthing has changed. 
 
     } catch (err) {
         res.status(400).send({
@@ -399,28 +451,32 @@ const getSuitablePosts = async (req, res) => {
 
 /************************************* functions for algorithm *************************************/
 
-function avg(x){
 
-    // x = [] 
+function createVector(profile){
+
+    let vector = []
+    vector.push(parseInt(profile.shoulder));
+    vector.push(parseInt(profile.chest));
+    vector.push(parseInt(profile.basin));
+    vector.push(parseInt(profile.waist));
+    vector.push(parseInt(profile.height));
+    vector.push(parseInt(profile.weight));
+
+    return vector;
+}
+
+function avg(x){
 
     if(x == null || x == undefined){
         return -1; 
     }
 
-    let count = 0; 
+    var count = 0 
     for(let i = 0; i < x.length; i++){
-        count += x[i]
+        count+= x[i]
     }
     count  = (count / x.length);
     return count; 
-
-    // float count = 0;
-    // for (int i = 0; i<x.length; i++)
-    // {
-    //     count += x[i];
-    // }
-    // count = (count / x.length);
-    // return count;
 }
 function variance(x){
 
@@ -435,16 +491,6 @@ function variance(x){
     let u = (avg(x) * avg(x));
     let V = (count - u);
     return V;
-
-    // float count = 0;
-    // for (int i = 0; i<x.length; i++)
-    // {
-    //     count+= (x[i] * x[i]);
-    // }
-    // count = (count / x.length);
-    // float u = (avg(x) * avg(x));
-    // float V = (count - u);
-    // return V;
 }
 
 function cov(x, y){
@@ -462,22 +508,6 @@ function cov(x, y){
     count = (count / x.length);
 
     return (count - (ax*ay));
-
-    // if (x == null || y == null){
-	// 	return -1;
-	// }
-    // float ex = avg(x);
-	// float ey = avg (y);
-
-    // float count2 = 0;
-	// for (int i = 0; i<x.length; i++)
-	// {
-	// 	count2 += (x[i] * y[i]);
-	// }
-	// count2 = count2 / x.length;
-		
-	// return (count2 - (ex*ey));
-
 }
 
 function pearson(x, y){ // x = [] sizes of profile 1, y = [] sizes of profile 2
@@ -486,11 +516,6 @@ function pearson(x, y){ // x = [] sizes of profile 1, y = [] sizes of profile 2
     let V2 = Math.sqrt(variance(y));
     let C =  cov(x,y);
     return (C/ (V1 * V2));
-
-    // float V1 = (float) Math.sqrt(var(x));
-    // float V2 = (float) Math.sqrt(var(y));
-    // float C = cov(x,y);
-    // return (C/ (V1 * V2));
 }
 
 
