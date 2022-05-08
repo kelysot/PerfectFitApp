@@ -276,13 +276,6 @@ const getWishList = async (req, res) => {
         const profile = await Profile.findOne({ userName: { $eq: userName } })
         const theList = profile.wishlist
 
-        // let i = 0
-        // var theArr = []
-        // let size = theList.length
-        // for(i=0; i<size; i++){
-        //     theArr.push(mongoose.Types.ObjectId(theList[i]))
-        // }
-
         var theReturnList = await Post.find({ '_id': { $in: theList } })
         res.status(200).send(theReturnList)
 
@@ -370,16 +363,6 @@ const getSuitablePosts = async (req, res) => {
         posts = posts.reverse()
         console.log(posts) 
 
-        // let postsToSend = []
-        // for(let i=0; i < posts.length; i++){
-        //     if(profilesNamesArr.includes(posts[i].profileId)){
-        //         postsToSend.push(posts[i])
-        //         if(postsToSend.length == 50){
-        //             break;
-        //         }
-        //     }
-        // }
-
         // now we got the posts include the profile posts: 
         // now we need to send every post and check the correlation between the two profiles.
         // if there is a correlation (more then the threshhold we choose), the post will be nent to the app.
@@ -406,8 +389,11 @@ const getSuitablePosts = async (req, res) => {
 
             let userNameofPost = posts[t].profileId
             console.log("the userNameofPost = " + userNameofPost)
+            let profile2 = await Profile.findOne({ userName: { $eq: userNameofPost } })
+            let id2 = profile2._id 
+
             // if the publisher of the post is in the list of "similarProfileId" we can add it immediately to the postsList. 
-            if(similarProfileId.includes(userNameofPost) || (userNameofPost == profile.userName )){
+            if(similarProfileId.includes(id2) || (userNameofPost == profile.userName )){
                 console.log("111")
                 postsForSend.push(posts[t])
             }
@@ -415,14 +401,15 @@ const getSuitablePosts = async (req, res) => {
             else{
                 console.log("222")
                 // let userNameOfPost = posts[t].profileId
-                let profile2 = await Profile.findOne({ userName: { $eq: userNameofPost } })
+                // let profile2 = await Profile.findOne({ userName: { $eq: userNameofPost } })
                 let vector2 = createVector(profile2)
                 let thePearson = pearson(vector1, vector2)
 
                 console.log("the pearson of " + userNameofPost + " is = " + thePearson )
 
-                if(thePearson > 0.965){
+                if(thePearson > 0.965){ //TODO: check the threshold
                     postsForSend.push(posts[t])
+                    similarProfileId.push(profile2._id)
                     // similarProfileId.push(userNameOfPost) // TODO: need to fix the schema
                     similarArr.push(userNameofPost)
                 }
@@ -430,16 +417,26 @@ const getSuitablePosts = async (req, res) => {
         }
 
         console.log("*******************************************************")
-
-        console.log("postsForSend: ")
-        console.log(postsForSend)
-        // console.log("similarProfileId: ")
-        // console.log(similarProfileId) // need to fix the schema
+        console.log("similarProfileId: ")
+        console.log(similarProfileId) // need to fix the schema
         console.log("the similarArr = " + similarArr)
 
         // need to update the similarProfileId
         // we can decide that every week or month we delete this list so we could check the people again if 
         // somthing has changed. 
+
+        profile.similarProfileId = similarProfileId
+
+        profile.save((error) => {
+            if (error) {
+                res.status(400).send({
+                    'status': 'fail',
+                    'error': error.message
+                })
+            } else {
+                res.status(200).send(postsForSend)
+            }
+        })
 
     } catch (err) {
         res.status(400).send({
