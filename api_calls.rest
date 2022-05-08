@@ -84,8 +84,8 @@ POST http://localhost:4000/auth/login
 Content-Type: application/json
 
 {
-    "email" : "y@gmail.com",
-    "password" : "123456",
+    "email" : "lilach",
+    "password" : "lilach",
     "type" : "client",
     "isConnected": "true"
 }
