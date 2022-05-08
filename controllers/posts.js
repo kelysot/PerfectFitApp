@@ -346,8 +346,6 @@ const getSuitablePosts = async (req, res) => {
 
         // find all the profiles with the same bodyType and gender
         const profiles = await Profile.find({ bodyType: { $eq: bodyType }, gender: {$eq: gender}  })
-        console.log("************************" )
-        console.log(profiles)
         let profilesNamesArr = [];
         for(let j=0; j< profiles.length; j++){
             profilesNamesArr.push(profiles[j].userName)
@@ -355,13 +353,8 @@ const getSuitablePosts = async (req, res) => {
 
         // now we find all the posts that suitable to the bodyType and gender
 
-        console.log("--------------------------------------------")
-        console.log(profilesNamesArr)
-
         let posts = await Post.find( {'profileId': {$in: profilesNamesArr} })
-        // console.log("the posts: ========================================== ")
         posts = posts.reverse()
-        console.log(posts) 
 
         // now we got the posts include the profile posts: 
         // now we need to send every post and check the correlation between the two profiles.
@@ -372,7 +365,6 @@ const getSuitablePosts = async (req, res) => {
         // allready cheked this profile) and then add the posts to the list we send if is ok. 
 
         let similarProfileId = profile.similarProfileId
-        var similarArr = []
 
         if(similarProfileId == null || similarProfileId == undefined){ // check if needed
             similarProfileId = []
@@ -381,45 +373,37 @@ const getSuitablePosts = async (req, res) => {
         let postsForSend = []
 
         let vector1 = createVector(profile);
-        console.log(vector1)
-
-        console.log("the length = " +  posts.length)
 
         for(let t = 0; t < posts.length; t++){
 
             let userNameofPost = posts[t].profileId
-            console.log("the userNameofPost = " + userNameofPost)
             let profile2 = await Profile.findOne({ userName: { $eq: userNameofPost } })
             let id2 = profile2._id 
 
             // if the publisher of the post is in the list of "similarProfileId" we can add it immediately to the postsList. 
             if(similarProfileId.includes(id2) || (userNameofPost == profile.userName )){
-                console.log("111")
+        
                 postsForSend.push(posts[t])
             }
             // if not, we need to check the correlation between the two profiles:
             else{
-                console.log("222")
-                // let userNameOfPost = posts[t].profileId
-                // let profile2 = await Profile.findOne({ userName: { $eq: userNameofPost } })
+            
                 let vector2 = createVector(profile2)
                 let thePearson = pearson(vector1, vector2)
 
-                console.log("the pearson of " + userNameofPost + " is = " + thePearson )
-
                 if(thePearson > 0.965){ //TODO: check the threshold
                     postsForSend.push(posts[t])
+                    if(similarProfileId.length == 100){
+                        similarProfileId.slice(1,100)
+                    }
                     similarProfileId.push(profile2._id)
-                    // similarProfileId.push(userNameOfPost) // TODO: need to fix the schema
-                    similarArr.push(userNameofPost)
                 }
             }
-        }
 
-        console.log("*******************************************************")
-        console.log("similarProfileId: ")
-        console.log(similarProfileId) // need to fix the schema
-        console.log("the similarArr = " + similarArr)
+            if(postsForSend.length == 300){
+                break;
+            }
+        }
 
         // need to update the similarProfileId
         // we can decide that every week or month we delete this list so we could check the people again if 
