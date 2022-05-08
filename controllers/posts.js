@@ -349,9 +349,12 @@ const getSuitablePosts = async (req, res) => {
 
         // second we find the bodyType
         const bodyType = profile.bodyType
+        const gender = profile.gender
 
-        // find all the profiles with the same bodyType
-        const profiles = await Profile.find({ bodyType: { $eq: bodyType } })
+        // find all the profiles with the same bodyType and gender
+        const profiles = await Profile.find({ bodyType: { $eq: bodyType }, gender: {$eq: gender}  })
+        console.log("************************ " )
+        console.log(profiles)
         let profilesNamesArr = [];
         for(let j=0; j< profiles.length; j++){
             profilesNamesArr.push(profiles[j].userName)
@@ -359,21 +362,32 @@ const getSuitablePosts = async (req, res) => {
 
         // now we find all the posts that suitable to the bodyType
 
-        const posts = await Post.find()
-        let postsToSend = []
-       
-        for(let i=0; i < posts.length; i++){
-            if(profilesNamesArr.includes(posts[i].profileId)){
-                postsToSend.push(posts[i])
-                if(postsToSend.length == 50){
-                    break;
-                }
-            }
-        }
+        console.log("--------------------------------------------")
+        console.log(profilesNamesArr)
 
-        console.log("the number: " + postsToSend.length )
-        console.log("the posts to send: ---------------------------------------- ")
-        console.log(postsToSend)
+        let posts = await Post.find( {'profileId': {$in: profilesNamesArr} })
+        console.log("the posts: ========================================== ")
+        posts = posts.reverse()
+        console.log(posts) 
+
+        // let postsToSend = []
+        // for(let i=0; i < posts.length; i++){
+        //     if(profilesNamesArr.includes(posts[i].profileId)){
+        //         postsToSend.push(posts[i])
+        //         if(postsToSend.length == 50){
+        //             break;
+        //         }
+        //     }
+        // }
+
+
+        // now we got the posts include the profile posts: 
+        // now we need to send every post and check the correlation between the two profiles.
+        // if there is a correlation (more then the threshhold we choose), the post will be nent to the app.
+        
+        // in order to do that, we create a map of profile/correlation that in every new profile we check
+        // we save it inside the map (so in every post we need to check we first check in the map if we 
+        // allready cheked this profile) and then add the posts to the list we send if is ok. 
 
     } catch (err) {
         res.status(400).send({
@@ -382,6 +396,106 @@ const getSuitablePosts = async (req, res) => {
         })
     }
 }
+
+/************************************* functions for algorithm *************************************/
+
+function avg(x){
+
+    // x = [] 
+
+    if(x == null || x == undefined){
+        return -1; 
+    }
+
+    let count = 0; 
+    for(let i = 0; i < x.length; i++){
+        count += x[i]
+    }
+    count  = (count / x.length);
+    return count; 
+
+    // float count = 0;
+    // for (int i = 0; i<x.length; i++)
+    // {
+    //     count += x[i];
+    // }
+    // count = (count / x.length);
+    // return count;
+}
+function variance(x){
+
+    if(x == null || x == undefined){
+        return -1; 
+    }
+    let count = 0; 
+    for (let i=0; i<x.length; i++){
+        count += (x[i] * x[i]);
+    }
+    count = (count/ x.length);
+    let u = (avg(x) * avg(x));
+    let V = (count - u);
+    return V;
+
+    // float count = 0;
+    // for (int i = 0; i<x.length; i++)
+    // {
+    //     count+= (x[i] * x[i]);
+    // }
+    // count = (count / x.length);
+    // float u = (avg(x) * avg(x));
+    // float V = (count - u);
+    // return V;
+}
+
+function cov(x, y){
+
+    if(x == null || y == null || x == undefined || y == undefined){
+        return -1; 
+    }
+    let ax = avg(x);
+    let ay = avg(y);
+
+    let count = 0; 
+    for(let i=0; i<x.length; i++){
+        count += (x[i] * y[i]);
+    }
+    count = (count / x.length);
+
+    return (count - (ax*ay));
+
+    // if (x == null || y == null){
+	// 	return -1;
+	// }
+    // float ex = avg(x);
+	// float ey = avg (y);
+
+    // float count2 = 0;
+	// for (int i = 0; i<x.length; i++)
+	// {
+	// 	count2 += (x[i] * y[i]);
+	// }
+	// count2 = count2 / x.length;
+		
+	// return (count2 - (ex*ey));
+
+}
+
+function pearson(x, y){ // x = [] sizes of profile 1, y = [] sizes of profile 2
+
+    let V1 = Math.sqrt(variance(x));
+    let V2 = Math.sqrt(variance(y));
+    let C =  cov(x,y);
+    return (C/ (V1 * V2));
+
+    // float V1 = (float) Math.sqrt(var(x));
+    // float V2 = (float) Math.sqrt(var(y));
+    // float C = cov(x,y);
+    // return (C/ (V1 * V2));
+}
+
+
+/*****************************************************************************************/
+
 
 module.exports = {
     getPosts,
