@@ -67,7 +67,8 @@ const addSubCategory = async (req, res) => {
         "pictureUrl": req.body.pictureUrl,
         "gender": req.body.gender,
         "categoryId": categoryId,
-        "posts": []
+        "posts": [],
+        "isDeleted": false
     })
 
     newSubCategory.save((error, newSubCategory) => {
@@ -163,8 +164,9 @@ const deleteSubCategory = async (req, res) => {
             }
         })
 
+        subCategoryToDelete.isDeleted = true;
 
-        subCategoryToDelete.remove((error) => {
+        subCategoryToDelete.save((error) => {
             if (error) {
                 res.status(400).send({
                     'status': 'fail',
@@ -172,12 +174,24 @@ const deleteSubCategory = async (req, res) => {
                 })
             }
             else {
-                res.status(200).send({
-                    'status': 'OK',
-                    'message': 'The subCategory was deleted successfully'
-                })
+                res.status(200)
             }
         })
+
+        // subCategoryToDelete.remove((error) => {
+        //     if (error) {
+        //         res.status(400).send({
+        //             'status': 'fail',
+        //             'error': error.message
+        //         })
+        //     }
+        //     else {
+        //         res.status(200).send({
+        //             'status': 'OK',
+        //             'message': 'The subCategory was deleted successfully'
+        //         })
+        //     }
+        // })
     } catch (err) {
         res.status(400).send({
             'status': 'fail',

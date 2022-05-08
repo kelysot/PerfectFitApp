@@ -16,7 +16,11 @@ const categorySchema = new mongoose.Schema({
     subCategory: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'SubCategory'
-    }]
+    }],
+    isDeleted: {
+        type: Boolean,
+        require: true
+    }
 })
 
 module.exports = mongoose.model('Category', categorySchema)

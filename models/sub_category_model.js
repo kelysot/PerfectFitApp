@@ -21,6 +21,10 @@ const subCategorySchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post'
     }],
+    isDeleted: {
+        type: Boolean,
+        require: true
+    }
 })
 
 module.exports = mongoose.model('SubCategory', subCategorySchema)

@@ -48,7 +48,8 @@ const addCategory = async (req, res) => {
         "name": req.body.name,
         "pictureUrl": req.body.pictureUrl,
         "gender": req.body.gender,
-        "subCategory": req.body.subCategory
+        "subCategory": req.body.subCategory,
+        "isDeleted": false
     })
 
     newCategory.save((error, newCategory) => {
@@ -114,7 +115,25 @@ const deleteCategory = async (req, res) => {
     }
     try {
         const categoryToDelete = await Category.findById(req.params.id)
-        categoryToDelete.remove((error) => {
+        categoryToDelete.isDeleted = true
+
+        // editCategory.save((error, editCategory) => {
+        //     if (error) {
+        //         res.status(400).send({
+        //             'status': 'fail',
+        //             'error': error.message
+        //         })
+        //     }
+        //     else {
+        //         res.status(200).send({
+        //             'status': 'OK',
+        //             'category': editCategory
+        //         })
+        //     }
+        // })
+
+
+        categoryToDelete.save((error) => {
             if (error) {
                 res.status(400).send({
                     'status': 'fail',
@@ -124,10 +143,24 @@ const deleteCategory = async (req, res) => {
             else {
                 res.status(200).send({
                     'status': 'OK',
-                    'message': 'The category was deleted successfully'
                 })
             }
         })
+
+        // categoryToDelete.remove((error) => {
+        //     if (error) {
+        //         res.status(400).send({
+        //             'status': 'fail',
+        //             'error': error.message
+        //         })
+        //     }
+        //     else {
+        //         res.status(200).send({
+        //             'status': 'OK',
+        //             'message': 'The category was deleted successfully'
+        //         })
+        //     }
+        // })
     } catch (err) {
         res.status(400).send({
             'status': 'fail',

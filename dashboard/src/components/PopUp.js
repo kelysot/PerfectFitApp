@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from "styled-components";
+import axios from 'axios';
 
 function PopUp(props) {
+    //TODO: function + show if exist or not
   const deleteRow = () => {
     let location = window.location.href;
     if(!location.includes('&')){
@@ -13,7 +15,19 @@ function PopUp(props) {
           })
             .then((res) => res.json())
               .then((data) => {
-                console.log(data.category);
+                let idForDelete = data.category._id;
+                axios
+                .delete(`/category/${idForDelete}`,{
+                  headers : {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDU0NWY1ODY1MWY5ZDg1NTE3MzU1MyIsImlhdCI6MTY1MjAyNTIzNiwiZXhwIjoxNjUyMTExNjM2fQ.tAlR1QPXZ9MVsBi3dQyeYSj76cqqTkViHQ87uMfzqao'
+                  }
+                })
+                  .then(() => console.log("ok"))
+                  .catch(err => {
+                    console.error(err);
+                });
+                
                 props.setTrigger(false);
             })
     }else{
@@ -21,12 +35,26 @@ function PopUp(props) {
             headers : { 
               'Content-Type': 'application/json',
               'Accept': 'application/json',
-              'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MTU1OTQ3NywiZXhwIjoxNjUxNjQ1ODc3fQ.XyIxQa-OhoUmVcQHEl4MMW0PmEAMQVOO8jgT9DKJixc'
+              'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDU0NWY1ODY1MWY5ZDg1NTE3MzU1MyIsImlhdCI6MTY1MjAyNTIzNiwiZXhwIjoxNjUyMTExNjM2fQ.tAlR1QPXZ9MVsBi3dQyeYSj76cqqTkViHQ87uMfzqao'
              }
           })
             .then((res) => res.json())
               .then((data) => {
                 console.log(data.subCategory);
+
+                let idSubForDelete = data.subCategory._id
+                axios
+                .delete(`/subCategory/${idSubForDelete}`,{
+                  headers : {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDU0NWY1ODY1MWY5ZDg1NTE3MzU1MyIsImlhdCI6MTY1MjAyNTIzNiwiZXhwIjoxNjUyMTExNjM2fQ.tAlR1QPXZ9MVsBi3dQyeYSj76cqqTkViHQ87uMfzqao'
+                  }
+                })
+                  .then(() => console.log("ok"))
+                  .catch(err => {
+                    console.error(err);
+                });
+
                 props.setTrigger(false);
             })
     }
