@@ -328,6 +328,42 @@ const deleteProfile = async (req, res) => {
     }
 }
 
+
+const getProfilesByUserNames = async (req, res) => {
+
+    const userNames = req.params.userNames // We get list as a string.
+    console.log(userNames)
+    console.log(userNames.length)
+
+    if (userNames == null || userNames == undefined) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+    try {
+        var profileArr = []
+
+        var i = 0
+        for (i = 1; i < userNames.length - 1; i++) {
+            console.log(userNames[i])
+            var user = userNames[i]
+            var profile = await Profile.findOne({ 'userName': user })
+            profileArr.push(profile)
+            if (i < userNames.length - 2) { // To not add space(" ") and "," to array.
+                i = i + 2
+            }
+        }
+
+        res.status(200).send(profileArr)
+    } catch (err) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+}
+
 module.exports = {
     addNewProfile,
     getProfileById,
@@ -336,5 +372,6 @@ module.exports = {
     deleteProfile,
     getProfile,
     checkIfUserNameExist,
-    getProfileByUserName
+    getProfileByUserName,
+    getProfilesByUserNames
 }
