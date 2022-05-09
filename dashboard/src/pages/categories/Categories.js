@@ -55,7 +55,7 @@ const CategoryStyle = styled.div`
   display:flex;
   box-shadow:-15px 20px 20px rgb(0 0 0 / 12%);
   width: 100%;
-  min-height: 41rem;
+  min-height: 40rem;
   border-radius:15px;
 
   .categoryContainer{

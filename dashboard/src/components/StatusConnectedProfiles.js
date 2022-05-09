@@ -52,10 +52,14 @@ function StatusConnectedProfiles({chartConnectData , percentage}) {
 const StatusConnectedProfilesStyle = styled.div`
     background-color: #ffffffe8;
     border-radius: 8px;
-    box-shadow: 0px -12px 15px rgb(0 0 0 / 10%);
+    box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.18);
     padding: 10px;
     flex:3;
     min-width: 20rem ;
+
+    @media screen and (max-width: 1400px) {
+      height: 22rem;
+    }
 `;
 
 const TopStyle = styled.div`
@@ -65,11 +69,17 @@ const TopStyle = styled.div`
 `;
 
 const BottomStyle = styled.div`
+
   display: flex ;
   justify-content: center ;
   align-items: center ;
   flex-direction: column ;
   padding: 20px ;
+
+  @media screen and (max-width: 1400px) {
+    padding: 0px;
+  }
+
   p{
     padding-bottom: 40px;
     padding-top: 15px;

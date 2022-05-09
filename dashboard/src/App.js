@@ -65,6 +65,10 @@ const AppStyle = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media screen and (max-width: 1400px) {
+      padding: 0.5rem;
+  }
 `;
 
 export default App;

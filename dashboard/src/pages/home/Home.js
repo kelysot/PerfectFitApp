@@ -44,7 +44,13 @@ const HomeStyle = styled.div`
   box-shadow:-15px 20px 20px rgb(0 0 0 / 12%);
   width: 100%;
   border-radius:15px;
-  min-height: 41rem;
+  height: 40rem;
+  overflow: hidden;
+
+  @media screen and (max-width: 1400px) {
+    width: 95%;
+    height: 38rem;
+  }
 
   .homeContainer{
     flex:6 ;

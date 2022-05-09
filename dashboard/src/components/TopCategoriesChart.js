@@ -40,10 +40,14 @@ function TopCategoriesChart({categoriesData}) {
 
 const TopCategoriesChartStyle = styled.div`
     background-color: #ffffffe8;
-    box-shadow: 0px -12px 15px rgb(0 0 0 / 10%);
+    box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.18);
     border-radius: 8px;
     padding: 10px;
     flex: 6;
+
+    @media screen and (max-width: 1400px) {
+      height: 22rem;
+    }
 `;
 
 const TopStyle = styled.div`

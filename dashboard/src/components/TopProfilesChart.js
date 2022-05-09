@@ -24,6 +24,11 @@ const TopUserChartStyle = styled.div`
     flex: 3;
     overflow: auto;
     min-width: 12rem;
+    box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.18);
+
+    @media screen and (max-width: 1400px) {
+      height: 22rem;
+    }
 `;
 
 const TopStyle = styled.div`
