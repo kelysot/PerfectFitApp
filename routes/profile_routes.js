@@ -232,7 +232,10 @@ router.get('/getProfile/:userName', authenticate, Profile.getProfileByUserName)
 
 router.get('/checkIfUserNameExist/:userName', authenticate, Profile.checkIfUserNameExist)
 
-router.get('/profilePage/all',authenticate,Profile.getAllProfiles)
+router.get('/profilePage/all', authenticate, Profile.getAllProfiles)
+
+router.get('/getProfilesByUserNames/:userNames', authenticate, Profile.getProfilesByUserNames)
+
 
 
 module.exports = router

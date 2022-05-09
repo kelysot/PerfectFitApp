@@ -1,80 +1,80 @@
-import React ,{useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import SideBar from '../../components/SideBar';
 import TopBar from '../../components/TopBar';
 import styled from "styled-components";
 
-function NewCategory({nameOfAdmin}) {
+function NewCategory({ nameOfAdmin }) {
   // const[image,setImage] = useState("");
-  const[newCategory,setNewCategory] = useState({
+  const [newCategory, setNewCategory] = useState({
     name: "",
     pictureUrl: "",
     gender: "",
     subCategory: []
   })
 
-  function handle(e) { 
-    const newData = {...newCategory};
+  function handle(e) {
+    const newData = { ...newCategory };
     newData[e.target.id] = e.target.value;
     setNewCategory(newData);
   }
   //TODO: get 401 / 403 - need pass 'token'
-  function submit(e){
+  function submit(e) {
     e.preventDefault();
     axios
-      .post('/category', newCategory ,{
-        headers : {
+      .post('/category', newCategory, {
+        headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDU0NWY1ODY1MWY5ZDg1NTE3MzU1MyIsImlhdCI6MTY1MjAyNTIzNiwiZXhwIjoxNjUyMTExNjM2fQ.tAlR1QPXZ9MVsBi3dQyeYSj76cqqTkViHQ87uMfzqao'
+          'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNzhkNWZhNWE1ZWRiMjc2Y2IxNWIyMSIsImlhdCI6MTY1MjA4NjI2NiwiZXhwIjoxNjUyMTcyNjY2fQ.o_tRc1C4pB3_zjBg6I2OzTsnqGCYFB67ZHp8qCs0DRo'
         }
       })
-        .then(() => window.location.href = `/categories/${newCategory.name}&${newCategory.gender}`
-        )
-        .catch(err => {
-          console.error(err);
+      .then(() => window.location.href = `/categories/${newCategory.name}&${newCategory.gender}`
+      )
+      .catch(err => {
+        console.error(err);
       });
   }
 
   return (
     <NewCategoryStyle>
-      <SideBar/>
-        <div className="newCategoryContainer">
-          <TopBar  nameOfAdmin={nameOfAdmin} />
-          <div className="top">
-            <h1>New Category</h1>
+      <SideBar />
+      <div className="newCategoryContainer">
+        <TopBar nameOfAdmin={nameOfAdmin} />
+        <div className="top">
+          <h1>New Category</h1>
+        </div>
+        <div className="bottom">
+          <div className="left">
+            <img src={newCategory.pictureUrl ? newCategory.pictureUrl : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}></img>
+            {/* <img src= {image ? URL.createObjectURL(image) : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}></img> */}
           </div>
-          <div className="bottom">
-            <div className="left">
-              <img src= {newCategory.pictureUrl ? newCategory.pictureUrl : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}></img>
-              {/* <img src= {image ? URL.createObjectURL(image) : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}></img> */}
-            </div>
-            <div className="right">
-              <form onSubmit={(e)=>submit(e)}>
-                <div className="formInput">
-                  <label>Category Name</label>
-                  <input type="text" autoComplete='off' onChange={(e)=>handle(e)} id="name" value={newCategory.name} placeholder="Name"></input>
-                </div>
-                <div className="formInput">
-                  <label>Category Image </label>
-                  <input type="text" autoComplete='off' onChange={(e)=>handle(e)} id="pictureUrl" value={newCategory.pictureUrl} placeholder="www.image.com"></input>
-                </div>
-                <div className="formInput">
-                  <label>Category Gender</label>
-                  <select onChange={(e)=>handle(e)} id="gender" value={newCategory.gender}>
-                    <option selected={true}>Choose here</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                  </select>
-                </div>
-                {/* <div className="formInput">
+          <div className="right">
+            <form onSubmit={(e) => submit(e)}>
+              <div className="formInput">
+                <label>Category Name</label>
+                <input type="text" autoComplete='off' onChange={(e) => handle(e)} id="name" value={newCategory.name} placeholder="Name"></input>
+              </div>
+              <div className="formInput">
+                <label>Category Image </label>
+                <input type="text" autoComplete='off' onChange={(e) => handle(e)} id="pictureUrl" value={newCategory.pictureUrl} placeholder="www.image.com"></input>
+              </div>
+              <div className="formInput">
+                <label>Category Gender</label>
+                <select onChange={(e) => handle(e)} id="gender" value={newCategory.gender}>
+                  <option selected={true}>Choose here</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+              {/* <div className="formInput">
                   <label htmlFor="file">Add Image<span className="material-icons-sharp">file_upload</span></label>
                   <input type="file" onChange={(e) => setImage(e.target.files[0])} id="file" style={{display:"none"}}></input>
                 </div> */}
-                <button>Save</button>
-              </form>
-            </div>
+              <button>Save</button>
+            </form>
           </div>
         </div>
+      </div>
     </NewCategoryStyle>
   )
 }
