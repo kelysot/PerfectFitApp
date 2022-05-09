@@ -45,8 +45,8 @@ const TopCategoriesChartStyle = styled.div`
     padding: 10px;
     flex: 6;
 
-    @media screen and (max-width: 1400px) {
-      height: 22rem;
+    @media screen and (max-width: 1280px) {
+      height: 19rem;
     }
 `;
 

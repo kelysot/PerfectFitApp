@@ -57,8 +57,8 @@ const StatusConnectedProfilesStyle = styled.div`
     flex:3;
     min-width: 20rem ;
 
-    @media screen and (max-width: 1400px) {
-      height: 22rem;
+    @media screen and (max-width: 1280px) {
+      height: 19rem;
     }
 `;
 
@@ -117,15 +117,15 @@ const BottomStyle = styled.div`
     }
   }
 
-  @media (max-width: 1600px){
+  @media (max-width: 1280px){
     .chart{
-      width : 150px;
-      height: 180px ;
+      width : 120px;
+      height: 120px ;
       margin-bottom:5px ;
     }
     p{
       padding-bottom: 20px;
-      padding-top: 0px;
+      padding-top: 12px;
     }
   }
   

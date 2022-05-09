@@ -47,9 +47,10 @@ const HomeStyle = styled.div`
   min-height: 40rem;
   overflow: hidden;
 
-  @media screen and (max-width: 1400px) {
-    width: 95%;
-    min-height: 38rem;
+  @media screen and (max-width: 1280px) {
+    width: 92%;
+    min-height: 34rem;
+    height: 34rem;
   }
 
   .homeContainer{

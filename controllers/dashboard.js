@@ -68,7 +68,7 @@ const getPercentage = async (req, res) => {
             sumOfMale:sumOfMale,
             total: connectProfileSize
         },
-        percentageOfConnect: percentageOfConnect
+        percentageOfConnect: percentageOfConnect.toFixed(2)
     });
 }
 
