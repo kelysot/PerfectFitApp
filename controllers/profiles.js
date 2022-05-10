@@ -1,5 +1,6 @@
 const Profile = require('../models/profile_model')
 const User = require('../models/user_model')
+const Post = require('../models/post_model')
 
 const getProfile = async (req, res) => {
 
@@ -204,6 +205,8 @@ const editProfile = async (req, res) => {
         newEditProfile.wishlist = req.body.wishlist
         newEditProfile.myPostsListId = req.body.myPostsListId
 
+        // save the profile
+
         newEditProfile.save((error, newEditProfile) => {
             if (error) {
                 res.status(400).send({
@@ -217,6 +220,25 @@ const editProfile = async (req, res) => {
                 })
             }
         })
+
+        // change the userName in every rlevant post: 
+
+        let posts = await Post.find({profileId: { $eq: previousName } })
+
+        for(let i=0; i<posts.length; i++){
+
+            posts[i].profileId = req.body.userName
+            posts[i].save((error) => { 
+                if (error) {
+                    res.status(400).send({
+                        'status': 'fail',
+                        'error': error.message
+                    })
+                } 
+            })
+        }
+
+        // change profile name in the list of the user:
 
         userName = req.body.userName
         if (previousName != null && previousName != undefined) {
