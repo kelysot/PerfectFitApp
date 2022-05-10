@@ -52,16 +52,14 @@ const getNotificationById = async (req, res) => {
 
 const addNotification = async (req, res) => {
     var userName = req.body.profileIdMine
-    console.log(userName)
     const profile = await Profile.findOne({ 'userName': userName })
-    console.log(profile)
     const profileUserName = profile.userName
 
     const newNotification = Notification({
         profileIdMine: profileUserName,
         profileIdFrom: req.body.profileIdFrom,
         notificationType: req.body.notificationType,
-        date: req.body.date
+        date: new Date()
     })
 
     const newNotificationList = profile.notifications
@@ -104,7 +102,7 @@ const editNotification = async (req, res) => {
     try {
         const editNotification = await Notification.findById(req.params.id)
         editNotification.notificationType = req.body.notificationType
-        editNotification.date = req.body.date
+        editNotification.date = new Date()
 
         editNotification.save((error, editNotification) => {
             if (error) {
@@ -193,7 +191,6 @@ const getNotificationsByIds = async (req, res) => {
 
         var i = 0
         for (i = 1; i < notificationsIds.length - 1; i++) {
-            console.log(notificationsIds[i])
             var id = notificationsIds[i]
             var notification = await Notification.findById(id)
             notificationArr.push(notification)
@@ -210,6 +207,8 @@ const getNotificationsByIds = async (req, res) => {
         })
     }
 }
+
+
 
 module.exports = {
     getNotificationsListByProfileId,
