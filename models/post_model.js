@@ -69,7 +69,11 @@ const postSchema = new mongoose.Schema({
     comments: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Comment'
-    }]
+    }],
+    isDeleted: {
+        type: Boolean,
+        require: true
+    }
 
 })
 

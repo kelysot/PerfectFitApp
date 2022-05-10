@@ -85,6 +85,7 @@ const addNewPost = async (req, res) => {
         picturesUrl: req.body.picturesUrl,
         likes: [],
         comments: [],
+        isDeleted: req.body.isDeleted,
     })
 
     //TODO: findOne instead of find:
@@ -136,7 +137,6 @@ const addNewPost = async (req, res) => {
             res.status(200)
         }
     })
-
 }
 
 const editPost = async (req, res) => {
@@ -169,6 +169,7 @@ const editPost = async (req, res) => {
         editPost.picturesUrl = req.body.picturesUrl
         editPost.likes = req.body.likes
         editPost.comments = req.body.comments
+        editPost.isDeleted = req.body.isDeleted
 
         editPost.save((error, editPost) => {
             if (error) {
@@ -204,20 +205,31 @@ const deletePost = async (req, res) => {
     const PostToDelete = await Post.findById(thePostId)
     const profileId = PostToDelete.profileId // userName
     try {
-        PostToDelete.remove((error) => {
+        PostToDelete.isDeleted = true
+        PostToDelete.save((error) => {
             if (error) {
                 res.status(400).send({
                     'status': 'fail',
                     'error': error.message
                 })
-            }
-            else {
-                res.status(200).send({
-                    'status': 'OK',
-                    'message': 'The post was deleted successfully'
-                })
+            } else {
+                res.status(200).send()
             }
         })
+        // PostToDelete.remove((error) => {
+        //     if (error) {
+        //         res.status(400).send({
+        //             'status': 'fail',
+        //             'error': error.message
+        //         })
+        //     }
+        //     else {
+        //         res.status(200).send({
+        //             'status': 'OK',
+        //             'message': 'The post was deleted successfully'
+        //         })
+        //     }
+        // })
     } catch (err) {
         res.status(400).send({
             'status': 'fail',
@@ -225,27 +237,25 @@ const deletePost = async (req, res) => {
         })
     }
 
-    // const profile = await Profile.findOne({ userName: PostToDelete.profileId })
-    const profile = await Profile.findOne({ userName: profileId })
-    var array = profile.myPostsListId
-    let index = array.indexOf(thePostId)
-    if (index > -1) {
-        array.splice(index, 1);
-    }
+    // const profile = await Profile.findOne({ userName: profileId })
+    // var array = profile.myPostsListId
+    // let index = array.indexOf(thePostId)
+    // if (index > -1) {
+    //     array.splice(index, 1);
+    // }
 
-    // array.remove(PostToDelete._id)
-    profile.myPostsListId = array
+    // profile.myPostsListId = array
 
-    profile.save((error) => {
-        if (error) {
-            res.status(400).send({
-                'status': 'fail',
-                'error': error.message
-            })
-        } else {
-            res.status(200)
-        }
-    })
+    // profile.save((error) => {
+    //     if (error) {
+    //         res.status(400).send({
+    //             'status': 'fail',
+    //             'error': error.message
+    //         })
+    //     } else {
+    //         res.status(200)
+    //     }
+    // })
 }
 
 // const getWishList = async (req, res) => {
@@ -302,7 +312,7 @@ const getProfilePosts = async (req, res) => {
         const profile = await Profile.findOne({ userName: { $eq: userName } })
         const theList = profile.myPostsListId
         var theProfilePostsList = await Post.find({ '_id': { $in: theList } })
-        res.status(200).send(theProfilePostsList)
+        res.status(200).send(theProfilePostsList.reverse())
 
     } catch (err) {
         res.status(400).send({
