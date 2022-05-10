@@ -110,4 +110,7 @@ app.use('/notification', notificationRouter)
 const imagesRouter = require('./routes/images')
 app.use('/images', imagesRouter)
 
+const adminRouter = require('./routes/admin_routes')
+app.use('/admin', adminRouter)
+
 module.exports = app

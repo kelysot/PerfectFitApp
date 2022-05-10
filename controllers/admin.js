@@ -30,9 +30,13 @@ const register = async (req, res) => {
         const salt = await bcrypt.genSalt(10)
         const hashPwd = await bcrypt.hash(password, salt)
         const admin = Admin({
-            'email': email,
+            'email': 'y@gmail.com',
             'password': hashPwd,
-            'isConnected': "true"
+            'isConnected': "false",
+            'lastUpdate': "10/05/2022",
+            'newProfilesCompere': "0",
+            'totalUsersCompere': "0",
+            'totalPostCompere': "0"
         })
         const accessToken = await jwt.sign(
             { 'id': admin._id },
@@ -58,20 +62,19 @@ const register = async (req, res) => {
     }
 }
 
-const login = async (req, res) => {
 
+const login = async (req, res) => {
     const email = req.body.email
     const password = req.body.password
     if (email == null || password == null) return sendError(res, 400, "wrong email or password")
 
     try {
-
         const admin = await Admin.findOne({ 'email': email })
         if (!admin) return sendError(res, 400, "wrong email or password")
 
         const match = await bcrypt.compare(password, admin.password)
-        if (!match) return sendError(res, 400, "wrong email or password")
-
+        
+        if (!match) return sendError(res, 400, "wrong email or password 111")
         admin.isConnected = "true"
         await admin.save()
 
@@ -105,28 +108,6 @@ const login = async (req, res) => {
     }
 }
 
-const getAdmin = async (req, res) => {
-
-    const email = req.params.email
-    if (email == null || email == undefined) {
-        res.status(400).send({
-            'status': 'fail',
-            'error': err.message
-        })
-    }
-    try {
-        const admin = await Admin.findOne({ 'email': email })
-        const sendAdmin = admin._doc
-        res.status(200).send(sendAdmin)
-    } catch (err) {
-        res.status(400).send({
-            'status': 'fail',
-            'error': err.message
-        })
-        console.log("--------------- " + err.message)
-    }
-}
-
 const logout = async (req, res) => {
     const authHeaders = req.headers['authorization']
     const token = authHeaders && authHeaders.split(' ')[1]
@@ -148,7 +129,7 @@ const logout = async (req, res) => {
                 admin.isConnected = "false"
                 await admin.save()
             }
-            admin.tokens.splice(user.tokens.indexOf(token), 1)
+            admin.tokens.splice(admin.tokens.indexOf(token), 1)
             await admin.save()
             res.status(200).send();
         } catch (err) {
@@ -160,8 +141,6 @@ const logout = async (req, res) => {
 module.exports = {
     login,
     register,
-    getAdmin,
-    checkIfEmailExist,
     logout
     // refreshToken
 }

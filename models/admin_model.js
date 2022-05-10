@@ -15,6 +15,22 @@ const adminSchema = new mongoose.Schema({
     },
     tokens: {
         type: [String]
+    },
+    lastUpdate: {
+        type: String,
+        required: true
+    },
+    newProfilesCompere: {
+        type: String,
+        required: true
+    },
+    totalUsersCompere: {
+        type: String,
+        required: true
+    },
+    totalPostCompere: {
+        type: String,
+        required: true
     }
 })
 

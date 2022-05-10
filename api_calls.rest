@@ -352,3 +352,30 @@ Content-Type: application/json
 ### 
 DELETE  http://localhost:4000/notification/622c616a33383e291b68d86b/
 Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOGM2NjE3YWVjOTI3YWZiMyIsImlhdCI6MTY0NzA2MjI0OCwiZXhwIjoxNjQ3MTQ4NjQ4fQ.6qHiuJkcX8EBuPxiyAv3c9hOu-2r_nCnIID1zp6zfSA
+
+//****************************************Admin****************************************
+
+###
+POST http://localhost:4000/admin/register
+Content-Type: application/json
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MjE3NTA4NCwiZXhwIjoxNjUyMjYxNDg0fQ.WLp_DzDfc3Jy-AKvklu-QBEGE5bDg3kekEv1AucS0Lc
+
+{       
+        "email": "y@gmail.com",
+        "password": "123456",
+        "isConnected": "false",
+        "lastUpdate": "10/05/2022",
+        "newProfilesCompere": "0",
+        "totalUsersCompere": "0",
+        "totalPostCompere": "0"
+}
+
+###
+Post http://localhost:4000/admin/login
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MjE3NTA4NCwiZXhwIjoxNjUyMjYxNDg0fQ.WLp_DzDfc3Jy-AKvklu-QBEGE5bDg3kekEv1AucS0Lc
+Content-Type: application/json
+
+{
+        "email" : "y@gmail.com",
+        "password" : "123456"
+}
