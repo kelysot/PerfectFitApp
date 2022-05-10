@@ -311,7 +311,10 @@ const getProfilePosts = async (req, res) => {
 
         const profile = await Profile.findOne({ userName: { $eq: userName } })
         const theList = profile.myPostsListId
-        var theProfilePostsList = await Post.find({ '_id': { $in: theList } })
+        var theProfilePostsList = await Post.find({ '_id': { $in: theList }, 'isDeleted': false })
+
+        console.log("-----------------------------------------")
+        console.log(theProfilePostsList)
         res.status(200).send(theProfilePostsList.reverse())
 
     } catch (err) {
@@ -363,7 +366,7 @@ const getSuitablePosts = async (req, res) => {
 
         // now we find all the posts that suitable to the bodyType and gender
 
-        let posts = await Post.find( {'profileId': {$in: profilesNamesArr} })
+        let posts = await Post.find( {'profileId': {$in: profilesNamesArr}, 'isDeleted': false })
         posts = posts.reverse()
 
         // now we got the posts include the profile posts: 
