@@ -19,11 +19,20 @@ const GlobalStyle = createGlobalStyle`
         /* scrollbar-width:thin;
         scrollbar-color:rgba(155,155,155,0.5) transparent; */
         overflow: hidden;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
 
-    /* *:focus {
+    *:focus {
      outline: none;
     }
+
+    /*
 
     *::-webkit-scrollbar{
         width:5px;

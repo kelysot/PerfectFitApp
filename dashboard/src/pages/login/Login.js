@@ -1,14 +1,30 @@
-import React from 'react';
+import React , {useState} from 'react';
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
 
 function Login() {
+
+  const[hide,setHide] = useState(true);
+
+  const hideHandler = () => {
+    let inputPassword = document.querySelector('#password');
+    setHide(!hide);
+    if (inputPassword.type === "password") {
+      inputPassword.type = "text";
+    } else {
+      inputPassword.type = "password";
+    }
+  }
+
   return (
       <ContainerStyle>
         <h1>Perfect<span>Fit</span></h1>
         <h3>Log In</h3>
         <InputStyle type="text" id="userName" placeholder="User Name" autocomplete="off" />
-        <InputStyle type="text" id="password" placeholder="Password" autocomplete="off"/>
+        <div className="pass-input">
+          <InputStyle type="password" id="password" placeholder="Password" />
+          <span className="material-icons-sharp" onClick={()=> hideHandler()}>{hide ? 'visibility' : 'visibility_off'}</span>
+        </div>
         <ButtonStyle>
           <Link to="/home" className='link'>Log In</Link>
         </ButtonStyle>
@@ -38,6 +54,19 @@ const ContainerStyle = styled.div`
   h3{
     margin-bottom: 0.7rem;
   }
+
+  .pass-input{
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    span {
+      position: absolute;
+      right: 18px;
+      cursor: pointer;
+      color: #7682ec;
+    }
+  }
   
 `;
 const InputStyle = styled.input`
@@ -66,18 +95,13 @@ const ButtonStyle = styled.button`
   margin-top:1rem ;
   
   :hover {
-    background: #f8f0e8a6;
     border: 1px solid var(--color-primary-purple) ;
-    transform: scale(1.02) ;
+    transform: scale(1.03) ;
   }
 
   .link{
     text-decoration: none;
     color:#f8f0e8a6;
-
-    &:hover{
-      color:var(--color-primary-purple) ;
-    }
   }
 `
 
