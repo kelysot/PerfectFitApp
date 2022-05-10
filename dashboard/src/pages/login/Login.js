@@ -5,6 +5,10 @@ import styled from "styled-components";
 function Login() {
 
   const[hide,setHide] = useState(true);
+  const[adminDetails,setAdminDetails] = useState({
+    email: "",
+    password: ""
+  });
 
   const hideHandler = () => {
     let inputPassword = document.querySelector('#password');
@@ -16,18 +20,33 @@ function Login() {
     }
   }
 
+  function handle(e) {
+    const newData = { ...adminDetails };
+    newData[e.target.id] = e.target.value;
+    setAdminDetails(newData);
+  }
+
+  function submit(e) {
+    e.preventDefault();
+    console.log(adminDetails);
+  }
+
   return (
       <ContainerStyle>
         <h1>Perfect<span>Fit</span></h1>
         <h3>Log In</h3>
-        <InputStyle type="text" id="userName" placeholder="User Name" autocomplete="off" />
-        <div className="pass-input">
-          <InputStyle type="password" id="password" placeholder="Password" />
-          <span className="material-icons-sharp" onClick={()=> hideHandler()}>{hide ? 'visibility' : 'visibility_off'}</span>
-        </div>
-        <ButtonStyle>
-          <Link to="/home" className='link'>Log In</Link>
-        </ButtonStyle>
+        <form onSubmit={(e) => submit(e)}>
+          <InputStyle type="text" id="email" placeholder="User Name" autoComplete='off' onChange={(e) => handle(e)} value={adminDetails.email}/>
+          <div className="pass-input">
+            <InputStyle type="password" id="password" placeholder="Password"  onChange={(e) => handle(e)} value={adminDetails.password} />
+            <span className="material-icons-sharp" onClick={()=> hideHandler()}>{hide ? 'visibility' : 'visibility_off'}</span>
+          </div>
+          <ButtonStyle>
+            {/* <Link to="/home" className='link'>Log In</Link> */}
+            {/* <Link to="/" className='link'>Log In</Link> */}
+            Login
+          </ButtonStyle>
+        </form>
       </ContainerStyle>
   )
 }
@@ -43,6 +62,14 @@ const ContainerStyle = styled.div`
   color:var(--color-iconCard-purple);
   margin:auto ;
   align-items: center;
+  box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.18);
+
+  form{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
   h1{
     font-size:2.5rem;
     padding-top:3px;
@@ -90,9 +117,9 @@ const ButtonStyle = styled.button`
   border-radius: 10px;
   border: 1px solid;
   background: var(--color-primary-purple) ;
-
+  color:#f8f0e8a6;
   border: 1px solid #f8f0e8a6 ;
-  margin-top:1rem ;
+  margin: 1rem 0rem 0.2rem 0rem;
   
   :hover {
     border: 1px solid var(--color-primary-purple) ;
