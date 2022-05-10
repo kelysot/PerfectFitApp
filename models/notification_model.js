@@ -1,7 +1,11 @@
 const mongoose = require("mongoose")
 
 const notificationSchema = new mongoose.Schema({
-    profileId: {
+    profileIdMine: {
+        type: String,
+        required: true
+    },
+    profileIdFrom: {
         type: String,
         required: true
     },
