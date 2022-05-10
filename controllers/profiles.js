@@ -56,31 +56,16 @@ const getProfileByUserName = async (req, res) => {
 
 
 const getAllProfiles = async (req, res) => {
-    const profilesList = await Profile.find()
-    const dataToTable = []
-
-    const createData = async (arr) => {
-        for (let i = 0; i < arr.length; i++) {
-            let profileData = {
-                id: i + 1,
-                image: arr[i].pictureUrl,
-                firstName: arr[i].firstName,
-                lastName: arr[i].lastName,
-                userName: arr[i].userName,
-                gender: arr[i].gender,
-                birthday: arr[i].birthday,
-                email: arr[i].userId
-            }
-            dataToTable.push(profileData)
-        }
-        return dataToTable
+    try {
+        const profilesList = await Profile.find()
+        res.status(200).send(profilesList)
+    } catch (err) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
     }
 
-    createData(profilesList).then((data) => {
-        res.json({
-            data: data
-        });
-    })
 }
 
 const addNewProfile = async (req, res) => {
@@ -223,18 +208,18 @@ const editProfile = async (req, res) => {
 
         // change the userName in every rlevant post: 
 
-        let posts = await Post.find({profileId: { $eq: previousName } })
+        let posts = await Post.find({ profileId: { $eq: previousName } })
 
-        for(let i=0; i<posts.length; i++){
+        for (let i = 0; i < posts.length; i++) {
 
             posts[i].profileId = req.body.userName
-            posts[i].save((error) => { 
+            posts[i].save((error) => {
                 if (error) {
                     res.status(400).send({
                         'status': 'fail',
                         'error': error.message
                     })
-                } 
+                }
             })
         }
 
