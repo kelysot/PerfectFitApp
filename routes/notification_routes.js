@@ -54,7 +54,7 @@ const authenticate = require('../common/auth_middleware')
 *                 $ref: '#/components/schemas/Notification'
 */
 
-router.get('/',authenticate,Notifications.getNotifications)
+router.get('/', authenticate, Notifications.getNotifications)
 
 /**
  * @swagger
@@ -80,7 +80,7 @@ router.get('/',authenticate,Notifications.getNotifications)
  *         description: The profile id was not found 
  */
 
-router.get('/:id',authenticate,Notifications.getNotificationsListByProfileId)
+router.get('/:id', authenticate, Notifications.getNotificationsListByProfileId)
 
 /**
  * @swagger
@@ -106,7 +106,7 @@ router.get('/:id',authenticate,Notifications.getNotificationsListByProfileId)
  *         description: The notification id was not found 
  */
 
-router.get('/byId/:id',authenticate,Notifications.getNotificationById)
+router.get('/byId/:id', authenticate, Notifications.getNotificationById)
 
 /**
  * @swagger
@@ -138,7 +138,7 @@ router.get('/byId/:id',authenticate,Notifications.getNotificationById)
  *         description: Some server error 
  */
 
-router.post('/:id',authenticate,Notifications.addNotification)
+router.post('/', authenticate, Notifications.addNotification)
 
 /**
  * @swagger
@@ -171,7 +171,7 @@ router.post('/:id',authenticate,Notifications.addNotification)
  */
 
 
-router.patch('/:id',authenticate,Notifications.editNotification)
+router.patch('/:id', authenticate, Notifications.editNotification)
 
 /**
  * @swagger
@@ -193,6 +193,9 @@ router.patch('/:id',authenticate,Notifications.editNotification)
  *          description: Some error     
  */
 
-router.delete('/:id',authenticate,Notifications.deleteNotification)
+router.delete('/:id', authenticate, Notifications.deleteNotification)
+
+router.get('/getNotificationsByIds/:notificationsIds', authenticate, Notifications.getNotificationsByIds)
+
 
 module.exports = router
