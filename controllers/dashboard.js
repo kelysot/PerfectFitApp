@@ -149,7 +149,7 @@ const getCategoriesData = async (req, res) => {
 
 const categoriesTableData = async (req, res) => {
     const categoriesList = await Category.find({},{_id:0})
-    const categoriesListWithId = await Category.find()
+    const categoriesListWithId = await Category.find({})
     const postList = await Post.find()
     const dataToTable = []
 
@@ -166,7 +166,8 @@ const categoriesTableData = async (req, res) => {
                 gender: arr[i].gender,
                 name: arr[i].name,
                 numOfPosts: numOfPosts,
-                percent: `${((numOfPosts / postList.length)*100).toFixed(2)}%`
+                percent: numOfPosts === 0 ? '0.00%' : `${((numOfPosts / postList.length)*100).toFixed(2)}%`,
+                status: arr[i].isDeleted ? 'Deleted' : 'Active'
             }
             dataToTable.push(categoryData)
         }
@@ -312,8 +313,6 @@ const getSubCategoriesData = async (req, res) => {
 const getProfileChartData = async (req, res) => {
     const userName = req.params.userName
     const profile = await Profile.findOne({'userName' : userName})
-
-
     getProfileCategoryData(profile.myPostsListId).then((data) => {
         const chartData = []
         for(let i = 0; i < data.categoriesName.length; i++) {

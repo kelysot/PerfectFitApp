@@ -20,10 +20,10 @@ function PopUp(props) {
                 .delete(`/category/${idForDelete}`,{
                   headers : {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDU0NWY1ODY1MWY5ZDg1NTE3MzU1MyIsImlhdCI6MTY1MjAyNTIzNiwiZXhwIjoxNjUyMTExNjM2fQ.tAlR1QPXZ9MVsBi3dQyeYSj76cqqTkViHQ87uMfzqao'
+                    'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MjE4NjE4NCwiZXhwIjoxNjUyMjcyNTg0fQ.qtKLhUcz9Fi7zpKhAIKNGIuDuHRcsVprJnLyz7hxhKc'
                   }
                 })
-                  .then(() => console.log("ok"))
+                  .then(() =>     window.location.href = `/categories`)
                   .catch(err => {
                     console.error(err);
                 });
@@ -35,7 +35,7 @@ function PopUp(props) {
             headers : { 
               'Content-Type': 'application/json',
               'Accept': 'application/json',
-              'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDU0NWY1ODY1MWY5ZDg1NTE3MzU1MyIsImlhdCI6MTY1MjAyNTIzNiwiZXhwIjoxNjUyMTExNjM2fQ.tAlR1QPXZ9MVsBi3dQyeYSj76cqqTkViHQ87uMfzqao'
+              'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MjE4NjE4NCwiZXhwIjoxNjUyMjcyNTg0fQ.qtKLhUcz9Fi7zpKhAIKNGIuDuHRcsVprJnLyz7hxhKc'
              }
           })
             .then((res) => res.json())
@@ -47,7 +47,7 @@ function PopUp(props) {
                 .delete(`/subCategory/${idSubForDelete}`,{
                   headers : {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDU0NWY1ODY1MWY5ZDg1NTE3MzU1MyIsImlhdCI6MTY1MjAyNTIzNiwiZXhwIjoxNjUyMTExNjM2fQ.tAlR1QPXZ9MVsBi3dQyeYSj76cqqTkViHQ87uMfzqao'
+                    'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MjE4NjE4NCwiZXhwIjoxNjUyMjcyNTg0fQ.qtKLhUcz9Fi7zpKhAIKNGIuDuHRcsVprJnLyz7hxhKc'
                   }
                 })
                   .then(() => console.log("ok"))
@@ -123,6 +123,7 @@ const PopUpStyle = styled.div`
             display: flex;
             justify-content: center;
             gap: 1.8rem;
+            padding: 0.3rem;
 
             #delete-button {
                 color: var(--color-downIcon-red);

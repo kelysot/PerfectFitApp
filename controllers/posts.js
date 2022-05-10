@@ -63,7 +63,7 @@ const addNewPost = async (req, res) => {
 
     const profileUserName = req.body.profileId
     const profile = await Profile.findOne({ userName: { $eq: profileUserName } })
-
+    
     //TODO: After we will send sizeAdjustment and rating change them to get the info from client.
     const post = Post({
         // profileId: profile._id,

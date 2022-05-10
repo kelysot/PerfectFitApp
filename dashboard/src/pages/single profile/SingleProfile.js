@@ -16,7 +16,7 @@ function SingleProfile({nameOfAdmin}) {
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDU0NWY1ODY1MWY5ZDg1NTE3MzU1MyIsImlhdCI6MTY1MjAyNTIzNiwiZXhwIjoxNjUyMTExNjM2fQ.tAlR1QPXZ9MVsBi3dQyeYSj76cqqTkViHQ87uMfzqao'
+        'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MjE3NTA4NCwiZXhwIjoxNjUyMjYxNDg0fQ.WLp_DzDfc3Jy-AKvklu-QBEGE5bDg3kekEv1AucS0Lc'
        }
     }) 
       .then((res) => res.json())
@@ -35,7 +35,6 @@ function SingleProfile({nameOfAdmin}) {
             setDataToChart(data.data);
           })
   },[]);
-
   return (
     <SingleProfileStyle>
         <SideBar/>
@@ -94,7 +93,8 @@ function SingleProfile({nameOfAdmin}) {
 
 const data2 = [
   {
-    categoryName: "There is not enough information about this profile"
+    categoryName: "There is not enough information about this profile",
+    amount: 0
   }
 ];
 
@@ -124,6 +124,7 @@ const SingleProfileStyle = styled.div`
             box-shadow: 0 35px 80px rgba(0,0,0,0.15);
             border-radius: 20px;
             position: relative;
+            overflow: initial;
 
             .image-box{
               position: absolute;

@@ -48,7 +48,7 @@ function Edit({nameOfAdmin}) {
               headers : { 
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDU0NWY1ODY1MWY5ZDg1NTE3MzU1MyIsImlhdCI6MTY1MjAyNTIzNiwiZXhwIjoxNjUyMTExNjM2fQ.tAlR1QPXZ9MVsBi3dQyeYSj76cqqTkViHQ87uMfzqao'
+                'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MjE3NTA4NCwiZXhwIjoxNjUyMjYxNDg0fQ.WLp_DzDfc3Jy-AKvklu-QBEGE5bDg3kekEv1AucS0Lc'
                }
             })
               .then((res) => res.json())

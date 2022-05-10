@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import React , {useState,useEffect} from 'react';
 import styled from "styled-components";
 import { DataGrid } from '@mui/x-data-grid';
 import { Link } from 'react-router-dom';
@@ -22,7 +22,10 @@ function Table({categoriesData, title , height, columns , link , action,addNew})
         <Link to={`/categories/${params.row.name}&${params.row.gender}`} className="link">
           <div className="view">View</div>
         </Link>
-        <div className="delete" onClick={() => nameToDelete(params.row.name,params.row.gender)}>Delete</div>
+        {
+          params.row.status === 'Deleted' ? <div className="delete-disable">Delete</div> 
+          : <div className="delete" onClick={() => nameToDelete(params.row.name,params.row.gender)}>Delete</div>
+        }
       </div>
      )
   }}]
@@ -175,7 +178,7 @@ const CategoriesTableStyle = styled.div`
       align-items: center;
       gap: 25px;
 
-      .view, .edit, .delete {
+      .view, .edit, .delete , .delete-disable {
         padding: 4px 8px;
         border-radius: 6px;
         font-weight: bolder;
@@ -194,6 +197,10 @@ const CategoriesTableStyle = styled.div`
         &:hover{
           color:white;
         }
+      }
+
+      .delete-disable{
+        background-color:#d6d0d0d4;
       }
 
       .link{
