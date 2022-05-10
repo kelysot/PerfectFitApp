@@ -250,5 +250,7 @@ router.get('/getDates/:date', authenticate, Post.getDates)
 
 router.get('/getSuitablePosts/:profileId', authenticate, Post.getSuitablePosts)
 
+router.get('/timeSince/:date', authenticate, Post.timeSince)
+
 
 module.exports = router

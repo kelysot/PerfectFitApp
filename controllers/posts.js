@@ -63,7 +63,7 @@ const addNewPost = async (req, res) => {
 
     const profileUserName = req.body.profileId
     const profile = await Profile.findOne({ userName: { $eq: profileUserName } })
-    
+
     //TODO: After we will send sizeAdjustment and rating change them to get the info from client.
     const post = Post({
         // profileId: profile._id,
@@ -162,7 +162,7 @@ const editPost = async (req, res) => {
         editPost.color = req.body.color
         editPost.categoryId = req.body.categoryId
         editPost.subCategoryId = req.body.subCategoryId
-        editPost.date = req.body.date
+        editPost.date = new Date()
         editPost.link = req.body.link
         editPost.sizeAdjustment = req.body.sizeAdjustment
         editPost.rating = req.body.rating
@@ -338,11 +338,11 @@ const getDates = async (req, res) => {
     })
 }
 
-const getSuitablePosts = async (req, res) => { 
+const getSuitablePosts = async (req, res) => {
 
     const userName = req.params.profileId
 
-    if(userName == null || userName == undefined){
+    if (userName == null || userName == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
@@ -358,28 +358,28 @@ const getSuitablePosts = async (req, res) => {
         const gender = profile.gender
 
         // find all the profiles with the same bodyType and gender
-        const profiles = await Profile.find({ bodyType: { $eq: bodyType }, gender: {$eq: gender}  })
+        const profiles = await Profile.find({ bodyType: { $eq: bodyType }, gender: { $eq: gender } })
         let profilesNamesArr = [];
-        for(let j=0; j< profiles.length; j++){
+        for (let j = 0; j < profiles.length; j++) {
             profilesNamesArr.push(profiles[j].userName)
         }
 
         // now we find all the posts that suitable to the bodyType and gender
 
-        let posts = await Post.find( {'profileId': {$in: profilesNamesArr}, 'isDeleted': false })
+        let posts = await Post.find({ 'profileId': { $in: profilesNamesArr }, 'isDeleted': false })
         posts = posts.reverse()
 
         // now we got the posts include the profile posts: 
         // now we need to send every post and check the correlation between the two profiles.
         // if there is a correlation (more then the threshhold we choose), the post will be nent to the app.
-        
+
         // in order to do that, we create a map of profile/correlation that in every new profile we check
         // we save it inside the map (so in every post we need to check we first check in the map if we 
         // allready cheked this profile) and then add the posts to the list we send if is ok. 
 
         let similarProfileId = profile.similarProfileId
 
-        if(similarProfileId == null || similarProfileId == undefined){ // check if needed
+        if (similarProfileId == null || similarProfileId == undefined) { // check if needed
             similarProfileId = []
         }
 
@@ -387,33 +387,33 @@ const getSuitablePosts = async (req, res) => {
 
         let vector1 = createVector(profile);
 
-        for(let t = 0; t < posts.length; t++){
+        for (let t = 0; t < posts.length; t++) {
 
             let userNameofPost = posts[t].profileId
             let profile2 = await Profile.findOne({ userName: { $eq: userNameofPost } })
-            let id2 = profile2._id 
+            let id2 = profile2._id
 
             // if the publisher of the post is in the list of "similarProfileId" we can add it immediately to the postsList. 
-            if(similarProfileId.includes(id2) || (userNameofPost == profile.userName )){
-        
+            if (similarProfileId.includes(id2) || (userNameofPost == profile.userName)) {
+
                 postsForSend.push(posts[t])
             }
             // if not, we need to check the correlation between the two profiles:
-            else{
-            
+            else {
+
                 let vector2 = createVector(profile2)
                 let thePearson = pearson(vector1, vector2)
 
-                if(thePearson > 0.965){ //TODO: check the threshold
+                if (thePearson > 0.965) { //TODO: check the threshold
                     postsForSend.push(posts[t])
-                    if(similarProfileId.length == 100){
-                        similarProfileId.slice(1,100)
+                    if (similarProfileId.length == 100) {
+                        similarProfileId.slice(1, 100)
                     }
                     similarProfileId.push(profile2._id)
                 }
             }
 
-            if(postsForSend.length == 300){
+            if (postsForSend.length == 300) {
                 break;
             }
         }
@@ -443,10 +443,84 @@ const getSuitablePosts = async (req, res) => {
     }
 }
 
+const timeSince = async (req, res) => {
+
+    var date = new Date(req.params.date)
+
+    var seconds = Math.floor((new Date() - date) / 1000);
+
+    var interval = seconds / 31536000;
+
+
+    try {
+        var flag = false
+        var ans
+
+        if (interval > 1 && !flag) {
+            flag = true
+            ans = Math.floor(interval) + " years";
+            console.log(ans)
+            res.status(200).send({
+                'status': 'OK',
+                'timeAgo': ans
+            })
+        }
+        else if ((seconds / 2592000) > 1 && !flag) {
+            flag = true
+            ans = Math.floor(seconds / 2592000) + " months";
+            console.log(ans)
+            res.status(200).send({
+                'status': 'OK',
+                'timeAgo': ans
+            })
+        }
+        else if ((seconds / 86400) > 1 && !flag) {
+            flag = true
+            ans = Math.floor(seconds / 86400) + " days";
+            res.status(200).send({
+                'status': 'OK',
+                'timeAgo': ans
+            })
+        }
+        else if ((seconds / 3600) > 1 && !flag) {
+            flag = true
+            ans = Math.floor(seconds / 3600) + " hours";
+            console.log(ans)
+            res.status(200).send({
+                'status': 'OK',
+                'timeAgo': ans
+            })
+        }
+        else if ((seconds / 60) > 1 && !flag) {
+            flag = true
+            ans = Math.floor(seconds / 60) + " minutes";
+            console.log(ans)
+            res.status(200).send({
+                'status': 'OK',
+                'timeAgo': ans
+            })
+        }
+        else {
+            ans = Math.floor(seconds) + " seconds";
+            console.log(ans)
+            res.status(200).send({
+                'status': 'OK',
+                'timeAgo': ans
+            })
+        }
+    } catch (err) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+
+}
+
 /************************************* functions for algorithm *************************************/
 
 
-function createVector(profile){
+function createVector(profile) {
 
     let vector = []
     vector.push(parseInt(profile.shoulder));
@@ -459,57 +533,57 @@ function createVector(profile){
     return vector;
 }
 
-function avg(x){
+function avg(x) {
 
-    if(x == null || x == undefined){
-        return -1; 
+    if (x == null || x == undefined) {
+        return -1;
     }
 
-    var count = 0 
-    for(let i = 0; i < x.length; i++){
-        count+= x[i]
+    var count = 0
+    for (let i = 0; i < x.length; i++) {
+        count += x[i]
     }
-    count  = (count / x.length);
-    return count; 
+    count = (count / x.length);
+    return count;
 }
-function variance(x){
+function variance(x) {
 
-    if(x == null || x == undefined){
-        return -1; 
+    if (x == null || x == undefined) {
+        return -1;
     }
-    let count = 0; 
-    for (let i=0; i<x.length; i++){
+    let count = 0;
+    for (let i = 0; i < x.length; i++) {
         count += (x[i] * x[i]);
     }
-    count = (count/ x.length);
+    count = (count / x.length);
     let u = (avg(x) * avg(x));
     let V = (count - u);
     return V;
 }
 
-function cov(x, y){
+function cov(x, y) {
 
-    if(x == null || y == null || x == undefined || y == undefined){
-        return -1; 
+    if (x == null || y == null || x == undefined || y == undefined) {
+        return -1;
     }
     let ax = avg(x);
     let ay = avg(y);
 
-    let count = 0; 
-    for(let i=0; i<x.length; i++){
+    let count = 0;
+    for (let i = 0; i < x.length; i++) {
         count += (x[i] * y[i]);
     }
     count = (count / x.length);
 
-    return (count - (ax*ay));
+    return (count - (ax * ay));
 }
 
-function pearson(x, y){ // x = [] sizes of profile 1, y = [] sizes of profile 2
+function pearson(x, y) { // x = [] sizes of profile 1, y = [] sizes of profile 2
 
     let V1 = Math.sqrt(variance(x));
     let V2 = Math.sqrt(variance(y));
-    let C =  cov(x,y);
-    return (C/ (V1 * V2));
+    let C = cov(x, y);
+    return (C / (V1 * V2));
 }
 
 
@@ -526,6 +600,7 @@ module.exports = {
     getWishList,
     getProfilePosts,
     getDates,
-    getSuitablePosts
+    getSuitablePosts,
+    timeSince
 }
 

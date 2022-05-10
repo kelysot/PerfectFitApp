@@ -57,7 +57,7 @@ const addComment = async (req, res) => {
     const newComment = Comment({
         profileId: profileId,
         postId: req.body.postId,
-        date: req.body.date,
+        date: new Date(),
         text: req.body.text
     })
 
@@ -99,7 +99,7 @@ const editComment = async (req, res) => {
     }
     try {
         const editComment = await Comment.findById(req.params.id)
-        editComment.date = req.body.date
+        editComment.date = new Date()
         editComment.text = req.body.text
         editComment.postId = req.body.postId
 
