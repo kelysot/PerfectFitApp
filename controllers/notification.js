@@ -59,7 +59,8 @@ const addNotification = async (req, res) => {
         profileIdMine: profileUserName,
         profileIdFrom: req.body.profileIdFrom,
         notificationType: req.body.notificationType,
-        date: new Date()
+        date: new Date(),
+        postId: req.body.postId
     })
 
     const newNotificationList = profile.notifications
@@ -103,6 +104,8 @@ const editNotification = async (req, res) => {
         const editNotification = await Notification.findById(req.params.id)
         editNotification.notificationType = req.body.notificationType
         editNotification.date = new Date()
+        editNotification.postId = req.body.postId
+
 
         editNotification.save((error, editNotification) => {
             if (error) {

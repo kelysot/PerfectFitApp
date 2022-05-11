@@ -106,7 +106,7 @@ router.get('/:id', authenticate, Notifications.getNotificationsListByProfileId)
  *         description: The notification id was not found 
  */
 
-router.get('/byId/:id', authenticate, Notifications.getNotificationById)
+router.get('/getNotificationById/:id', authenticate, Notifications.getNotificationById)
 
 /**
  * @swagger

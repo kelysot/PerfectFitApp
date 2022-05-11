@@ -459,7 +459,6 @@ const timeSince = async (req, res) => {
         if (interval > 1 && !flag) {
             flag = true
             ans = Math.floor(interval) + " years";
-            console.log(ans)
             res.status(200).send({
                 'status': 'OK',
                 'timeAgo': ans
@@ -468,7 +467,6 @@ const timeSince = async (req, res) => {
         else if ((seconds / 2592000) > 1 && !flag) {
             flag = true
             ans = Math.floor(seconds / 2592000) + " months";
-            console.log(ans)
             res.status(200).send({
                 'status': 'OK',
                 'timeAgo': ans
@@ -485,7 +483,6 @@ const timeSince = async (req, res) => {
         else if ((seconds / 3600) > 1 && !flag) {
             flag = true
             ans = Math.floor(seconds / 3600) + " hours";
-            console.log(ans)
             res.status(200).send({
                 'status': 'OK',
                 'timeAgo': ans
@@ -494,7 +491,6 @@ const timeSince = async (req, res) => {
         else if ((seconds / 60) > 1 && !flag) {
             flag = true
             ans = Math.floor(seconds / 60) + " minutes";
-            console.log(ans)
             res.status(200).send({
                 'status': 'OK',
                 'timeAgo': ans
@@ -502,7 +498,6 @@ const timeSince = async (req, res) => {
         }
         else {
             ans = Math.floor(seconds) + " seconds";
-            console.log(ans)
             res.status(200).send({
                 'status': 'OK',
                 'timeAgo': ans
