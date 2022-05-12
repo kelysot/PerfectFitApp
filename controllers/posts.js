@@ -509,6 +509,33 @@ const timeSince = async (req, res) => {
             'error': err.message
         })
     }
+}
+
+
+const getSearchPosts = async (req, res) =>{
+
+    const map = req.body
+
+    const sizes = map.Sizes
+    const categories = map.Categories
+    const colors = map.Colors
+    const companies = map.Companies
+    const bodyTypes = map.BodyTypes
+
+    let posts = await Post.find({'size': { $in: sizes}, 'categoryId': { $in: categories}, 'color': { $in: colors}, 'company': { $in: companies}})
+
+    //TODO: add check of price
+    
+    console.log(posts)
+    try {
+       res.status(200).send(posts)
+    } catch (err) {
+        res.status(400).send({
+            'status': 'failure',
+            'error': err.message
+        })
+    }
+
 
 }
 
@@ -596,6 +623,7 @@ module.exports = {
     getProfilePosts,
     getDates,
     getSuitablePosts,
-    timeSince
+    timeSince,
+    getSearchPosts
 }
 
