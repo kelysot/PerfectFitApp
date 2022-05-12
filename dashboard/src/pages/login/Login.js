@@ -8,6 +8,7 @@ function Login() {
   
   let navigate = useNavigate();
   const {dispatch} = useContext(UserAutContext);
+  const[error,setError] = useState("");
   const[hide,setHide] = useState(true);
   const[adminDetails,setAdminDetails] = useState({
     email: "",
@@ -44,6 +45,7 @@ function Login() {
       .then(() => navigate("/home"))
       .catch(err => {
         console.error(err);
+        setError("* Email and/or password incorrect");
       });
   }
 
@@ -57,6 +59,7 @@ function Login() {
             <InputStyle type="password" id="password" placeholder="Password"  onChange={(e) => handle(e)} value={adminDetails.password} />
             <span className="material-icons-sharp" onClick={()=> hideHandler()}>{hide ? 'visibility' : 'visibility_off'}</span>
           </div>
+          <span id="error">{error}</span>
           <ButtonStyle>Login</ButtonStyle>
         </form>
       </ContainerStyle>
@@ -80,6 +83,11 @@ const ContainerStyle = styled.div`
     align-items: center;
     display: flex;
     flex-direction: column;
+
+    #error{
+      color: var(--color-downIcon-red);
+      font-weight: bold;
+    }
   }
 
   h1{

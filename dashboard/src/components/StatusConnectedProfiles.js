@@ -57,6 +57,10 @@ const StatusConnectedProfilesStyle = styled.div`
     flex:3;
     min-width: 20rem ;
 
+    @media screen and (max-width: 1540px) {
+      height: 24rem;
+    }
+
     @media screen and (max-width: 1280px) {
       height: 19rem;
     }
@@ -114,6 +118,18 @@ const BottomStyle = styled.div`
         justify-content: center;
         color:var(--color-dark-variant) ;
       }
+    }
+  }
+
+  @media screen and (max-width: 1540px) {
+    .chart{
+      width : 170px;
+      height: 170px ;
+      margin-bottom: 10px ;
+    }
+    p{
+      padding-bottom: 20px;
+      padding-top: 12px;
     }
   }
 

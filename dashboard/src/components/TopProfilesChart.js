@@ -26,6 +26,10 @@ const TopUserChartStyle = styled.div`
     min-width: 12rem;
     box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.18);
 
+    @media screen and (max-width: 1540px) {
+      height: 24rem;
+    }
+
     @media screen and (max-width: 1280px) {
       height: 19rem;
     }

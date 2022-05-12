@@ -45,6 +45,10 @@ const TopCategoriesChartStyle = styled.div`
     padding: 10px;
     flex: 6;
 
+    @media screen and (max-width: 1540px) {
+      height: 24rem;
+    }
+
     @media screen and (max-width: 1280px) {
       height: 19rem;
     }
