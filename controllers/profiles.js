@@ -339,8 +339,9 @@ const deleteProfile = async (req, res) => {
 const getProfilesByUserNames = async (req, res) => {
 
     const userNames = req.params.userNames // We get list as a string.
-    console.log(userNames)
-    console.log(userNames.length)
+    arrayUserNames = userNames.substring(1)
+    arrayUserNames = arrayUserNames.slice(0, -1)
+    arrayUserNames = arrayUserNames.split(", ")
 
     if (userNames == null || userNames == undefined) {
         res.status(400).send({
@@ -352,14 +353,10 @@ const getProfilesByUserNames = async (req, res) => {
         var profileArr = []
 
         var i = 0
-        for (i = 1; i < userNames.length - 1; i++) {
-            console.log(userNames[i])
-            var user = userNames[i]
+        for (i = 0; i < arrayUserNames.length; i++) {
+            var user = arrayUserNames[i]
             var profile = await Profile.findOne({ 'userName': user })
             profileArr.push(profile)
-            if (i < userNames.length - 2) { // To not add space(" ") and "," to array.
-                i = i + 2
-            }
         }
 
         res.status(200).send(profileArr)

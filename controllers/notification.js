@@ -183,11 +183,9 @@ const deleteNotification = async (req, res) => {
 const getNotificationsByIds = async (req, res) => {
 
     const notificationsIds = req.params.notificationsIds // We get list as a string.
-    console.log(notificationsIds)
-    console.log(notificationsIds.split("", ""))
-
-    console.log(notificationsIds[0])
-
+    arrayNotificationsIds = notificationsIds.substring(1)
+    arrayNotificationsIds = arrayNotificationsIds.slice(0, -1)
+    arrayNotificationsIds = arrayNotificationsIds.split(", ")
 
     if (notificationsIds == null || notificationsIds == undefined) {
         res.status(400).send({
@@ -199,13 +197,10 @@ const getNotificationsByIds = async (req, res) => {
         var notificationArr = []
 
         var i = 0
-        for (i = 1; i < notificationsIds.length - 1; i++) {
-            var id = notificationsIds[i]
+        for (i = 0; i < arrayNotificationsIds.length; i++) {
+            var id = arrayNotificationsIds[i]
             var notification = await Notification.findById(id)
             notificationArr.push(notification)
-            if (i < notificationsIds.length - 2) { // To not add space(" ") and "," to array.
-                i = i + 2
-            }
         }
 
         res.status(200).send(notificationArr)
