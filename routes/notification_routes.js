@@ -171,7 +171,7 @@ router.post('/', authenticate, Notifications.addNotification)
  */
 
 
-router.patch('/:id', authenticate, Notifications.editNotification)
+router.patch('/', authenticate, Notifications.editNotification)
 
 /**
  * @swagger
