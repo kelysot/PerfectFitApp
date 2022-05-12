@@ -60,7 +60,8 @@ const addNotification = async (req, res) => {
         profileIdFrom: req.body.profileIdFrom,
         notificationType: req.body.notificationType,
         date: new Date(),
-        postId: req.body.postId
+        postId: req.body.postId,
+        seen: req.body.seen
     })
 
     const newNotificationList = profile.notifications
@@ -94,18 +95,23 @@ const addNotification = async (req, res) => {
 }
 
 const editNotification = async (req, res) => {
-    if (req.params.id == null || req.params.id == undefined) {
+
+    const notification = req.body
+    const id = notification._id
+
+    if (notification == null || notification == undefined) {
         res.status(400).send({
             'status': 'fail',
             'error': err.message
         })
     }
+
     try {
-        const editNotification = await Notification.findById(req.params.id)
+        const editNotification = await Notification.findById(id)
         editNotification.notificationType = req.body.notificationType
         editNotification.date = new Date()
         editNotification.postId = req.body.postId
-
+        editNotification.seen = req.body.seen
 
         editNotification.save((error, editNotification) => {
             if (error) {
