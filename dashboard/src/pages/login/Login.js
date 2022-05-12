@@ -1,9 +1,13 @@
-import React , {useState} from 'react';
-import { Link } from 'react-router-dom';
+import React , {useState,useContext} from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
+import axios from 'axios';
+import {UserAutContext} from '../../context/userAutContext';
 
 function Login() {
-
+  
+  let navigate = useNavigate();
+  const {dispatch} = useContext(UserAutContext);
   const[hide,setHide] = useState(true);
   const[adminDetails,setAdminDetails] = useState({
     email: "",
@@ -28,7 +32,19 @@ function Login() {
 
   function submit(e) {
     e.preventDefault();
-    console.log(adminDetails);
+    
+    axios
+      .post('/admin/login', adminDetails, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      .then(data => {console.log(data)})
+      .then(() => dispatch({type: 'LOGIN'}))
+      .then(() => navigate("/home"))
+      .catch(err => {
+        console.error(err);
+      });
   }
 
   return (
@@ -41,11 +57,7 @@ function Login() {
             <InputStyle type="password" id="password" placeholder="Password"  onChange={(e) => handle(e)} value={adminDetails.password} />
             <span className="material-icons-sharp" onClick={()=> hideHandler()}>{hide ? 'visibility' : 'visibility_off'}</span>
           </div>
-          <ButtonStyle>
-            {/* <Link to="/home" className='link'>Log In</Link> */}
-            {/* <Link to="/" className='link'>Log In</Link> */}
-            Login
-          </ButtonStyle>
+          <ButtonStyle>Login</ButtonStyle>
         </form>
       </ContainerStyle>
   )

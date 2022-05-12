@@ -12,13 +12,16 @@ import Edit from "./pages/edit/Edit";
 import {Routes,Route} from "react-router-dom";
 import styled from "styled-components";
 import {DarkModeContext} from '../src/context/darkModeContext';
+import {UserAutContext} from '../src/context/userAutContext';
 import Profiles from "./pages/profiles/Profiles";
 import Setting from "./pages/admin setting/Setting";
+import ProtectedRoutes from './components/ProtectedRoutes';
 
 function App() {
 
   const[nameOfAdmin,setNameOfAdmin] = useState("");
   const {darkMode} = useContext(DarkModeContext);
+  const {login} = useContext(UserAutContext);
 
   useEffect(() => {
       fetch("/dashboard",{
@@ -38,21 +41,23 @@ function App() {
       <GlobalStyle />
       <GlobalStyleDark />
       <Routes path="/">
-        <Route index element={<Login/>} ></Route>
-        <Route path="home" element={<Home nameOfAdmin={nameOfAdmin} />}></Route>
-        <Route path="categories">
-          <Route index element={<Categories  nameOfAdmin={nameOfAdmin} />}></Route>
-          <Route path=":categoryId" element={<SingleCategory nameOfAdmin={nameOfAdmin} />}></Route>
-          <Route path="newCategory" element={<NewCategory nameOfAdmin={nameOfAdmin}/>}></Route>
-          <Route path="editCategory/:id" element={<Edit nameOfAdmin={nameOfAdmin} />}></Route>
-          <Route path="newSubCategory/:id" element={<NewSubCategory nameOfAdmin={nameOfAdmin} />}></Route>
-          <Route path="editSubCategory/:id" element={<Edit nameOfAdmin={nameOfAdmin} />}></Route>
+        <Route index element={<Login/>}></Route>
+        <Route element={<ProtectedRoutes userState={login}/>}>
+          <Route path="home" element={<Home nameOfAdmin={nameOfAdmin} />}></Route>
+          <Route path="categories">
+            <Route index element={<Categories  nameOfAdmin={nameOfAdmin} />}></Route>
+            <Route path=":categoryId" element={<SingleCategory nameOfAdmin={nameOfAdmin} />}></Route>
+            <Route path="newCategory" element={<NewCategory nameOfAdmin={nameOfAdmin}/>}></Route>
+            <Route path="editCategory/:id" element={<Edit nameOfAdmin={nameOfAdmin} />}></Route>
+            <Route path="newSubCategory/:id" element={<NewSubCategory nameOfAdmin={nameOfAdmin} />}></Route>
+            <Route path="editSubCategory/:id" element={<Edit nameOfAdmin={nameOfAdmin} />}></Route>
+          </Route>
+          <Route path="users">
+            <Route index element={<Profiles nameOfAdmin={nameOfAdmin} />}></Route>
+            <Route path=":id" element={<SingleProfile nameOfAdmin={nameOfAdmin} />}></Route>
+          </Route>
+          <Route path="setting" element={<Setting nameOfAdmin={nameOfAdmin} />}></Route>
         </Route>
-        <Route path="users">
-          <Route index element={<Profiles nameOfAdmin={nameOfAdmin} />}></Route>
-          <Route path=":id" element={<SingleProfile nameOfAdmin={nameOfAdmin} />}></Route>
-        </Route>
-        <Route path="setting" element={<Setting nameOfAdmin={nameOfAdmin} />}></Route>
       </Routes>
     </AppStyle>
   );

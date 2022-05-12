@@ -64,6 +64,7 @@ const register = async (req, res) => {
 
 
 const login = async (req, res) => {
+    
     const email = req.body.email
     const password = req.body.password
     if (email == null || password == null) return sendError(res, 400, "wrong email or password")
