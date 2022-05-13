@@ -300,6 +300,7 @@ const getSubCategoriesData = async (req, res) => {
             image: subCategory.pictureUrl,
             gender: subCategory.gender,
             name: subCategory.name,
+            status: subCategory.isDeleted ? 'Deleted' : 'Active'
         })
     }
 

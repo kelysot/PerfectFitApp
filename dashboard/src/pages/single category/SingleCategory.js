@@ -50,9 +50,11 @@ function SingleCategory({nameOfAdmin}) {
           <div className='singleCategoryContainer'>
             <div className='top'>
               <div className='left'>
-                <Link to={`/categories/editCategory/${singleCategory.name}&${singleCategory.gender}`} className="link">
-                  <div className='editButton'>Edit</div>
-                </Link>
+                { singleCategory.isDeleted ? "" 
+                  : <Link to={`/categories/editCategory/${singleCategory.name}&${singleCategory.gender}`} className="link">
+                      <div className='editButton'>Edit</div>
+                    </Link>
+                }
                 <h1 className='title'>Information</h1>
                 <div className='item'>
                   <img src={singleCategory.pictureUrl} alt=''></img>
@@ -90,7 +92,7 @@ function SingleCategory({nameOfAdmin}) {
               </div>
             </div>
             <div className='bottom'>
-              <Table categoriesData={subCategoryData} addNew={true} action={'subCategories'} columns={columns} title={'SubCategory List'} height={26} link={`/categories/newSubCategory/${location}`}/>
+              <Table categoriesData={subCategoryData} addNew={singleCategory.isDeleted ? false : true} action={'subCategories'} columns={columns} title={'SubCategory List'} height={26} link={`/categories/newSubCategory/${location}`}/>
             </div>
           </div>
           </>)}
@@ -111,7 +113,8 @@ const columns = [
     }
   },
   { field: 'name', headerName: 'SubCategory Name', width: 200},
-  { field: 'gender', headerName: 'SubCategory Gender', width: 200}
+  { field: 'gender', headerName: 'SubCategory Gender', width: 200},
+  { field: 'status', headerName: 'Status', width: 120}
 ];
 
 const SingleCategoryStyle = styled.div`

@@ -11,11 +11,11 @@ function Profiles({nameOfAdmin}) {
   const[profilesList,setProfilesList] = useState("");
 
   useEffect(() => {
-    fetch(`/profile/profilePage/all` , {
+    fetch(`/profile/` , {
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MjE3NTA4NCwiZXhwIjoxNjUyMjYxNDg0fQ.WLp_DzDfc3Jy-AKvklu-QBEGE5bDg3kekEv1AucS0Lc'
+        'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Q5MWI3MWJjNmExYTNmZWJmMTFlNSIsImlhdCI6MTY1MjQ0NTU0OCwiZXhwIjoxNjUyNTMxOTQ4fQ.LWuTKqImJW628q6Qy-4lCKNPrP8xl3GzJHm1qEentG0'
        }
     })
       .then((res) => res.json())

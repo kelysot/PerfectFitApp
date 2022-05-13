@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from 'axios';
 
 function PopUp(props) {
-    //TODO: function + show if exist or not
+  //TODO: function
   const deleteRow = () => {
     let location = window.location.href;
     if(!location.includes('&')){
@@ -20,14 +20,13 @@ function PopUp(props) {
                 .delete(`/category/${idForDelete}`,{
                   headers : {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MjE4NjE4NCwiZXhwIjoxNjUyMjcyNTg0fQ.qtKLhUcz9Fi7zpKhAIKNGIuDuHRcsVprJnLyz7hxhKc'
+                    'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Q5MWI3MWJjNmExYTNmZWJmMTFlNSIsImlhdCI6MTY1MjQ0OTEwOSwiZXhwIjoxNjUyNTM1NTA5fQ.gKRwGyzZv5skobFeYX0bLdKXllgiUCP4aOftM2mihk4'
                   }
                 })
                   .then(() =>     window.location.href = `/categories`)
                   .catch(err => {
                     console.error(err);
                 });
-                
                 props.setTrigger(false);
             })
     }else{
@@ -35,22 +34,21 @@ function PopUp(props) {
             headers : { 
               'Content-Type': 'application/json',
               'Accept': 'application/json',
-              'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MjE4NjE4NCwiZXhwIjoxNjUyMjcyNTg0fQ.qtKLhUcz9Fi7zpKhAIKNGIuDuHRcsVprJnLyz7hxhKc'
+              'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Q5MWI3MWJjNmExYTNmZWJmMTFlNSIsImlhdCI6MTY1MjQ0OTEwOSwiZXhwIjoxNjUyNTM1NTA5fQ.gKRwGyzZv5skobFeYX0bLdKXllgiUCP4aOftM2mihk4'
              }
           })
             .then((res) => res.json())
               .then((data) => {
-                console.log(data.subCategory);
-
                 let idSubForDelete = data.subCategory._id
+                let nameAndGender = window.location.href.split("/").slice(-1).pop()
                 axios
                 .delete(`/subCategory/${idSubForDelete}`,{
                   headers : {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MjE4NjE4NCwiZXhwIjoxNjUyMjcyNTg0fQ.qtKLhUcz9Fi7zpKhAIKNGIuDuHRcsVprJnLyz7hxhKc'
+                    'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Q5MWI3MWJjNmExYTNmZWJmMTFlNSIsImlhdCI6MTY1MjQ0OTEwOSwiZXhwIjoxNjUyNTM1NTA5fQ.gKRwGyzZv5skobFeYX0bLdKXllgiUCP4aOftM2mihk4'
                   }
                 })
-                  .then(() => console.log("ok"))
+                  .then(() => window.location.href = `/categories/${nameAndGender}`)
                   .catch(err => {
                     console.error(err);
                 });

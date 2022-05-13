@@ -117,21 +117,21 @@ const deleteCategory = async (req, res) => {
         const categoryToDelete = await Category.findById(req.params.id)
         categoryToDelete.isDeleted = true
 
-        // editCategory.save((error, editCategory) => {
-        //     if (error) {
-        //         res.status(400).send({
-        //             'status': 'fail',
-        //             'error': error.message
-        //         })
-        //     }
-        //     else {
-        //         res.status(200).send({
-        //             'status': 'OK',
-        //             'category': editCategory
-        //         })
-        //     }
-        // })
+        categoryToDelete.subCategory.forEach(async (sub) => {
+            let subCategory = await SubCategory.findById(sub)
+            subCategory.isDeleted = true
 
+            subCategory.save((err) =>{
+                if (err) {
+                    res.status(400).send({
+                        'status': 'fail',
+                        'error': error.message
+                    })
+                }else{
+                    res.status(200)
+                }
+            })
+        })
 
         categoryToDelete.save((error) => {
             if (error) {
@@ -147,20 +147,6 @@ const deleteCategory = async (req, res) => {
             }
         })
 
-        // categoryToDelete.remove((error) => {
-        //     if (error) {
-        //         res.status(400).send({
-        //             'status': 'fail',
-        //             'error': error.message
-        //         })
-        //     }
-        //     else {
-        //         res.status(200).send({
-        //             'status': 'OK',
-        //             'message': 'The category was deleted successfully'
-        //         })
-        //     }
-        // })
     } catch (err) {
         res.status(400).send({
             'status': 'fail',

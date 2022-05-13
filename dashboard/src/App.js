@@ -42,7 +42,7 @@ function App() {
       <GlobalStyleDark />
       <Routes path="/">
         <Route index element={<Login/>}></Route>
-        <Route element={<ProtectedRoutes userState={login}/>}>
+        {/* <Route element={<ProtectedRoutes userState={login}/>}> */}
           <Route path="home" element={<Home nameOfAdmin={nameOfAdmin} />}></Route>
           <Route path="categories">
             <Route index element={<Categories  nameOfAdmin={nameOfAdmin} />}></Route>
@@ -57,7 +57,7 @@ function App() {
             <Route path=":id" element={<SingleProfile nameOfAdmin={nameOfAdmin} />}></Route>
           </Route>
           <Route path="setting" element={<Setting nameOfAdmin={nameOfAdmin} />}></Route>
-        </Route>
+        {/* </Route> */}
       </Routes>
     </AppStyle>
   );

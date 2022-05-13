@@ -33,10 +33,16 @@ function Table({categoriesData, title , height, columns , link , action,addNew})
   const actionColumnSubCategory = [{field: 'action', headerName:"Action", width: 250, renderCell: (params)=> {
     return(
      <div className="cellAction">
-       <Link to={`/categories/editSubCategory/${params.row.name}&${params.row.gender}`} className="link">
-         <div className="edit">Edit</div>
-       </Link>
-       <div className="delete" onClick={() => nameToDelete(params.row.name,params.row.gender)}>Delete</div>
+       {
+          params.row.status === 'Deleted' ? <div className="edit-disable">Edit</div> 
+          : <Link to={`/categories/editSubCategory/${params.row.name}&${params.row.gender}`} className="link">
+          <div className="edit">Edit</div>
+          </Link>
+       }
+       {
+          params.row.status === 'Deleted' ? <div className="delete-disable">Delete</div> 
+          : <div className="delete" onClick={() => nameToDelete(params.row.name,params.row.gender)}>Delete</div>
+        }
      </div>
     )
   }}]
@@ -60,9 +66,7 @@ function Table({categoriesData, title , height, columns , link , action,addNew})
       { (categoriesData && columns) && (<>
         <div className="tableTop">
           <h3 className="title">{title}</h3>
-          <Link to={link} className={addNew ? "link" : "notLink" }>
-            Add New
-          </Link>
+          {!addNew ? "" : <Link to={link} className={addNew ? "link" : "notLink" }>Add New </Link>} 
         </div>
         <DataGrid style={{ height:`${height}vh`}}
             rows={categoriesData}
@@ -178,7 +182,7 @@ const CategoriesTableStyle = styled.div`
       align-items: center;
       gap: 25px;
 
-      .view, .edit, .delete , .delete-disable {
+      .view, .edit, .delete , .delete-disable , .edit-disable {
         padding: 4px 8px;
         border-radius: 6px;
         font-weight: bolder;
@@ -199,7 +203,7 @@ const CategoriesTableStyle = styled.div`
         }
       }
 
-      .delete-disable{
+      .delete-disable , .edit-disable{
         background-color:#d6d0d0d4;
       }
 
