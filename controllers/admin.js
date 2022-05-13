@@ -32,6 +32,8 @@ const register = async (req, res) => {
         const admin = Admin({
             'email': 'y@gmail.com',
             'password': hashPwd,
+            'name' : "Yarin Matmoni",
+            'image': "https://media-exp1.licdn.com/dms/image/C4E03AQEGVXXL-uwrGA/profile-displayphoto-shrink_400_400/0/1606300287456?e=1657756800&v=beta&t=vqPPAP-02fFAQBeY0_SSwi7shnDXWVCgvUsQ6LnNZ-g",
             'isConnected': "false",
             'lastUpdate': "10/05/2022",
             'newProfilesCompere': "0",

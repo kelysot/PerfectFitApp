@@ -9,6 +9,13 @@ const adminSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    name: {
+        type: String,
+        required: true
+    },
+    image: {
+        type: String,
+    },
     isConnected: {
         type: String,
         required: true

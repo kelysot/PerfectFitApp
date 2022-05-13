@@ -135,7 +135,7 @@ const SingleProfileStyle = styled.div`
               height: 180px;
               background: #fff;
               border-radius: 20px;
-              box-shadow: 0  15px 50px rgba(0,0,0,0.35);
+              box-shadow: 0 36px 44px rgb(0 0 0 / 15%);
               overflow: hidden;
 
               img{

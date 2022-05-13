@@ -358,11 +358,13 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 ###
 POST http://localhost:4000/admin/register
 Content-Type: application/json
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MjE3NTA4NCwiZXhwIjoxNjUyMjYxNDg0fQ.WLp_DzDfc3Jy-AKvklu-QBEGE5bDg3kekEv1AucS0Lc
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2U4Mjg2MjBmOTViNzRhODhhMzk2NyIsImlhdCI6MTY1MjQ1ODExOCwiZXhwIjoxNjUyNTQ0NTE4fQ.TUKWUc-HoTmQh-tVW8OTjCLGP_7ZVO-NCGsV5pmdxj4
 
 {       
         "email": "y@gmail.com",
         "password": "123456",
+        "name": "Yarin Matmoni",
+        "image": "https://media-exp1.licdn.com/dms/image/C4E03AQEGVXXL-uwrGA/profile-displayphoto-shrink_400_400/0/1606300287456?e=1657756800&v=beta&t=vqPPAP-02fFAQBeY0_SSwi7shnDXWVCgvUsQ6LnNZ-g",
         "isConnected": "false",
         "lastUpdate": "10/05/2022",
         "newProfilesCompere": "0",

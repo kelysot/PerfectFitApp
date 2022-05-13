@@ -35,8 +35,8 @@ function Categories({nameOfAdmin}) {
 }
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'options' , headerName: 'Image',
+  { field: 'id', headerName: 'ID', width: 60 },
+  { field: 'options' , headerName: 'Image', width: 80,
     renderCell: (params) => {
       return (
         <div className="image">
@@ -47,9 +47,9 @@ const columns = [
   },
   { field: 'name', headerName: 'Category Name', width: 150},
   { field: 'gender', headerName: 'Category Gender', width: 160},
-  { field: 'numOfPosts', headerName: 'Total Post', type: 'number', width: 130},
+  { field: 'numOfPosts', headerName: 'Total Post', type: 'number', width: 110},
   { field: 'percent', headerName: 'Percent Of Total Post', width: 180},
-  { field: 'status', headerName: 'Status', width: 120}
+  { field: 'status', headerName: 'Status', width: 90}
 ];
 
 const CategoryStyle = styled.div`
