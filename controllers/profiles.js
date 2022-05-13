@@ -190,6 +190,7 @@ const editProfile = async (req, res) => {
         newEditProfile.wishlist = req.body.wishlist
         newEditProfile.myPostsListId = req.body.myPostsListId
 
+
         // save the profile
 
         newEditProfile.save((error, newEditProfile) => {
