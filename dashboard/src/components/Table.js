@@ -84,7 +84,7 @@ const CategoriesTableStyle = styled.div`
     background-color: #ffffffe8;
     border-radius: 8px;
     padding: 10px 20px;
-    box-shadow: 0px -12px 15px rgb(0 0 0 / 10%);
+    box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.18);
     width: 100%;
 
     .title{

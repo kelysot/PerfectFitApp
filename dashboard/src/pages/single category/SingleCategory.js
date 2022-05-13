@@ -151,7 +151,7 @@ const SingleCategoryStyle = styled.div`
       justify-content: space-evenly;
 
       .left{
-        box-shadow: 5px -5px 8px rgb(0 0 0 / 12%);
+        box-shadow: -7px 6px 4px rgb(0 0 0 / 7%);
         border-radius:15px;
         background-color:#ffffffe8;
         position: relative;
@@ -210,7 +210,7 @@ const SingleCategoryStyle = styled.div`
       }
 
       .right{
-        box-shadow: 5px -5px 8px rgb(0 0 0 / 12%);
+        box-shadow: -7px 6px 4px rgb(0 0 0 / 7%);
         border-radius:15px;
         background-color:#ffffffe8;
         align-items: center;
@@ -224,6 +224,7 @@ const SingleCategoryStyle = styled.div`
 
     .bottom{
       width: 97.5%;
+      box-shadow: -7px 6px 4px rgb(0 0 0 / 7%);
     }
 
   }
