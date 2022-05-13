@@ -70,12 +70,10 @@ const profileSchema = new mongoose.Schema({
         ref: 'Profile'
     }],
     followers: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Profile'
+        type: String,
     }],
     trackers: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Profile'
+        type: String,
     }],
     notifications: [{
         type: mongoose.Schema.Types.ObjectId,
