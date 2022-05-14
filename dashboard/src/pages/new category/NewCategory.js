@@ -4,7 +4,7 @@ import SideBar from '../../components/SideBar';
 import TopBar from '../../components/TopBar';
 import styled from "styled-components";
 
-function NewCategory({ nameOfAdmin }) {
+function NewCategory() {
   // const[image,setImage] = useState("");
   const [newCategory, setNewCategory] = useState({
     name: "",
@@ -39,7 +39,7 @@ function NewCategory({ nameOfAdmin }) {
     <NewCategoryStyle>
       <SideBar />
       <div className="newCategoryContainer">
-        <TopBar nameOfAdmin={nameOfAdmin} />
+        <TopBar />
         <div className="top">
           <h1>New Category</h1>
         </div>

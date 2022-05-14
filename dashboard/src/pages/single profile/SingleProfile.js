@@ -4,7 +4,7 @@ import TopBar from "../../components/TopBar";
 import styled from "styled-components";
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
 
-function SingleProfile({nameOfAdmin}) {
+function SingleProfile() {
 
   const[profileData,setProfileData] = useState("");
   const[dataToChart,setDataToChart] = useState("");
@@ -39,7 +39,7 @@ function SingleProfile({nameOfAdmin}) {
     <SingleProfileStyle>
         <SideBar/>
         <div className='singleContainer'>
-            <TopBar  nameOfAdmin={nameOfAdmin} />
+            <TopBar  />
             <div className='cards'>
             { (profileData && dataToChart) &&(<>
                 <div className='details-card'>

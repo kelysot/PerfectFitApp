@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 //TODO: get data from sever to categoriesData
 
-function Profiles({nameOfAdmin}) {
+function Profiles() {
 
   const[profilesList,setProfilesList] = useState("");
 
@@ -29,7 +29,7 @@ function Profiles({nameOfAdmin}) {
     <ProfilesStyle>
         <SideBar/>
         <div className="profileContainer">
-          <TopBar  nameOfAdmin={nameOfAdmin} />
+          <TopBar />
           <div className="profilesList">
             <Table categoriesData={profilesList} addNew={false} action={true} columns={columns} title={'Profiles List'} height={56} link={''}/>
           </div>

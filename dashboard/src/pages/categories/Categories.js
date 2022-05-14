@@ -4,7 +4,7 @@ import Table from '../../components/Table';
 import SideBar from "../../components/SideBar";
 import TopBar from "../../components/TopBar";
 
-function Categories({nameOfAdmin}) {
+function Categories() {
   
   const[categoriesData,setCategoriesData] = useState(null)
 
@@ -25,7 +25,7 @@ function Categories({nameOfAdmin}) {
     <CategoryStyle>
         <SideBar/>
         <div className="categoryContainer">
-          <TopBar  nameOfAdmin={nameOfAdmin} />
+          <TopBar />
           <div className="categoriesList">
             <Table categoriesData={categoriesData} addNew={true} action={'categories'} columns={columns} title={'Categories List'} height={56} link={'/categories/newCategory'}/>
           </div>

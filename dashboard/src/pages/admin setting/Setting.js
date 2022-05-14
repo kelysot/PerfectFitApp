@@ -3,12 +3,12 @@ import SideBar from "../../components/SideBar";
 import TopBar from "../../components/TopBar";
 import styled from "styled-components";
 
-function Setting({nameOfAdmin}) {
+function Setting() {
   return (
     <SettingStyle>
         <SideBar/>
         <div className='settingContainer'>
-            <TopBar  nameOfAdmin={nameOfAdmin} />
+            <TopBar />
             <h1>Setting</h1>
         </div>
     </SettingStyle>

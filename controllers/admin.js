@@ -111,6 +111,46 @@ const login = async (req, res) => {
     }
 }
 
+const getAdminData = async (req, res) => {
+    try{
+        const admin = await Admin.findOne()
+        res.json({
+            data: admin
+        });
+    }catch (err) {
+        return sendError(res, 400, err.message)
+    }
+}
+
+const updateData = async (req, res) => {
+    try {
+        const admin = await Admin.findOne()
+        const lastUpdate = admin.lastUpdate
+
+        let today = new Date()
+        const dd = String(today.getDate()).padStart(2, '0')
+        const mm = String(today.getMonth() + 1).padStart(2, '0')
+        const yyyy = today.getFullYear()
+        today = dd + '/' + mm + '/' + yyyy
+
+        // if need update:
+        // save current date in mongo
+        // save the variables to cards home page in mongo
+        // create variable to send client - calculate percentage for each card data
+
+        if(checkIfNeedUpdate(lastUpdate,dd)){
+            console.log("ok")
+        }
+
+        res.json({
+            data: "ok"
+        })
+
+    }catch (err) {
+        return sendError(res, 400, err.message)
+    }
+}
+
 const logout = async (req, res) => {
     const authHeaders = req.headers['authorization']
     const token = authHeaders && authHeaders.split(' ')[1]
@@ -141,9 +181,23 @@ const logout = async (req, res) => {
     })
 }
 
+//////////////////////////////////////*Functions*///////////////////////////////////////
+
+function checkIfNeedUpdate(lastUpdate,today){
+    const dayBefore = (parseInt(lastUpdate.split('/')[0]))
+    const dayToday = (parseInt(today))
+
+    if(dayToday - dayBefore >= 7)
+        return true
+    else
+        return false
+}
+
 module.exports = {
     login,
     register,
-    logout
+    logout,
+    getAdminData,
+    updateData
     // refreshToken
 }

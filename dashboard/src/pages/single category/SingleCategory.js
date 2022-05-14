@@ -6,7 +6,7 @@ import SideBar from "../../components/SideBar";
 import TopBar from "../../components/TopBar";
 import styled from "styled-components";
 
-function SingleCategory({nameOfAdmin}) {
+function SingleCategory() {
 
   const[singleCategory ,setSingleCategory ] = useState("");
   const[location,setLocation] = useState("");
@@ -45,7 +45,7 @@ function SingleCategory({nameOfAdmin}) {
     <SingleCategoryStyle>
        <SideBar/>
         <div className='singleContainer'>
-          <TopBar  nameOfAdmin={nameOfAdmin} />
+          <TopBar />
           {(singleCategory && subCategoryData) && (<>
           <div className='singleCategoryContainer'>
             <div className='top'>

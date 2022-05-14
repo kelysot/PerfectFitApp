@@ -7,22 +7,23 @@ import TopProfilesChart from "../../components/TopProfilesChart";
 import TopCategoriesChart from '../../components/TopCategoriesChart';
 import StatusConnectedProfiles from "../../components/StatusConnectedProfiles";
 
-function Home({nameOfAdmin}) {
-    
+function Home() {
+  
   const[topProfiles,setTopProfiles]=useState(null);
   const[chartConnectData,setChartConnectData] = useState(null);
   const[percentage,setPercentage] = useState(0);
   const[categoriesData,setCategoriesData] = useState(null);
+  const[updateData,setUpdateData] = useState(null);
   
   useEffect(() => {
-    loadData(setTopProfiles,setChartConnectData,setPercentage,setCategoriesData)          
+    loadData(setTopProfiles,setChartConnectData,setPercentage,setCategoriesData,setUpdateData)          
   },[])
 
   return (
     <HomeStyle>
         <Sidebar />
         <div className="homeContainer">
-          <TopBar nameOfAdmin={nameOfAdmin}/>
+          <TopBar />
           <div className="cardsDetails">
             <CardDetails type="onlineUsers"/>
             <CardDetails type="newProfiles"/>
@@ -75,7 +76,7 @@ const HomeStyle = styled.div`
   
 `
 
-function loadData(setTopProfiles,setChartConnectData,setPercentage,setCategoriesData){
+function loadData(setTopProfiles,setChartConnectData,setPercentage,setCategoriesData,setUpdateData){
 
   fetch("/dashboard/topProfiles" , {
     headers : { 
@@ -110,6 +111,17 @@ function loadData(setTopProfiles,setChartConnectData,setPercentage,setCategories
     .then((data) => {
       setCategoriesData(data.data)
     })
+
+  fetch("/admin/updateData" , {
+    headers : { 
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+      }
+  }) 
+    .then((res) => res.json())
+      .then((data) => {
+        console.log(data.data);
+      })
 }
 
 export default Home;

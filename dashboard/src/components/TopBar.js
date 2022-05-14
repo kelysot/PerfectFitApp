@@ -1,29 +1,45 @@
-import React , {useContext} from 'react';
+import React , {useContext,useState,useEffect} from 'react';
 import styled from 'styled-components';
 import {DarkModeContext} from '../../src/context/darkModeContext';
 
-function TopBar({nameOfAdmin}) {
+function TopBar() {
 
-  const {dispatch} = useContext(DarkModeContext);
+    const {dispatch} = useContext(DarkModeContext);
+    const[nameAndImageAdmin,setNameAndImageAdmin] = useState("");
 
-  return (
-    <TopBarStyle>
-        <WrapperStyle>
-           <div className="search">
-               <input className="search" placeholder="Search..."></input>
-               <span className="material-icons-sharp">search</span>
-           </div>
-           <div className="mode">
+    useEffect(() => {
+        fetch("/admin/getAdminData",{
+          headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        })
+        .then((res) => res.json())
+          .then((data) => {
+            setNameAndImageAdmin({
+              image: data.data.image
+            });
+        })
+    },[])
+
+    return (
+        <TopBarStyle>
+            <WrapperStyle>
+            <div className="search">
+                <input className="search" placeholder="Search..."></input>
+                <span className="material-icons-sharp">search</span>
+            </div>
+            <div className="mode">
                 <span className="material-icons-sharp" id="light" onClick={() => dispatch({type: 'LIGHT'})} >light_mode</span>
                 <span className="material-icons-sharp" id="dark" onClick={() => dispatch({type: 'DARK'})} >dark_mode</span>
-           </div>
-           <div className="adminDetails">
-               <img src="https://cdn.pixabay.com/photo/2020/04/15/16/58/smile-5047506_960_720.jpg"></img>
-               <h3>{nameOfAdmin}</h3>
-           </div>
-        </WrapperStyle>
-    </TopBarStyle>
-  )
+            </div>
+            <div className="adminDetails">
+                <img src={nameAndImageAdmin.image !== 'undefined' ? nameAndImageAdmin.image : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb75aLAsHQuVvgofGiZw0yCiEDZz_LRBNmPw&usqp=CAU'}></img>
+                <h3>Admin Dashboard</h3>
+            </div>
+            </WrapperStyle>
+        </TopBarStyle>
+    )
 };
 
 const TopBarStyle = styled.div`

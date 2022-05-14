@@ -1,4 +1,4 @@
-import React, {useState,useEffect,useContext} from "react"
+import React, {useContext} from "react"
 import GlobalStyleDark from '../src/style/dark';
 import GlobalStyle from './components/GlobalStyle'
 import Home from "./pages/home/Home";
@@ -19,44 +19,30 @@ import ProtectedRoutes from './components/ProtectedRoutes';
 
 function App() {
 
-  const[nameOfAdmin,setNameOfAdmin] = useState("");
   const {darkMode} = useContext(DarkModeContext);
   const {login} = useContext(UserAutContext);
-
-  useEffect(() => {
-      fetch("/dashboard",{
-      headers : { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    })
-    .then((res) => res.json())
-      .then((data) => {
-        setNameOfAdmin(data.adminName);
-        })
-  },[])
 
   return (
     <AppStyle className={ darkMode ? "App dark" : 'App'}>
       <GlobalStyle />
-      <GlobalStyleDark />
+      <GlobalStyleDark />        
       <Routes path="/">
         <Route index element={<Login/>}></Route>
         {/* <Route element={<ProtectedRoutes userState={login}/>}> */}
-          <Route path="home" element={<Home nameOfAdmin={nameOfAdmin} />}></Route>
+          <Route path="home" element={<Home />}></Route>
           <Route path="categories">
-            <Route index element={<Categories  nameOfAdmin={nameOfAdmin} />}></Route>
-            <Route path=":categoryId" element={<SingleCategory nameOfAdmin={nameOfAdmin} />}></Route>
-            <Route path="newCategory" element={<NewCategory nameOfAdmin={nameOfAdmin}/>}></Route>
-            <Route path="editCategory/:id" element={<Edit nameOfAdmin={nameOfAdmin} />}></Route>
-            <Route path="newSubCategory/:id" element={<NewSubCategory nameOfAdmin={nameOfAdmin} />}></Route>
-            <Route path="editSubCategory/:id" element={<Edit nameOfAdmin={nameOfAdmin} />}></Route>
+            <Route index element={<Categories />}></Route>
+            <Route path=":categoryId" element={<SingleCategory />}></Route>
+            <Route path="newCategory" element={<NewCategory />}></Route>
+            <Route path="editCategory/:id" element={<Edit />}></Route>
+            <Route path="newSubCategory/:id" element={<NewSubCategory  />}></Route>
+            <Route path="editSubCategory/:id" element={<Edit />}></Route>
           </Route>
           <Route path="users">
-            <Route index element={<Profiles nameOfAdmin={nameOfAdmin} />}></Route>
-            <Route path=":id" element={<SingleProfile nameOfAdmin={nameOfAdmin} />}></Route>
+            <Route index element={<Profiles  />}></Route>
+            <Route path=":id" element={<SingleProfile />}></Route>
           </Route>
-          <Route path="setting" element={<Setting nameOfAdmin={nameOfAdmin} />}></Route>
+          <Route path="setting" element={<Setting />}></Route>
         {/* </Route> */}
       </Routes>
     </AppStyle>
@@ -73,7 +59,7 @@ const AppStyle = styled.div`
 
     @media screen and (max-width: 1400px) {
       padding: 0.5rem;
-  }
+   }
 `;
 
 export default App;

@@ -4,7 +4,7 @@ import TopBar from '../../components/TopBar';
 import styled from "styled-components";
 import EditForm from '../../components/EditForm';
 
-function Edit({nameOfAdmin}) {
+function Edit() {
     const[location,setLocation] = useState("");
     const[editCategory,setEditCategory] = useState({
         title: 'Edit Category',
@@ -68,7 +68,7 @@ function Edit({nameOfAdmin}) {
         <EditStyle>
         <SideBar/>
             <div className="newCategoryContainer">
-                <TopBar  nameOfAdmin={nameOfAdmin} />
+                <TopBar />
                 <EditForm 
                   title={location} 
                   name={location === 'Edit Category' ? editCategory.name : editSubCategory.name} 

@@ -9,4 +9,8 @@ router.post('/login', Admin.login)
 
 router.post('/logout', authenticate, Admin.logout)
 
+router.get('/getAdminData', Admin.getAdminData)
+
+router.get('/updateData',Admin.updateData)
+
 module.exports = router
