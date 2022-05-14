@@ -31,6 +31,10 @@ const adminSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    profilesLoginCompere: {
+        type: String,
+        required: true
+    },
     totalUsersCompere: {
         type: String,
         required: true

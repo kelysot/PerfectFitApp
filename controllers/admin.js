@@ -1,4 +1,7 @@
 const Admin = require('../models/admin_model')
+const User = require('../models/user_model')
+const Post = require('../models/post_model')
+const Profile = require('../models/profile_model')
 const bcrypt = require('bcryptjs')
 const { use } = require('../routes')
 const jwt = require('jsonwebtoken')
@@ -36,6 +39,7 @@ const register = async (req, res) => {
             'image': "https://media-exp1.licdn.com/dms/image/C4E03AQEGVXXL-uwrGA/profile-displayphoto-shrink_400_400/0/1606300287456?e=1657756800&v=beta&t=vqPPAP-02fFAQBeY0_SSwi7shnDXWVCgvUsQ6LnNZ-g",
             'isConnected': "false",
             'lastUpdate': "10/05/2022",
+            'profilesLoginCompere': "0",
             'newProfilesCompere': "0",
             'totalUsersCompere': "0",
             'totalPostCompere': "0"
@@ -134,18 +138,56 @@ const updateData = async (req, res) => {
         today = dd + '/' + mm + '/' + yyyy
 
         // if need update:
-        // save current date in mongo
-        // save the variables to cards home page in mongo
+        // save current date in mongo - V
+        // save the variables to cards home page in mongo - v
         // create variable to send client - calculate percentage for each card data
-
         if(checkIfNeedUpdate(lastUpdate,dd)){
-            console.log("ok")
+            const profileListLogin = await Profile.find({ status: "true" })
+            const profileList = await Profile.find()
+            const usersList = await User.find()
+            const postsList = await Post.find()
+            
+            //FIXME: the calc of past week and today doesn't correct
+            const newProfilesCompere_new = profileList.length - admin.newProfilesCompere
+            const profilesLoginCompere_new = profileListLogin.length - admin.profilesLoginCompere
+            const totalUsersCompere_new =  usersList.length - admin.totalUsersCompere
+            const totalPostCompere_new = postsList.length - admin.totalPostCompere
+
+            const cardsData = ({
+                'loginProfile': {
+                    'result' : ((Math.abs(profilesLoginCompere_new)/admin.profilesLoginCompere)*100).toFixed(1),
+                    'direction' : profilesLoginCompere_new > 0 ? "up" : "down"
+                },
+                'newProfiles' : {
+                    'result' : ((Math.abs(newProfilesCompere_new)/admin.newProfilesCompere)*100).toFixed(1),
+                    'direction' :  newProfilesCompere_new > 0 ? "up" : "down"
+                },
+                'totalUsers' : {
+                    'result' : ((Math.abs(totalUsersCompere_new)/admin.totalUsersCompere)*100).toFixed(1),
+                    'direction' : totalUsersCompere_new > 0 ? "up" : "down"
+                },
+                'totalPosts' : {
+                    'result' : ((Math.abs(totalPostCompere_new)/admin.totalPostCompere)*100).toFixed(1),
+                    'direction' : totalPostCompere_new > 0 ? "up" : "down"
+                }
+            })
+            
+            admin.lastUpdate = today
+            admin.newProfilesCompere = newProfilesCompere_new
+            admin.profilesLoginCompere = profilesLoginCompere_new
+            admin.totalUsersCompere = totalUsersCompere_new
+            admin.totalPostCompere = totalPostCompere_new   
+            await admin.save()
+
+            res.json({
+                data: cardsData
+            })
+        
+        }else{
+            res.json({
+                data: "none"
+            })
         }
-
-        res.json({
-            data: "ok"
-        })
-
     }catch (err) {
         return sendError(res, 400, err.message)
     }
