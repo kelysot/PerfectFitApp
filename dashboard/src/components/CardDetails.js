@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 let data;
@@ -29,6 +29,7 @@ function CardDetails({type,dataCard}) {
 
 function dataToCard(type,data,dataCard) {
   //todo : add no change icon "trending_flat" + use the relevet class name + compre to last week
+  //TODO: get percentage from server add to data object and use in card component
   switch(type){
     case "onlineUsers":
       data={
