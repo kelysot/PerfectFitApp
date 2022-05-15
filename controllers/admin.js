@@ -155,6 +155,7 @@ const updateData = async (req, res) => {
             const usersList = await User.find()
             const postsList = await Post.find()
             
+            admin.lastUpdate = today
             admin.newProfilesCompere.lastWeek = admin.newProfilesCompere.total
             admin.newProfilesCompere.total = profileList.length
             admin.profilesLoginCompere.lastWeek = admin.profilesLoginCompere.total
@@ -174,18 +175,22 @@ const updateData = async (req, res) => {
             const cardsData = ({
                 'loginProfile': {
                     'result' : resToLoginProfile,
+                    'resultPercent' :  Math.abs((resToLoginProfile/admin.profilesLoginCompere.lastWeek)*100).toFixed(1),
                     'direction' : resToLoginProfile >= 0 ? 'up' : 'down'  
                 },
                 'newProfiles' : {
                     'result' : resToNewProfiles,
+                    'resultPercent' :  Math.abs((resToNewProfiles/admin.newProfilesCompere.lastWeek)*100).toFixed(1),
                     'direction' : resToNewProfiles >= 0 ? 'up' : 'down'
                 },
                 'totalUsers' : {
                     'result' : resToTotalUsers,
+                    'resultPercent' :  Math.abs((resToTotalUsers/admin.totalUsersCompere.lastWeek)*100).toFixed(1),
                     'direction' : resToTotalUsers >= 0 ? 'up' : 'down'
                 },
                 'totalPosts' : {
                     'result' : resToTotalPosts,
+                    'resultPercent' :  Math.abs((resToTotalPosts/admin.totalPostCompere.lastWeek)*100).toFixed(1),
                     'direction' : resToTotalPosts >= 0 ? 'up' : 'down'
                 }
             })
@@ -195,8 +200,28 @@ const updateData = async (req, res) => {
             })
         
         }else{
+            //FIXME: to send percentage when dont pass week
+            const cardsData = ({
+                'loginProfile': {
+                    'result' : admin.profilesLoginCompere.lastWeek,
+                    'direction' : admin.profilesLoginCompere.lastWeek >= 0 ? 'up' : 'down'  
+                },
+                'newProfiles' : {
+                    'result' : admin.newProfilesCompere.lastWeek,
+                    'direction' : admin.newProfilesCompere.lastWeek >= 0 ? 'up' : 'down'
+                },
+                'totalUsers' : {
+                    'result' : admin.totalUsersCompere.lastWeek,
+                    'direction' : admin.totalUsersCompere.lastWeek >= 0 ? 'up' : 'down'
+                },
+                'totalPosts' : {
+                    'result' : admin.totalPostCompere.lastWeek,
+                    'direction' : admin.totalPostCompere.lastWeek >= 0 ? 'up' : 'down'
+                }
+            })
+
             res.json({
-                data: "none"
+                data: cardsData
             })
         }
     }catch (err) {

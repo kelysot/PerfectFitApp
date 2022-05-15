@@ -3,74 +3,58 @@ import styled from 'styled-components';
 
 let data;
 
-function CardDetails({type}) {
+function CardDetails({type,dataCard}) {
   
-  const [numOfPosts,setNumOfPosts]=useState(null);
-  const [numOfUsers,setNumOfUsers]=useState(null);
-  const [numOnlineProfiles,setNumOnlineProfiles]=useState(null);
-  data = dataToCard(type,data , numOfPosts , numOfUsers ,numOnlineProfiles);
+  data = dataToCard(type,data,dataCard);
   
-  useEffect(() =>{    
-      fetch("/dashboard/amounts" ,{
-        headers : { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }
-      })
-      .then((res) => res.json())
-          .then((data) => {
-            setNumOfPosts(data.numOfPosts);
-            setNumOfUsers(data.numOfUsers);
-            setNumOnlineProfiles(data.numOnlineProfiles);
-            })
-  },[]);
-
   return (
     <CardStyle>
-        <LeftStyled>
-          <span className="title">{data.title}</span>
-          <span className="counter">{data.counter}</span>
-          <span className="message">Compared to last week</span>
-        </LeftStyled>
-        <RightStyled>
-          <div className="percentage negative">
-            20%
+      {dataCard && (<>
+          <LeftStyled>
+            <span className="title">{data.title}</span>
+            <span className="counter">{data.counter}</span>
+            <span className="message">Compared to last week</span>
+          </LeftStyled>
+          <RightStyled>
+            <div className="percentage negative">
+              20%
             <span className="material-icons-sharp">trending_down</span>
-          </div>
-          <span className="material-icons-sharp" id="icon">{data.icon}</span>
-        </RightStyled>
+            </div>
+            <span className="material-icons-sharp" id="icon">{data.icon}</span>
+          </RightStyled>
+        </>)}
     </CardStyle>
   )
 };
 
-function dataToCard(type,data, numOfPosts , numOfUsers ,numOnlineProfiles) {
+function dataToCard(type,data,dataCard) {
   //todo : add no change icon "trending_flat" + use the relevet class name + compre to last week
   switch(type){
     case "onlineUsers":
       data={
         title:"Online Profiles",
-        counter:numOnlineProfiles ? numOnlineProfiles : "--",
+        counter: dataCard.direction === 'up'? `+${dataCard.result}` : dataCard.result,
         icon:"person_outline",
       };
       break;
       case "newProfiles":
       data={
         title:"New Profiles",
-        counter:"--",
+        counter: dataCard.direction === 'up'? `+${dataCard.result}` : dataCard.result,
         icon:"account_circle",
       };
       break;
       case "totalUsers":
       data={
         title:"Total Users",
-        counter:numOfUsers ? numOfUsers : "--",
+        counter: dataCard.direction === 'up'? `+${dataCard.result}` : dataCard.result,
         icon:"group",
       };
       break;
       case "totalPosts":
       data={
         title:"Total Posts",
-        counter:numOfPosts ? numOfPosts : "--",
+        counter: dataCard.direction === 'up'? `+${dataCard.result}` : dataCard.result,
         icon:"post_add",
       };
       break;

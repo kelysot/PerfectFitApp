@@ -24,17 +24,19 @@ function Home() {
         <Sidebar />
         <div className="homeContainer">
           <TopBar />
-          <div className="cardsDetails">
-            <CardDetails type="onlineUsers"/>
-            <CardDetails type="newProfiles"/>
-            <CardDetails type="totalUsers"/>
-            <CardDetails type="totalPosts"/>
-          </div>
-          <div className="charts">
-            <TopProfilesChart topProfiles={topProfiles} />
-            <TopCategoriesChart categoriesData={categoriesData} />
-            <StatusConnectedProfiles percentage={percentage} chartConnectData={chartConnectData} />
-          </div>
+          {updateData && (<>
+            <div className="cardsDetails">
+              <CardDetails type="onlineUsers" dataCard={updateData.loginProfile}/>
+              <CardDetails type="newProfiles" dataCard={updateData.newProfiles}/>
+              <CardDetails type="totalUsers" dataCard={updateData.totalUsers}/>
+              <CardDetails type="totalPosts" dataCard={updateData.totalPosts}/>
+            </div>
+            <div className="charts">
+              <TopProfilesChart topProfiles={topProfiles} />
+              <TopCategoriesChart categoriesData={categoriesData} />
+              <StatusConnectedProfiles percentage={percentage} chartConnectData={chartConnectData} />
+            </div>
+          </>)}
         </div>
     </HomeStyle>
   )
@@ -120,6 +122,7 @@ function loadData(setTopProfiles,setChartConnectData,setPercentage,setCategories
   }) 
     .then((res) => res.json())
       .then((data) => {
+        setUpdateData(data.data);
         console.log(data.data);
       })
 }
