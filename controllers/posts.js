@@ -569,12 +569,16 @@ const general = async (req, res) => {
 
 const getGeneral = async (req, res) => {
 
-    console.log("heyyyyyyyyyyyyyy")
-
     const gen = await General.find({})
-    console.log(gen)
 
-    res.status(200).send({gen})
+    try {
+        res.status(200).send({'gen':gen})
+     } catch (err) {
+         res.status(400).send({
+             'status': 'failure',
+             'error': err.message
+         })
+     }
     
 }
 
