@@ -367,10 +367,22 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2U4Mjg2Mj
         "image": "https://media-exp1.licdn.com/dms/image/C4E03AQEGVXXL-uwrGA/profile-displayphoto-shrink_400_400/0/1606300287456?e=1657756800&v=beta&t=vqPPAP-02fFAQBeY0_SSwi7shnDXWVCgvUsQ6LnNZ-g",
         "isConnected": "false",
         "lastUpdate": "10/05/2022",
-        "profilesLoginCompere": "0",
-        "newProfilesCompere": "0",
-        "totalUsersCompere": "0",
-        "totalPostCompere": "0"
+        "profilesLoginCompere": {
+                "lastWeek": "0",
+                "total": "0"
+        },
+        "newProfilesCompere": {
+                "lastWeek": "0",
+                "total": "0"  
+        },
+        "totalUsersCompere":{
+                "lastWeek": "0",
+                "total": "0"
+        },
+        "totalPostCompere": {
+                "lastWeek": "0",
+                "total": "0"
+        }
 }
 
 ###

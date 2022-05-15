@@ -28,20 +28,20 @@ const adminSchema = new mongoose.Schema({
         required: true
     },
     newProfilesCompere: {
-        type: String,
-        required: true
+        lastWeek: {type: String, required: true},
+        total: {type: String, required: true}
     },
     profilesLoginCompere: {
-        type: String,
-        required: true
+        lastWeek: {type: String, required: true},
+        total: {type: String, required: true}
     },
     totalUsersCompere: {
-        type: String,
-        required: true
+        lastWeek: {type: String, required: true},
+        total: {type: String, required: true}
     },
     totalPostCompere: {
-        type: String,
-        required: true
+        lastWeek: {type: String, required: true},
+        total: {type: String, required: true}
     }
 })
 

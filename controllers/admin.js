@@ -39,10 +39,22 @@ const register = async (req, res) => {
             'image': "https://media-exp1.licdn.com/dms/image/C4E03AQEGVXXL-uwrGA/profile-displayphoto-shrink_400_400/0/1606300287456?e=1657756800&v=beta&t=vqPPAP-02fFAQBeY0_SSwi7shnDXWVCgvUsQ6LnNZ-g",
             'isConnected': "false",
             'lastUpdate': "10/05/2022",
-            'profilesLoginCompere': "0",
-            'newProfilesCompere': "0",
-            'totalUsersCompere': "0",
-            'totalPostCompere': "0"
+            "profilesLoginCompere": {
+                "lastWeek": "0",
+                "total": "0"
+            },
+            "newProfilesCompere": {
+                    "lastWeek": "0",
+                    "total": "0"  
+            },
+            "totalUsersCompere":{
+                    "lastWeek": "0",
+                    "total": "0"
+            },
+            "totalPostCompere": {
+                    "lastWeek": "0",
+                    "total": "0"
+            }
         })
         const accessToken = await jwt.sign(
             { 'id': admin._id },
@@ -137,47 +149,46 @@ const updateData = async (req, res) => {
         const yyyy = today.getFullYear()
         today = dd + '/' + mm + '/' + yyyy
 
-        // if need update:
-        // save current date in mongo - V
-        // save the variables to cards home page in mongo - v
-        // create variable to send client - calculate percentage for each card data
         if(checkIfNeedUpdate(lastUpdate,dd)){
-            const profileListLogin = await Profile.find({ status: "true" })
             const profileList = await Profile.find()
+            const profileListLogin = await Profile.find({ status: "true" })
             const usersList = await User.find()
             const postsList = await Post.find()
             
-            //FIXME: the calc of past week and today doesn't correct
-            const newProfilesCompere_new = profileList.length - admin.newProfilesCompere
-            const profilesLoginCompere_new = profileListLogin.length - admin.profilesLoginCompere
-            const totalUsersCompere_new =  usersList.length - admin.totalUsersCompere
-            const totalPostCompere_new = postsList.length - admin.totalPostCompere
+            admin.newProfilesCompere.lastWeek = admin.newProfilesCompere.total
+            admin.newProfilesCompere.total = profileList.length
+            admin.profilesLoginCompere.lastWeek = admin.profilesLoginCompere.total
+            admin.profilesLoginCompere.total = profileListLogin.length
+            admin.totalUsersCompere.lastWeek = admin.totalUsersCompere.total
+            admin.totalUsersCompere.total = usersList.length
+            admin.totalPostCompere.lastWeek = admin.totalPostCompere.total
+            admin.totalPostCompere.total = postsList.length
+
+            await admin.save()
+
+            const resToLoginProfile = profileListLogin.length - admin.profilesLoginCompere.lastWeek
+            const resToNewProfiles = profileList.length - admin.newProfilesCompere.lastWeek
+            const resToTotalUsers = usersList.length - admin.totalUsersCompere.lastWeek
+            const resToTotalPosts = postsList.length - admin.totalPostCompere.lastWeek
 
             const cardsData = ({
                 'loginProfile': {
-                    'result' : ((Math.abs(profilesLoginCompere_new)/admin.profilesLoginCompere)*100).toFixed(1),
-                    'direction' : profilesLoginCompere_new > 0 ? "up" : "down"
+                    'result' : resToLoginProfile,
+                    'direction' : resToLoginProfile >= 0 ? 'up' : 'down'  
                 },
                 'newProfiles' : {
-                    'result' : ((Math.abs(newProfilesCompere_new)/admin.newProfilesCompere)*100).toFixed(1),
-                    'direction' :  newProfilesCompere_new > 0 ? "up" : "down"
+                    'result' : resToNewProfiles,
+                    'direction' : resToNewProfiles >= 0 ? 'up' : 'down'
                 },
                 'totalUsers' : {
-                    'result' : ((Math.abs(totalUsersCompere_new)/admin.totalUsersCompere)*100).toFixed(1),
-                    'direction' : totalUsersCompere_new > 0 ? "up" : "down"
+                    'result' : resToTotalUsers,
+                    'direction' : resToTotalUsers >= 0 ? 'up' : 'down'
                 },
                 'totalPosts' : {
-                    'result' : ((Math.abs(totalPostCompere_new)/admin.totalPostCompere)*100).toFixed(1),
-                    'direction' : totalPostCompere_new > 0 ? "up" : "down"
+                    'result' : resToTotalPosts,
+                    'direction' : resToTotalPosts >= 0 ? 'up' : 'down'
                 }
             })
-            
-            admin.lastUpdate = today
-            admin.newProfilesCompere = newProfilesCompere_new
-            admin.profilesLoginCompere = profilesLoginCompere_new
-            admin.totalUsersCompere = totalUsersCompere_new
-            admin.totalPostCompere = totalPostCompere_new   
-            await admin.save()
 
             res.json({
                 data: cardsData
