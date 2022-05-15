@@ -543,8 +543,6 @@ const getSearchPosts = async (req, res) =>{
 
 const general = async (req, res) => {
 
-    console.log("heyyyy")
-
     const general = General({
         sizes: ["XS", "S", "M", "L", "XL", "XXL", "XXXL"],
         companies: ["ZARA", "Studio-Pasha", "Mango", "Pull&Bear", "Castro", "Renuar", "Levis", "American-Eagle"], // the profileId here it's the userName of the ptofile!
@@ -566,9 +564,18 @@ const general = async (req, res) => {
             })
         }
     })
+}
 
 
+const getGeneral = async (req, res) => {
 
+    console.log("heyyyyyyyyyyyyyy")
+
+    const gen = await General.find({})
+    console.log(gen)
+
+    res.status(200).send({gen})
+    
 }
 
 /************************************* functions for algorithm *************************************/
@@ -657,6 +664,7 @@ module.exports = {
     getSuitablePosts,
     timeSince,
     getSearchPosts,
-    general
+    general,
+    getGeneral
 }
 
