@@ -254,5 +254,9 @@ router.get('/timeSince/:date', authenticate, Post.timeSince)
 
 router.post('/getSearchPosts', authenticate, Post.getSearchPosts)
 
+router.post('/general', authenticate, Post.general)
+
+
+
 
 module.exports = router

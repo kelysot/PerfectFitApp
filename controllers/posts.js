@@ -2,6 +2,7 @@ const Post = require('../models/post_model')
 const Profile = require('../models/profile_model')
 const Category = require('../models/category_model')
 const SubCategory = require('../models/sub_category_model')
+const General = require('../models/general_model')
 
 
 const getPosts = async (req, res) => {
@@ -525,7 +526,7 @@ const getSearchPosts = async (req, res) =>{
     let posts = await Post.find({'size': { $in: sizes}, 'categoryId': { $in: categories}, 'color': { $in: colors}, 'company': { $in: companies}})
 
     //TODO: add check of price
-    
+
     console.log(posts)
     try {
        res.status(200).send(posts)
@@ -535,6 +536,37 @@ const getSearchPosts = async (req, res) =>{
             'error': err.message
         })
     }
+
+
+}
+
+
+const general = async (req, res) => {
+
+    console.log("heyyyy")
+
+    const general = General({
+        sizes: ["XS", "S", "M", "L", "XL", "XXL", "XXXL"],
+        companies: ["ZARA", "Studio-Pasha", "Mango", "Pull&Bear", "Castro", "Renuar", "Levis", "American-Eagle"], // the profileId here it's the userName of the ptofile!
+        colors: ["Black", "White", "Red", "Green", "Purple", "Orange", "Pink", "Yellow"], 
+        bodyTypes: ["Hourglass", "Pear", "Apple", "Ruler"]
+    })
+
+    general.save((error, general) => {
+        if (error) {
+            res.status(400).send({
+                'status': 'fail',
+                'error': error.message
+            })
+        }
+        else {
+            res.status(200).send({
+                'status': 'OK',
+                'general': general
+            })
+        }
+    })
+
 
 
 }
@@ -624,6 +656,7 @@ module.exports = {
     getDates,
     getSuitablePosts,
     timeSince,
-    getSearchPosts
+    getSearchPosts,
+    general
 }
 
