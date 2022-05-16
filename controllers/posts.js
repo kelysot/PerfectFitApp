@@ -65,7 +65,6 @@ const addNewPost = async (req, res) => {
     const profileUserName = req.body.profileId
     const profile = await Profile.findOne({ userName: { $eq: profileUserName } })
 
-    //TODO: After we will send sizeAdjustment and rating change them to get the info from client.
     const post = Post({
         // profileId: profile._id,
         profileId: req.body.profileId, // the profileId here it's the userName of the ptofile!
@@ -78,11 +77,10 @@ const addNewPost = async (req, res) => {
         color: req.body.color,
         categoryId: req.body.categoryId,
         subCategoryId: req.body.subCategoryId,
-        // date: req.body.date,
         date: new Date(),
         link: req.body.link,
-        sizeAdjustment: '4',
-        rating: '6',
+        sizeAdjustment: req.body.sizeAdjustment,
+        rating: req.body.rating,
         picturesUrl: req.body.picturesUrl,
         likes: [],
         comments: [],
@@ -513,7 +511,7 @@ const timeSince = async (req, res) => {
 }
 
 
-const getSearchPosts = async (req, res) =>{
+const getSearchPosts = async (req, res) => {
 
     const map = req.body
 
@@ -526,62 +524,62 @@ const getSearchPosts = async (req, res) =>{
     const price = map.Price
     let priceFrom, priceTo
 
-    if(price[0] != "false"){
+    if (price[0] != "false") {
         priceFrom = parseInt(price[0])
     }
-    else{
+    else {
         priceFrom = price[0] // = false
     }
-    if(price[1] != "false"){
+    if (price[1] != "false") {
         priceTo = parseInt(price[1])
     }
-    else{
+    else {
         priceTo = price[1] // = false
     }
-   
+
     let posts
 
-    if(count == "true"){ // it means that no category was choosen - we need to send all the posts. 
+    if (count == "true") { // it means that no category was choosen - we need to send all the posts. 
         posts = await Post.find({})
     }
-    else{
-        posts = await Post.find({'size': { $in: sizes}, 'categoryId': { $in: categories}, 'color': { $in: colors}, 'company': { $in: companies}})
+    else {
+        posts = await Post.find({ 'size': { $in: sizes }, 'categoryId': { $in: categories }, 'color': { $in: colors }, 'company': { $in: companies } })
     }
 
     let postsToSned = []
 
 
-    if(priceFrom != "false" &&  priceTo != "false"){
-        for(let i=0; i < posts.length; i++){
-            if(posts[i].price >= priceFrom && posts[i].price <= priceTo){
+    if (priceFrom != "false" && priceTo != "false") {
+        for (let i = 0; i < posts.length; i++) {
+            if (posts[i].price >= priceFrom && posts[i].price <= priceTo) {
                 postsToSned.push(posts[i])
             }
         }
     }
-    else if(priceFrom == "false" && priceTo != "false"){
+    else if (priceFrom == "false" && priceTo != "false") {
         console.log("we are here now 1")
-        for(let i=0; i < posts.length; i++){
-            if(posts[i].price <= priceTo){
+        for (let i = 0; i < posts.length; i++) {
+            if (posts[i].price <= priceTo) {
                 postsToSned.push(posts[i])
             }
         }
     }
-    else if(priceFrom != "false" &&  priceTo == "false"){
+    else if (priceFrom != "false" && priceTo == "false") {
         console.log("we are here now 2")
-        for(let i=0; i < posts.length; i++){
-            if(posts[i].price >= priceFrom){
+        for (let i = 0; i < posts.length; i++) {
+            if (posts[i].price >= priceFrom) {
                 postsToSned.push(posts[i])
             }
         }
     }
-    else if(priceFrom == "false" &&  priceTo == "false"){
+    else if (priceFrom == "false" && priceTo == "false") {
         postsToSned = posts
     }
 
     postsToSned = postsToSned.reverse()
 
     try {
-       res.status(200).send(postsToSned)
+        res.status(200).send(postsToSned)
     } catch (err) {
         res.status(400).send({
             'status': 'failure',
@@ -596,7 +594,7 @@ const general = async (req, res) => {
     const general = General({
         sizes: ["XS", "S", "M", "L", "XL", "XXL", "XXXL"],
         companies: ["ZARA", "Studio Pasha", "Mango", "Pull&Bear", "Castro", "Renuar", "Levis", "American Eagle"], // the profileId here it's the userName of the ptofile!
-        colors: ["Black", "White", "Red", "Green", "Purple", "Orange", "Pink", "Yellow"], 
+        colors: ["Black", "White", "Red", "Green", "Purple", "Orange", "Pink", "Yellow"],
         bodyTypes: ["Hourglass", "Pear", "Apple", "Ruler"]
     })
 
@@ -622,14 +620,14 @@ const getGeneral = async (req, res) => {
     const gen = await General.find({})
 
     try {
-        res.status(200).send({'gen':gen})
-     } catch (err) {
-         res.status(400).send({
-             'status': 'failure',
-             'error': err.message
-         })
-     }
-    
+        res.status(200).send({ 'gen': gen })
+    } catch (err) {
+        res.status(400).send({
+            'status': 'failure',
+            'error': err.message
+        })
+    }
+
 }
 
 /************************************* functions for algorithm *************************************/
