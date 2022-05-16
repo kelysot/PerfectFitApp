@@ -549,17 +549,28 @@ const getSearchPosts = async (req, res) =>{
     else{
         priceTo = price[1] // = false
     }
-    
-    // // BodyType
 
-    const profiles = await Profile.find({'bodyType': { $in: bodyTypes}})
-    let profilesId = []
-   
-    for(let j = 0; j<profiles.length; j++){
-        profilesId.push(profiles[j].userName)
+
+    let genderList = []
+    console.log("the size of gender: " + gender.length)
+
+    if(gender.length > 0){
+         genderList.push(gender[0])
+        if(gender.length == 2){
+             genderList.push(gender[1])
+        }
+    }
+    else{
+        genderList.push("Female")
+        genderList.push("Male")
     }
 
-    // Sizes: 
+    // // BodyType and Gender
+
+    // first we find all the relevant profiles:
+   
+
+    // Then we check for the posts considered with sizes, categories, companies and colors:
    
     let posts
 
@@ -567,62 +578,24 @@ const getSearchPosts = async (req, res) =>{
         posts = await Post.find({})
     }
     else{
+
+        const profiles = await Profile.find({'bodyType': { $in: bodyTypes}, 'gender': {$in: genderList}})
+        let profilesId = []
+       
+        // save the userNames of the relevant profiles: 
+        for(let j = 0; j<profiles.length; j++){
+            profilesId.push(profiles[j].userName)
+        }
+    
+        console.log("th profilesId is: " + profilesId)
+
         posts = await Post.find({'size': { $in: sizes}, 'categoryId': { $in: categories}, 'color': { $in: colors}, 'company': { $in: companies}, 'profileId': {$in: profilesId}})
-        // posts = await Post.find({'size': { $in: sizes}})
+        
     }
 
     console.log("the size after sizes: " + posts.length)
 
-    //Categories: 
-
-    // let posts1 = []
-
-    // for(let i=0; i<posts.length; i++){
-    //     if(categories.includes(posts[i].categoryId)){
-    //         posts1.push(posts[i])
-    //     }
-    // }
-
-    // console.log("the size after sizes and categories: " + posts1.length)
-
-    // // Colors
-
-    // let posts2 = []
-
-    // for(let i=0; i<posts1.length; i++){
-    //     if(colors.includes(posts1[i].color)){
-    //         posts2.push(posts1[i])
-    //     }
-    // }
-
-    // console.log("the size after sizes and categories and colors: " + posts2.length)
-
-    // // Companies
-
-    // let posts3 = []
-
-    // for(let i=0; i<posts2.length; i++){
-    //     if(companies.includes(posts2[i].company)){
-    //         posts3.push(posts2[i])
-    //     }
-    //     else{
-    //         console.log("the post = " + posts[i].profileId + " and " + posts[i].productName )
-    //     }
-    // }
-
-    // console.log("the size after sizes and categories and colors and companies: " + posts3.length)
-
-    // console.log(posts3)
-
-    // let posts4 = []
-
-    // for(let i=0; i<posts3.length; i++){
-    //     if(profilesId.includes(posts3[i].profileId)){
-    //         posts4.push(posts3[i])
-    //     }
-    // }
-
-    // Price
+    //check the price 
 
     let postsToSend = []
 
@@ -655,7 +628,7 @@ const getSearchPosts = async (req, res) =>{
 
     postsToSend = postsToSend.reverse()
 
-    console.log(postsToSend)
+    // console.log(postsToSend)
 
     try {
        res.status(200).send(postsToSend)
