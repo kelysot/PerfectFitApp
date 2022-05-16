@@ -247,14 +247,17 @@ Content-Type: application/json
 }
 ###
 Post http://localhost:4000/subcategory/6262c13e0124be7d5f953a3c
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MDcxMzk3NiwiZXhwIjoxNjUwODAwMzc2fQ.svy4VUz4lYZddJOL7mnHWEjgfUZ2LcLqeWj2t4ehSiE
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDU0NWY1ODY1MWY5ZDg1NTE3MzU1MyIsImlhdCI6MTY1MjcyNzI5MywiZXhwIjoxNjUyODEzNjkzfQ.6-FS5lvvb1WUuF4tSh2MdH3bd8upm-lF-2DucZm1O2Y
 Content-Type: application/json
 
 {
         "name": "gloves nike",
         "pictureUrl": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSmNq21_AFczzpbSxSW5K7gR9OtCK3XfPByH69nY5zTRmw0ilkEQ-VlrFOh9tSsyUF7JIM7GV7Cilc&usqp=CAc",
         "gender": "Female",
-        "posts": []
+        "categoryId": "6277f3806df5d69932aaccfe",
+        "posts": [],
+        "isDeleted": "false"
+
 }
 
 ###

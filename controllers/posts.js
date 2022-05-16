@@ -337,6 +337,7 @@ const getDates = async (req, res) => {
     })
 }
 
+//Algorithm 
 const getSuitablePosts = async (req, res) => {
 
     const userName = req.params.profileId
@@ -394,8 +395,8 @@ const getSuitablePosts = async (req, res) => {
 
             // if the publisher of the post is in the list of "similarProfileId" we can add it immediately to the postsList. 
             if (similarProfileId.includes(id2) || (userNameofPost == profile.userName)) {
-
                 postsForSend.push(posts[t])
+                console.log("the profile 1: " + posts[t].profileId)
             }
             // if not, we need to check the correlation between the two profiles:
             else {
@@ -423,6 +424,31 @@ const getSuitablePosts = async (req, res) => {
 
         profile.similarProfileId = similarProfileId
 
+        // console.log("the similar profiles to me: " + similarProfileId)
+
+        //TODO: posts of shoes: 
+        // we take the avarage size the profile wrote to the system, and choose size-1 and size+1 posts.
+
+        let finalList = []
+        let shoeSize = parseInt(profile.foot)
+        // console.log("the shoe size is: " + shoeSize)
+
+        let minus = parseInt(shoeSize)-1
+        let plus = parseInt(shoeSize)+1
+
+        // console.log("the -- " + minus + " the plus ++ " + plus)
+
+        for(let i=0; i<postsForSend.length; i++){
+            if(postsForSend[i].categoryId == "Shoes"){
+                if(shoeSize >= minus && shoeSize <= plus){
+                    finalList.push(postsForSend[i])
+                }
+            }
+            else{
+                finalList.push(postsForSend[i])
+            }
+        }
+
         profile.save((error) => {
             if (error) {
                 res.status(400).send({
@@ -430,7 +456,7 @@ const getSuitablePosts = async (req, res) => {
                     'error': error.message
                 })
             } else {
-                res.status(200).send(postsForSend)
+                res.status(200).send(finalList)
             }
         })
 
