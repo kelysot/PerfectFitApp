@@ -522,22 +522,72 @@ const getSearchPosts = async (req, res) =>{
     const colors = map.Colors
     const companies = map.Companies
     const bodyTypes = map.BodyTypes
+    const count = map.Count
+    const price = map.Price
+    let priceFrom, priceTo
 
-    let posts = await Post.find({'size': { $in: sizes}, 'categoryId': { $in: categories}, 'color': { $in: colors}, 'company': { $in: companies}})
+    if(price[0] != "false"){
+        priceFrom = parseInt(price[0])
+    }
+    else{
+        priceFrom = price[0] // = false
+    }
+    if(price[1] != "false"){
+        priceTo = parseInt(price[1])
+    }
+    else{
+        priceTo = price[1] // = false
+    }
+   
+    let posts
 
-    //TODO: add check of price
+    if(count == "true"){ // it means that no category was choosen - we need to send all the posts. 
+        posts = await Post.find({})
+    }
+    else{
+        posts = await Post.find({'size': { $in: sizes}, 'categoryId': { $in: categories}, 'color': { $in: colors}, 'company': { $in: companies}})
+    }
 
-    console.log(posts)
+    let postsToSned = []
+
+
+    if(priceFrom != "false" &&  priceTo != "false"){
+        for(let i=0; i < posts.length; i++){
+            if(posts[i].price >= priceFrom && posts[i].price <= priceTo){
+                postsToSned.push(posts[i])
+            }
+        }
+    }
+    else if(priceFrom == "false" && priceTo != "false"){
+        console.log("we are here now 1")
+        for(let i=0; i < posts.length; i++){
+            if(posts[i].price <= priceTo){
+                postsToSned.push(posts[i])
+            }
+        }
+    }
+    else if(priceFrom != "false" &&  priceTo == "false"){
+        console.log("we are here now 2")
+        for(let i=0; i < posts.length; i++){
+            if(posts[i].price >= priceFrom){
+                postsToSned.push(posts[i])
+            }
+        }
+    }
+    else if(priceFrom == "false" &&  priceTo == "false"){
+        postsToSned = posts
+    }
+
+    postsToSned = postsToSned.reverse()
+
     try {
-       res.status(200).send(posts)
+       res.status(200).send(postsToSned)
     } catch (err) {
         res.status(400).send({
             'status': 'failure',
             'error': err.message
         })
     }
-
-
 }
 
 
@@ -545,7 +595,7 @@ const general = async (req, res) => {
 
     const general = General({
         sizes: ["XS", "S", "M", "L", "XL", "XXL", "XXXL"],
-        companies: ["ZARA", "Studio-Pasha", "Mango", "Pull&Bear", "Castro", "Renuar", "Levis", "American-Eagle"], // the profileId here it's the userName of the ptofile!
+        companies: ["ZARA", "Studio Pasha", "Mango", "Pull&Bear", "Castro", "Renuar", "Levis", "American Eagle"], // the profileId here it's the userName of the ptofile!
         colors: ["Black", "White", "Red", "Green", "Purple", "Orange", "Pink", "Yellow"], 
         bodyTypes: ["Hourglass", "Pear", "Apple", "Ruler"]
     })
