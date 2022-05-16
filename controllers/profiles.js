@@ -222,7 +222,7 @@ const editProfile = async (req, res) => {
             }
         })
 
-        // change the userName in every rlevant post: 
+        // change the userName in every relevant post: 
 
         let posts = await Post.find({ profileId: { $eq: previousName } })
 

@@ -131,5 +131,7 @@ router.get('/checkIfEmailExist/:email', Auth.checkIfEmailExist)
 
 router.post('/logout', authenticate, Auth.logout)
 
+router.patch('/', authenticate, Auth.editUser)
+
 
 module.exports = router

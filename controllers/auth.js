@@ -1,4 +1,5 @@
 const User = require('../models/user_model')
+const Profile = require('../models/profile_model')
 const bcrypt = require('bcryptjs')
 const { use } = require('../routes')
 const jwt = require('jsonwebtoken')
@@ -220,10 +221,81 @@ const checkIfEmailExist = async (req, res) => {
     }
 }
 
+const editUser = async (req, res) => {
+
+    const user = req.body
+    const previousEmail = req.body.previousEmail
+    var email = req.body.email
+
+    if (previousEmail != null && previousEmail != undefined) {
+        email = previousEmail
+    }
+
+    const password = req.body.password
+    const salt = await bcrypt.genSalt(10)
+    const hashPwd = await bcrypt.hash(password, salt)
+
+    if (user == null || user == undefined) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+
+    try {
+        const editUser = await User.findOne({ 'email': email })
+        editUser.email = req.body.email
+        editUser.password = hashPwd
+        editUser.type = "client"
+        editUser.isConnected = req.body.isConnected
+        editUser.profilesId = req.body.profilesId
+        editUser.tokens = editUser.tokens
+
+        editUser.save((error, editUser) => {
+            if (error) {
+                res.status(400).send({
+                    'status': 'fail',
+                    'error': error.message
+                })
+            } else {
+                res.status(200).send({
+                    'status': 'OK',
+                    'user': editUser
+                })
+            }
+        })
+
+        //Change the email in every relevant profile: 
+
+        let profiles = await Profile.find({ userId: { $eq: previousEmail } })
+
+        for (const element of profiles) {
+
+            element.userId = req.body.email
+            element.save((error) => {
+                if (error) {
+                    res.status(400).send({
+                        'status': 'fail',
+                        'error': error.message
+                    })
+                }
+            })
+        }
+
+    } catch (err) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+}
+
+
 module.exports = {
     login,
     register,
     getUser,
+    editUser,
     checkIfEmailExist,
     logout
     // refreshToken
