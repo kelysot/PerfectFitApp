@@ -12,7 +12,7 @@ function NewCategory() {
     gender: "",
     subCategory: []
   })
-
+  
   function handle(e) {
     const newData = { ...newCategory };
     newData[e.target.id] = e.target.value;

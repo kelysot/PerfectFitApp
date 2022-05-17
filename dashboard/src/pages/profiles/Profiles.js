@@ -20,7 +20,6 @@ function Profiles() {
     })
       .then((res) => res.json())
         .then((data) => {
-          console.log(data.data)
           setProfilesList(data.data);
         })
   },[])
