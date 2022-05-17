@@ -51,7 +51,7 @@ function EditForm({title,name,image,id,gender}) {
         .patch(`/category/${id}`, edit ,{
           headers : {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Q5MWI3MWJjNmExYTNmZWJmMTFlNSIsImlhdCI6MTY1MjQ0OTEwOSwiZXhwIjoxNjUyNTM1NTA5fQ.gKRwGyzZv5skobFeYX0bLdKXllgiUCP4aOftM2mihk4'
+            'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODE3OTlmNDc5YTUyM2FmZjIzNDYyNyIsImlhdCI6MTY1Mjc2ODU4MywiZXhwIjoxNjUyODU0OTgzfQ.SUDTWGOEUUQQUFc-qs9aQ6_K9e0CJTmBGj_sBb1-6MM'
           }
         })
           .then(() =>  window.location.href = `/categories/${edit.name}&${gender}`)
@@ -63,7 +63,7 @@ function EditForm({title,name,image,id,gender}) {
       .patch(`/subCategory/${id}`, editSub ,{
         headers : {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2Q5MWI3MWJjNmExYTNmZWJmMTFlNSIsImlhdCI6MTY1MjQ0OTEwOSwiZXhwIjoxNjUyNTM1NTA5fQ.gKRwGyzZv5skobFeYX0bLdKXllgiUCP4aOftM2mihk4'
+          'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODE3OTlmNDc5YTUyM2FmZjIzNDYyNyIsImlhdCI6MTY1Mjc2ODU4MywiZXhwIjoxNjUyODU0OTgzfQ.SUDTWGOEUUQQUFc-qs9aQ6_K9e0CJTmBGj_sBb1-6MM'
         }
       })
         .then(() =>  window.location.href = `/categories` )

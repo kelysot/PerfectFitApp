@@ -16,9 +16,9 @@ function CardDetails({type,dataCard}) {
             <span className="message">Compared to last week</span>
           </LeftStyled>
           <RightStyled>
-            <div className="percentage negative">
-              20%
-            <span className="material-icons-sharp">trending_down</span>
+            <div className={dataCard.direction === "up" ? "percentage positive" : dataCard.direction === "down" ? "percentage negative" : "percentage flat"}>
+              {data.percent}
+              <span className="material-icons-sharp">  {dataCard.direction === "up" ? "trending_up" : dataCard.direction === "down" ? "trending_down" : "trending_flat"}</span>
             </div>
             <span className="material-icons-sharp" id="icon">{data.icon}</span>
           </RightStyled>
@@ -28,34 +28,36 @@ function CardDetails({type,dataCard}) {
 };
 
 function dataToCard(type,data,dataCard) {
-  //todo : add no change icon "trending_flat" + use the relevet class name + compre to last week
-  //TODO: get percentage from server add to data object and use in card component
   switch(type){
     case "onlineUsers":
       data={
         title:"Online Profiles",
-        counter: dataCard.direction === 'up'? `+${dataCard.result}` : dataCard.result,
+        counter: dataCard.direction === 'up'? `+${dataCard.result}` :  dataCard.direction === 'down'? dataCard.result : `+${dataCard.result}`,
+        percent: `${dataCard.resultPercent}%`,
         icon:"person_outline",
       };
       break;
       case "newProfiles":
       data={
         title:"New Profiles",
-        counter: dataCard.direction === 'up'? `+${dataCard.result}` : dataCard.result,
+        counter: dataCard.direction === 'up'? `+${dataCard.result}` : dataCard.direction === 'down' ? dataCard.result : `+${dataCard.result}`,
+        percent: `${dataCard.resultPercent}%`,
         icon:"account_circle",
       };
       break;
       case "totalUsers":
       data={
         title:"Total Users",
-        counter: dataCard.direction === 'up'? `+${dataCard.result}` : dataCard.result,
+        counter: dataCard.direction === 'up'? `+${dataCard.result}` : dataCard.direction === "down" ? dataCard.result : `+${dataCard.result}`,
+        percent: `${dataCard.resultPercent}%`,
         icon:"group",
       };
       break;
       case "totalPosts":
       data={
         title:"Total Posts",
-        counter: dataCard.direction === 'up'? `+${dataCard.result}` : dataCard.result,
+        counter: dataCard.direction === 'up'? `+${dataCard.result}` : dataCard.direction === 'down' ? dataCard.result : `+${dataCard.result}`,
+        percent: `${dataCard.resultPercent}%`,
         icon:"post_add",
       };
       break;

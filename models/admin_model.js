@@ -29,19 +29,23 @@ const adminSchema = new mongoose.Schema({
     },
     newProfilesCompere: {
         lastWeek: {type: String, required: true},
-        total: {type: String, required: true}
+        total: {type: String, required: true},
+        percent:{type: String, required: true}
     },
     profilesLoginCompere: {
         lastWeek: {type: String, required: true},
-        total: {type: String, required: true}
+        total: {type: String, required: true},
+        percent:{type: String, required: true}
     },
     totalUsersCompere: {
         lastWeek: {type: String, required: true},
-        total: {type: String, required: true}
+        total: {type: String, required: true},
+        percent:{type: String, required: true}
     },
     totalPostCompere: {
         lastWeek: {type: String, required: true},
-        total: {type: String, required: true}
+        total: {type: String, required: true},
+        percent:{type: String, required: true}
     }
 })
 
