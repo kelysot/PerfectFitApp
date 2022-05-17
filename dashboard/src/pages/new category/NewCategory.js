@@ -21,6 +21,8 @@ function NewCategory() {
   //TODO: get 401 / 403 - need pass 'token'
   function submit(e) {
     e.preventDefault();
+    if(newCategory.pictureUrl === "")
+      newCategory.pictureUrl = "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
     axios
       .post('/category', newCategory, {
         headers: {
