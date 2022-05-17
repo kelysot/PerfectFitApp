@@ -384,7 +384,6 @@ const getSuitablePosts = async (req, res) => {
         }
 
         let postsForSend = []
-
         let vector1 = createVector(profile);
 
         for (let t = 0; t < posts.length; t++) {
@@ -396,7 +395,6 @@ const getSuitablePosts = async (req, res) => {
             // if the publisher of the post is in the list of "similarProfileId" we can add it immediately to the postsList. 
             if (similarProfileId.includes(id2) || (userNameofPost == profile.userName)) {
                 postsForSend.push(posts[t])
-                console.log("the profile 1: " + posts[t].profileId)
             }
             // if not, we need to check the correlation between the two profiles:
             else {
@@ -431,12 +429,8 @@ const getSuitablePosts = async (req, res) => {
 
         let finalList = []
         let shoeSize = parseInt(profile.foot)
-        // console.log("the shoe size is: " + shoeSize)
-
         let minus = parseInt(shoeSize)-1
         let plus = parseInt(shoeSize)+1
-
-        // console.log("the -- " + minus + " the plus ++ " + plus)
 
         for(let i=0; i<postsForSend.length; i++){
             if(postsForSend[i].categoryId == "Shoes"){
@@ -539,8 +533,6 @@ const timeSince = async (req, res) => {
 
 ///////////////////
 
-
-
 const getSearchPosts = async (req, res) =>{
 
     const map = req.body
@@ -633,7 +625,6 @@ const getSearchPosts = async (req, res) =>{
         }
     }
     else if(priceFrom == "false" && priceTo != "false"){
-        console.log("we are here now 1")
         for(let i=0; i < posts.length; i++){
             if(posts[i].price <= priceTo){
                 postsToSend.push(posts[i])
@@ -641,7 +632,6 @@ const getSearchPosts = async (req, res) =>{
         }
     }
     else if(priceFrom != "false" &&  priceTo == "false"){
-        console.log("we are here now 2")
         for(let i=0; i < posts.length; i++){
             if(posts[i].price >= priceFrom){
                 postsToSend.push(posts[i])
@@ -654,8 +644,6 @@ const getSearchPosts = async (req, res) =>{
 
     postsToSend = postsToSend.reverse()
 
-    // console.log(postsToSend)
-
     try {
        res.status(200).send(postsToSend)
     } catch (err) {
@@ -665,9 +653,6 @@ const getSearchPosts = async (req, res) =>{
         })
     }
 }
-
-
-
 
 //////////////
 
@@ -753,10 +738,12 @@ const getSearchPosts = async (req, res) =>{
 const general = async (req, res) => {
 
     const general = General({
-        sizes: ["XS", "S", "M", "L", "XL", "XXL", "XXXL"],
-        companies: ["ZARA", "Studio Pasha", "Mango", "Pull&Bear", "Castro", "Renuar", "Levis", "American Eagle"], // the profileId here it's the userName of the ptofile!
-        colors: ["Black", "White", "Red", "Green", "Purple", "Orange", "Pink", "Yellow"],
-        bodyTypes: ["Hourglass", "Pear", "Apple", "Ruler"]
+        sizes: ["XS", "S", "M", "L", "XL", "XXL", "XXXL", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51"],
+        companies: ["ZARA", "Studio Pasha", "Mango", "Pull&Bear", "Castro", "Renuar", "Levis", "American Eagle", "Other"], // the profileId here it's the userName of the ptofile!
+        colors: ["Black", "White", "Red", "Green", "Purple", "Orange", "Pink", "Yellow", "Brown", "Cream", "Gray", "Turquoise"],
+        bodyTypes: ["Hourglass", "Pear", "Apple", "Ruler"],
+        bodyTypeDescription: ["This type is characterized by a relatively broad shoulders, a wide pelvis and a narrow waist (Endomorphic or Mesomorphic)", "In this body type the upper body is small, the chest is small and the abdomen is flat. Most of the weight is concentrated in the waist area and down (Mesomorphic or Endomorphic)", "This body type is characterized by a heavy upper torso, relatively broad chest and abdomen, but a narrow lower torso - narrow hips and narrow legs (Mesomorphic or Endomorphic)", "This body type is characterized by a straight body shape from the middle upwards and the middle downwards (Ectomorphic)"],
+        gender: ["Female", "Male"]
     })
 
     general.save((error, general) => {
