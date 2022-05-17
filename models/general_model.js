@@ -12,6 +12,12 @@ const generalSchema = new mongoose.Schema({
     }],
     bodyTypes: [{
         type: String,
+    }],
+    bodyTypeDescription: [{
+        type: String,
+    }],
+    gender: [{
+        type: String,
     }]
 })
 
