@@ -24,10 +24,10 @@ function Setting() {
 
   return (
     <SettingStyle>
-      {admin && (<>
-        <SideBar/>
-          <div className='settingContainer'>
-              <TopBar />
+      <SideBar/>
+        <div className='settingContainer'>
+          <TopBar />
+            {admin && (<>
               <div className="top">
                 <h1>Setting</h1>
               </div>
@@ -38,11 +38,26 @@ function Setting() {
                   </div>
                 </div>
                 <div className='right'>
-                  right
+                  <h3>Admin Details</h3>
+                  <div className='details'>
+                    <div className='detailsItem'>
+                      <span className="item-key">Full Name:</span>
+                      <span className="item-value">{admin.name}</span>
+                    </div>
+                    <div className='detailsItem'>
+                      <span className="item-key">Email:</span>
+                      <span className="item-value">{admin.email}</span>
+                    </div>
+                    <div className='detailsItem'>
+                      <span className="item-key">Last Update:</span>
+                      <span className="item-value">{admin.lastUpdate}</span>
+                    </div>
+                  </div>
+                  <button className='btn-edit'>Edit</button>
                 </div>
               </div>
-          </div>
-        </>)}
+            </>)}
+      </div>
     </SettingStyle>
   )
 };
@@ -98,6 +113,59 @@ const SettingStyle = styled.div`
           object-fit: cover;
           border-radius: 20px;
           box-shadow: 8px 8px 8px rgb(0 0 0 / 20%);
+        }
+      }
+
+      .right{
+        padding: 1.5rem;
+        margin: auto;
+        height: 20rem;
+        width: 25rem;
+        text-align: center;
+        background: #f3efefa1;
+        box-shadow: 0px 0px 15px 1px rgb(0 0 0 / 18%);
+        border-radius: 18px;
+
+        h3{
+          font-size: 30px;
+          display: flex;
+          justify-content: center;
+          color: var(--color-primary-purple);
+          margin-bottom: 1rem;
+        }
+
+        .details{
+          font-size: 18px;
+
+          .detailsItem{
+            margin: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+
+            .item-key{
+              font-weight: bold;
+              color: var(--color-dark-variant);
+            }
+          }
+        }
+
+        .btn-edit{
+          margin-top: 1rem;
+          padding: 0.5rem 1rem;
+          font-size: 16px;
+          width: 35%;
+          border-radius: 8px;
+          outline: none;
+          border: none;
+          background-color: #3e98c766;
+          color: var(--color-dark-variant);
+          font-weight: bold;
+          cursor: pointer;
+          transition: all 0.4s ease;
+
+          &:hover{
+            color: white;
+          }
         }
       }
     }
