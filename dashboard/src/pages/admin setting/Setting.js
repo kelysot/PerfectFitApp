@@ -101,11 +101,11 @@ const SettingStyle = styled.div`
       box-shadow: 0px 0px 15px 1px rgb(0 0 0 / 18%);
       justify-content: space-between;
       align-items: center;
+      padding: 1.5rem;
 
       .image-box {
         display: flex;
         align-items: center;
-        padding: 1.5rem;
         
         img{
           height: 22rem;
@@ -117,14 +117,13 @@ const SettingStyle = styled.div`
       }
 
       .right{
-        padding: 1.5rem;
-        margin: auto;
         height: 20rem;
         width: 25rem;
         text-align: center;
         background: #f3efefa1;
         box-shadow: 0px 0px 15px 1px rgb(0 0 0 / 18%);
         border-radius: 18px;
+        padding: 1rem;
 
         h3{
           font-size: 30px;
