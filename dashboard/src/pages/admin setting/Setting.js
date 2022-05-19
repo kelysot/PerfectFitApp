@@ -2,10 +2,12 @@ import React ,{useEffect,useState} from 'react';
 import SideBar from "../../components/SideBar";
 import TopBar from "../../components/TopBar";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 function Setting() {
 
   const[admin,setAdmin] = useState("");
+  let navigate = useNavigate();
 
   useEffect(() => {
     fetch(`/admin/getAdminData` , {
@@ -27,10 +29,10 @@ function Setting() {
       <SideBar/>
         <div className='settingContainer'>
           <TopBar />
-            {admin && (<>
               <div className="top">
                 <h1>Setting</h1>
               </div>
+            {admin && (<>
               <div className='bottom'>
                 <div className='left'>
                   <div className='image-box'>
@@ -53,7 +55,7 @@ function Setting() {
                       <span className="item-value">{admin.lastUpdate}</span>
                     </div>
                   </div>
-                  <button className='btn-edit'>Edit</button>
+                  <button className='btn-edit' onClick={()=> navigate(`/setting/edit`)}>Edit</button>
                 </div>
               </div>
             </>)}
@@ -124,7 +126,7 @@ const SettingStyle = styled.div`
         box-shadow: 0px 0px 15px 1px rgb(0 0 0 / 18%);
         border-radius: 18px;
         padding: 1rem;
-
+        
         h3{
           font-size: 30px;
           display: flex;

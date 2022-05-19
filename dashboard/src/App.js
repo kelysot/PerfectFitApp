@@ -16,6 +16,7 @@ import {UserAutContext} from '../src/context/userAutContext';
 import Profiles from "./pages/profiles/Profiles";
 import Setting from "./pages/admin setting/Setting";
 import ProtectedRoutes from './components/ProtectedRoutes';
+import EditAdmin from "./pages/admin setting/EditAdmin";
 
 function App() {
 
@@ -42,7 +43,10 @@ function App() {
             <Route index element={<Profiles  />}></Route>
             <Route path=":id" element={<SingleProfile />}></Route>
           </Route>
-          <Route path="setting" element={<Setting />}></Route>
+          <Route path="setting">
+            <Route index element={<Setting />}></Route>
+            <Route path="edit" element={<EditAdmin />}></Route>
+          </Route>
         {/* </Route> */}
       </Routes>
     </AppStyle>
