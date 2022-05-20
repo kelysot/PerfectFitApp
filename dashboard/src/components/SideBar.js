@@ -2,16 +2,10 @@ import React,{useState}  from 'react';
 import {Link} from "react-router-dom";
 import styled from 'styled-components';
 
-//TODO: add image to the logo div + //TODO: add link to go in profile && setting
 function SideBar() {
 
   const menuitems = document.querySelectorAll("li");
   const[currentIndex,setCurrentIndex] = useState(0);
-
-  // menuitems.forEach((item,index) =>{
-  //   if(index === 0 && currentIndex === 0)
-  //     item.classList.add("active-item");
-  // });
 
   const handlerSelectItem = (index)=>{
     if(index !== currentIndex){
@@ -63,10 +57,6 @@ function SideBar() {
             </StyledLink>
           </ul>
         </CenterStyle>
-        {/* <BottomStyle>
-          <div className="color-option"></div>
-          <div className="color-option"></div>
-        </BottomStyle> */}
     </SideBarStyle>
   )
 }
@@ -142,56 +132,7 @@ const CenterStyle = styled.div`
       }
     }
   }
-
-
-  //FIXME: problem when move between pages for now dont show the current page
-  /* .active-item{
-    transform: translateX(1rem);
-    a,h3,span{
-      color:var(--color-primary-purple);
-    }
-
-    &:before{
-      content:"";
-      height:1.6rem;
-      width:2.5px;
-      background-color:var(--color-primary-purple);
-    }
-  } */
-
 `;
-
-// const BottomStyle = styled.div`
-//   display:flex;
-//   align-items: center;
-//   justify-content: space-around;
-//   padding: 2rem 3.8rem;
-//   position: absolute;
-//   bottom: 0;
-//   gap: 2rem;
-
-//   .color-option{
-//     width: 35px;
-//     height: 35px;
-//     border-radius: 30%;
-//     cursor: pointer;
-//     border: 1.5px solid var( --color-dark-variant);
-//     transition: all 0.3s ease;
-    
-//     &:nth-child(1){
-//       background-color: #f8f0e8;
-//     }
-
-//     &:nth-child(2){
-//       background-color: #333;
-//     }
-
-//     &:hover{
-//       transform: scale(1.1);
-//       border: 1.8px solid var( --color-dark-variant);
-//     }
-//   }
-// `;
 
 const StyledLinkLogo = styled(Link)`
   text-decoration: none;
