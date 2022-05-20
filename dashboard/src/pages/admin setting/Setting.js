@@ -1,8 +1,8 @@
 import React ,{useEffect,useState} from 'react';
+import { useNavigate } from "react-router-dom";
 import SideBar from "../../components/SideBar";
 import TopBar from "../../components/TopBar";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 
 function Setting() {
 
@@ -19,7 +19,6 @@ function Setting() {
     })
       .then((res) => res.json())
         .then((data) => {
-          console.log(data.data);
           setAdmin(data.data);
         })
   },[])
@@ -114,7 +113,6 @@ const SettingStyle = styled.div`
           width: 22rem;
           object-fit: cover;
           border-radius: 20px;
-          box-shadow: 8px 8px 8px rgb(0 0 0 / 20%);
         }
       }
 

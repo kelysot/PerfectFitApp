@@ -131,6 +131,37 @@ const login = async (req, res) => {
     }
 }
 
+const editAdminDetails = async (req, res) => {
+    console.log("ok")
+    try{
+        const editAdmin = await Admin.findOne()
+        editAdmin.name = req.body.name
+        editAdmin.email = req.body.email
+        editAdmin.image = req.body.image
+
+        editAdmin.save((error, editAdmin) => {
+            if (error) {
+                res.status(400).send({
+                    'status': 'fail',
+                    'error': error.message
+                })
+            }
+            else {
+                res.status(200).send({
+                    'status': 'OK',
+                    'admin': editAdmin
+                })
+            }
+        })
+
+    }catch (err){
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+}
+
 const getAdminData = async (req, res) => {
     try{
         const admin = await Admin.findOne()
@@ -288,6 +319,7 @@ module.exports = {
     register,
     logout,
     getAdminData,
-    updateData
+    updateData,
+    editAdminDetails
     // refreshToken
 }

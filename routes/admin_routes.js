@@ -13,4 +13,6 @@ router.get('/getAdminData', Admin.getAdminData)
 
 router.get('/updateData',Admin.updateData)
 
+router.patch('/editAdmin',authenticate,Admin.editAdminDetails)
+
 module.exports = router

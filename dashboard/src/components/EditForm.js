@@ -41,7 +41,6 @@ function EditForm({title,name,image,id,gender}) {
       newData[e.target.id] = e.target.value;
       setEditSub(newData);
     }
-    
   }
 
   function submit(e){
@@ -116,25 +115,25 @@ function EditForm({title,name,image,id,gender}) {
 
 const EditFormStyle = styled.div`
     .bottom{
-    margin: 20px 60px;
-    padding: 10px;
-    display: flex;
-    background-color: #ffffffe8;
-    box-shadow: -6px -15px 20px rgb(0 0 0 / 12%);
-    border-radius: 15px;
-    
-    .left{
-      flex: 1;
+      margin: 20px 60px;
+      padding: 10px;
       display: flex;
-      justify-content: center;
+      background-color: #ffffffe8;
+      box-shadow: -6px -15px 20px rgb(0 0 0 / 12%);
+      border-radius: 15px;
       
-      img{
-        height: 200px;
-        width: 200px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin: auto;
-      }
+      .left{
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        
+        img{
+          height: 200px;
+          width: 200px;
+          border-radius: 50%;
+          object-fit: cover;
+          margin: auto;
+        }
     }
 
     .right{
