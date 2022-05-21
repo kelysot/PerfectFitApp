@@ -6,6 +6,7 @@ function TopBar() {
 
     const {dispatch} = useContext(DarkModeContext);
     const[nameAndImageAdmin,setNameAndImageAdmin] = useState("");
+    const[search,setSearch] = useState("");
 
     useEffect(() => {
         fetch("/admin/getAdminData",{
@@ -22,12 +23,22 @@ function TopBar() {
         })
     },[])
 
+    const inputHandler = (e) => {
+        const newInput = {...search};
+        newInput[0] = e.target.value;
+        setSearch(newInput);
+    };
+
+    const searchHandler = () => {
+        console.log(search);
+    };  
+
     return (
         <TopBarStyle>
             <WrapperStyle>
             <div className="search">
-                <input className="search" placeholder="Search..."></input>
-                <span className="material-icons-sharp">search</span>
+                <input className="search" onChange={inputHandler} placeholder="Search..."></input>
+                <span className="material-icons-sharp" onClick={searchHandler}>search</span>
             </div>
             <div className="mode">
                 <span className="material-icons-sharp" id="light" onClick={() => dispatch({type: 'LIGHT'})} >light_mode</span>
