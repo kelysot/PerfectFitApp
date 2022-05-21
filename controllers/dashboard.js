@@ -331,6 +331,14 @@ const getProfileChartData = async (req, res) => {
 
 }
 
+//////////////////////////////////////*Search*///////////////////////////////////////
+
+const search = async (req, res) => {
+    const search = req.params.inputToSearch
+    console.log(search);
+    
+}
+
 //////////////////////////////////////*Functions*///////////////////////////////////////
 
 function sortTogether(array1, array2) {
@@ -395,5 +403,6 @@ module.exports = {
     getSingleCategory,
     getSubCategoriesData,
     getCategoryId,
-    getProfileChartData
+    getProfileChartData,
+    search
 }

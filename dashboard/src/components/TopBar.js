@@ -1,5 +1,8 @@
 import React , {useContext,useState,useEffect} from 'react';
 import styled from 'styled-components';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import {DarkModeContext} from '../../src/context/darkModeContext';
 
 function TopBar() {
@@ -7,6 +10,11 @@ function TopBar() {
     const {dispatch} = useContext(DarkModeContext);
     const[nameAndImageAdmin,setNameAndImageAdmin] = useState("");
     const[search,setSearch] = useState("");
+    const [searchType, setSearchType] = useState("");
+      
+    const handleChange = (e) => {
+        setSearchType(e.target.value);
+    };
 
     useEffect(() => {
         fetch("/admin/getAdminData",{
@@ -24,30 +32,59 @@ function TopBar() {
     },[])
 
     const inputHandler = (e) => {
-        const newInput = {...search};
-        newInput[0] = e.target.value;
-        setSearch(newInput);
+        setSearch(e.target.value);
     };
-
+    //TODO: add function to admin controller to search + send type of what to search
     const searchHandler = () => {
-        console.log(search);
-    };  
 
+        fetch(`/dashboard/search/${search}`,{
+            headers : { 
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+              'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODE3OTlmNDc5YTUyM2FmZjIzNDYyNyIsImlhdCI6MTY1Mjc2ODU4MywiZXhwIjoxNjUyODU0OTgzfQ.SUDTWGOEUUQQUFc-qs9aQ6_K9e0CJTmBGj_sBb1-6MM'
+            }
+          })
+          .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+          })
+
+        console.log(search);
+        setSearch("");
+    };  
     return (
         <TopBarStyle>
             <WrapperStyle>
-            <div className="search">
-                <input className="search" onChange={inputHandler} placeholder="Search..."></input>
-                <span className="material-icons-sharp" onClick={searchHandler}>search</span>
-            </div>
-            <div className="mode">
-                <span className="material-icons-sharp" id="light" onClick={() => dispatch({type: 'LIGHT'})} >light_mode</span>
-                <span className="material-icons-sharp" id="dark" onClick={() => dispatch({type: 'DARK'})} >dark_mode</span>
-            </div>
-            <div className="adminDetails">
-                <img src={nameAndImageAdmin.image !== 'undefined' ? nameAndImageAdmin.image : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb75aLAsHQuVvgofGiZw0yCiEDZz_LRBNmPw&usqp=CAU'}></img>
-                <h3>Admin Dashboard</h3>
-            </div>
+                <div className="search-select">
+                    <div className="search">
+                        <input className="search" value={search} onChange={inputHandler} placeholder="Search..."></input>
+                        <span className="material-icons-sharp" onClick={searchHandler}>search</span>
+                    </div>
+                    <div className="select-box">
+                    <FormControl sx={{minWidth: 150 }} size="small">
+                        <Select
+                        value={searchType}
+                        onChange={handleChange}
+                        displayEmpty
+                        >
+                        <MenuItem  value="">
+                            <em>Choose type</em>
+                        </MenuItem>
+                        <MenuItem value={"category"}>Category</MenuItem>
+                        <MenuItem value={"subCategory"}>SubCategory</MenuItem>
+                        <MenuItem value={"profile"}>Profile</MenuItem>
+                        </Select>
+                    </FormControl>
+                    </div>
+                </div>
+                <div className="mode">
+                    <span className="material-icons-sharp" id="light" onClick={() => dispatch({type: 'LIGHT'})} >light_mode</span>
+                    <span className="material-icons-sharp" id="dark" onClick={() => dispatch({type: 'DARK'})} >dark_mode</span>
+                </div>
+                <div className="adminDetails">
+                    <img src={nameAndImageAdmin.image !== 'undefined' ? nameAndImageAdmin.image : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb75aLAsHQuVvgofGiZw0yCiEDZz_LRBNmPw&usqp=CAU'}></img>
+                    <h3>Admin Dashboard</h3>
+                </div>
             </WrapperStyle>
         </TopBarStyle>
     )
@@ -63,6 +100,11 @@ const WrapperStyle = styled.div`
     align-items: center;
     justify-content:space-around;
     width: 100%;
+    
+    .search-select{
+        display: flex;
+        gap: 6px;
+    }
 
     .search{
         align-items: center;
@@ -129,6 +171,26 @@ const WrapperStyle = styled.div`
                 transform: scale(1.2) ;
             }
         }
+
+    }
+
+    .css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root{
+        border-radius: 8px;
+    }
+
+    .css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input{
+        padding: 5px;
+        background-color: white;
+        color: var(--color-dark-variant);
+        font-family: 'Nunito',sans-serif;
+    }
+
+    .css-1d3z3hw-MuiOutlinedInput-notchedOutline{
+        border: none;
+    }
+
+    .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root.Mui-selected{
+        color: var(--color-dark-variant);
     }
 `; 
 
