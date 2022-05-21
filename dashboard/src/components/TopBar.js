@@ -11,9 +11,14 @@ function TopBar() {
     const[nameAndImageAdmin,setNameAndImageAdmin] = useState("");
     const[search,setSearch] = useState("");
     const [searchType, setSearchType] = useState("");
+    const [genderType, setGenderType] = useState("");
       
-    const handleChange = (e) => {
+    const handleChangeType = (e) => {
         setSearchType(e.target.value);
+    };
+
+    const handleChangeGender = (e) => {
+        setGenderType(e.target.value);
     };
 
     useEffect(() => {
@@ -37,7 +42,7 @@ function TopBar() {
     //TODO: add function to admin controller to search + send type of what to search
     const searchHandler = () => {
 
-        fetch(`/dashboard/search/${search}`,{
+        fetch(`/dashboard/search/${search}/${searchType}/${genderType}`,{
             headers : { 
               'Content-Type': 'application/json',
               'Accept': 'application/json',
@@ -46,11 +51,13 @@ function TopBar() {
           })
           .then((res) => res.json())
             .then((data) => {
-                console.log(data);
+                window.location.href = data.data;
           })
 
         console.log(search);
         setSearch("");
+        setGenderType("");
+        setSearchType("");
     };  
     return (
         <TopBarStyle>
@@ -61,20 +68,35 @@ function TopBar() {
                         <span className="material-icons-sharp" onClick={searchHandler}>search</span>
                     </div>
                     <div className="select-box">
-                    <FormControl sx={{minWidth: 150 }} size="small">
-                        <Select
-                        value={searchType}
-                        onChange={handleChange}
-                        displayEmpty
-                        >
-                        <MenuItem  value="">
-                            <em>Choose type</em>
-                        </MenuItem>
-                        <MenuItem value={"category"}>Category</MenuItem>
-                        <MenuItem value={"subCategory"}>SubCategory</MenuItem>
-                        <MenuItem value={"profile"}>Profile</MenuItem>
-                        </Select>
-                    </FormControl>
+                        <FormControl sx={{minWidth: 150 }} size="small">
+                            <Select
+                            value={searchType}
+                            onChange={handleChangeType}
+                            displayEmpty
+                            >
+                            <MenuItem  value="">
+                                <em>Choose type</em>
+                            </MenuItem>
+                            <MenuItem value={"category"}>Category</MenuItem>
+                            <MenuItem value={"subCategory"}>SubCategory</MenuItem>
+                            <MenuItem value={"profile"}>Profile</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </div>
+                    <div className="select-box">
+                        <FormControl sx={{minWidth: 150 }} size="small">
+                            <Select
+                            value={genderType}
+                            onChange={handleChangeGender}
+                            displayEmpty
+                            >
+                            <MenuItem  value="">
+                                <em>Choose gender</em>
+                            </MenuItem>
+                            <MenuItem value={"Male"}>Male</MenuItem>
+                            <MenuItem value={"Female"}>Female</MenuItem>
+                            </Select>
+                        </FormControl>
                     </div>
                 </div>
                 <div className="mode">

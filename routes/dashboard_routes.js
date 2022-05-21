@@ -23,6 +23,6 @@ router.get('/categories/:categoryData/subCategoryData',Dashboard.getSubCategorie
 
 router.get('/users/:userName',Dashboard.getProfileChartData)
 
-router.get('/search/:inputToSearch',Dashboard.search)
+router.get('/search/:inputToSearch/:typeSearch/:gender',Dashboard.search)
 
 module.exports = router

@@ -335,8 +335,35 @@ const getProfileChartData = async (req, res) => {
 
 const search = async (req, res) => {
     const search = req.params.inputToSearch
-    console.log(search);
-    
+    const typeSearch = req.params.typeSearch
+    const genderSearch = req.params.gender
+
+    switch(typeSearch) {
+        case 'category': {
+            if(search !== "" && typeSearch !== "" && genderSearch !== "") {
+                const category = await Category.findOne({'name': search , 'gender': genderSearch})
+                if(category !== null){
+                    const location = `/categories/${category.name}&${category.gender}`
+             
+                    res.json({
+                        data: location
+                    });
+                }
+            }
+        }
+        break;
+        case 'subCategory': { //TODO: search for subCategory
+            console.log(typeSearch)
+        }
+        break; 
+        case 'profile': { //TODO: search for Profile
+            console.log(typeSearch)
+        }
+        break;
+        default:
+            break;
+    }
+
 }
 
 //////////////////////////////////////*Functions*///////////////////////////////////////
