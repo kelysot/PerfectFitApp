@@ -133,5 +133,9 @@ router.post('/logout', authenticate, Auth.logout)
 
 router.patch('/', authenticate, Auth.editUser)
 
+router.get('/resetPassword/:email', Auth.resetPassword)
+
+router.post('/changePassword', Auth.changePassword)
+
 
 module.exports = router
