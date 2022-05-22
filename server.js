@@ -3,6 +3,8 @@ const express = require('express')
 const app = express();
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const path = require('path')
+
 
 if (process.env.NODE_ENV == "development") {
     const swaggerUI = require("swagger-ui-express")
@@ -79,6 +81,8 @@ const port = process.env.PORT
 
 // });
 
+// app.use('/uploadsAdmin',express.static(__dirname + '/uploads'))
+app.use('/uploadsAdmin', express.static(path.join(__dirname, 'uploads')))
 
 const dashboardRouter = require('./routes/dashboard_routes')
 app.use('/dashboard', dashboardRouter)

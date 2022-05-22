@@ -41,10 +41,10 @@ function SingleProfile() {
         <div className='singleContainer'>
             <TopBar  />
             <div className='cards'>
-            { (profileData && dataToChart) &&(<>
+            {(profileData && dataToChart) &&(<>
                 <div className='details-card'>
                 <div className='image-box'>
-                  <img src={profileData.pictureUrl}></img>
+                  <img src={`/uploadsAdmin/${profileData.pictureUrl.split('/')[1]}`}></img>
                 </div>
                 <div className='content'>
                   <div className='details'>

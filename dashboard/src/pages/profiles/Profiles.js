@@ -4,8 +4,6 @@ import SideBar from "../../components/SideBar";
 import TopBar from "../../components/TopBar";
 import styled from 'styled-components';
 
-//TODO: get data from sever to categoriesData
-
 function Profiles() {
 
   const[profilesList,setProfilesList] = useState("");
@@ -21,6 +19,7 @@ function Profiles() {
       .then((res) => res.json())
         .then((data) => {
           setProfilesList(data.data);
+          console.log(data.data);
         })
   },[])
 
@@ -36,14 +35,15 @@ function Profiles() {
     </ProfilesStyle>
   )
 };
-
+//TODO: image from camera have "/" wrong direction 
 const columns = [
     { field: 'id', headerName: 'ID', width: 50 },
     { field: 'options' , headerName: 'Image',
       renderCell: (params) => {
         return (
           <div className="image">
-              <img src={params.row.image} alt="categoryImage"></img>
+            {console.log(params.row.image)}
+            <img src={`/uploadsAdmin/${params.row.image.split('/')[1]}`}></img>
           </div>
         )
       }
