@@ -25,4 +25,7 @@ router.get('/users/:userName',Dashboard.getProfileChartData)
 
 router.get('/search/:inputToSearch/:typeSearch/:gender',Dashboard.search)
 
+router.get('/search/:inputToSearch/:typeSearch',Dashboard.search)
+
+
 module.exports = router

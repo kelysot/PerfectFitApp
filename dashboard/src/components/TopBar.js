@@ -39,20 +39,33 @@ function TopBar() {
     const inputHandler = (e) => {
         setSearch(e.target.value);
     };
-    //TODO: add function to admin controller to search + send type of what to search
+    
     const searchHandler = () => {
-
-        fetch(`/dashboard/search/${search}/${searchType}/${genderType}`,{
-            headers : { 
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-              'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODE3OTlmNDc5YTUyM2FmZjIzNDYyNyIsImlhdCI6MTY1Mjc2ODU4MywiZXhwIjoxNjUyODU0OTgzfQ.SUDTWGOEUUQQUFc-qs9aQ6_K9e0CJTmBGj_sBb1-6MM'
-            }
-          })
-          .then((res) => res.json())
-            .then((data) => {
-                window.location.href = data.data;
-          })
+        if(searchType !== 'profile'){
+            fetch(`/dashboard/search/${search}/${searchType}/${genderType}`,{
+                headers : { 
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json',
+                  'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODE3OTlmNDc5YTUyM2FmZjIzNDYyNyIsImlhdCI6MTY1Mjc2ODU4MywiZXhwIjoxNjUyODU0OTgzfQ.SUDTWGOEUUQQUFc-qs9aQ6_K9e0CJTmBGj_sBb1-6MM'
+                }
+              })
+              .then((res) => res.json())
+                .then((data) => {
+                    window.location.href = data.data;
+              })
+        }else{
+            fetch(`/dashboard/search/${search}/${searchType}`,{
+                headers : { 
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json',
+                  'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODE3OTlmNDc5YTUyM2FmZjIzNDYyNyIsImlhdCI6MTY1Mjc2ODU4MywiZXhwIjoxNjUyODU0OTgzfQ.SUDTWGOEUUQQUFc-qs9aQ6_K9e0CJTmBGj_sBb1-6MM'
+                }
+              })
+              .then((res) => res.json())
+                .then((data) => {
+                    window.location.href = data.data;
+              })
+        }
 
         console.log(search);
         setSearch("");

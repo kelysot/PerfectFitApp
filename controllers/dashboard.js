@@ -352,18 +352,37 @@ const search = async (req, res) => {
             }
         }
         break;
-        case 'subCategory': { //TODO: search for subCategory
-            console.log(typeSearch)
+        case 'subCategory': {
+            if(search !== "" && typeSearch !== "" && genderSearch !== "") {
+                const subCategory = await SubCategory.findOne({'name': search, 'gender': genderSearch})
+                const category = await Category.findById(subCategory.categoryId)
+                if(category !== null && subCategory !== null) {
+                    const location = `/categories/${category.name}&${category.gender}`
+
+                    res.json({
+                        data: location
+                    });
+                }
+            }
         }
         break; 
-        case 'profile': { //TODO: search for Profile
-            console.log(typeSearch)
+        case 'profile': {
+            if(search !== "" && typeSearch !== "") {
+                const profile = await Profile.findOne({'name': search})
+                console.log(profile)
+                if(profile !== null){
+                    const location = `/users/${search}`
+
+                    res.json({
+                        data: location
+                    });
+                }
+            }
         }
         break;
         default:
             break;
     }
-
 }
 
 //////////////////////////////////////*Functions*///////////////////////////////////////

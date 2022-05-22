@@ -15,7 +15,7 @@ function Profiles() {
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODE3OTlmNDc5YTUyM2FmZjIzNDYyNyIsImlhdCI6MTY1Mjc2ODU4MywiZXhwIjoxNjUyODU0OTgzfQ.SUDTWGOEUUQQUFc-qs9aQ6_K9e0CJTmBGj_sBb1-6MM'
+        'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2U2ZDYwZmNmMmJjMGU1YjRjZGI4NyIsImlhdCI6MTY1MzIyNDY5NywiZXhwIjoxNjUzMzExMDk3fQ.Z3lw1JsDbMePssQzD0CuSLwKvtK3KQ0iwABj4EUqiow'
        }
     })
       .then((res) => res.json())
