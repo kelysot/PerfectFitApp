@@ -373,22 +373,26 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2U4Mjg2Mj
         "profilesLoginCompere": {
                 "lastWeek": "0",
                 "total": "0",
-                "percent": "0"
+                "percent": "0",
+                "difference":"0"
         },
         "newProfilesCompere": {
                 "lastWeek": "0",
                 "total": "0",
-                "percent": "0"  
+                "percent": "0",
+                "difference":"0"  
         },
         "totalUsersCompere":{
                 "lastWeek": "0",
                 "total": "0",
-                "percent": "0"
+                "percent": "0",
+                "difference":"0"
         },
         "totalPostCompere": {
                 "lastWeek": "0",
                 "total": "0",
-                "percent": "0"
+                "percent": "0",
+                "difference":"0"
         }
 }
 

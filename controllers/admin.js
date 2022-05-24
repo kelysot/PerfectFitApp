@@ -42,22 +42,26 @@ const register = async (req, res) => {
             "profilesLoginCompere": {
                 "lastWeek": "0",
                 "total": "0",
-                "percent": "0"
+                "percent": "0",
+                "difference":"0"
             },
             "newProfilesCompere": {
                     "lastWeek": "0",
                     "total": "0",
-                    "percent": "0"  
+                    "percent": "0",
+                    "difference":"0"  
             },
             "totalUsersCompere":{
                     "lastWeek": "0",
                     "total": "0",
-                    "percent": "0"
+                    "percent": "0",
+                    "difference":"0"
             },
             "totalPostCompere": {
                     "lastWeek": "0",
                     "total": "0",
-                    "percent": "0"
+                    "percent": "0",
+                    "difference":"0"
             }
         })
         const accessToken = await jwt.sign(
@@ -197,39 +201,46 @@ const updateData = async (req, res) => {
 
             admin.lastUpdate = today
             admin.newProfilesCompere.total = profileList.length
-            admin.newProfilesCompere.lastWeek = admin.newProfilesCompere.total
             admin.newProfilesCompere.percent = Math.abs((resToNewProfiles/admin.newProfilesCompere.lastWeek)*100).toFixed(1)
+            admin.newProfilesCompere.lastWeek = admin.newProfilesCompere.total
+            admin.newProfilesCompere.difference = resToNewProfiles
+
             admin.profilesLoginCompere.total = profileListLogin.length
-            admin.profilesLoginCompere.lastWeek = admin.profilesLoginCompere.total
             admin.profilesLoginCompere.percent = Math.abs((resToLoginProfile/admin.profilesLoginCompere.lastWeek)*100).toFixed(1)
+            admin.profilesLoginCompere.lastWeek = admin.profilesLoginCompere.total
+            admin.profilesLoginCompere.difference = resToLoginProfile
+
             admin.totalUsersCompere.total = usersList.length
-            admin.totalUsersCompere.lastWeek = admin.totalUsersCompere.total
             admin.totalUsersCompere.percent = Math.abs((resToTotalUsers/admin.totalUsersCompere.lastWeek)*100).toFixed(1)
+            admin.totalUsersCompere.lastWeek = admin.totalUsersCompere.total
+            admin.totalUsersCompere.difference = resToTotalUsers
+
             admin.totalPostCompere.total = postsList.length
-            admin.totalPostCompere.lastWeek = admin.totalPostCompere.total
             admin.totalPostCompere.percent = Math.abs((resToTotalPosts/admin.totalPostCompere.lastWeek)*100).toFixed(1)
+            admin.totalPostCompere.lastWeek = admin.totalPostCompere.total
+            admin.totalPostCompere.difference = resToTotalPosts
 
             await admin.save()
 
             const cardsData = ({
                 'loginProfile': {
                     'result' : resToLoginProfile,
-                    'resultPercent' : admin.profilesLoginCompere.lastWeek === "0" ? "---" : admin.profilesLoginCompere.percent,
+                    'resultPercent' : admin.profilesLoginCompere.percent === 'Infinity' ? "100" : admin.profilesLoginCompere.percent,
                     'direction' : resToLoginProfile > 0 ? 'up' : resToLoginProfile < 0 ? 'down' : 'flat'
                 },
                 'newProfiles' : {
                     'result' : resToNewProfiles,
-                    'resultPercent' : admin.newProfilesCompere.lastWeek === "0" ? "---" : admin.newProfilesCompere.percent,
+                    'resultPercent' : admin.newProfilesCompere.percent === 'Infinity' ? "100" : admin.newProfilesCompere.percent,
                     'direction' : resToNewProfiles > 0 ? 'up' : resToNewProfiles < 0 ? 'down' : 'flat'
                 },
                 'totalUsers' : {
                     'result' : resToTotalUsers,
-                    'resultPercent' : admin.totalUsersCompere.lastWeek === "0" ? "---" : admin.totalUsersCompere.percent,
+                    'resultPercent' : admin.totalUsersCompere.percent === 'Infinity' ? "100" : admin.totalUsersCompere.percent,
                     'direction' : resToTotalUsers > 0 ? 'up' : resToTotalUsers < 0 ? 'down' : 'flat'
                 },
                 'totalPosts' : {
                     'result' : resToTotalPosts,
-                    'resultPercent' : admin.totalPostCompere.lastWeek === "0" ? "---" : admin.totalPostCompere.percent,
+                    'resultPercent' : admin.totalPostCompere.percent === 'Infinity' ? "100" : admin.totalPostCompere.percent,
                     'direction' : resToTotalPosts > 0 ? 'up' : resToTotalPosts < 0 ? 'down' : 'flat'
                 }
             })
@@ -239,27 +250,26 @@ const updateData = async (req, res) => {
             })
         
         }else{
-            //FIXME: Check
             const cardsData = ({
                 'loginProfile': {
                     'result' : admin.profilesLoginCompere.lastWeek,
-                    'resultPercent' : admin.profilesLoginCompere.percent === "0" ? "---" : admin.profilesLoginCompere.percent,
-                    'direction' : admin.profilesLoginCompere.lastWeek > 0 ? 'up' :  admin.profilesLoginCompere.lastWeek < 0 ? 'down' : "flat"
+                    'resultPercent' : admin.profilesLoginCompere.percent === 'Infinity' ? "100" : admin.profilesLoginCompere.percent,
+                    'direction' : admin.profilesLoginCompere.difference > 0 ? 'up' :  admin.profilesLoginCompere.difference < 0 ? 'down' : "flat"
                 },
                 'newProfiles' : {
                     'result' : admin.newProfilesCompere.lastWeek,
-                    'resultPercent' : admin.newProfilesCompere.percent === "0" ? "---" : admin.newProfilesCompere.percent,
-                    'direction' : admin.newProfilesCompere.lastWeek > 0 ? 'up' :  admin.newProfilesCompere.lastWeek < 0 ? 'down' : "flat"
+                    'resultPercent' : admin.newProfilesCompere.percent === 'Infinity' ? "100" : admin.newProfilesCompere.percent,
+                    'direction' : admin.newProfilesCompere.difference > 0 ? 'up' :  admin.newProfilesCompere.difference < 0 ? 'down' : "flat"
                 },
                 'totalUsers' : {
                     'result' : admin.totalUsersCompere.lastWeek,
-                    'resultPercent' : admin.totalUsersCompere.percent === "0" ? "---" : admin.totalUsersCompere.percent,
-                    'direction' : admin.totalUsersCompere.lastWeek > 0 ? 'up' :  admin.totalUsersCompere.lastWeek < 0 ? 'down' : "flat"
+                    'resultPercent' : admin.totalUsersCompere.percent === 'Infinity' ? "100" : admin.totalUsersCompere.percent,
+                    'direction' : admin.totalUsersCompere.difference > 0 ? 'up' :  admin.totalUsersCompere.difference < 0 ? 'down' : "flat"
                 },
                 'totalPosts' : {
                     'result' : admin.totalPostCompere.lastWeek,
-                    'resultPercent' : admin.totalPostCompere.percent === "0" ? "---" : admin.totalPostCompere.percent,
-                    'direction' : admin.totalPostCompere.lastWeek > 0 ? 'up' :  admin.totalPostCompere.lastWeek < 0 ? 'down' : "flat"
+                    'resultPercent' : admin.totalPostCompere.percent === 'Infinity' ? "100" : admin.totalPostCompere.percent,
+                    'direction' : admin.totalPostCompere.difference > 0 ? 'up' :  admin.totalPostCompere.difference < 0 ? 'down' : "flat"
                 }
             })
 
