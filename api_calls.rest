@@ -199,11 +199,11 @@ Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjFlMTMyOG
 
 ###
 Post http://localhost:4000/category/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNGYxMWUzMWFlNWUzZGE1NmM3YTliOSIsImlhdCI6MTY1MDYzOTExMSwiZXhwIjoxNjUwNzI1NTExfQ.Upj294AdM0rxkyS8DHPxwzjlFShcxJlN8yGtWPmjNC4
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOGNhNTQ3YzkyODVkZmQ4ODE4NmQ0OSIsImlhdCI6MTY1MzM4NDUxOSwiZXhwIjoxNjUzNDcwOTE5fQ.T7U7O8KaSowzABrV2g4b2fpOsW17aILPa_iqyIQVUDs
 Content-Type: application/json
 
 {
-        "name": "Gloves",
+        "name": "Shirts",
         "pictureUrl": "https://cdn.shopify.com/s/files/1/0970/4540/products/Lynn-Button-Back-Cotton-Dress-2_256x.jpg?v=1647997123",
         "gender": "Female",
         "subCategory": []
@@ -211,7 +211,7 @@ Content-Type: application/json
 
 ###
 PATCH  http://localhost:4000/category/626b8a9ad37c22060899109b/
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNmI4OGE0N2U5MTQ3Mjk4NjIxMGIyYiIsImlhdCI6MTY1MTIxNDUwMCwiZXhwIjoxNjUxMzAwOTAwfQ.sjv8hCboY7uJ_uzH0dgqw_MbT1A0BDsTGk6E8Us_gdM
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOGNhNTQ3YzkyODVkZmQ4ODE4NmQ0OSIsImlhdCI6MTY1MzM4NDUxOSwiZXhwIjoxNjUzNDcwOTE5fQ.T7U7O8KaSowzABrV2g4b2fpOsW17aILPa_iqyIQVUDs
 Content-Type: application/json
 
 {
@@ -246,15 +246,15 @@ Content-Type: application/json
         "currentUserGender": ["Male"]
 }
 ###
-Post http://localhost:4000/subcategory/6262c13e0124be7d5f953a3c
-Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDU0NWY1ODY1MWY5ZDg1NTE3MzU1MyIsImlhdCI6MTY1MjcyNzI5MywiZXhwIjoxNjUyODEzNjkzfQ.6-FS5lvvb1WUuF4tSh2MdH3bd8upm-lF-2DucZm1O2Y
+Post http://localhost:4000/subcategory/628ca59cc9285dfd88186d68
+Authorization: barer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOGNhNTQ3YzkyODVkZmQ4ODE4NmQ0OSIsImlhdCI6MTY1MzM4NDUxOSwiZXhwIjoxNjUzNDcwOTE5fQ.T7U7O8KaSowzABrV2g4b2fpOsW17aILPa_iqyIQVUDs
 Content-Type: application/json
 
 {
-        "name": "gloves nike",
+        "name": "Pants nike",
         "pictureUrl": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSmNq21_AFczzpbSxSW5K7gR9OtCK3XfPByH69nY5zTRmw0ilkEQ-VlrFOh9tSsyUF7JIM7GV7Cilc&usqp=CAc",
         "gender": "Female",
-        "categoryId": "6277f3806df5d69932aaccfe",
+        "categoryId": "628ca59cc9285dfd88186d68",
         "posts": [],
         "isDeleted": "false"
 
