@@ -137,5 +137,9 @@ router.get('/resetPassword/:email', Auth.resetPassword)
 
 router.post('/changePassword', Auth.changePassword)
 
+router.get('/refreshToken', Auth.refreshToken)
+
+//add authenticate wehre needed
+
 
 module.exports = router
