@@ -2,12 +2,12 @@ import React , {useState,useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import axios from 'axios';
-import {UserAutContext} from '../../context/userAutContext';
+// import {UserAutContext} from '../../context/userAutContext';
 
 function Login() {
   
   let navigate = useNavigate();
-  const {dispatch} = useContext(UserAutContext);
+  // const {dispatch} = useContext(UserAutContext);
   const[error,setError] = useState("");
   const[hide,setHide] = useState(true);
   const[adminDetails,setAdminDetails] = useState({
@@ -41,7 +41,7 @@ function Login() {
         }
       })
       .then(data => {console.log(data)})
-      .then(() => dispatch({type: 'LOGIN'}))
+      // .then(() => dispatch({type: 'LOGIN'}))
       .then(() => navigate("/home"))
       .catch(err => {
         console.error(err);

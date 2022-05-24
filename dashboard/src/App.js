@@ -12,7 +12,7 @@ import Edit from "./pages/edit/Edit";
 import {Routes,Route} from "react-router-dom";
 import styled from "styled-components";
 import {DarkModeContext} from '../src/context/darkModeContext';
-import {UserAutContext} from '../src/context/userAutContext';
+// import {UserAutContext} from '../src/context/userAutContext';
 import Profiles from "./pages/profiles/Profiles";
 import Setting from "./pages/admin setting/Setting";
 import ProtectedRoutes from './components/ProtectedRoutes';
@@ -21,7 +21,7 @@ import EditAdmin from "./pages/admin setting/EditAdmin";
 function App() {
 
   const {darkMode} = useContext(DarkModeContext);
-  const {login} = useContext(UserAutContext);
+  // const {login} = useContext(UserAutContext);
 
   return (
     <AppStyle className={ darkMode ? "App dark" : 'App'}>
