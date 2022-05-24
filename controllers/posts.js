@@ -312,8 +312,6 @@ const getProfilePosts = async (req, res) => {
         const theList = profile.myPostsListId
         var theProfilePostsList = await Post.find({ '_id': { $in: theList }, 'isDeleted': false })
 
-        console.log("-----------------------------------------")
-        console.log(theProfilePostsList)
         res.status(200).send(theProfilePostsList.reverse())
 
     } catch (err) {
@@ -389,8 +387,14 @@ const getSuitablePosts = async (req, res) => {
         const bodyType = profile.bodyType
         const gender = profile.gender
 
+        var profiles = null
         // find all the profiles with the same bodyType and gender
-        const profiles = await Profile.find({ bodyType: { $eq: bodyType }, gender: { $eq: gender } })
+        if (gender != "None") {
+            profiles = await Profile.find({ bodyType: { $eq: bodyType }, gender: { $eq: gender } })
+        } else {
+            profiles = await Profile.find({ bodyType: { $eq: bodyType } })
+        }
+
         let profilesNamesArr = [];
         for (let j = 0; j < profiles.length; j++) {
             profilesNamesArr.push(profiles[j].userName)
@@ -430,8 +434,8 @@ const getSuitablePosts = async (req, res) => {
             }
             // if not, we need to check the correlation between the two profiles:
             else {
-
                 let vector2 = createVector(profile2)
+
                 let thePearson = pearson(vector1, vector2)
 
                 if (thePearson > 0.965) { //TODO: check the threshold
@@ -639,7 +643,7 @@ const getSearchPosts = async (req, res) => {
 
         console.log("th profilesId is: " + profilesId)
 
-        posts = await Post.find({ 'size': { $in: sizes }, 'categoryId': { $in: categories }, 'color': { $in: colors }, 'company': { $in: companies }, 'profileId': { $in: profilesId }, 'isDeleted': 'false' })
+        posts = await Post.find({ 'size': { $in: sizes }, 'categoryId': { $in: categories }, 'color': { $in: colors }, 'company': { $in: companies }, 'profileId': { $in: profilesId }, 'isDeleted': false })
 
     }
 
@@ -848,9 +852,11 @@ function variance(x) {
     for (let i = 0; i < x.length; i++) {
         count += (x[i] * x[i]);
     }
+
     count = (count / x.length);
     let u = (avg(x) * avg(x));
     let V = (count - u);
+
     return V;
 }
 
@@ -867,7 +873,6 @@ function cov(x, y) {
         count += (x[i] * y[i]);
     }
     count = (count / x.length);
-
     return (count - (ax * ay));
 }
 
@@ -876,6 +881,10 @@ function pearson(x, y) { // x = [] sizes of profile 1, y = [] sizes of profile 2
     let V1 = Math.sqrt(variance(x));
     let V2 = Math.sqrt(variance(y));
     let C = cov(x, y);
+
+    if (V1 == 0 || V2 == 0) {
+        return 1
+    }
     return (C / (V1 * V2));
 }
 
