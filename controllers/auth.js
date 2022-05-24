@@ -178,14 +178,18 @@ const refreshToken = async (req, res) => {
 
     jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, async (err, userInfo) => {
         if (err) return res.status(403).send(err.message)
-        const userId = userInfo._id
+        const userId = userInfo.id
         try {
-            user = await User.findById(userId)
+            console.log("**************")
+            console.log("the userId = " + userId)
+            const user = await User.findById(userId)
             if (user == null) return res.status(403).send('invalid request')
-            if (!user.token.includes(token)) {
-                user.token = [] //invalidate all user tokens
+            if (!user.tokens.includes(token)) {
+                console.log("delete the tokens!!!")
+                user.tokens = [] //invalidate all user tokens
                 await user.save()
                 return res.status(403).send('invalid request')
+                
             }
             const accessToken = await jwt.sign(
                 { 'id': user._id },
@@ -197,7 +201,15 @@ const refreshToken = async (req, res) => {
                 process.env.REFRESH_TOKEN_SECRET
             )
 
-            user.tokens[user.tokens.indexOf(token)] = refreshToken
+            user.tokens = [accessToken, refreshToken]
+            console.log("the tokens: ")
+            console.log("access = " + accessToken)
+            console.log("refresh = " + refreshToken)
+            console.log("the user is:")
+            console.log(user)
+            //TODO: maybe we need to save the tokens by add them tp the tokens array.
+            
+            // user.tokens[user.tokens.indexOf(token)] = refreshToken
             await user.save()
             res.status(200).send({ 'accessToken': accessToken, 'refreshToken': refreshToken });
         } catch (err) {
@@ -366,6 +378,6 @@ module.exports = {
     checkIfEmailExist,
     logout,
     resetPassword,
-    changePassword
-    // refreshToken
+    changePassword,
+    refreshToken
 }

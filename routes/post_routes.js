@@ -258,6 +258,7 @@ router.post('/general', authenticate, Post.general)
 
 router.get('/getGeneral', authenticate, Post.getGeneral)
 
+router.get('/getPostsByIds/:postsId', authenticate, Post.getPostsByIds)
 
 
 
