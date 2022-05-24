@@ -639,7 +639,7 @@ const getSearchPosts = async (req, res) => {
 
         console.log("th profilesId is: " + profilesId)
 
-        posts = await Post.find({ 'size': { $in: sizes }, 'categoryId': { $in: categories }, 'color': { $in: colors }, 'company': { $in: companies }, 'profileId': { $in: profilesId } })
+        posts = await Post.find({ 'size': { $in: sizes }, 'categoryId': { $in: categories }, 'color': { $in: colors }, 'company': { $in: companies }, 'profileId': { $in: profilesId }, 'isDeleted': 'false' })
 
     }
 
