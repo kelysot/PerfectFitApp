@@ -29,7 +29,8 @@ function Edit() {
             fetch(`/category/getByGenderAndName/${categoryData}` , {
                 headers : { 
                   'Content-Type': 'application/json',
-                  'Accept': 'application/json'
+                  'Accept': 'application/json',
+                  'Authorization': 'Bearer ' + localStorage.getItem('token')
                  }
               })
                 .then((res) => res.json())
@@ -48,8 +49,7 @@ function Edit() {
               headers : { 
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
-                'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOGE0YzA3OGNhNDY2N2QyMDJhM2UzYyIsImlhdCI6MTY1MzIzMDU5OSwiZXhwIjoxNjUzMzE2OTk5fQ.Y_goHDbt87PY3tySepGBHJ8zFe7NKy8ErvvVM0nnzME'
-               }
+                'Authorization': 'Bearer ' + localStorage.getItem('token')               }
             })
               .then((res) => res.json())
                 .then((data) => {

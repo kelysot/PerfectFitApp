@@ -15,7 +15,7 @@ function EditAdmin() {
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODM4YzNlN2M5YTE0OWQxMjRhNWI4YyIsImlhdCI6MTY1MzA4NTQ3NCwiZXhwIjoxNjUzMTcxODc0fQ.KihTUoJ4qU138ffcq3eh6Des2sYOujsIl-VpwVcSofQ'
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
        }
     })
       .then((res) => res.json())
@@ -31,10 +31,9 @@ function EditAdmin() {
         headers : {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2U2ZDYwZmNmMmJjMGU1YjRjZGI4NyIsImlhdCI6MTY1MzA4NTM5NywiZXhwIjoxNjUzMTcxNzk3fQ.ULmDbfrNWFgI8kzjXzMJtfnmOB4yH2xOzOuhqXoinOE'
-        }
+          'Authorization': 'Bearer ' + localStorage.getItem('token')        }
       })
-        .then(() =>  navigate(`/`))
+        .then(() =>  navigate(`/home`))
         .catch(err => {
           console.error(err);
       });

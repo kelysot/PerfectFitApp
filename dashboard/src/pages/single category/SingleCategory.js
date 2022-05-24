@@ -20,7 +20,8 @@ function SingleCategory() {
     fetch(`/dashboard/categories/${categoryData}` , {
       headers : { 
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
        }
     })
       .then((res) => res.json())
@@ -32,7 +33,8 @@ function SingleCategory() {
         fetch(`/dashboard/categories/${categoryData}/subCategoryData` , {
           headers : { 
             'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
            }
         })
           .then((res) => res.json())

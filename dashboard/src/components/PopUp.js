@@ -1,16 +1,19 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import axios from 'axios';
 
 function PopUp(props) {
   //TODO: function
+  let navigate = useNavigate();
   const deleteRow = () => {
     let location = window.location.href;
     if(!location.includes('&')){
         fetch(`/category/getByGenderAndName/${props.name}` , {
             headers : { 
               'Content-Type': 'application/json',
-              'Accept': 'application/json'
+              'Accept': 'application/json',
+              'Authorization': 'Bearer ' + localStorage.getItem('token')
              }
           })
             .then((res) => res.json())
@@ -20,10 +23,10 @@ function PopUp(props) {
                 .delete(`/category/${idForDelete}`,{
                   headers : {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODE3OTlmNDc5YTUyM2FmZjIzNDYyNyIsImlhdCI6MTY1Mjc2ODU4MywiZXhwIjoxNjUyODU0OTgzfQ.SUDTWGOEUUQQUFc-qs9aQ6_K9e0CJTmBGj_sBb1-6MM'
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
                   }
                 })
-                  .then(() =>     window.location.href = `/categories`)
+                  .then(() => navigate(`/home`))
                   .catch(err => {
                     console.error(err);
                 });
@@ -34,7 +37,7 @@ function PopUp(props) {
             headers : { 
               'Content-Type': 'application/json',
               'Accept': 'application/json',
-              'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODE3OTlmNDc5YTUyM2FmZjIzNDYyNyIsImlhdCI6MTY1Mjc2ODU4MywiZXhwIjoxNjUyODU0OTgzfQ.SUDTWGOEUUQQUFc-qs9aQ6_K9e0CJTmBGj_sBb1-6MM'
+              'Authorization': 'Bearer ' + localStorage.getItem('token')
              }
           })
             .then((res) => res.json())
@@ -45,10 +48,10 @@ function PopUp(props) {
                 .delete(`/subCategory/${idSubForDelete}`,{
                   headers : {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODE3OTlmNDc5YTUyM2FmZjIzNDYyNyIsImlhdCI6MTY1Mjc2ODU4MywiZXhwIjoxNjUyODU0OTgzfQ.SUDTWGOEUUQQUFc-qs9aQ6_K9e0CJTmBGj_sBb1-6MM'
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
                   }
                 })
-                  .then(() => window.location.href = `/categories/${nameAndGender}`)
+                  .then(() => navigate(`/categories`))
                   .catch(err => {
                     console.error(err);
                 });

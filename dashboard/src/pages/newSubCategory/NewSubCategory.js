@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import SideBar from '../../components/SideBar';
 import TopBar from '../../components/TopBar';
@@ -6,7 +7,7 @@ import styled from "styled-components";
 
 function NewCategory() {
   // const[image,setImage] = useState("");
-  //check
+  let navigate = useNavigate();
   const [categoryGender, setCategoryGender] = useState("");
   const [categoryName, setCategoryName] = useState("");
   const [categoryId, setCategoryId] = useState("");
@@ -23,7 +24,8 @@ function NewCategory() {
     fetch(`/dashboard/categories/getId/${categoryData}`, {
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
       }
     })
       .then((res) => res.json())
@@ -53,10 +55,9 @@ function NewCategory() {
       .post(`/subCategory/${categoryId}`, newSubCategory, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODE3OTlmNDc5YTUyM2FmZjIzNDYyNyIsImlhdCI6MTY1Mjc2ODU4MywiZXhwIjoxNjUyODU0OTgzfQ.SUDTWGOEUUQQUFc-qs9aQ6_K9e0CJTmBGj_sBb1-6MM'
-        }
+          'Authorization': 'Bearer ' + localStorage.getItem('token')        }
       })
-      .then(() => window.location.href = `/categories/${categoryName}&${categoryGender}`)
+      .then(() => navigate(`/categories/${categoryName}&${categoryGender}`))
       .catch(err => {
         console.error(err);
       });

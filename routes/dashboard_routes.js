@@ -2,30 +2,30 @@ const express = require('express')
 const router = express.Router()
 
 const Dashboard = require('../controllers/dashboard')
+const authenticate = require('../common/auth_middleware')
 
-router.get('/',Dashboard.getHello)
+router.get('/',authenticate,Dashboard.getHello)
 
-router.get('/amounts',Dashboard.getAmounts)
+router.get('/amounts',authenticate,Dashboard.getAmounts)
 
-router.get('/topProfiles',Dashboard.getTopProfiles)
+router.get('/topProfiles',authenticate,Dashboard.getTopProfiles)
 
-router.get('/percentage',Dashboard.getPercentage)
+router.get('/percentage',authenticate,Dashboard.getPercentage)
 
-router.get('/topCategories',Dashboard.getCategoriesData)
+router.get('/topCategories',authenticate,Dashboard.getCategoriesData)
 
-router.get('/categories',Dashboard.categoriesTableData)
+router.get('/categories',authenticate,Dashboard.categoriesTableData)
 
-router.get('/categories/:categoryData',Dashboard.getSingleCategory)
+router.get('/categories/:categoryData',authenticate,Dashboard.getSingleCategory)
 
-router.get('/categories/getId/:categoryData',Dashboard.getCategoryId)
+router.get('/categories/getId/:categoryData',authenticate,Dashboard.getCategoryId)
 
-router.get('/categories/:categoryData/subCategoryData',Dashboard.getSubCategoriesData)
+router.get('/categories/:categoryData/subCategoryData',authenticate,Dashboard.getSubCategoriesData)
 
-router.get('/users/:userName',Dashboard.getProfileChartData)
+router.get('/users/:userName',authenticate,Dashboard.getProfileChartData)
 
-router.get('/search/:inputToSearch/:typeSearch/:gender',Dashboard.search)
+router.get('/search/:inputToSearch/:typeSearch/:gender',authenticate,Dashboard.search)
 
-router.get('/search/:inputToSearch/:typeSearch',Dashboard.search)
-
+router.get('/search/:inputToSearch/:typeSearch',authenticate,Dashboard.search)
 
 module.exports = router

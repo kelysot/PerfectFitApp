@@ -25,7 +25,8 @@ function TopBar() {
         fetch("/admin/getAdminData",{
           headers : { 
             'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
           }
         })
         .then((res) => res.json())
@@ -46,7 +47,7 @@ function TopBar() {
                 headers : { 
                   'Content-Type': 'application/json',
                   'Accept': 'application/json',
-                  'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODE3OTlmNDc5YTUyM2FmZjIzNDYyNyIsImlhdCI6MTY1Mjc2ODU4MywiZXhwIjoxNjUyODU0OTgzfQ.SUDTWGOEUUQQUFc-qs9aQ6_K9e0CJTmBGj_sBb1-6MM'
+                  'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
               })
               .then((res) => res.json())
@@ -58,7 +59,7 @@ function TopBar() {
                 headers : { 
                   'Content-Type': 'application/json',
                   'Accept': 'application/json',
-                  'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODE3OTlmNDc5YTUyM2FmZjIzNDYyNyIsImlhdCI6MTY1Mjc2ODU4MywiZXhwIjoxNjUyODU0OTgzfQ.SUDTWGOEUUQQUFc-qs9aQ6_K9e0CJTmBGj_sBb1-6MM'
+                  'Authorization': 'Bearer ' + localStorage.getItem('token')
                 }
               })
               .then((res) => res.json())

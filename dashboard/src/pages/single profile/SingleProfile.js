@@ -16,8 +16,8 @@ function SingleProfile() {
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODgxZDEwNmQ5Nzg2MzA2ZWI0YjMzZiIsImlhdCI6MTY1MzMxOTA0OSwiZXhwIjoxNjUzNDA1NDQ5fQ.ZByBwPUmi63KEuEvbNaFCVzDwS-akhxESuwlsfevFcE'
-       }
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }
     }) 
       .then((res) => res.json())
         .then((data) => {
@@ -28,6 +28,7 @@ function SingleProfile() {
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
         }
       }) 
         .then((res) => res.json())

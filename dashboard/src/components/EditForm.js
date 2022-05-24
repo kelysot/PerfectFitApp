@@ -1,8 +1,10 @@
 import React , {useState,useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import axios from 'axios';
 
 function EditForm({title,name,image,id,gender}) {
+  let navigate = useNavigate();
   const[edit,setEdit] = useState({
     name: name,
     pictureUrl: image,
@@ -50,10 +52,10 @@ function EditForm({title,name,image,id,gender}) {
         .patch(`/category/${id}`, edit ,{
           headers : {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOGE0YzA3OGNhNDY2N2QyMDJhM2UzYyIsImlhdCI6MTY1MzIzMDU5OSwiZXhwIjoxNjUzMzE2OTk5fQ.Y_goHDbt87PY3tySepGBHJ8zFe7NKy8ErvvVM0nnzME'
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
           }
         })
-          .then(() =>  window.location.href = `/categories/${edit.name}&${gender}`)
+          .then(() => navigate(`/categories/${edit.name}&${gender}`))
           .catch(err => {
             console.error(err);
         });
@@ -62,10 +64,10 @@ function EditForm({title,name,image,id,gender}) {
       .patch(`/subCategory/${id}`, editSub ,{
         headers : {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOGE0YzA3OGNhNDY2N2QyMDJhM2UzYyIsImlhdCI6MTY1MzIzMDU5OSwiZXhwIjoxNjUzMzE2OTk5fQ.Y_goHDbt87PY3tySepGBHJ8zFe7NKy8ErvvVM0nnzME'
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
         }
       })
-        .then(() =>  window.location.href = `/categories` )
+        .then(() =>  navigate(`/categories`))
         .catch(err => {
           console.error(err);
       });

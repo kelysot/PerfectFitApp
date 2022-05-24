@@ -159,6 +159,6 @@ router.patch('/:id', authenticate, Category.editCategory)
 
 router.delete('/:id', authenticate, Category.deleteCategory)
 
-router.get('/getByGenderAndName/:data', Category.getCategoryNameAndGender)
+router.get('/getByGenderAndName/:data',authenticate, Category.getCategoryNameAndGender)
 
 module.exports = router

@@ -13,8 +13,8 @@ function Profiles() {
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer '+ 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyN2U2ZDYwZmNmMmJjMGU1YjRjZGI4NyIsImlhdCI6MTY1MzIyNDY5NywiZXhwIjoxNjUzMzExMDk3fQ.Z3lw1JsDbMePssQzD0CuSLwKvtK3KQ0iwABj4EUqiow'
-       }
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }
     })
       .then((res) => res.json())
         .then((data) => {

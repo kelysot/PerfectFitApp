@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import SideBar from '../../components/SideBar';
 import TopBar from '../../components/TopBar';
@@ -6,6 +7,7 @@ import styled from "styled-components";
 
 function NewCategory() {
   // const[image,setImage] = useState("");
+  let navigate = useNavigate();
   const [newCategory, setNewCategory] = useState({
     name: "",
     pictureUrl: "",
@@ -27,11 +29,10 @@ function NewCategory() {
       .post('/category', newCategory, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODE3OTlmNDc5YTUyM2FmZjIzNDYyNyIsImlhdCI6MTY1Mjc2ODU4MywiZXhwIjoxNjUyODU0OTgzfQ.SUDTWGOEUUQQUFc-qs9aQ6_K9e0CJTmBGj_sBb1-6MM'
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
         }
       })
-      .then(() => window.location.href = `/categories/${newCategory.name}&${newCategory.gender}`
-      )
+      .then(() => navigate(`/categories/${newCategory.name}&${newCategory.gender}`))
       .catch(err => {
         console.error(err);
       });

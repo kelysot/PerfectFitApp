@@ -83,7 +83,8 @@ function loadData(setTopProfiles,setChartConnectData,setPercentage,setCategories
   fetch("/dashboard/topProfiles" , {
     headers : { 
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
      }
   }) 
     .then((res) => res.json())
@@ -94,7 +95,8 @@ function loadData(setTopProfiles,setChartConnectData,setPercentage,setCategories
   fetch("/dashboard/percentage",{
     headers : { 
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
       }
   })
     .then((res) => res.json())
@@ -106,7 +108,8 @@ function loadData(setTopProfiles,setChartConnectData,setPercentage,setCategories
   fetch("/dashboard/topCategories",{
     headers : { 
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
       }
   })
   .then((res) => res.json())
@@ -117,7 +120,8 @@ function loadData(setTopProfiles,setChartConnectData,setPercentage,setCategories
   fetch("/admin/updateData" , {
     headers : { 
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
       }
   }) 
     .then((res) => res.json())
