@@ -337,6 +337,38 @@ const getDates = async (req, res) => {
     })
 }
 
+const getPostsByIds = async (req, res) => {
+
+    const postsIds = req.params.postsId // We get list as a string.
+    arrayPostsIds = postsIds.substring(1)
+    arrayPostsIds = arrayPostsIds.slice(0, -1)
+    arrayPostsIds = arrayPostsIds.split(", ")
+
+    if (postsIds == null || postsIds == undefined) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+    try {
+        var postArr = []
+
+        var i = 0
+        for (i = 0; i < arrayPostsIds.length; i++) {
+            var postId = arrayPostsIds[i]
+            var post = await Post.findById(postId)
+            postArr.push(post)
+        }
+
+        res.status(200).send(postArr)
+    } catch (err) {
+        res.status(400).send({
+            'status': 'fail',
+            'error': err.message
+        })
+    }
+}
+
 //Algorithm 
 const getSuitablePosts = async (req, res) => {
 
@@ -429,16 +461,16 @@ const getSuitablePosts = async (req, res) => {
 
         let finalList = []
         let shoeSize = parseInt(profile.foot)
-        let minus = parseInt(shoeSize)-1
-        let plus = parseInt(shoeSize)+1
+        let minus = parseInt(shoeSize) - 1
+        let plus = parseInt(shoeSize) + 1
 
-        for(let i=0; i<postsForSend.length; i++){
-            if(postsForSend[i].categoryId == "Shoes"){
-                if(shoeSize >= minus && shoeSize <= plus){
+        for (let i = 0; i < postsForSend.length; i++) {
+            if (postsForSend[i].categoryId == "Shoes") {
+                if (shoeSize >= minus && shoeSize <= plus) {
                     finalList.push(postsForSend[i])
                 }
             }
-            else{
+            else {
                 finalList.push(postsForSend[i])
             }
         }
@@ -533,7 +565,7 @@ const timeSince = async (req, res) => {
 
 ///////////////////
 
-const getSearchPosts = async (req, res) =>{
+const getSearchPosts = async (req, res) => {
 
     const map = req.body
 
@@ -555,16 +587,16 @@ const getSearchPosts = async (req, res) =>{
     console.log("the price: " + price)
     console.log("the gender: " + gender)
 
-    if(price[0] != "false"){
+    if (price[0] != "false") {
         priceFrom = parseInt(price[0])
     }
-    else{
+    else {
         priceFrom = price[0] // = false
     }
-    if(price[1] != "false"){
+    if (price[1] != "false") {
         priceTo = parseInt(price[1])
     }
-    else{
+    else {
         priceTo = price[1] // = false
     }
 
@@ -572,13 +604,13 @@ const getSearchPosts = async (req, res) =>{
     let genderList = []
     console.log("the size of gender: " + gender.length)
 
-    if(gender.length > 0){
-         genderList.push(gender[0])
-        if(gender.length == 2){
-             genderList.push(gender[1])
+    if (gender.length > 0) {
+        genderList.push(gender[0])
+        if (gender.length == 2) {
+            genderList.push(gender[1])
         }
     }
-    else{
+    else {
         genderList.push("Female")
         genderList.push("Male")
     }
@@ -586,29 +618,29 @@ const getSearchPosts = async (req, res) =>{
     // // BodyType and Gender
 
     // first we find all the relevant profiles:
-   
+
 
     // Then we check for the posts considered with sizes, categories, companies and colors:
-   
+
     let posts
 
-    if(count == "true"){ // it means that no category was choosen - we need to send all the posts. 
+    if (count == "true") { // it means that no category was choosen - we need to send all the posts. 
         posts = await Post.find({})
     }
-    else{
+    else {
 
-        const profiles = await Profile.find({'bodyType': { $in: bodyTypes}, 'gender': {$in: genderList}})
+        const profiles = await Profile.find({ 'bodyType': { $in: bodyTypes }, 'gender': { $in: genderList } })
         let profilesId = []
-       
+
         // save the userNames of the relevant profiles: 
-        for(let j = 0; j<profiles.length; j++){
+        for (let j = 0; j < profiles.length; j++) {
             profilesId.push(profiles[j].userName)
         }
-    
+
         console.log("th profilesId is: " + profilesId)
 
-        posts = await Post.find({'size': { $in: sizes}, 'categoryId': { $in: categories}, 'color': { $in: colors}, 'company': { $in: companies}, 'profileId': {$in: profilesId}})
-        
+        posts = await Post.find({ 'size': { $in: sizes }, 'categoryId': { $in: categories }, 'color': { $in: colors }, 'company': { $in: companies }, 'profileId': { $in: profilesId } })
+
     }
 
     console.log("the size after sizes: " + posts.length)
@@ -617,35 +649,35 @@ const getSearchPosts = async (req, res) =>{
 
     let postsToSend = []
 
-    if(priceFrom != "false" &&  priceTo != "false"){
-        for(let i=0; i < posts.length; i++){
-            if(posts[i].price >= priceFrom && posts[i].price <= priceTo){
+    if (priceFrom != "false" && priceTo != "false") {
+        for (let i = 0; i < posts.length; i++) {
+            if (posts[i].price >= priceFrom && posts[i].price <= priceTo) {
                 postsToSend.push(posts[i])
             }
         }
     }
-    else if(priceFrom == "false" && priceTo != "false"){
-        for(let i=0; i < posts.length; i++){
-            if(posts[i].price <= priceTo){
+    else if (priceFrom == "false" && priceTo != "false") {
+        for (let i = 0; i < posts.length; i++) {
+            if (posts[i].price <= priceTo) {
                 postsToSend.push(posts[i])
             }
         }
     }
-    else if(priceFrom != "false" &&  priceTo == "false"){
-        for(let i=0; i < posts.length; i++){
-            if(posts[i].price >= priceFrom){
+    else if (priceFrom != "false" && priceTo == "false") {
+        for (let i = 0; i < posts.length; i++) {
+            if (posts[i].price >= priceFrom) {
                 postsToSend.push(posts[i])
             }
         }
     }
-    else if(priceFrom == "false" &&  priceTo == "false"){
+    else if (priceFrom == "false" && priceTo == "false") {
         postsToSend = posts
     }
 
     postsToSend = postsToSend.reverse()
 
     try {
-       res.status(200).send(postsToSend)
+        res.status(200).send(postsToSend)
     } catch (err) {
         res.status(400).send({
             'status': 'failure',
@@ -865,6 +897,7 @@ module.exports = {
     timeSince,
     getSearchPosts,
     general,
-    getGeneral
+    getGeneral,
+    getPostsByIds
 }
 
