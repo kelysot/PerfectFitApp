@@ -365,13 +365,13 @@ const search = async (req, res) => {
                 }
             }
         }
-        break; 
+        break;
         case 'profile': {
             if(search !== "" && typeSearch !== "") {
-                const profile = await Profile.findOne({'name': search})
-                console.log(profile)
+                const profile = await Profile.findOne({'userName': search})
+                 console.log(profile)
                 if(profile !== null){
-                    const location = `/users/${search}`
+                    const location = `/users/${profile.userName}`
 
                     res.json({
                         data: location
