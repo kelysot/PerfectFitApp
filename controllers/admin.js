@@ -252,22 +252,22 @@ const updateData = async (req, res) => {
         }else{
             const cardsData = ({
                 'loginProfile': {
-                    'result' : admin.profilesLoginCompere.lastWeek,
+                    'result' : admin.profilesLoginCompere.difference,
                     'resultPercent' : admin.profilesLoginCompere.percent === 'Infinity' ? "100" : admin.profilesLoginCompere.percent,
                     'direction' : admin.profilesLoginCompere.difference > 0 ? 'up' :  admin.profilesLoginCompere.difference < 0 ? 'down' : "flat"
                 },
                 'newProfiles' : {
-                    'result' : admin.newProfilesCompere.lastWeek,
+                    'result' : admin.newProfilesCompere.difference,
                     'resultPercent' : admin.newProfilesCompere.percent === 'Infinity' ? "100" : admin.newProfilesCompere.percent,
                     'direction' : admin.newProfilesCompere.difference > 0 ? 'up' :  admin.newProfilesCompere.difference < 0 ? 'down' : "flat"
                 },
                 'totalUsers' : {
-                    'result' : admin.totalUsersCompere.lastWeek,
+                    'result' : admin.totalUsersCompere.difference,
                     'resultPercent' : admin.totalUsersCompere.percent === 'Infinity' ? "100" : admin.totalUsersCompere.percent,
                     'direction' : admin.totalUsersCompere.difference > 0 ? 'up' :  admin.totalUsersCompere.difference < 0 ? 'down' : "flat"
                 },
                 'totalPosts' : {
-                    'result' : admin.totalPostCompere.lastWeek,
+                    'result' : admin.totalPostCompere.difference,
                     'resultPercent' : admin.totalPostCompere.percent === 'Infinity' ? "100" : admin.totalPostCompere.percent,
                     'direction' : admin.totalPostCompere.difference > 0 ? 'up' :  admin.totalPostCompere.difference < 0 ? 'down' : "flat"
                 }
