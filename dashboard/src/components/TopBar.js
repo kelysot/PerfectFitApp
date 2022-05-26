@@ -1,4 +1,5 @@
 import React , {useContext,useState,useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -7,6 +8,7 @@ import {DarkModeContext} from '../../src/context/darkModeContext';
 
 function TopBar() {
 
+    let navigate = useNavigate();
     const {dispatch} = useContext(DarkModeContext);
     const[nameAndImageAdmin,setNameAndImageAdmin] = useState("");
     const[search,setSearch] = useState("");
@@ -52,7 +54,7 @@ function TopBar() {
               })
               .then((res) => res.json())
                 .then((data) => {
-                    window.location.href = data.data;
+                    navigate(data.data); //FIXME: if not refresh stay in same page
               })
         }else{
             fetch(`/dashboard/search/${search}/${searchType}`,{
@@ -64,11 +66,10 @@ function TopBar() {
               })
               .then((res) => res.json())
                 .then((data) => {
-                    window.location.href = data.data;
+                    navigate(data.data); //FIXME: if not refresh stay in same page
               })
         }
 
-        console.log(search);
         setSearch("");
         setGenderType("");
         setSearchType("");
