@@ -2,9 +2,10 @@ import React from 'react';
 import Login from '../pages/login/Login';
 import { Outlet } from 'react-router-dom';
 
-function ProtectedRoutes({userState}) {
+function ProtectedRoutes() {
+    const status = localStorage.getItem('token');
     return (
-        userState ? <Outlet /> : <Login/>
+        status !== '' ? <Outlet /> : <Login/>
     )
 };
 

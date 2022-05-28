@@ -1,12 +1,10 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import axios from 'axios';
 
 function PopUp(props) {
   //TODO: function
-  let navigate = useNavigate();
-  const deleteRow = () => {
+    const deleteRow = () => {
     let location = window.location.href;
     if(!location.includes('&')){
         fetch(`/category/getByGenderAndName/${props.name}` , {
@@ -26,7 +24,7 @@ function PopUp(props) {
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                   }
                 })
-                  .then(() => navigate(`/home`))
+                  .then(() => window.location.href = '/categories')
                   .catch(err => {
                     console.error(err);
                 });
@@ -51,7 +49,7 @@ function PopUp(props) {
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
                   }
                 })
-                  .then(() => navigate(`/categories`))
+                  .then(() => window.location.href = `/categories/${nameAndGender}`)
                   .catch(err => {
                     console.error(err);
                 });

@@ -54,7 +54,7 @@ function TopBar() {
               })
               .then((res) => res.json())
                 .then((data) => {
-                    navigate(data.data); //FIXME: if not refresh stay in same page
+                    window.location.href = data.data;
               })
         }else{
             fetch(`/dashboard/search/${search}/${searchType}`,{
@@ -66,7 +66,7 @@ function TopBar() {
               })
               .then((res) => res.json())
                 .then((data) => {
-                    navigate(data.data); //FIXME: if not refresh stay in same page
+                    window.location.href = data.data;
               })
         }
 

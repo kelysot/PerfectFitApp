@@ -41,7 +41,6 @@ function Login() {
         }
       })
       .then(data => {
-        console.log(data);
         localStorage.setItem('token', data.data.accessToken);
       })
       .then(() => dispatch({type: 'LOGIN'}))

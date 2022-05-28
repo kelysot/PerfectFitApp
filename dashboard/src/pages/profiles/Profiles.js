@@ -19,7 +19,6 @@ function Profiles() {
       .then((res) => res.json())
         .then((data) => {
           setProfilesList(data.data);
-          console.log(data.data);
         })
   },[])
 
@@ -42,7 +41,6 @@ const columns = [
       renderCell: (params) => {
         return (
           <div className="image">
-            {console.log(params.row.image)}
             <img src={`/uploadsAdmin/${params.row.image.split('/')[1]}`}></img>
           </div>
         )

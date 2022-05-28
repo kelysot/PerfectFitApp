@@ -46,7 +46,7 @@ function NewCategory() {
     newData[e.target.id] = e.target.value;
     setNewSubCategory(newData);
   }
-  //TODO: get 401 / 403 - need pass 'token'
+  
   function submit(e) {
     e.preventDefault();
     if(newSubCategory.pictureUrl === "")

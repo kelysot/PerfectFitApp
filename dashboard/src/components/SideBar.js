@@ -49,7 +49,7 @@ function SideBar() {
                   <h3>Setting</h3>
               </li>
               </StyledLink>
-            <StyledLink to="/"  onClick={()=> localStorage.removeItem('token')}>
+            <StyledLink to="/"  onClick={()=> localStorage.setItem('token','')}>
               <li>
                   <span className="material-icons-sharp">logout</span>
                   <h3>Log Out</h3>

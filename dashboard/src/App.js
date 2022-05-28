@@ -21,7 +21,6 @@ import EditAdmin from "./pages/admin setting/EditAdmin";
 function App() {
 
   const {darkMode} = useContext(DarkModeContext);
-  const {login} = useContext(UserAutContext);
 
   return (
     <AppStyle className={ darkMode ? "App dark" : 'App'}>
@@ -29,7 +28,7 @@ function App() {
       <GlobalStyleDark />        
       <Routes path="/">
         <Route index element={<Login/>}></Route>
-        <Route element={<ProtectedRoutes userState={login}/>}>
+        <Route element={<ProtectedRoutes />}>
           <Route path="home" element={<Home />}></Route>
           <Route path="categories">
             <Route index element={<Categories />}></Route>

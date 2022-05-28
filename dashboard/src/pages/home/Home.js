@@ -127,7 +127,6 @@ function loadData(setTopProfiles,setChartConnectData,setPercentage,setCategories
     .then((res) => res.json())
       .then((data) => {
         setUpdateData(data.data);
-        console.log(data.data);
       })
 }
 
