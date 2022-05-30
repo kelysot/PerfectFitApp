@@ -86,7 +86,11 @@ const profileSchema = new mongoose.Schema({
     myPostsListId: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post'
-    }]
+    }],
+    isDeleted: {
+        type: Boolean,
+        require: true
+    }
 })
 
 module.exports = mongoose.model('Profile', profileSchema)

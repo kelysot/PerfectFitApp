@@ -69,7 +69,8 @@ const getAllProfiles = async (req, res) => {
                 userName: arr[i].userName,
                 gender: arr[i].gender,
                 birthday: arr[i].birthday,
-                email: arr[i].userId
+                email: arr[i].userId,
+                isDeleted: false,
             }
             dataToTable.push(profileData)
         }
@@ -110,7 +111,8 @@ const addNewProfile = async (req, res) => {
         trackers: [],
         notifications: [],
         wishlist: [],
-        myPostsListId: []
+        myPostsListId: [],
+        isDeleted: false
     })
 
     profile.save((error, profile) => {
@@ -204,7 +206,7 @@ const editProfile = async (req, res) => {
         newEditProfile.notifications = req.body.notifications
         newEditProfile.wishlist = req.body.wishlist
         newEditProfile.myPostsListId = req.body.myPostsListId
-
+        newEditProfile.isDeleted = req.body.isDeleted
 
         // save the profile
 
@@ -310,11 +312,11 @@ const deleteProfile = async (req, res) => {
         // First, we delete all his posts: 
         let postsListToDelete = profileToDelete.myPostsListId
 
-        for(let i=0; i<postsListToDelete.length; i++){
-    
-            let postToDelete = await Post.findOne({'_id': postsListToDelete[i]})
-            if(postToDelete != null && postToDelete != undefined){
-            
+        for (let i = 0; i < postsListToDelete.length; i++) {
+
+            let postToDelete = await Post.findOne({ '_id': postsListToDelete[i] })
+            if (postToDelete != null && postToDelete != undefined) {
+
                 postToDelete.isDeleted = true
                 await postToDelete.save((error, newPostToDelete) => {
                     if (error) {
@@ -322,8 +324,8 @@ const deleteProfile = async (req, res) => {
                             'status': 'fail',
                             'error': error.message
                         })
-                    } 
-                    else{
+                    }
+                    else {
                         res.status(200)
                     }
                 })
@@ -331,20 +333,35 @@ const deleteProfile = async (req, res) => {
         }
         // Remove the profile from profilesList:
 
-        profileToDelete.remove((error) => {
+        profileToDelete.isDeleted = true
+        profileToDelete.save((error) => {
             if (error) {
                 res.status(400).send({
                     'status': 'fail',
                     'error': error.message
                 })
-            }
-            else {
+            } else {
                 res.status(200).send({
                     'status': 'OK',
                     'message': 'The profile was deleted successfully'
                 })
             }
         })
+
+        // profileToDelete.remove((error) => {
+        //     if (error) {
+        //         res.status(400).send({
+        //             'status': 'fail',
+        //             'error': error.message
+        //         })
+        //     }
+        //     else {
+        //         res.status(200).send({
+        //             'status': 'OK',
+        //             'message': 'The profile was deleted successfully'
+        //         })
+        //     }
+        // })
 
         //Second, we remove from the user itself:
 
@@ -400,7 +417,9 @@ const getProfilesByUserNames = async (req, res) => {
             profileArr.push(profile)
         }
 
-        res.status(200).send(profileArr)
+        var theProfileArrToSent = await Profile.find({ '_id': { $in: profileArr }, 'isDeleted': false })
+
+        res.status(200).send(theProfileArrToSent)
     } catch (err) {
         res.status(400).send({
             'status': 'fail',
