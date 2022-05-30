@@ -306,6 +306,28 @@ const deleteProfile = async (req, res) => {
     try {
         const profileToDelete = await Profile.findOne({ 'userName': req.params.userName })
         const email = profileToDelete.userId
+
+        // First, we delete all his posts: 
+        let postsListToDelete = profileToDelete.myPostsListId
+        console.log("thw postsListToDelete is: " + postsListToDelete)
+
+        for(let i=0; i<postsListToDelete.length; i++){
+
+            let postToDelete = await Post.findOne({'_id': postsListToDelete[i]})
+
+            postToDelete.isDeleted = true
+            await postToDelete.save((error, newPostToDelete) => {
+                if (error) {
+                    res.status(400).send({
+                        'status': 'fail',
+                        'error': error.message
+                    })
+                } 
+                else{
+                    res.status(200)
+                }
+            })
+        }
         profileToDelete.remove((error) => {
             if (error) {
                 res.status(400).send({
@@ -321,7 +343,7 @@ const deleteProfile = async (req, res) => {
             }
         })
 
-        //TODO: remove from the user itself!
+        //Second, we remove from the user itself:
 
         const newUser = await User.findOne({ 'email': email })
         newUser.profilesId.forEach(element => {
