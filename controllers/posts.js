@@ -390,9 +390,9 @@ const getSuitablePosts = async (req, res) => {
         var profiles = null
         // find all the profiles with the same bodyType and gender
         if (gender != "None") {
-            profiles = await Profile.find({ bodyType: { $eq: bodyType }, gender: { $eq: gender } })
+            profiles = await Profile.find({ bodyType: { $eq: bodyType }, gender: { $eq: gender }, isDeleted: {$ne: true}})
         } else {
-            profiles = await Profile.find({ bodyType: { $eq: bodyType } })
+            profiles = await Profile.find({ bodyType: { $eq: bodyType }, isDeleted: {$ne: true}})
         }
 
         let profilesNamesArr = [];
