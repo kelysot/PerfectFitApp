@@ -285,7 +285,7 @@ const getWishList = async (req, res) => {
         const profile = await Profile.findOne({ userName: { $eq: userName } })
         const theList = profile.wishlist
 
-        var theReturnList = await Post.find({ '_id': { $in: theList } })
+        var theReturnList = await Post.find({ '_id': { $in: theList }, "isDeleted": false})
         res.status(200).send(theReturnList)
 
     } catch (err) {
