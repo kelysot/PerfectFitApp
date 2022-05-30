@@ -208,7 +208,7 @@ const refreshToken = async (req, res) => {
             console.log("the user is:")
             console.log(user)
             //TODO: maybe we need to save the tokens by add them tp the tokens array.
-            
+
             // user.tokens[user.tokens.indexOf(token)] = refreshToken
             await user.save()
             res.status(200).send({ 'accessToken': accessToken, 'refreshToken': refreshToken });
