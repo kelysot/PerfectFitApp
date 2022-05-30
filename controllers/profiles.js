@@ -309,25 +309,28 @@ const deleteProfile = async (req, res) => {
 
         // First, we delete all his posts: 
         let postsListToDelete = profileToDelete.myPostsListId
-        console.log("thw postsListToDelete is: " + postsListToDelete)
 
         for(let i=0; i<postsListToDelete.length; i++){
-
+    
             let postToDelete = await Post.findOne({'_id': postsListToDelete[i]})
-
-            postToDelete.isDeleted = true
-            await postToDelete.save((error, newPostToDelete) => {
-                if (error) {
-                    res.status(400).send({
-                        'status': 'fail',
-                        'error': error.message
-                    })
-                } 
-                else{
-                    res.status(200)
-                }
-            })
+            if(postToDelete != null && postToDelete != undefined){
+            
+                postToDelete.isDeleted = true
+                await postToDelete.save((error, newPostToDelete) => {
+                    if (error) {
+                        res.status(400).send({
+                            'status': 'fail',
+                            'error': error.message
+                        })
+                    } 
+                    else{
+                        res.status(200)
+                    }
+                })
+            }
         }
+        // Remove the profile from profilesList:
+
         profileToDelete.remove((error) => {
             if (error) {
                 res.status(400).send({
