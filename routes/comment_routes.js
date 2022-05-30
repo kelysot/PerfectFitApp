@@ -106,7 +106,7 @@ router.get('/:id', authenticate, Comment.getCommentsListIdsByPostId)
  *         description: The comment id was not found 
  */
 
-router.get('/byId/:id', authenticate, Comment.getCommentById)
+router.get('/getCommentById/:id', authenticate, Comment.getCommentById)
 
 /**
  * @swagger
