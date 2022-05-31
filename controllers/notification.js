@@ -1,5 +1,6 @@
 const Notification = require('../models/notification_model')
 const Profile = require('../models/profile_model')
+const Post = require('../models/post_model')
 
 const getNotifications = async (req, res) => {
     try {
@@ -51,6 +52,7 @@ const getNotificationById = async (req, res) => {
 }
 
 const addNotification = async (req, res) => {
+    console.log("**********")
     var userName = req.body.profileIdMine
     const profile = await Profile.findOne({ 'userName': userName })
     const profileUserName = profile.userName
@@ -67,6 +69,7 @@ const addNotification = async (req, res) => {
     const newNotificationList = profile.notifications
     newNotificationList.push(newNotification._id)
     profile.notifications = newNotificationList
+    console.log(newNotification)
 
     await profile.save((error) => {
         if (error) {
@@ -200,8 +203,22 @@ const getNotificationsByIds = async (req, res) => {
         for (i = 0; i < arrayNotificationsIds.length; i++) {
             var id = arrayNotificationsIds[i]
             var notification = await Notification.findById(id)
-            notificationArr.push(notification)
+
+            //Check if the post that get a notification isn't deleted.    
+            if (notification.postId != " ") {
+                const post = await Post.findById(notification.postId)
+                if (post.isDeleted == true) {
+                    break
+                }
+            }
+
+            //Check if the profile that made a notification deleted his profile.    
+            const profile = await Profile.findOne({ 'userName': notification.profileIdFrom })
+            if (profile.isDeleted == false) {
+                notificationArr.push(notification)
+            }
         }
+
 
         res.status(200).send(notificationArr)
     } catch (err) {
