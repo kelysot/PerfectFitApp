@@ -52,7 +52,6 @@ const getNotificationById = async (req, res) => {
 }
 
 const addNotification = async (req, res) => {
-    console.log("**********")
     var userName = req.body.profileIdMine
     const profile = await Profile.findOne({ 'userName': userName })
     const profileUserName = profile.userName
@@ -66,10 +65,35 @@ const addNotification = async (req, res) => {
         seen: req.body.seen
     })
 
-    const newNotificationList = profile.notifications
-    newNotificationList.push(newNotification._id)
-    profile.notifications = newNotificationList
-    console.log(newNotification)
+    const profileNotificationList = profile.notifications
+    var notificationsToSend = []
+    var flag = false
+    //Check to not have the same notifications lot of time.
+    for (var i = 0; i < profileNotificationList.length; i++) {
+        const notification = await Notification.findById(profileNotificationList[i]._id)
+
+        if (!flag && notification.profileIdFrom == newNotification.profileIdFrom &&
+            notification.notificationType == newNotification.notificationType) {
+            //Comments and likes check.    
+            if (newNotification.notificationType.includes("commented") ||
+                newNotification.notificationType.includes("liked")) {
+                if (notification.postId == newNotification.postId) {
+                    notificationsToSend.push(newNotification._id)
+                }
+            } else {
+                notificationsToSend.push(newNotification._id)
+            }
+            flag = true
+        } else {
+            notificationsToSend.push(notification._id)
+        }
+    }
+
+    if (!notificationsToSend.includes(newNotification._id)) {
+        notificationsToSend.push(newNotification._id)
+    }
+
+    profile.notifications = notificationsToSend
 
     await profile.save((error) => {
         if (error) {
@@ -219,6 +243,10 @@ const getNotificationsByIds = async (req, res) => {
             }
         }
 
+        //Sort notification arr according to the time the notification was created.
+        notificationArr.sort(function (a, b) {
+            return new Date(b.date) - new Date(a.date);
+        });
 
         res.status(200).send(notificationArr)
     } catch (err) {
