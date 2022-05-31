@@ -1,11 +1,16 @@
 import React from 'react';
-import Login from '../pages/login/Login';
-import { Outlet } from 'react-router-dom';
+import { Outlet , Navigate} from 'react-router-dom';
 
 function ProtectedRoutes() {
+    
     const status = localStorage.getItem('token');
+
+    if(localStorage.getItem('token') === null) {
+        localStorage.setItem('token', '');
+    }
+
     return (
-        status !== '' ? <Outlet /> : <Login/>
+       status !== '' ? <Outlet /> : <Navigate to='/' />
     )
 };
 

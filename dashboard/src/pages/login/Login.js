@@ -1,10 +1,14 @@
-import React , {useState,useContext} from 'react';
+import React , {useState,useContext,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import axios from 'axios';
 import {UserAutContext} from '../../context/userAutContext';
 
 function Login() {
+
+  useEffect(() => {
+    localStorage.setItem('token','');
+  },[])
   
   let navigate = useNavigate();
   const {dispatch} = useContext(UserAutContext);
