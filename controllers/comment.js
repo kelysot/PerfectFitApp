@@ -1,5 +1,6 @@
 const Comment = require('../models/comment_model')
 const Post = require('../models/post_model')
+const Profile = require('../models/profile_model')
 
 const getComments = async (req, res) => {
     try {
@@ -23,7 +24,17 @@ const getCommentsListIdsByPostId = async (req, res) => {
     try {
         const post = await Post.findById(req.params.id)
         const commentList = await Comment.find({ '_id': { $in: post.comments } })
-        res.status(200).send(commentList)
+
+        //Check if the profile that wrote a comment deleted his profile.    
+        var sentComment = []
+        for (var i = 0; i < commentList.length; i++) {
+            const profile = await Profile.findOne({ 'userName': commentList[i].profileId })
+            if (profile.isDeleted == false) {
+                sentComment.push(commentList[i])
+            }
+        }
+
+        res.status(200).send(sentComment.reverse())
     } catch (err) {
         res.status(400).send({
             'status': 'fail',
