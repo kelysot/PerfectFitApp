@@ -318,7 +318,7 @@ function checkIfNeedUpdate(lastUpdate,today){
     const dayBefore = (parseInt(lastUpdate.split('/')[0]))
     const dayToday = (parseInt(today))
 
-    if(dayToday - dayBefore >= 7)
+    if(Math.abs(dayToday - dayBefore) >= 7)
         return true
     else
         return false

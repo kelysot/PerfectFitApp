@@ -81,12 +81,14 @@ const getCategoriesData = async (req, res) => {
         let results = []
         for(let i=0; i<arr.length; i++) {
             let category = await Category.findById(arr[i].categoryId)
-            let mData = {
-                name: category.name,
-                sum : arr[i].posts.length,
-                gender : arr[i].gender
+            if(category != null || category != undefined){
+                let mData = {
+                    name: category.name,
+                    sum : arr[i].posts.length,
+                    gender : arr[i].gender
+                }
+                results.push(mData)
             }
-            results.push(mData)
         }
         return results
     }
@@ -126,13 +128,13 @@ const getCategoriesData = async (req, res) => {
                     if(category.gender === 'Male'){
                         finalDataArr.forEach((data) => {
                             if(data.name === category.name){
-                                data.male = category.sum
+                                data.male += category.sum
                             }
                         })
                     }else{
                         finalDataArr.forEach((data) => {
                             if(data.name === category.name){
-                                data.female = category.sum
+                                data.female += category.sum
                             }
                         })
                     }
