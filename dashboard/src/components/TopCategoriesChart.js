@@ -24,7 +24,7 @@ function TopCategoriesChart({categoriesData}) {
                   <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
                 </linearGradient>
               </defs>
-              <XAxis dataKey="name" />
+              <XAxis dataKey="name" tick={{fontSize: 13}} />
               <YAxis allowDecimals={false} />
               <CartesianGrid strokeDasharray="3 3" stroke="lightgray" />
               <Tooltip />

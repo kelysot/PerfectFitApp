@@ -225,22 +225,22 @@ const updateData = async (req, res) => {
             const cardsData = ({
                 'loginProfile': {
                     'result' : resToLoginProfile,
-                    'resultPercent' : admin.profilesLoginCompere.percent === 'Infinity' ? "100" : admin.profilesLoginCompere.percent,
+                    'resultPercent' : admin.profilesLoginCompere.percent === 'Infinity' ? "100" : admin.profilesLoginCompere.percent === "NaN" ? "0" : admin.profilesLoginCompere.percent,
                     'direction' : resToLoginProfile > 0 ? 'up' : resToLoginProfile < 0 ? 'down' : 'flat'
                 },
                 'newProfiles' : {
                     'result' : resToNewProfiles,
-                    'resultPercent' : admin.newProfilesCompere.percent === 'Infinity' ? "100" : admin.newProfilesCompere.percent,
+                    'resultPercent' : admin.newProfilesCompere.percent === 'Infinity' ? "100" : admin.newProfilesCompere.percent === 'NaN' ? "0" : admin.newProfilesCompere.percent,
                     'direction' : resToNewProfiles > 0 ? 'up' : resToNewProfiles < 0 ? 'down' : 'flat'
                 },
                 'totalUsers' : {
                     'result' : resToTotalUsers,
-                    'resultPercent' : admin.totalUsersCompere.percent === 'Infinity' ? "100" : admin.totalUsersCompere.percent,
+                    'resultPercent' : admin.totalUsersCompere.percent === 'Infinity' ? "100" :  admin.totalUsersCompere.percent === 'NaN' ? "0" : admin.totalUsersCompere.percent,
                     'direction' : resToTotalUsers > 0 ? 'up' : resToTotalUsers < 0 ? 'down' : 'flat'
                 },
                 'totalPosts' : {
                     'result' : resToTotalPosts,
-                    'resultPercent' : admin.totalPostCompere.percent === 'Infinity' ? "100" : admin.totalPostCompere.percent,
+                    'resultPercent' : admin.totalPostCompere.percent === 'Infinity' ? "100" : admin.totalPostCompere.percent === 'NaN' ? "0" : admin.totalPostCompere.percent,
                     'direction' : resToTotalPosts > 0 ? 'up' : resToTotalPosts < 0 ? 'down' : 'flat'
                 }
             })
@@ -253,22 +253,22 @@ const updateData = async (req, res) => {
             const cardsData = ({
                 'loginProfile': {
                     'result' : admin.profilesLoginCompere.difference,
-                    'resultPercent' : admin.profilesLoginCompere.percent === 'Infinity' ? "100" : admin.profilesLoginCompere.percent,
+                    'resultPercent' : admin.profilesLoginCompere.percent === 'Infinity' ? "100" : admin.profilesLoginCompere.percent === 'NaN' ? "0" : admin.profilesLoginCompere.percent,
                     'direction' : admin.profilesLoginCompere.difference > 0 ? 'up' :  admin.profilesLoginCompere.difference < 0 ? 'down' : "flat"
                 },
                 'newProfiles' : {
                     'result' : admin.newProfilesCompere.difference,
-                    'resultPercent' : admin.newProfilesCompere.percent === 'Infinity' ? "100" : admin.newProfilesCompere.percent,
+                    'resultPercent' : admin.newProfilesCompere.percent === 'Infinity' ? "100" : admin.newProfilesCompere.percent === 'NaN'? "0" : admin.newProfilesCompere.percent,
                     'direction' : admin.newProfilesCompere.difference > 0 ? 'up' :  admin.newProfilesCompere.difference < 0 ? 'down' : "flat"
                 },
                 'totalUsers' : {
                     'result' : admin.totalUsersCompere.difference,
-                    'resultPercent' : admin.totalUsersCompere.percent === 'Infinity' ? "100" : admin.totalUsersCompere.percent,
+                    'resultPercent' : admin.totalUsersCompere.percent === 'Infinity' ? "100" : admin.totalUsersCompere.percent === 'NaN' ? "0" : admin.totalUsersCompere.percent,
                     'direction' : admin.totalUsersCompere.difference > 0 ? 'up' :  admin.totalUsersCompere.difference < 0 ? 'down' : "flat"
                 },
                 'totalPosts' : {
                     'result' : admin.totalPostCompere.difference,
-                    'resultPercent' : admin.totalPostCompere.percent === 'Infinity' ? "100" : admin.totalPostCompere.percent,
+                    'resultPercent' : admin.totalPostCompere.percent === 'Infinity' ? "100" : admin.totalPostCompere.percent === 'NaN' ? "0" : admin.totalPostCompere.percent,
                     'direction' : admin.totalPostCompere.difference > 0 ? 'up' :  admin.totalPostCompere.difference < 0 ? 'down' : "flat"
                 }
             })
