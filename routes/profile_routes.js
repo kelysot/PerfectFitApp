@@ -154,6 +154,8 @@ const authenticate = require('../common/auth_middleware')
 *         application/json:
 *           schema:
 *             $ref: '#/components/schemas/Profile'
+*     security:
+*       - bearerAuth: []
 *     responses:
 *       200:
 *         description: Add new profile
@@ -198,7 +200,7 @@ router.delete('/:userName', authenticate, Profile.deleteProfile)
 
 /**
 * @swagger
-* /profile/{email}/{userName}:
+* /profile/:
 *   get:
 *     summary: get profile by user-email and profile-userName
 *     tags: [Profile Api]
@@ -215,6 +217,8 @@ router.delete('/:userName', authenticate, Profile.deleteProfile)
 *           type: string
 *           required: true
 *           description: profile userName
+*     security:
+*       - bearerAuth: []
 *     responses:
 *       200:
 *         description: the profile
@@ -225,6 +229,30 @@ router.delete('/:userName', authenticate, Profile.deleteProfile)
 */
 
 router.patch('/', authenticate, Profile.editProfile)
+
+/**
+* @swagger
+* /profile/getProfile/{email}/{userName}:
+*   get:
+*     summary: get profile by email and username
+*     tags: [Profile Api]
+*     parameters:
+*       - in: path
+*         name: email
+*         schema:
+*           type: string
+*         required: true
+*         description: The profile id
+*     security:
+*       - bearerAuth: []
+*     responses:
+*       200:
+*         description: the profile
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/Profile'
+*/
 
 router.get('/getProfile/:email/:userName', authenticate, Profile.getProfile)
 
