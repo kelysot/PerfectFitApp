@@ -223,8 +223,7 @@ const getNotificationsByIds = async (req, res) => {
     try {
         var notificationArr = []
 
-        var i = 0
-        for (i = 0; i < arrayNotificationsIds.length; i++) {
+        for (let i = 0; i < arrayNotificationsIds.length; i++) {
             var id = arrayNotificationsIds[i]
             var notification = await Notification.findById(id)
 
@@ -232,7 +231,7 @@ const getNotificationsByIds = async (req, res) => {
             if (notification.postId != " ") {
                 const post = await Post.findById(notification.postId)
                 if (post.isDeleted == true) {
-                    break
+                    continue
                 }
             }
 

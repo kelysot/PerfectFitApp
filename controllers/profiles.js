@@ -1,6 +1,8 @@
 const Profile = require('../models/profile_model')
 const User = require('../models/user_model')
 const Post = require('../models/post_model')
+const Notification = require('../models/notification_model')
+const Comment = require('../models/comment_model')
 
 const getProfile = async (req, res) => {
 
@@ -208,7 +210,7 @@ const editProfile = async (req, res) => {
         newEditProfile.myPostsListId = req.body.myPostsListId
         newEditProfile.isDeleted = req.body.isDeleted
 
-        // save the profile
+        //Save the profile
 
         newEditProfile.save((error, newEditProfile) => {
             if (error) {
@@ -224,7 +226,7 @@ const editProfile = async (req, res) => {
             }
         })
 
-        // change the userName in every relevant post: 
+        //Change the userName in every relevant post: 
 
         let posts = await Post.find({ profileId: { $eq: previousName } })
 
@@ -241,7 +243,122 @@ const editProfile = async (req, res) => {
             })
         }
 
-        // change profile name in the list of the user:
+        //Change the userName in every relevant notification: 
+
+        let notifications = await Notification.find({ profileIdFrom: { $eq: previousName } })
+
+        for (let i = 0; i < notifications.length; i++) {
+
+            notifications[i].profileIdFrom = req.body.userName
+            notifications[i].save((error) => {
+                if (error) {
+                    res.status(400).send({
+                        'status': 'fail',
+                        'error': error.message
+                    })
+                }
+            })
+        }
+
+        let notificationsMe = await Notification.find({ profileIdMine: { $eq: previousName } })
+
+        for (let i = 0; i < notificationsMe.length; i++) {
+
+            notificationsMe[i].profileIdMine = req.body.userName
+            notificationsMe[i].save((error) => {
+                if (error) {
+                    res.status(400).send({
+                        'status': 'fail',
+                        'error': error.message
+                    })
+                }
+            })
+        }
+
+        //Change the userName in every relevant comment: 
+
+        let comments = await Comment.find({ profileId: { $eq: previousName } })
+
+        for (let i = 0; i < comments.length; i++) {
+
+            comments[i].profileId = req.body.userName
+            comments[i].save((error) => {
+                if (error) {
+                    res.status(400).send({
+                        'status': 'fail',
+                        'error': error.message
+                    })
+                }
+            })
+        }
+
+        //Change the userName in every relevant followers lists: 
+
+        let profileFollowers = await Profile.find({ followers: { $eq: previousName } })
+
+        for (let i = 0; i < profileFollowers.length; i++) {
+            for (let j = 0; j < profileFollowers[i].followers.length; j++) {
+                if (profileFollowers[i].followers[j] == previousName) {
+                    profileFollowers[i].followers[j] = req.body.userName
+                    profileFollowers[i].save((error) => {
+                        if (error) {
+                            res.status(400).send({
+                                'status': 'fail',
+                                'error': error.message
+                            })
+                        }
+                    })
+                    break
+                }
+            }
+
+        }
+
+        //Change the userName in every relevant trackers lists: 
+
+        let profileTrackers = await Profile.find({ trackers: { $eq: previousName } })
+
+        for (let i = 0; i < profileTrackers.length; i++) {
+            for (let j = 0; j < profileTrackers[i].trackers.length; j++) {
+                if (profileTrackers[i].trackers[j] == previousName) {
+                    profileTrackers[i].trackers[j] = req.body.userName
+                    profileTrackers[i].save((error) => {
+                        if (error) {
+                            res.status(400).send({
+                                'status': 'fail',
+                                'error': error.message
+                            })
+                        }
+                    })
+                    break
+                }
+            }
+
+        }
+
+        //Change the userName in every relevant posts likes lists: 
+
+        let postLikes = await Post.find({ likes: { $eq: previousName } })
+
+        for (let i = 0; i < postLikes.length; i++) {
+            for (let j = 0; j < postLikes[i].likes.length; j++) {
+                if (postLikes[i].likes[j] == previousName) {
+                    postLikes[i].likes[j] = req.body.userName
+                    postLikes[i].save((error) => {
+                        if (error) {
+                            res.status(400).send({
+                                'status': 'fail',
+                                'error': error.message
+                            })
+                        }
+                    })
+                    break
+                }
+            }
+
+        }
+
+        //Change profile name in the list of the user:
 
         userName = req.body.userName
         if (previousName != null && previousName != undefined) {
