@@ -584,12 +584,6 @@ const getSearchPosts = async (req, res) => {
     let priceFrom, priceTo
 
     console.log("------------------------------------------------------------------")
-    console.log("the body types: " + bodyTypes)
-    console.log("the sizes: " + sizes)
-    console.log("the categories: " + categories)
-    console.log("the companies: " + companies)
-    console.log("the price: " + price)
-    console.log("the gender: " + gender)
 
     if (price[0] != "false") {
         priceFrom = parseInt(price[0])
@@ -629,11 +623,11 @@ const getSearchPosts = async (req, res) => {
     let posts
 
     if (count == "true") { // it means that no category was choosen - we need to send all the posts. 
-        posts = await Post.find({})
+        posts = await Post.find({'isDeleted': false})
     }
     else {
 
-        const profiles = await Profile.find({ 'bodyType': { $in: bodyTypes }, 'gender': { $in: genderList } })
+        const profiles = await Profile.find({ 'bodyType': { $in: bodyTypes }, 'gender': { $in: genderList }, isDeleted: {$ne: true} })
         let profilesId = []
 
         // save the userNames of the relevant profiles: 
