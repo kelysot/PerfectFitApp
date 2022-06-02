@@ -18,13 +18,17 @@ const authenticate = require('../common/auth_middleware')
 *     Comment:
 *       type: object
 *       required:
+*         - postId
 *         - profileId
 *         - date
 *         - text  
 *       properties:
+*        postId:
+*           type: String
+*           description: The id of the post that the comment belongs to
 *        profileId:
 *           type: String
-*           description: The id of the profile
+*           description: The id of the profile that comment belongs to
 *        date:
 *           type: String
 *           description: The date of the comment
@@ -32,9 +36,10 @@ const authenticate = require('../common/auth_middleware')
 *           type: String
 *           description: The comment text
 *       example:
-*         profileId: '123456    '
+*         postId: '62971ec03c84c67d89299800'
+*         profileId: 'Avi'
 *         date: '16/03/2022'
-*         text: 'This is my first comment'
+*         text: 'Amazing shirt'
 */
 
 /**

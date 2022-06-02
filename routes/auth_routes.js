@@ -31,7 +31,9 @@ const Auth = require('../controllers/auth')
 *         - email
 *         - password
 *         - type
+*         - isConnected
 *         - profilesListId
+*         - tokens
 *       properties:
 *        email:
 *           type: String
@@ -42,14 +44,22 @@ const Auth = require('../controllers/auth')
 *        type:
 *           type: String
 *           description: The type of the user
+*        isConnected:
+*           type: String
+*           description: The check if the user is connected
 *        profilesListId:
 *           type: String
-*           description: An array of profiles ID that belong to the user 
+*           description: An array of profiles ID that belong to the user
+*        tokens:
+*           type: String
+*           description: An array of the tokens of the user 
 *       example:
-*         email: 'y@gmail.com'
-*         password: '123456'
-*         type: 'admin'
+*         email: 'yuval@gmail.com'
+*         password: 'yuv123456'
+*         type: 'client'
+*         isConnected: 'true'
 *         profilesListId: ["Yarin","Eden","Tal","Lilach","Kely"]
+*         tokens: ["eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTcxZTM0M2M4NGM2N2Q4OTI5OTdiMCIsImlhdCI6MTY1NDE3NjUzNiwiZXhwIjoxNjU0MjYyOTM2fQ.9t8Ccu1rUqnwZDI7Uyr0WsuQaWZJRIzI9AROn9gyixY", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOTcxZTM0M2M4NGM2N2Q4OTI5OTdiMCIsImlhdCI6MTY1NDE3NjUzNiwiZXhwIjoxNjU0MjYyOTM2fQ.9t8Ccu1rUqnwZDI7Uyr0WsuQaWZJRIzI9AROn9gyixY"]
 */
 
 

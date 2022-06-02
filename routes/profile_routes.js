@@ -28,36 +28,31 @@ const authenticate = require('../common/auth_middleware')
 *     Profile:
 *       type: object
 *       required:
-*         -userId
-*         -firstName
-*         -lastName
-*         -gender
-*         -userName
-*         -birthday
-*         -pictureUrl
-*         -shoulder
-*         -chest
-*         -basin
-*         -waist
-*         -foot
-*         -height
-*         -weight
-*         -bodyType
-*         -status
-*         -similarProfileId
-*         -followers
-*         -trackers
-*         -notifications
-*         -wishlist
-*         -myPostsListId
+*         - userId
+*         - firstName
+*         - lastName
+*         - gender
+*         - userName
+*         - birthday
+*         - pictureUrl
+*         - shoulder
+*         - chest
+*         - basin
+*         - waist
+*         - foot
+*         - height
+*         - weight
+*         - bodyType
+*         - status
+*         - isDeleted
 *       properties:
 *        userId:
 *           type: String
-*           description: The user ID
+*           description: The user ID the profile is associated with
 *        firstName:
 *           type: String
 *           description: The first name of the profile owner
-*        slastNameku:
+*        lastName:
 *           type: String
 *           description: The last name of the profile owner
 *        gender:
@@ -97,16 +92,16 @@ const authenticate = require('../common/auth_middleware')
 *           type: String
 *           description: Profile owner's bodyType
 *        status:
-*           type: Boolean
+*           type: String
 *           description: Check if the profile owner is connected
 *        similarProfileId:
 *           type: mongoose.Schema.Types.ObjectId
 *           description: Profiles with similar dimensions to the profile owner - for the matching algorithm
 *        followers:
-*           type: mongoose.Schema.Types.ObjectId
+*           type: String
 *           description: Profiles that follow the profile owner
 *        trackers:
-*           type: mongoose.Schema.Types.ObjectId
+*           type: String
 *           description: Profiles that the profile owner follow
 *        notifications:
 *           type: mongoose.Schema.Types.ObjectId
@@ -117,14 +112,17 @@ const authenticate = require('../common/auth_middleware')
 *        myPostsListId:
 *           type: mongoose.Schema.Types.ObjectId
 *           description: Profile owner's posts list
+*        isDeleted:
+*           type: Boolean
+*           description: Check if the profile owner deleted his profile
 *       example:
-*         userId: '1234'
+*         userId: 'yuval@gmail.com'
 *         firstName: 'Yuval'
 *         lastName: 'Levi'
-*         gender: 'female' 
+*         gender: 'Female' 
 *         userName: 'yuv92'
-*         birthday: '07.11.92'
-*         pictureUrl: 'pic1'
+*         birthday: '07/11/1992'
+*         pictureUrl: 'uploads/f86488dab7577b9c557670dc0f63d2d6.png'
 *         shoulder: '80'
 *         chest: '90'
 *         basin: '80'
@@ -132,14 +130,15 @@ const authenticate = require('../common/auth_middleware')
 *         foot: '80'
 *         height: '80'
 *         weight: '70'
-*         bodyType: '1'
+*         bodyType: 'Hourglass'
 *         status: 'false'
-*         similarProfileId: ["33dsc", "4dsc5", "75dsds"]
-*         followers: ["33dsc", "4dsc5", "75dsds"]
-*         trackers: ["33dsc", "4dsc5", "75dsds"]
+*         similarProfileId: ["Amit", "Dana", "Sapir"]
+*         followers: ["Noa", "Roi"]
+*         trackers: ["Noa", "Lena", "Anna"]
 *         notifications: ["fvds3", "sdvds23", "cds23"]
-*         wishlist: ["dsdv34", "dsvv33", "vsd23"]
-*         myPostsListId: ["dscg75", "bdfm65f", "dfvfs2d"]
+*         wishlist: ["62971ec73c84c67d89299859", "62971ec93c84c67d89299860"]
+*         myPostsListId: ["62971ec03c84c67d89299800", "62971edc3c84c67d89299992"]
+*         isDeleted: false
 */
 
 /**
