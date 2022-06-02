@@ -19,17 +19,35 @@ const authenticate = require('../common/auth_middleware')
 *       type: object
 *       required:
 *         - name
-*         - categoryId
+*         - pictureUrl
+*         - gender
+*         - isDeleted
 *       properties:
 *        name:
 *           type: String
 *           description: The name of the subCategory
+*        pictureUrl:
+*           type: String
+*           description: TThe url of the picture of the subcategory
+*        gender:
+*           type: String
+*           description: The gender of the subCategory
 *        categoryId:
 *           type: String
-*           description: The category id
+*           description: The category id that the subCategory belongs to
+*        posts:
+*           type: String
+*           description: An array of posts of the subCategory
+*        isDeleted:
+*           type: Boolean
+*           description: The check if the subCategory is deleted 
 *       example:
 *         name: 'T-shirt'
-*         categoryId: 'Shirt'
+*         pictureUrl: 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSmNq21_AFczzpbSxSW5K7gR9OtCK3XfPByH69nY5zTRmw0ilkEQ-VlrFOh9tSsyUF7JIM7GV7Cilc&usqp=CAc'
+*         gender: 'Female'
+*         categoryId: '6295e5cd0701947bc06be7fc'
+*         posts: ["62971ec03c84c67d89299800","62971f513c84c67d892999ff"]
+*         isDeleted: false
 */
 
 /**
@@ -166,5 +184,5 @@ router.delete('/:id', authenticate, SubCategory.deleteSubCategory)
 //TODO: add to Swagger API
 router.get('/:categoryId/:gender', authenticate, SubCategory.getSubCategoriesByCategoryId)
 
-router.get('/edit/getSubCategoriesByNameAndGender/:data',authenticate,SubCategory.getSubCategoriesByNameAndGender)
+router.get('/edit/getSubCategoriesByNameAndGender/:data', authenticate, SubCategory.getSubCategoriesByNameAndGender)
 module.exports = router

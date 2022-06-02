@@ -19,20 +19,31 @@ const authenticate = require('../common/auth_middleware')
 *       type: object
 *       required:
 *         - name
+*         - pictureUrl
+*         - gender
+*         - isDeleted
 *       properties:
 *        name:
 *           type: String
 *           description: The name of the category
+*        pictureUrl:
+*           type: String
+*           description: The url of the picture of the category
 *        gender:
 *           type: String
-*           description: The gender 
+*           description: The gender to whom the category belongs
 *        subCategory:
 *           type: mongoose.Schema.Types.ObjectId
 *           description: An array of subCategories 
+*        isDeleted:
+*           type: Boolean
+*           description: The check if the category is deleted
 *       example:
 *         name: 'Shirt'
+*         pictureUrl: 'https://cdn.shopify.com/s/files/1/0970/4540/products/Lynn-Button-Back-Cotton-Dress-2_256x.jpg?v=1647997123'
 *         gender: 'Female'
 *         subCategory: ['T-shirt','Polo']
+*         isDeleted: false
 */
 
 /**
@@ -159,6 +170,6 @@ router.patch('/:id', authenticate, Category.editCategory)
 
 router.delete('/:id', authenticate, Category.deleteCategory)
 
-router.get('/getByGenderAndName/:data',authenticate, Category.getCategoryNameAndGender)
+router.get('/getByGenderAndName/:data', authenticate, Category.getCategoryNameAndGender)
 
 module.exports = router

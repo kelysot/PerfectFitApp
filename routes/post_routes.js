@@ -33,16 +33,15 @@ const authenticate = require('../common/auth_middleware')
 *         - link
 *         - sizeAdjustment
 *         - rating
-*         - picturesUrl
-*         - likes
 *         - comments
+*         - isDeleted
 *       properties:
 *        profileId:
 *           type: String
-*           description: The profile ID
+*           description: The profile who wrote this post ID
 *        productName:
 *           type: String
-*           description: The name of the product
+*           description: The name of the product in the post
 *        sku:
 *           type: String
 *           description: The serial number of the product
@@ -83,16 +82,19 @@ const authenticate = require('../common/auth_middleware')
 *           type: String
 *           description: An array of links to the images that displayed in the post
 *        likes:
-*           type: mongoose.Schema.Types.ObjectId
+*           type: String
 *           description: An array of profiles ID who liked the post
 *        comments:
 *           type: mongoose.Schema.Types.ObjectId
 *           description: An array of profiles ID who comment on the post
+*        isDeleted:
+*           type: Boolean
+*           description: The check if the post is deleted
 *       example:
-*         profileId: 'Yarin'
-*         productName: 'shirt'
+*         profileId: 'Haim'
+*         productName: 'White shirt'
 *         sku: 'KS123456'
-*         size: 'Large' 
+*         size: 'L' 
 *         company: 'Renuar'
 *         price: '125.00'
 *         color: 'blue'
@@ -101,12 +103,12 @@ const authenticate = require('../common/auth_middleware')
 *         description: 'Nice shirt, very comfortable'
 *         date: '22/03/2022'
 *         link: 'https://www.renuar.co.il/he/men/sale/hvlcvt-ti-qcrvt-3-b-99-90-w-h/422895519.html'
-*         sizeAdjustment: 'The shirt rests well on the body'
-*         rating: 'The fabric of the shirt is very comfortable and the color is beautiful'
-*         picturesUrl: ["https://www.renuar.co.il/media/catalog/product/cache/2/image/9df78eab33525d08d6e5fb8d27136e95/4/2/422895519-1.jpg",
-*                       "https://www.renuar.co.il/media/catalog/product/cache/2/image/9df78eab33525d08d6e5fb8d27136e95/4/2/422895519-2.jpg"]
-*         likes: ["E215616547418","YE4564651236"]
-*         comments: ["E215616547418","AE45646546"]
+*         sizeAdjustment: '3'
+*         rating: '4.5'
+*         picturesUrl: ["uploads/f86488dab7577b9c557670dc0f63d2d6.png"]
+*         likes: ["Amit","Liem"]
+*         comments: ["62971ec03c84c67d89299800","62971f513c84c67d892999ff"]
+*         isDeleted: false
 */
 
 /**

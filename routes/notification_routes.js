@@ -18,23 +18,38 @@ const authenticate = require('../common/auth_middleware')
 *     Notification:
 *       type: object
 *       required:
-*         - profileId
+*         - profileIdMine
+*         - profileIdFrom
 *         - notificationType
 *         - date
+*         - postId
+*         - seen
 *       properties:
-*        profileId:
+*        profileIdMine:
 *           type: String
-*           description: The profile id
+*           description: The profile that got the notification
+*        profileIdFrom:
+*           type: String
+*           description: The profile that made the notification
 *        notificationType:
 *           type: String
-*           description: The type of the notification
+*           description: The type of the notification(follow/like or comment) or a post
 *        date:
 *           type: String
-*           description: The date of the notification
+*           description: The date of the notification created
+*        postId:
+*           type: String
+*           description: The post id the notification belongs to
+*        seen:
+*           type: String
+*           description: The check if the profileIdMine saw the notification
 *       example:
-*         profileId: '123456'
-*         notificationType: 'Like'
+*         profileIdMine: 'Haim'
+*         profileIdFrom: 'Liel'
+*         notificationType: 'Liked your post.'
 *         date: '16/03/2022'
+*         postId: '62971ec03c84c67d89299800'
+*         seen: 'true'
 */
 
 /**
