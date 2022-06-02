@@ -242,6 +242,12 @@ router.patch('/', authenticate, Profile.editProfile)
 *           type: string
 *         required: true
 *         description: The profile id
+*       - in: path
+*         name: userName
+*         schema:
+*           type: string
+*         required: true
+*         description: The profile userName
 *     security:
 *       - bearerAuth: []
 *     responses:
@@ -255,11 +261,102 @@ router.patch('/', authenticate, Profile.editProfile)
 
 router.get('/getProfile/:email/:userName', authenticate, Profile.getProfile)
 
+/**
+* @swagger
+* /profile/getProfile/{userName}:
+*   get:
+*     summary: get profile by username
+*     tags: [Profile Api]
+*     parameters:
+*       - in: path
+*         name: userName
+*         schema:
+*           type: string
+*         required: true
+*         description: The profile userName
+*     security:
+*       - bearerAuth: []
+*     responses:
+*       200:
+*         description: the profile
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/Profile'
+*/
+
 router.get('/getProfile/:userName', authenticate, Profile.getProfileByUserName)
+
+/**
+* @swagger
+* /profile/checkIfUserNameExist/{userName}:
+*   get:
+*     summary: check if the userName exists
+*     tags: [Profile Api]
+*     parameters:
+*       - in: path
+*         name: userName
+*         schema:
+*           type: string
+*         required: true
+*         description: The profile userName
+*     security:
+*       - bearerAuth: []
+*     responses:
+*       200:
+*         description: the userName doesn't exists
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/Profile'
+*/
 
 router.get('/checkIfUserNameExist/:userName', authenticate, Profile.checkIfUserNameExist)
 
+/**
+* @swagger
+* /profile:
+*   get:
+*     summary: Return the list of all the profiles
+*     tags: [Profile Api]
+*     responses:
+*       200:
+*         description: The list of all the profiles
+*     security:
+*       - bearerAuth: []
+*         content:
+*           application/json:
+*             schema:
+*               type: array
+*               items:
+*                 $ref: '#/components/schemas/Profile'
+*/
+
 router.get('/', authenticate, Profile.getAllProfiles)
+
+/**
+* @swagger
+* /profile/getProfilesByUserNames/{userName}:
+*   get:
+*     summary: get all profiles by userNames
+*     tags: [Profile Api]
+*     parameters:
+*       - in: path
+*         name: userName
+*         schema:
+*           type: string
+*         required: true
+*         description: The profile userName
+*     security:
+*       - bearerAuth: []
+*     responses:
+*       200:
+*         description: The list of all the profiles
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/Profile'
+*/
 
 router.get('/getProfilesByUserNames/:userNames', authenticate, Profile.getProfilesByUserNames)
 
