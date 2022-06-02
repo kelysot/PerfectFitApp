@@ -6,8 +6,14 @@ const getCategories = async (req, res) => {
     const gender = req.params.gender
 
     try {
-        // { profileId: { $eq: profileId } }
-        const categoriesList = await Category.find({ 'gender': gender })
+        var categoriesList = []
+
+        if (gender != "None") {
+            categoriesList = await Category.find({ 'gender': gender })
+        } else {
+            categoriesList = await Category.find()
+        }
+
         res.status(200).send(categoriesList)
     } catch (err) {
         res.status(400).send({
@@ -19,7 +25,7 @@ const getCategories = async (req, res) => {
 
 const getCategoryNameAndGender = async (req, res) => {
     const categoryData = req.params.data
-    const category = await Category.findOne({ 'name': categoryData.split('&')[0] ,'gender': categoryData.split('&')[1]})
+    const category = await Category.findOne({ 'name': categoryData.split('&')[0], 'gender': categoryData.split('&')[1] })
     res.json({
         category: category
     });
@@ -121,13 +127,13 @@ const deleteCategory = async (req, res) => {
             let subCategory = await SubCategory.findById(sub)
             subCategory.isDeleted = true
 
-            subCategory.save((err) =>{
+            subCategory.save((err) => {
                 if (err) {
                     res.status(400).send({
                         'status': 'fail',
                         'error': error.message
                     })
-                }else{
+                } else {
                     res.status(200)
                 }
             })
