@@ -306,9 +306,9 @@ router.get('/getProfile/:userName', authenticate, Profile.getProfileByUserName)
 *       200:
 *         description: the userName doesn't exists
 *         content:
-*           application/json:
+*           text/plain:
 *             schema:
-*               $ref: '#/components/schemas/Profile'
+*               type: string
 */
 
 router.get('/checkIfUserNameExist/:userName', authenticate, Profile.checkIfUserNameExist)

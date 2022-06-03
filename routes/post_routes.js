@@ -119,7 +119,7 @@ const authenticate = require('../common/auth_middleware')
 *     tags: [Post Api]
 *     responses:
 *       200:
-*         description: The list of all the categories
+*         description: The list of all the posts
 *         content:
 *           application/json:
 *             schema:
@@ -240,25 +240,294 @@ router.delete('/:postId', authenticate, Post.deletePost)
 
 // router.get('/getWishList/:wishListId',authenticate, Post.getWishList)
 
+/**
+* @swagger
+* /post/getWishList/{userName}:
+*   get:
+*     summary: get list of all post that are in the profile's wishlist list 
+*     tags: [Post Api]
+*     parameters:
+*       - in: path
+*         name: userName
+*         schema:
+*           type: string
+*         required: true
+*         description: The profile userName
+*     security:
+*       - bearerAuth: []
+*     responses:
+*       200:
+*         description: The list of all the posts sent 
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/Post'
+*/
+
 router.get('/getWishList/:userName', authenticate, Post.getWishList)
+
+/**
+* @swagger
+* /post/getProfilePosts/{userName}:
+*   get:
+*     summary: get list of all post that are belongs to the profile
+*     tags: [Post Api]
+*     parameters:
+*       - in: path
+*         name: userName
+*         schema:
+*           type: string
+*         required: true
+*         description: The profile userName
+*     security:
+*       - bearerAuth: []
+*     responses:
+*       200:
+*         description: The list of all the posts sent  
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/Post'
+*/
 
 router.get('/getProfilePosts/:userName', authenticate, Post.getProfilePosts)
 
+/**
+* @swagger
+* /post/getPostById/{postId}:
+*   get:
+*     summary: get post by postId
+*     tags: [Post Api]
+*     parameters:
+*       - in: path
+*         name: postId
+*         schema:
+*           type: string
+*         required: true
+*         description: The post id
+*     security:
+*       - bearerAuth: []
+*     responses:
+*       200:
+*         description: The post sent  
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/Post'
+*/
+
 router.get('/getPostById/:postId', authenticate, Post.getPostById)
+
+/**
+* @swagger
+* /post/getPostsBySubCategoryId/{subCategoryId}:
+*   get:
+*     summary: get list of all posts that are belongs to the subcategory
+*     tags: [Post Api]
+*     parameters:
+*       - in: path
+*         name: subCategoryId
+*         schema:
+*           type: string
+*         required: true
+*         description: The subCategory id
+*     security:
+*       - bearerAuth: []
+*     responses:
+*       200:
+*         description: The posts list sent  
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/Post'
+*/
 
 router.get('/getPostsBySubCategoryId/:subCategoryId', authenticate, Post.getPostsBySubCategoryId)
 
 router.get('/getDates/:date', authenticate, Post.getDates)
 
+/**
+* @swagger
+* /post/getSuitablePosts/{profileId}:
+*   get:
+*     summary: get list of all posts that are match the profile size
+*     tags: [Post Api]
+*     parameters:
+*       - in: path
+*         name: profileId
+*         schema:
+*           type: string
+*         required: true
+*         description: The profile id
+*     security:
+*       - bearerAuth: []
+*     responses:
+*       200:
+*         description: The posts list sent  
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/Post'
+*/
+
 router.get('/getSuitablePosts/:profileId', authenticate, Post.getSuitablePosts)
+
+/**
+* @swagger
+* /post/timeSince/{date}:
+*   get:
+*     summary: get how much time has passed since the post was created
+*     tags: [Post Api]
+*     parameters:
+*       - in: path
+*         name: date
+*         schema:
+*           type: string
+*         required: true
+*         description: The date the post was created
+*     security:
+*       - bearerAuth: []
+*     responses:
+*       200:
+*         description: The time sent  
+*         content:
+*           text/plain:
+*             schema:
+*               type: string
+*/
 
 router.get('/timeSince/:date', authenticate, Post.timeSince)
 
+/**
+* @swagger
+* /post/getSearchPosts:
+*   post:
+*     summary: get list of all posts that are match the profile search
+*     tags: [Post Api]
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             $ref: '#/components/schemas/Post'
+*     security:
+*       - bearerAuth: []
+*     responses:
+*       200:
+*         description: The posts list sent
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/Post'
+*/
+
 router.post('/getSearchPosts', authenticate, Post.getSearchPosts)
+
+/**
+* @swagger
+* /post/general:
+*   post:
+*     summary: create general model for the search
+*     tags: [Post Api]
+*     requestBody:
+*       required: true
+*       content:
+*         application/json:
+*           schema:
+*             $ref: '#/components/schemas/object'
+*     security:
+*       - bearerAuth: []
+*     responses:
+*       200:
+*         description: The general model was successfully created
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                   sizes:
+*                       type: array
+*                       description: Array of sizes
+*                   companies:
+*                       type: array
+*                       description: Array of companies
+*                   colors:
+*                       type: array
+*                       description: Array of colors
+*                   bodyTypes:
+*                       type: array
+*                       description: Array of bodyTypes
+*                   bodyTypeDescription:
+*                       type: array
+*                       description: Array of bodyTypeDescription
+*                   gender:
+*                       type: array
+*                       description: Array of gender
+*/
 
 router.post('/general', authenticate, Post.general)
 
+/**
+* @swagger
+* /post/getGeneral:
+*   get:
+*     summary: get the general model data
+*     tags: [Post Api]
+*     security:
+*       - bearerAuth: []
+*     responses:
+*       200:
+*         description: The general model data sent successfully 
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               properties:
+*                   sizes:
+*                       type: array
+*                       description: Array of sizes
+*                   companies:
+*                       type: array
+*                       description: Array of companies
+*                   colors:
+*                       type: array
+*                       description: Array of colors
+*                   bodyTypes:
+*                       type: array
+*                       description: Array of bodyTypes
+*                   bodyTypeDescription:
+*                       type: array
+*                       description: Array of bodyTypeDescription
+*                   gender:
+*                       type: array
+*                       description: Array of gender
+*/
+
 router.get('/getGeneral', authenticate, Post.getGeneral)
+
+/**
+* @swagger
+* /post/getPostsByIds/{postsId}:
+*   get:
+*     summary: get list of all posts by postsId
+*     tags: [Post Api]
+*     parameters:
+*       - in: path
+*         name: postsId
+*         schema:
+*           type: string
+*         required: true
+*         description: The posts id
+*     security:
+*       - bearerAuth: []
+*     responses:
+*       200:
+*         description: The posts list sent  
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/Post'
+*/
 
 router.get('/getPostsByIds/:postsId', authenticate, Post.getPostsByIds)
 
