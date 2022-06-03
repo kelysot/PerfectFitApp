@@ -104,7 +104,7 @@ router.post('/register', Auth.register)
  *          content:
  *            application/json:
  *              schema:
- *                 $ref: '#/components/schemas/Tokens'
+ *                 $ref: '#/components/schemas/User'
  */
 
 router.post('/login', Auth.login)
@@ -181,6 +181,29 @@ router.get('/checkIfEmailExist/:email', Auth.checkIfEmailExist)
 
 router.post('/logout', authenticate, Auth.logout)
 
+/**
+ * @swagger
+ * /auth:
+ *  patch:
+ *    summary: Update the user
+ *    tags: [Auth Api]
+ *    requestBody:
+ *      required: true
+ *      content:
+ *          application/json:
+ *              schema:
+ *                  $ref: '#/components/schemas/User'
+ *    responses:
+ *      200:
+ *          description: The User was updated successfully
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/User'
+ *      400:
+ *          description: Some error 
+ */
+
 router.patch('/', authenticate, Auth.editUser)
 
 /**
@@ -200,14 +223,59 @@ router.patch('/', authenticate, Auth.editUser)
 *       200:
 *         description: the user
 *         content:
-*           application/json:
+*           text/plain:
 *             schema:
-*               $ref: 
+*               type: string
 */
 
 router.get('/resetPassword/:email', Auth.resetPassword)
 
+/**
+ * @swagger
+ * /auth/changePassword:
+ *  post:
+ *    summary: Change user's password
+ *    tags: [Auth Api]
+ *    requestBody:
+ *      required: true
+ *      content:
+ *         application/json:
+ *          schema:
+ *             $ref: '#/components/schemas/User'
+ *    responses:
+ *      200:
+ *          description: The user's password changed successfully 
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/User'
+ *      400:
+ *         description: Some server error 
+ */
+
 router.post('/changePassword', Auth.changePassword)
+
+/**
+* @swagger
+* /auth/refreshToken:
+*   get:
+*     summary: Refresh the user's token
+*     tags: [Auth Api]
+*     responses:
+*       200:
+*         description: the user's token has been refreshed 
+*         content:
+*           application/json:
+*             schema:
+*               type: object
+*               accessToken:
+*                   sizes:
+*                       type: string
+*                       description: The accessToken
+*                   refreshToken:
+*                       type: string
+*                       description: The refreshToken
+*/
 
 router.get('/refreshToken', Auth.refreshToken)
 
