@@ -59,6 +59,8 @@ const authenticate = require('../common/auth_middleware')
 *     responses:
 *       200:
 *         description: The list of all the subCategories
+*     security:
+*       - bearerAuth: []
 *         content:
 *           application/json:
 *             schema:
@@ -82,6 +84,8 @@ router.get('/', authenticate, SubCategory.getSubCategories)
  *          type: string
  *        required: true
  *        description: The subCategory id
+ *    security:
+ *       - bearerAuth: []
  *    responses:
  *      200:
  *          description: The subCategory description by id
@@ -108,6 +112,8 @@ router.get('/getSubCategoryById/:id', authenticate, SubCategory.getSubCategoryBy
  *          type: string
  *        required: true
  *        description: The Category id
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *      required: true
  *      content:
@@ -140,6 +146,8 @@ router.post('/:id', authenticate, SubCategory.addSubCategory)
  *          type: string
  *        required: true
  *        description: The subCategory id
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *      required: true
  *      content:
@@ -172,6 +180,8 @@ router.patch('/:id', authenticate, SubCategory.editSubCategory)
  *         type: string 
  *        required: true
  *        description: The subCategory id
+ *    security:
+ *       - bearerAuth: []
  *    responses:
  *      200:
  *          description: The subCategory was deleted successfully
@@ -200,6 +210,8 @@ router.delete('/:id', authenticate, SubCategory.deleteSubCategory)
  *          type: string
  *        required: true
  *        description: The profile gender
+ *    security:
+ *       - bearerAuth: []
  *    responses:
  *      200:
  *          description: The subCategory list by categoryId and gender sent
@@ -226,6 +238,8 @@ router.get('/:categoryId/:gender', authenticate, SubCategory.getSubCategoriesByC
  *          type: string
  *        required: true
  *        description: The subcategory data
+ *    security:
+ *       - bearerAuth: []
  *    responses:
  *      200:
  *          description: The subCategory list by subcategory name and gender sent
@@ -238,4 +252,5 @@ router.get('/:categoryId/:gender', authenticate, SubCategory.getSubCategoriesByC
  */
 
 router.get('/edit/getSubCategoriesByNameAndGender/:data', authenticate, SubCategory.getSubCategoriesByNameAndGender)
+
 module.exports = router

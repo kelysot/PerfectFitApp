@@ -48,6 +48,8 @@ const authenticate = require('../common/auth_middleware')
 *   get:
 *     summary: Return the list of all the comments
 *     tags: [Comment Api]
+*     security:
+*       - bearerAuth: []
 *     responses:
 *       200:
 *         description: The list of all the comments
@@ -74,6 +76,8 @@ router.get('/', authenticate, Comment.getComments)
  *          type: string
  *        required: true
  *        description: The post id
+ *    security:
+ *       - bearerAuth: []
  *    responses:
  *      200:
  *          description: The list of comments by post id
@@ -100,6 +104,8 @@ router.get('/:id', authenticate, Comment.getCommentsListIdsByPostId)
  *          type: string
  *        required: true
  *        description: The comment id
+ *    security:
+ *       - bearerAuth: []
  *    responses:
  *      200:
  *          description: The comment by id
@@ -132,6 +138,8 @@ router.get('/getCommentById/:id', authenticate, Comment.getCommentById)
  *         application/json:
  *          schema:
  *             $ref: '#/components/schemas/Comment'
+ *    security:
+ *       - bearerAuth: []
  *    responses:
  *      200:
  *          description: The comment was successfully create
@@ -158,6 +166,8 @@ router.post('/', authenticate, Comment.addComment)
  *          type: string
  *        required: true
  *        description: The comment id
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *      required: true
  *      content:
@@ -190,6 +200,8 @@ router.patch('/:id', authenticate, Comment.editComment)
  *         type: string 
  *        required: true
  *        description: The comment id
+ *    security:
+ *       - bearerAuth: []
  *    responses:
  *      200:
  *          description: The comment was deleted successfully

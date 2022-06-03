@@ -195,6 +195,8 @@ router.get('/:id', Profile.getProfileById)
  *         type: string 
  *        required: true
  *        description: The profile userName
+ *    security:
+ *       - bearerAuth: []
  *    responses:
  *      200:
  *          description: The profile isDeleted changed to true successfully

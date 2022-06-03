@@ -119,7 +119,9 @@ const authenticate = require('../common/auth_middleware')
 *     tags: [Post Api]
 *     responses:
 *       200:
-*         description: The list of all the posts
+*         description: The list of all the posts*     
+*     security:
+*       - bearerAuth: []
 *         content:
 *           application/json:
 *             schema:
@@ -129,34 +131,6 @@ const authenticate = require('../common/auth_middleware')
 */
 
 router.get('/', authenticate, Post.getPosts)
-
-
-/**
- * @swagger
- * /post/{id}:
- *  get:
- *    summary: Return the post by id
- *    tags: [Post Api]
- *    parameters:
- *      - in: path
- *        name: id
- *        schema:
- *          type: string
- *        required: true
- *        description: The post id
- *    responses:
- *      200:
- *          description: The post description by id
- *          content:
- *              application/json:
- *                  schema:
- *                      $ref: '#/components/schemas/Post'
- *      404:
- *         description: The post was not found 
- */
-
-// router.get('/:id', authenticate, Post.getPostById)
-
 
 /**
 * @swagger
@@ -196,6 +170,8 @@ router.post('/', authenticate, Post.addNewPost)
  *          type: string
  *        required: true
  *        description: The post id
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *      required: true
  *      content:
@@ -228,6 +204,8 @@ router.patch('/', authenticate, Post.editPost)
  *         type: string 
  *        required: true
  *        description: The post id
+ *    security:
+ *       - bearerAuth: []
  *    responses:
  *      200:
  *          description: The post isDeleted changed to true successfully

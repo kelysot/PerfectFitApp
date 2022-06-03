@@ -169,7 +169,7 @@ router.get('/checkIfEmailExist/:email', Auth.checkIfEmailExist)
  *         application/json:
  *          schema:
  *              $ref: '#/components/schemas/User'
- *      security:
+ *    security:
  *       - bearerAuth: []
  *    responses:
  *       200:
@@ -193,6 +193,8 @@ router.post('/logout', authenticate, Auth.logout)
  *          application/json:
  *              schema:
  *                  $ref: '#/components/schemas/User'
+ *    security:
+ *       - bearerAuth: []
  *    responses:
  *      200:
  *          description: The User was updated successfully
