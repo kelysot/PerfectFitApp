@@ -44,7 +44,7 @@ const authenticate = require('../common/auth_middleware')
 
 /**
 * @swagger
-* /Comment:
+* /comment:
 *   get:
 *     summary: Return the list of all the comments
 *     tags: [Comment Api]
@@ -63,7 +63,7 @@ router.get('/', authenticate, Comment.getComments)
 
 /**
  * @swagger
- * /Comment/{id}:
+ * /comment/{id}:
  *  get:
  *    summary: Return the list of comments by post id
  *    tags: [Comment Api]
@@ -89,7 +89,7 @@ router.get('/:id', authenticate, Comment.getCommentsListIdsByPostId)
 
 /**
  * @swagger
- * /Comment/byId/{id}:
+ * /comment/byId/{id}:
  *  get:
  *    summary: Return the comment by id
  *    tags: [Comment Api]
@@ -115,7 +115,7 @@ router.get('/getCommentById/:id', authenticate, Comment.getCommentById)
 
 /**
  * @swagger
- * /Comment/{id}:
+ * /comment/{id}:
  *  post:
  *    summary: Create a new comment
  *    tags: [Comment Api]
@@ -147,7 +147,7 @@ router.post('/', authenticate, Comment.addComment)
 
 /**
  * @swagger
- * /Comment/{id}:
+ * /comment/{id}:
  *  patch:
  *    summary: Update the comment by id
  *    tags: [Comment Api]
@@ -179,7 +179,7 @@ router.patch('/:id', authenticate, Comment.editComment)
 
 /**
  * @swagger
- * /Comment/{id}:
+ * /comment/{id}:
  *  delete:
  *    summary: Remove the comment by id
  *    tags: [Comment Api]

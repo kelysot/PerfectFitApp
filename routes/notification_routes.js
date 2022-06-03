@@ -54,7 +54,7 @@ const authenticate = require('../common/auth_middleware')
 
 /**
 * @swagger
-* /Notification:
+* /notification:
 *   get:
 *     summary: Return the list of all the notifications
 *     tags: [Notification Api]
@@ -73,7 +73,7 @@ router.get('/', authenticate, Notifications.getNotifications)
 
 /**
  * @swagger
- * /Notification/{id}:
+ * /notification/{id}:
  *  get:
  *    summary: Return the notification List by profile id
  *    tags: [Notification Api]
@@ -99,7 +99,7 @@ router.get('/:id', authenticate, Notifications.getNotificationsListByProfileId)
 
 /**
  * @swagger
- * /Notification/byId/{id}:
+ * /notification/byId/{id}:
  *  get:
  *    summary: Return the notification by id
  *    tags: [Notification Api]
@@ -125,7 +125,7 @@ router.get('/getNotificationById/:id', authenticate, Notifications.getNotificati
 
 /**
  * @swagger
- * /Notification/{id}:
+ * /notification/{id}:
  *  post:
  *    summary: Create a new notification
  *    tags: [Notification Api]
@@ -157,7 +157,7 @@ router.post('/', authenticate, Notifications.addNotification)
 
 /**
  * @swagger
- * /Notification/{id}:
+ * /notification/{id}:
  *  patch:
  *    summary: Update the notification by id
  *    tags: [Notification Api]
@@ -190,7 +190,7 @@ router.patch('/', authenticate, Notifications.editNotification)
 
 /**
  * @swagger
- * /Notification/{id}:
+ * /notification/{id}:
  *  delete:
  *    summary: Remove the notification by id
  *    tags: [Notification Api]
@@ -209,6 +209,30 @@ router.patch('/', authenticate, Notifications.editNotification)
  */
 
 router.delete('/:id', authenticate, Notifications.deleteNotification)
+
+/**
+ * @swagger
+ * /notification/getNotificationsByIds/{notificationsIds}:
+ *  get:
+ *    summary: Return the notifications by notifications list of ids
+ *    tags: [Notification Api]
+ *    parameters:
+ *      - in: path
+ *        name: notificationsIds
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: The notifications id
+ *    responses:
+ *      200:
+ *          description: The notifications by notifications id
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Notification'
+ *      404:
+ *         description: The notification id was not found 
+ */
 
 router.get('/getNotificationsByIds/:notificationsIds', authenticate, Notifications.getNotificationsByIds)
 

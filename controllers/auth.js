@@ -189,7 +189,7 @@ const refreshToken = async (req, res) => {
                 user.tokens = [] //invalidate all user tokens
                 await user.save()
                 return res.status(403).send('invalid request')
-                
+
             }
             const accessToken = await jwt.sign(
                 { 'id': user._id },
@@ -327,8 +327,6 @@ function getRandomInt() {
 }
 
 const changePassword = async (req, res) => {
-    console.log("1111111111111")
-
     const user = req.body
     var email = req.body.email
     console.log(email)

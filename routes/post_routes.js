@@ -219,7 +219,7 @@ router.patch('/', authenticate, Post.editPost)
  * @swagger
  * /post/{id}:
  *  delete:
- *    summary: Remove the post by id
+ *    summary: Change post isDeleted to true
  *    tags: [Post Api]
  *    parameters:
  *      - in: path
@@ -230,7 +230,7 @@ router.patch('/', authenticate, Post.editPost)
  *        description: The post id
  *    responses:
  *      200:
- *          description: The post was deleted successfully
+ *          description: The post isDeleted changed to true successfully
  *      400:
  *          description: Some error     
  */
@@ -244,7 +244,7 @@ router.delete('/:postId', authenticate, Post.deletePost)
 * @swagger
 * /post/getWishList/{userName}:
 *   get:
-*     summary: get list of all post that are in the profile's wishlist list 
+*     summary: Get list of all post that are in the profile's wishlist list 
 *     tags: [Post Api]
 *     parameters:
 *       - in: path
@@ -270,7 +270,7 @@ router.get('/getWishList/:userName', authenticate, Post.getWishList)
 * @swagger
 * /post/getProfilePosts/{userName}:
 *   get:
-*     summary: get list of all post that are belongs to the profile
+*     summary: Get list of all post that are belongs to the profile
 *     tags: [Post Api]
 *     parameters:
 *       - in: path
@@ -296,7 +296,7 @@ router.get('/getProfilePosts/:userName', authenticate, Post.getProfilePosts)
 * @swagger
 * /post/getPostById/{postId}:
 *   get:
-*     summary: get post by postId
+*     summary: Get post by postId
 *     tags: [Post Api]
 *     parameters:
 *       - in: path
@@ -322,7 +322,7 @@ router.get('/getPostById/:postId', authenticate, Post.getPostById)
 * @swagger
 * /post/getPostsBySubCategoryId/{subCategoryId}:
 *   get:
-*     summary: get list of all posts that are belongs to the subcategory
+*     summary: Get list of all posts that are belongs to the subcategory
 *     tags: [Post Api]
 *     parameters:
 *       - in: path
@@ -350,7 +350,7 @@ router.get('/getDates/:date', authenticate, Post.getDates)
 * @swagger
 * /post/getSuitablePosts/{profileId}:
 *   get:
-*     summary: get list of all posts that are match the profile size
+*     summary: Get list of all posts that are match the profile size
 *     tags: [Post Api]
 *     parameters:
 *       - in: path
@@ -376,7 +376,7 @@ router.get('/getSuitablePosts/:profileId', authenticate, Post.getSuitablePosts)
 * @swagger
 * /post/timeSince/{date}:
 *   get:
-*     summary: get how much time has passed since the post was created
+*     summary: Get how much time has passed since the post was created
 *     tags: [Post Api]
 *     parameters:
 *       - in: path
@@ -402,7 +402,7 @@ router.get('/timeSince/:date', authenticate, Post.timeSince)
 * @swagger
 * /post/getSearchPosts:
 *   post:
-*     summary: get list of all posts that are match the profile search
+*     summary: Get list of all posts that are match the profile search
 *     tags: [Post Api]
 *     requestBody:
 *       required: true
@@ -427,7 +427,7 @@ router.post('/getSearchPosts', authenticate, Post.getSearchPosts)
 * @swagger
 * /post/general:
 *   post:
-*     summary: create general model for the search
+*     summary: Create general model for the search
 *     tags: [Post Api]
 *     requestBody:
 *       required: true
@@ -471,7 +471,7 @@ router.post('/general', authenticate, Post.general)
 * @swagger
 * /post/getGeneral:
 *   get:
-*     summary: get the general model data
+*     summary: Get the general model data
 *     tags: [Post Api]
 *     security:
 *       - bearerAuth: []
@@ -509,7 +509,7 @@ router.get('/getGeneral', authenticate, Post.getGeneral)
 * @swagger
 * /post/getPostsByIds/{postsId}:
 *   get:
-*     summary: get list of all posts by postsId
+*     summary: Get list of all posts by postsId
 *     tags: [Post Api]
 *     parameters:
 *       - in: path

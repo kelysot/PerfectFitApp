@@ -48,7 +48,7 @@ const authenticate = require('../common/auth_middleware')
 
 /**
 * @swagger
-* /Category:
+* /category:
 *   get:
 *     summary: Return the list of all the categories
 *     tags: [Category Api]
@@ -67,7 +67,7 @@ router.get('/:gender', authenticate, Category.getCategories)
 
 /**
  * @swagger
- * /Category/{id}:
+ * /category/{id}:
  *  get:
  *    summary: Return the category by id
  *    tags: [Category Api]
@@ -93,7 +93,7 @@ router.get('/:id', authenticate, Category.getCategoryById)
 
 /**
  * @swagger
- * /Category:
+ * /category:
  *  post:
  *    summary: Create a new category
  *    tags: [Category Api]
@@ -118,7 +118,7 @@ router.post('/', authenticate, Category.addCategory)
 
 /**
  * @swagger
- * /Category/{id}:
+ * /category/{id}:
  *  patch:
  *    summary: Update the category by id
  *    tags: [Category Api]
@@ -150,7 +150,7 @@ router.patch('/:id', authenticate, Category.editCategory)
 
 /**
  * @swagger
- * /Category/{id}:
+ * /category/{id}:
  *  delete:
  *    summary: Remove the category by id
  *    tags: [Category Api]
@@ -169,6 +169,30 @@ router.patch('/:id', authenticate, Category.editCategory)
  */
 
 router.delete('/:id', authenticate, Category.deleteCategory)
+
+/**
+ * @swagger
+ * /category/getByGenderAndName/{data}:
+ *  get:
+ *    summary: Return the category by gender and name
+ *    tags: [Category Api]
+ *    parameters:
+ *      - in: path
+ *        name: data
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: The category data
+ *    responses:
+ *      200:
+ *          description: The category by gender and name
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/Category'
+ *      404:
+ *         description: The category was not found 
+ */
 
 router.get('/getByGenderAndName/:data', authenticate, Category.getCategoryNameAndGender)
 
