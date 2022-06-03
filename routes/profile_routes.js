@@ -11,16 +11,6 @@ const authenticate = require('../common/auth_middleware')
 *   description: The Profile API
 */
 
-// /**
-// * @swagger
-// * components:
-// *   securitySchemes:
-// *       bearerAuth:
-// *           type: http
-// *           scheme: bearer
-// *           bearerFormat: JWT
-// */
-
 /**
 * @swagger
 * components:
@@ -135,7 +125,7 @@ const authenticate = require('../common/auth_middleware')
 *         similarProfileId: ["Amit", "Dana", "Sapir"]
 *         followers: ["Noa", "Roi"]
 *         trackers: ["Noa", "Lena", "Anna"]
-*         notifications: ["fvds3", "sdvds23", "cds23"]
+*         notifications: ["62971f513c84c67d892999ff", "62971ecc3c84c67d8929986d"]
 *         wishlist: ["62971ec73c84c67d89299859", "62971ec93c84c67d89299860"]
 *         myPostsListId: ["62971ec03c84c67d89299800", "62971edc3c84c67d89299992"]
 *         isDeleted: false
@@ -145,7 +135,7 @@ const authenticate = require('../common/auth_middleware')
 * @swagger
 * /profile:
 *   post:
-*     summary: add new profile
+*     summary: Add new profile
 *     tags: [Profile Api]
 *     requestBody:
 *       required: true
@@ -165,13 +155,12 @@ const authenticate = require('../common/auth_middleware')
 */
 
 router.post('/', authenticate, Profile.addNewProfile)
-// router.post('/', authenticate, Profile.addNewProfile)
 
 /**
 * @swagger
 * /profile/{id}:
 *   get:
-*     summary: get profile by id
+*     summary: Get profile by id
 *     tags: [Profile Api]
 *     parameters:
 *       - in: path
@@ -193,15 +182,33 @@ router.post('/', authenticate, Profile.addNewProfile)
 
 router.get('/:id', Profile.getProfileById)
 
-// router.delete('/{userName}', authenticate, Profile.deleteProfile)
-router.delete('/:userName', authenticate, Profile.deleteProfile)
+/**
+ * @swagger
+ * /profile/{userName}:
+ *  delete:
+ *    summary: Change profile isDeleted to true
+ *    tags: [Profile Api]
+ *    parameters:
+ *      - in: path
+ *        name: userName
+ *        schema:
+ *         type: string 
+ *        required: true
+ *        description: The profile userName
+ *    responses:
+ *      200:
+ *          description: The profile isDeleted changed to true successfully
+ *      400:
+ *          description: Some error     
+ */
 
+router.delete('/:userName', authenticate, Profile.deleteProfile)
 
 /**
 * @swagger
 * /profile/:
 *   get:
-*     summary: get profile by user-email and profile-userName
+*     summary: Get profile by user-email and profile-userName
 *     tags: [Profile Api]
 *     parameters:
 *       - in: path
@@ -233,7 +240,7 @@ router.patch('/', authenticate, Profile.editProfile)
 * @swagger
 * /profile/getProfile/{email}/{userName}:
 *   get:
-*     summary: get profile by email and username
+*     summary: Get profile by email and username
 *     tags: [Profile Api]
 *     parameters:
 *       - in: path
@@ -265,7 +272,7 @@ router.get('/getProfile/:email/:userName', authenticate, Profile.getProfile)
 * @swagger
 * /profile/getProfile/{userName}:
 *   get:
-*     summary: get profile by username
+*     summary: Get profile by username
 *     tags: [Profile Api]
 *     parameters:
 *       - in: path
@@ -291,7 +298,7 @@ router.get('/getProfile/:userName', authenticate, Profile.getProfileByUserName)
 * @swagger
 * /profile/checkIfUserNameExist/{userName}:
 *   get:
-*     summary: check if the userName exists
+*     summary: Check if the userName exists
 *     tags: [Profile Api]
 *     parameters:
 *       - in: path
@@ -338,7 +345,7 @@ router.get('/', authenticate, Profile.getAllProfiles)
 * @swagger
 * /profile/getProfilesByUserNames/{userName}:
 *   get:
-*     summary: get all profiles by userNames
+*     summary: Get all profiles by userNames
 *     tags: [Profile Api]
 *     parameters:
 *       - in: path
@@ -359,8 +366,6 @@ router.get('/', authenticate, Profile.getAllProfiles)
 */
 
 router.get('/getProfilesByUserNames/:userNames', authenticate, Profile.getProfilesByUserNames)
-
-
 
 module.exports = router
 
