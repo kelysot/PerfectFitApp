@@ -58,6 +58,8 @@ const authenticate = require('../common/auth_middleware')
 *   get:
 *     summary: Return the list of all the notifications
 *     tags: [Notification Api]
+*     security:
+*       - bearerAuth: []
 *     responses:
 *       200:
 *         description: The list of all the notifications
@@ -84,6 +86,8 @@ router.get('/', authenticate, Notifications.getNotifications)
  *          type: string
  *        required: true
  *        description: The profile id
+ *    security:
+ *       - bearerAuth: []
  *    responses:
  *      200:
  *          description: The list of notifications by profile id
@@ -110,6 +114,8 @@ router.get('/:id', authenticate, Notifications.getNotificationsListByProfileId)
  *          type: string
  *        required: true
  *        description: The notification id
+ *    security:
+ *       - bearerAuth: []
  *    responses:
  *      200:
  *          description: The notification by notification id
@@ -142,6 +148,8 @@ router.get('/getNotificationById/:id', authenticate, Notifications.getNotificati
  *         application/json:
  *          schema:
  *             $ref: '#/components/schemas/Notification'
+ *    security:
+ *       - bearerAuth: []
  *    responses:
  *      200:
  *          description: The notification was successfully create
@@ -168,6 +176,8 @@ router.post('/', authenticate, Notifications.addNotification)
  *          type: string
  *        required: true
  *        description: The notification id
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *      required: true
  *      content:
@@ -201,6 +211,8 @@ router.patch('/', authenticate, Notifications.editNotification)
  *         type: string 
  *        required: true
  *        description: The notification id
+ *    security:
+ *       - bearerAuth: []
  *    responses:
  *      200:
  *          description: The notification was deleted successfully
@@ -223,6 +235,8 @@ router.delete('/:id', authenticate, Notifications.deleteNotification)
  *          type: string
  *        required: true
  *        description: The notifications id
+ *    security:
+ *       - bearerAuth: []
  *    responses:
  *      200:
  *          description: The notifications by notifications id

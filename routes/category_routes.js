@@ -52,6 +52,8 @@ const authenticate = require('../common/auth_middleware')
 *   get:
 *     summary: Return the list of all the categories
 *     tags: [Category Api]
+*     security:
+*       - bearerAuth: []
 *     responses:
 *       200:
 *         description: The list of all the categories
@@ -78,6 +80,8 @@ router.get('/:gender', authenticate, Category.getCategories)
  *          type: string
  *        required: true
  *        description: The category id
+ *    security:
+ *       - bearerAuth: []
  *    responses:
  *      200:
  *          description: The category description by id
@@ -103,6 +107,8 @@ router.get('/:id', authenticate, Category.getCategoryById)
  *         application/json:
  *          schema:
  *             $ref: '#/components/schemas/Category'
+ *    security:
+ *       - bearerAuth: []
  *    responses:
  *      200:
  *          description: The category was successfully create
@@ -129,6 +135,8 @@ router.post('/', authenticate, Category.addCategory)
  *          type: string
  *        required: true
  *        description: The category id
+ *    security:
+ *       - bearerAuth: []
  *    requestBody:
  *      required: true
  *      content:
@@ -161,6 +169,8 @@ router.patch('/:id', authenticate, Category.editCategory)
  *         type: string 
  *        required: true
  *        description: The category id
+ *    security:
+ *       - bearerAuth: []
  *    responses:
  *      200:
  *          description: The category was deleted successfully
@@ -183,6 +193,8 @@ router.delete('/:id', authenticate, Category.deleteCategory)
  *          type: string
  *        required: true
  *        description: The category data
+ *    security:
+ *       - bearerAuth: []
  *    responses:
  *      200:
  *          description: The category by gender and name
