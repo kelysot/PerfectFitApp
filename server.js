@@ -4,6 +4,7 @@ const app = express();
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const path = require('path')
+const Profile = require('./models/profile_model')
 
 
 if (process.env.NODE_ENV == "development") {
@@ -40,6 +41,71 @@ db.once('open', () => { console.log('db connected!') })
 const port = process.env.PORT
 
 
+
+/////////////////////////////// similar profiles deleter ///////////////////////////////
+
+let compareMonth = 5
+deleteSimilar()
+
+function deleteSimilar() {
+    (function loop() {
+
+        var now = new Date()
+        var currentMonth =  parseInt(now.getMonth())
+    
+        if(currentMonth == 11){
+            if(compareMonth == 0){
+                deleteSimilarProfile()
+                compareMonth = currentMonth
+                console.log("inside1")
+            }
+        }
+        else if(currentMonth > compareMonth) {
+            deleteSimilarProfile().then(
+                console.log("inside")
+            )
+            compareMonth = currentMonth
+        }
+
+        now = new Date();                  
+        var delay = 60000 - (now % 60000); 
+        // setTimeout(loop, delay);
+        setTimeout(loop, 86400000); // delay of a day
+
+        // maybe need setInterval
+    })();
+}
+
+async function getProfiles(){
+    let profiles = Profile.find({})
+    return profiles
+}
+
+
+async function deleteSimilarProfile(){ // delete every month the similarProfiles arrays
+
+    let profiles = await getProfiles()
+
+    for(let i=0; i<profiles.length; i++){
+        profiles[i].similarProfileId = []
+        profiles[i].save((error) => {
+            if (error) {
+                res.status(400).send({
+                    'status': 'fail',
+                    'error': error.message
+                })
+            } else {
+                return false
+            }
+        })
+    }
+
+    return true;
+}
+
+
+
+///////////////////////////////////////////////////////
 
 
 
@@ -82,6 +148,10 @@ const port = process.env.PORT
 // });
 
 // app.use('/uploadsAdmin',express.static(__dirname + '/uploads'))
+
+/////////////////////////////// Routers ///////////////////////////////
+
+
 app.use('/uploadsAdmin', express.static(path.join(__dirname, 'uploads')))
 
 const dashboardRouter = require('./routes/dashboard_routes')
