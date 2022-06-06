@@ -28,7 +28,7 @@ const getPostsBySubCategoryId = async (req, res) => {
     }
 
     const category = await SubCategory.findById(req.params.subCategoryId)
-    const subCategoryPosts = await Post.find({ '_id': category.posts })
+    const subCategoryPosts = await Post.find({ '_id': category.posts, "isDeleted": false })
     try {
 
         res.status(200).send(subCategoryPosts)
