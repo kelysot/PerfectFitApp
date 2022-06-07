@@ -3,8 +3,8 @@ const request = require('supertest')
 const mongoose = require('mongoose')
 const User = require('../models/user_model')
 
-const email = 'test@a.com'
-const pwd = '123456'
+const email = 'test1'
+const pwd = 'test1'
 
 beforeAll((done) => {
     User.remove({ 'email': email }, (err) => {
@@ -21,24 +21,28 @@ afterAll((done) => {
 })
 
 describe('Testing Post API', () => {
-    const postDescription = 'this is my test post'
+    const profileId = 'test'
+    const productName = 'shirt1'
+    const description = 'this is my test post'
     // const profileId = '1234' - need to change later user id to profile id.
-    const productName = 'shirt'
     const sku = 'abc'
     const size = 'L'
-    const company = 'Zara'
+    const company = 'ZARA'
     const price = '100'
-    const color = 'black'
-    const categoryId = '1'
-    const subCategoryId = '2'
-    const date = '3/3/22'
+    const color = 'Black'
+    const categoryId = 'Shirt'
+    const subCategoryId = 'T-Shirt'
+    const date = '7/6/22'
     const link = 'www.example.com'
     const sizeAdjustment = '4'
     const rating = '5'
-    const picturesUrl = ['pic1', 'pic2']
+    const picturesUrl = []
+    const likes = []
+    const comments = []
+    const isDeleted = false
     let accessToken = ''
-    let userId = ''
-
+    
+ 
     test('test registration', async () => {
         const response = await request(app).post('/auth/register').send({
             'email': email,
@@ -61,40 +65,81 @@ describe('Testing Post API', () => {
 
 
 
-    test('post get', async () => {
-        const response = await request(app).get('/post').set({ authorization: 'JWT ' + accessToken })
+    test('get all posts', async () => {
+        const response = await request(app).get('/').set({ authorization: 'JWT ' + accessToken })
         expect(response.statusCode).toEqual(200)
     })
-    test('add new post', async () => {
-        const response = await request(app).post('/post').set({ authorization: 'JWT ' + accessToken }).send({
-            'description': postDescription,
-            'profileId': userId,
-            'productName': productName,
-            'sku': sku,
-            'size': size,
-            'company': company,
-            'price': price,
-            'color': color,
-            'categoryId': categoryId,
-            'subCategoryId': subCategoryId,
-            'date': date,
-            'link': link,
-            'sizeAdjustment': sizeAdjustment,
-            'rating': rating,
-            'picturesUrl': picturesUrl,
-            'likes': null,
-            'comments': null
-        })
-        expect(response.statusCode).toEqual(200)
-        const newPost = response.body.post
-        expect(newPost.description).toEqual(postDescription)
+
+    // test('add new post', async () => {
+    //     const response = await request(app).post('/').set({ authorization: 'JWT ' + accessToken }).send({
+    //         'description': postDescription,
+    //         'profileId': userId,
+    //         'productName': productName,
+    //         'sku': sku,
+    //         'size': size,
+    //         'company': company,
+    //         'price': price,
+    //         'color': color,
+    //         'categoryId': categoryId,
+    //         'subCategoryId': subCategoryId,
+    //         'date': date,
+    //         'link': link,
+    //         'sizeAdjustment': sizeAdjustment,
+    //         'rating': rating,
+    //         'picturesUrl': picturesUrl,
+    //         'likes': null,
+    //         'comments': null,
+    //         'isDeleted': false
+    //     })
+    //     expect(response.statusCode).toEqual(200)
+        // const newPost = response.body.post
+        // expect(newPost.description).toEqual(postDescription)
         // expect(newPost.sender).toEqual(sender)
 
-        const response2 = await request(app).get('/post/' + newPost._id).set({ authorization: 'JWT ' + accessToken })
-        expect(response2.statusCode).toEqual(200)
-        const post2 = response2.body
-        expect(post2.description).toEqual(postDescription)
+        // const response2 = await request(app).get('/post/' + newPost._id).set({ authorization: 'JWT ' + accessToken })
+        // expect(response2.statusCode).toEqual(200)
+        // const post2 = response2.body
+        // expect(post2.description).toEqual(postDescription)
         // expect(post2.sender).toEqual(sender)
+    // })
+
+
+    test('get WishList', async () => {
+        const response = await request(app).get('/post/getWishList/' + profileId).set({ authorization: 'JWT ' + accessToken }).send({
+        })
+        expect(response.statusCode).toEqual(200)
     })
+
+
+    test('get profiles posts', async () => {
+        const response = await request(app).get('/post/getProfilePosts/' + profileId).set({ authorization: 'JWT ' + accessToken }).send({
+        })
+        expect(response.statusCode).toEqual(200)
+    })
+
+    const postId = '625bf9283127cd24f5a99da6'
+    
+    test('get post by id', async () => {
+        const response = await request(app).get('/post/getPostById/' + postId).set({ authorization: 'JWT ' + accessToken }).send({
+        })
+        expect(response.statusCode).toEqual(200)
+    })
+
+
+    const subCategoryIdsend = '6277e8f36e522fb22ce0f50d'
+    test('get posts by subCategoryId', async () => {
+        const response = await request(app).get('/post/getPostsBySubCategoryId/' + subCategoryIdsend).set({ authorization: 'JWT ' + accessToken }).send({
+        })
+        expect(response.statusCode).toEqual(200)
+    })
+
+    test('Get suitable posts', async () => {
+        const response = await request(app).get('/post/getSuitablePosts/' + profileId).set({ authorization: 'JWT ' + accessToken }).send({
+        })
+        expect(response.statusCode).toEqual(200)
+    })
+
+
+
 })
 

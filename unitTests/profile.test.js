@@ -51,51 +51,51 @@ describe('Testing Profile API', () => {
         userId = response.body._id
     })
 
-    test('test login', async () => {
-        const response = await request(app).post('/auth/login').send({
-            'email': email,
-            'password': pwd,
-            'type': "client" //need to think how we create admin account.
-        })
-        expect(response.statusCode).toEqual(200)
-        accessToken = response.body.accessToken
-    })
+    // test('test login', async () => {
+    //     const response = await request(app).post('/auth/login').send({
+    //         'email': email,
+    //         'password': pwd,
+    //         'type': "client" //need to think how we create admin account.
+    //     })
+    //     expect(response.statusCode).toEqual(200)
+    //     accessToken = response.body.accessToken
+    // })
 
 
-    test('add new profile', async () => {
-        const response = await request(app).post('/profile').set({ authorization: 'JWT ' + accessToken}).send({
-            'userId': userId,
-            'firstName': firstName,
-            'lastName': lastName,
-            'gender': gender,
-            'userName': userName,
-            'birthday': birthday,
-            'pictureUrl': pictureUrl,
-            'shoulder': shoulder,
-            'chest': chest,
-            'basin': basin,
-            'waist': waist,
-            'foot': foot,
-            'height': height,
-            'weight': weight,
-            'bodyType': bodyType,
-            'status': status,
-            'similarProfileId': null,
-            'followers': null,
-            'trackers': null,
-            'notifications': null,
-            'wishlist': null,
-            'myPostsListId': null
+    // test('add new profile', async () => {
+    //     const response = await request(app).post('/profile').set({ authorization: 'JWT ' + accessToken}).send({
+    //         'userId': userId,
+    //         'firstName': firstName,
+    //         'lastName': lastName,
+    //         'gender': gender,
+    //         'userName': userName,
+    //         'birthday': birthday,
+    //         'pictureUrl': pictureUrl,
+    //         'shoulder': shoulder,
+    //         'chest': chest,
+    //         'basin': basin,
+    //         'waist': waist,
+    //         'foot': foot,
+    //         'height': height,
+    //         'weight': weight,
+    //         'bodyType': bodyType,
+    //         'status': status,
+    //         'similarProfileId': null,
+    //         'followers': null,
+    //         'trackers': null,
+    //         'notifications': null,
+    //         'wishlist': null,
+    //         'myPostsListId': null
 
-        })
-        expect(response.statusCode).toEqual(200)
-        const newProfile = response.body.profile
-        expect(newProfile.firstName).toEqual(firstName)
+    //     })
+    //     expect(response.statusCode).toEqual(200)
+    //     const newProfile = response.body.profile
+    //     expect(newProfile.firstName).toEqual(firstName)
 
         // const response2 = await request(app).get('/profile/' + newProfile._id).set({ authorization: 'JWT ' + accessToken })
         // expect(response2.statusCode).toEqual(200)
         // const profile2 = response2.body
         // expect(profile2.firstName).toEqual(firstName)
-    })
+    // })
 })
 

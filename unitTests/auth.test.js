@@ -2,9 +2,10 @@ const app = require('../server')
 const request = require('supertest')
 const mongoose = require('mongoose')
 const User = require('../models/user_model')
+const res = require('express/lib/response')
 
-const email = 'test@a.com'
-const pwd = '123456'
+const email = 'testtest'
+const pwd = 'testtest'
 let accessToken = ''
 let refreshToken = ''
 
@@ -12,17 +13,17 @@ let newAccessToken = ''
 let newRefreshToken = ''
 
 beforeAll((done) => {
-    User.remove({ 'email': email }, (err) => {
+    // User.remove({ 'email': email }, (err) => {
         done()
-    })
+    // })
 
 })
 
 afterAll((done) => {
-    User.remove({ 'email': email }, (err) => {
+    // User.remove({ 'email': email }, (err) => {
         mongoose.connection.close()
         done()
-    })
+    // })
 })
 
 describe('Testing Auth API', () => {
@@ -31,7 +32,7 @@ describe('Testing Auth API', () => {
         const response = await request(app).post('/auth/register').send({
             'email': email,
             'password': pwd,
-            'type': "client" //need to think how we create admin account.
+            'type': "client" 
         })
         expect(response.statusCode).toEqual(200)
     })
@@ -40,7 +41,7 @@ describe('Testing Auth API', () => {
         const response = await request(app).post('/auth/login').send({
             'email': email,
             'password': pwd,
-            'type': "client" //need to think how we create admin account.
+            'type': "client" 
         })
         expect(response.statusCode).toEqual(200)
         accessToken = response.body.accessToken
@@ -49,6 +50,23 @@ describe('Testing Auth API', () => {
         expect(refreshToken).not.toEqual(null);
     })
 
+})
+
+describe("Get user by email ", () => {
+    test("test getUser", async () =>{
+        const response = await request(app).get('/auth/getUser/' + email).send({
+        })
+        expect(response.statusCode).toEqual(200)
+    })
+})
+
+describe("Check if user exist by email ", () => {
+    test("test check if user exist", async () =>{
+        const response = await request(app).get('/auth/checkIfEmailExist/:email').send({
+            'email': email
+        })
+        expect(response.statusCode).toEqual(200)
+    })
 })
 
 describe("Token access", () => {
@@ -68,7 +86,7 @@ describe("Token access", () => {
         expect(response.statusCode).not.toEqual(200);
     });
 
-    // TODO: Refresh Token not working.
+
     // test("Refresh Token", async () => {
     //     const response = await request(app).get("/auth/refreshToken")
     //         .set({ authorization: 'JWT' + refreshToken })
@@ -88,3 +106,4 @@ describe("Restric access without Auth / ", () => {
         expect(response.statusCode).not.toEqual(200);
     })
 })
+
