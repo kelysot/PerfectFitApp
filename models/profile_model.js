@@ -29,6 +29,10 @@ const profileSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    bigPictureUrl: {
+        type: String,
+        required: false
+    },
     shoulder: {
         type: String,
         required: false

@@ -99,6 +99,7 @@ const addNewProfile = async (req, res) => {
         userName: req.body.userName,
         birthday: req.body.birthday,
         pictureUrl: req.body.pictureUrl,
+        bigPictureUrl: req.body.bigPictureUrl,
         shoulder: req.body.shoulder,
         chest: req.body.chest,
         basin: req.body.basin,
@@ -193,6 +194,7 @@ const editProfile = async (req, res) => {
         newEditProfile.userName = req.body.userName
         newEditProfile.birthday = req.body.birthday
         newEditProfile.pictureUrl = req.body.pictureUrl
+        newEditProfile.bigPictureUrl = req.body.bigPictureUrl
         newEditProfile.shoulder = req.body.shoulder
         newEditProfile.chest = req.body.chest
         newEditProfile.basin = req.body.basin
