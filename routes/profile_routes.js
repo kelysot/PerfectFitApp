@@ -25,6 +25,7 @@ const authenticate = require('../common/auth_middleware')
 *         - userName
 *         - birthday
 *         - pictureUrl
+*         - bigPictureUrl
 *         - shoulder
 *         - chest
 *         - basin
@@ -57,6 +58,9 @@ const authenticate = require('../common/auth_middleware')
 *        pictureUrl:
 *           type: String
 *           description: The url to the picture of the profile owner
+*        bigPictureUrl:
+*           type: String
+*           description: The url to the big picture of the profile owner
 *        shoulder:
 *           type: String
 *           description: Profile owner's shoulder length
@@ -113,6 +117,7 @@ const authenticate = require('../common/auth_middleware')
 *         userName: 'yuv92'
 *         birthday: '07/11/1992'
 *         pictureUrl: 'uploads/f86488dab7577b9c557670dc0f63d2d6.png'
+*         bigPictureUrl: 'uploads/26299beb5c6407d91360a354245300b9.png'
 *         shoulder: '80'
 *         chest: '90'
 *         basin: '80'
