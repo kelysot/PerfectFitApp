@@ -343,7 +343,7 @@ const search = async (req, res) => {
     switch(typeSearch) {
         case 'category': {
             if(search !== "" && typeSearch !== "" && genderSearch !== "") {
-                const category = await Category.findOne({'name': search , 'gender': genderSearch})
+                const category = await Category.findOne({'name': {$regex: new RegExp("^" + search , "i") }  , 'gender': genderSearch})
                 if(category !== null){
                     const location = `/categories/${category.name}&${category.gender}`
              
@@ -356,7 +356,7 @@ const search = async (req, res) => {
         break;
         case 'subCategory': {
             if(search !== "" && typeSearch !== "" && genderSearch !== "") {
-                const subCategory = await SubCategory.findOne({'name': search, 'gender': genderSearch})
+                const subCategory = await SubCategory.findOne({'name':  {$regex: new RegExp("^" + search , "i") }, 'gender': genderSearch})
                 const category = await Category.findById(subCategory.categoryId)
                 if(category !== null && subCategory !== null) {
                     const location = `/categories/${category.name}&${category.gender}`
@@ -370,8 +370,7 @@ const search = async (req, res) => {
         break;
         case 'profile': {
             if(search !== "" && typeSearch !== "") {
-                const profile = await Profile.findOne({'userName': search})
-                 console.log(profile)
+                const profile = await Profile.findOne({'userName':  {$regex: new RegExp("^" + search , "i") }})
                 if(profile !== null){
                     const location = `/users/${profile.userName}`
 

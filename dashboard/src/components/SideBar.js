@@ -3,20 +3,6 @@ import {Link} from "react-router-dom";
 import styled from 'styled-components';
 
 function SideBar() {
-
-  const menuitems = document.querySelectorAll("li");
-  const[currentIndex,setCurrentIndex] = useState(0);
-
-  const handlerSelectItem = (index)=>{
-    if(index !== currentIndex){
-      menuitems.forEach((item)=>{
-        item.classList.remove("active-item");
-      })
-      setCurrentIndex(index);
-      menuitems[index].classList.add("active-item");
-    }
-  };
-
   return (
     <SideBarStyle>
         <TopStyle>
@@ -25,31 +11,31 @@ function SideBar() {
         </TopStyle>
         <CenterStyle>
           <ul>
-            <StyledLink to="/home"  onClick={()=> handlerSelectItem(0)}>
+            <StyledLink to="/home">
               <li>
                   <span className="material-icons-sharp">dashboard</span>
                   <h3>Dashboard</h3>
               </li>
             </StyledLink>
-              <StyledLink to="/categories" onClick={()=> handlerSelectItem(1)}>
+              <StyledLink to="/categories">
                 <li>
                     <span className="material-icons-sharp">category</span>
                     <h3>Categories</h3>
                 </li>
               </StyledLink>
-            <StyledLink to="/users"  onClick={()=> handlerSelectItem(2)}>
+            <StyledLink to="/users">
               <li>
                   <span className="material-icons-sharp">person</span>
                   <h3>Profiles</h3>
               </li>
             </StyledLink>
-            <StyledLink to="/setting"  onClick={()=> handlerSelectItem(3)}>
+            <StyledLink to="/setting">
               <li>
                   <span className="material-icons-sharp">settings</span>
                   <h3>Setting</h3>
               </li>
               </StyledLink>
-            <StyledLink to="/"  onClick={()=> localStorage.setItem('token','')}>
+            <StyledLink to="/">
               <li>
                   <span className="material-icons-sharp">logout</span>
                   <h3>Log Out</h3>

@@ -1,5 +1,4 @@
 import React , {useContext,useState,useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -7,8 +6,6 @@ import Select from '@mui/material/Select';
 import {DarkModeContext} from '../../src/context/darkModeContext';
 
 function TopBar() {
-
-    let navigate = useNavigate();
     const {dispatch} = useContext(DarkModeContext);
     const[nameAndImageAdmin,setNameAndImageAdmin] = useState("");
     const[search,setSearch] = useState("");
@@ -98,9 +95,10 @@ function TopBar() {
                             </Select>
                         </FormControl>
                     </div>
-                    <div className="select-box">
+                    <div className="select-box" >
                         <FormControl sx={{minWidth: 150 }} size="small">
                             <Select
+                            disabled={searchType === "category" || searchType === "subCategory" ? false : true}
                             value={genderType}
                             onChange={handleChangeGender}
                             displayEmpty
