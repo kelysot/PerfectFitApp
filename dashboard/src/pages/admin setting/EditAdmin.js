@@ -109,6 +109,18 @@ const EditAdminStyle = styled.div`
   min-height: 40rem;
   border-radius:15px;
 
+  @media screen and (max-width: 1400px) {
+    width: 94%;
+    min-height: 34rem;
+    height: 40rem;
+  }
+
+  @media screen and (max-width: 1280px) {
+    width: 90%;
+    min-height: 34rem;
+    height: 34rem;
+  }
+
   .editAdminContainer{
     flex:6 ;
     background-color: #f8f0e8a6;

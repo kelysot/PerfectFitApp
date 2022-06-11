@@ -85,6 +85,18 @@ const ContainerStyle = styled.div`
   align-items: center;
   box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.18);
 
+  @media screen and (max-width: 1400px) {
+    width: 94%;
+    min-height: 34rem;
+    height: 40rem;
+  }
+
+  @media screen and (max-width: 1280px) {
+    width: 90%;
+    min-height: 34rem;
+    height: 34rem;
+  }
+
   form{
     align-items: center;
     display: flex;

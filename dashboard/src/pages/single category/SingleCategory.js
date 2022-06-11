@@ -80,12 +80,12 @@ function SingleCategory() {
               <div className='right'>
                 <h1 className='title'>Comparison between a parallel category  &amp; Top profiles in the category</h1>
                 <div className='charts'>
-                  <BarChart width={320} height={180} data={amounts.parallelCategory}>
+                  <BarChart width={300} height={180} data={amounts.parallelCategory}>
                     <XAxis dataKey="name" />
                     <YAxis allowDecimals={false} padding={{ top: 20, bottom: 2}} />
                     <Bar dataKey="count" fill="#9665C1" />
                   </BarChart>
-                  <BarChart width={400} height={180} data={amounts.topProfilesChart}>
+                  <BarChart width={300} height={180} data={amounts.topProfilesChart}>
                     <XAxis dataKey="name" />
                     <YAxis allowDecimals={false}  padding={{ top: 20, bottom: 2}} />
                     <Bar dataKey="count" fill="#9665C1" />
@@ -126,6 +126,18 @@ const SingleCategoryStyle = styled.div`
   min-height: 40rem;
   border-radius:15px;
 
+  @media screen and (max-width: 1400px) {
+    width: 94%;
+    min-height: 34rem;
+    height: 40rem;
+  }
+
+  @media screen and (max-width: 1280px) {
+    width: 90%;
+    min-height: 34rem;
+    height: 34rem;
+  }
+
   .title{
     font-size:16px;
     color: #8a93ec;
@@ -151,12 +163,20 @@ const SingleCategoryStyle = styled.div`
       width: 100%;
       justify-content: space-evenly;
 
+      @media screen and (max-width: 1400px) {
+        gap: 20px;
+      }
+
       .left{
         box-shadow: -7px 6px 4px rgb(0 0 0 / 7%);
         border-radius:15px;
         background-color:#ffffffe8;
         position: relative;
         padding: 8px;
+
+        @media screen and (max-width: 1400px) {
+          padding: 6px;
+        }
 
         .editButton{
           position: absolute;
@@ -182,6 +202,11 @@ const SingleCategoryStyle = styled.div`
             width: 150px;
             object-fit: cover;
             border-radius: 50%;
+
+            @media screen and (max-width: 1400px) {
+              height: 100px;
+              width: 100px;
+            }
           }
 
           .details{
@@ -189,6 +214,10 @@ const SingleCategoryStyle = styled.div`
               margin: 10px 0px 30px 0px;
               color: var(--color-dark-variant);
               font-size: 30px;
+
+              @media screen and (max-width: 1400px) {
+                font-size: 22px;
+              }
             }
 
             .detailsItem{
@@ -199,11 +228,19 @@ const SingleCategoryStyle = styled.div`
                 color: gray;
                 font-size: 16px;
                 margin-right: 5px;
+
+                @media screen and (max-width: 1400px) {
+                  font-size: 14px;
+                }
               }
 
               .item-value{
                 font-size: 16px;
                 color: gray;
+
+                @media screen and (max-width: 1400px) {
+                  font-size: 14px;
+                }
               }
             }
           }
@@ -216,6 +253,10 @@ const SingleCategoryStyle = styled.div`
         background-color:#ffffffe8;
         align-items: center;
         padding: 10px;
+
+        @media screen and (max-width: 1400px) {
+          padding: 8px;
+        }
 
         .charts{
           display:flex;

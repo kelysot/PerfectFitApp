@@ -55,6 +55,9 @@ const SideBarStyle = styled.div`
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   min-width: 12.5rem;
+
+  @media screen and (max-width: 1400px) {
+  }
 `;
 
 const TopStyle = styled.div`
