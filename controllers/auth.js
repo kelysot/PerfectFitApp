@@ -34,7 +34,7 @@ const register = async (req, res) => {
         const user = User({
             'email': email,
             'password': hashPwd,
-            'type': "client", //need to think how we create admin account.
+            'type': "client",
             'isConnected': "true"
         })
         const accessToken = await jwt.sign(
@@ -48,7 +48,6 @@ const register = async (req, res) => {
             process.env.REFRESH_TOKEN_SECRET
         )
 
-        console.log("the token: " + accessToken)
         user.tokens = [accessToken, refreshToken]
 
         newUser = await user.save();
@@ -78,14 +77,6 @@ const login = async (req, res) => {
 
         user.isConnected = "true"
         await user.save()
-        // user.save((error, user) => {
-        //     if (error) {
-        //         res.status(400).send({
-        //             'status': 'fail',
-        //             'error': error.message
-        //         })
-        //     }
-        // })
 
         const accessToken = await jwt.sign(
             { 'id': user._id },
@@ -98,13 +89,7 @@ const login = async (req, res) => {
             process.env.REFRESH_TOKEN_SECRET
         )
 
-
-
-        console.log("the token: " + accessToken)
-        // if (user.tokens == null)
-        //TODO: send the two tokens: access and refresh
         user.tokens = [accessToken, refreshToken]
-        // else user.tokens.push(refreshToken)
         await user.save()
 
         res.status(200).send({
@@ -136,7 +121,6 @@ const getUser = async (req, res) => {
             'status': 'fail',
             'error': err.message
         })
-        console.log("--------------- " + err.message)
     }
 }
 
@@ -153,7 +137,7 @@ const logout = async (req, res) => {
             if (user == null) return res.status(403).send('invalid request')
             if (!user.tokens.includes(token)) {
                 user.isConnected = "false"
-                user.tokens = [] //invalidate all user token
+                user.tokens = []
                 await user.save()
                 return res.status(403).send('invalid request')
             }
@@ -180,13 +164,10 @@ const refreshToken = async (req, res) => {
         if (err) return res.status(403).send(err.message)
         const userId = userInfo.id
         try {
-            console.log("**************")
-            console.log("the userId = " + userId)
             const user = await User.findById(userId)
             if (user == null) return res.status(403).send('invalid request')
             if (!user.tokens.includes(token)) {
-                console.log("delete the tokens!!!")
-                user.tokens = [] //invalidate all user tokens
+                user.tokens = []
                 await user.save()
                 return res.status(403).send('invalid request')
 
@@ -202,14 +183,6 @@ const refreshToken = async (req, res) => {
             )
 
             user.tokens = [accessToken, refreshToken]
-            console.log("the tokens: ")
-            console.log("access = " + accessToken)
-            console.log("refresh = " + refreshToken)
-            console.log("the user is:")
-            console.log(user)
-            //TODO: maybe we need to save the tokens by add them tp the tokens array.
-
-            // user.tokens[user.tokens.indexOf(token)] = refreshToken
             await user.save()
             res.status(200).send({ 'accessToken': accessToken, 'refreshToken': refreshToken });
         } catch (err) {
@@ -220,9 +193,7 @@ const refreshToken = async (req, res) => {
 
 const checkIfEmailExist = async (req, res) => {
     const email = req.params.email
-    console.log(email)
     const exist = await User.findOne({ 'email': email })
-    console.log(exist)
     if (exist != null) {
         return res.status(400).send({
             'status': 'fail',
@@ -308,8 +279,6 @@ const editUser = async (req, res) => {
 const resetPassword = async (req, res) => {
     var randomCode = getRandomInt()
 
-    console.log(randomCode)
-
     var text = "Hi, your new code to PerfectFit app is " + String(randomCode)
 
     await SendEmail(req.params.email, "Reset Password - PerfectFit", text)
@@ -329,7 +298,6 @@ function getRandomInt() {
 const changePassword = async (req, res) => {
     const user = req.body
     var email = req.body.email
-    console.log(email)
 
     const password = req.body.password
     const salt = await bcrypt.genSalt(10)
@@ -344,10 +312,7 @@ const changePassword = async (req, res) => {
 
     try {
         const editUser = await User.findOne({ 'email': email })
-        console.log(editUser)
         editUser.password = hashPwd
-
-        console.log(editUser)
 
         editUser.save((error, editUser) => {
             if (error) {

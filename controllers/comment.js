@@ -158,7 +158,6 @@ const deleteComment = async (req, res) => {
                         })
                     } else {
                         res.status(200)
-                        return
                     }
                 })
             }
