@@ -66,8 +66,7 @@ const addNewPost = async (req, res) => {
     const profile = await Profile.findOne({ userName: { $eq: profileUserName } })
 
     const post = Post({
-        // profileId: profile._id,
-        profileId: req.body.profileId, // the profileId here it's the userName of the ptofile!
+        profileId: req.body.profileId, // the profileId here it's the userName of the profile!
         description: req.body.description,
         productName: req.body.productName,
         sku: req.body.sku,
@@ -87,7 +86,6 @@ const addNewPost = async (req, res) => {
         isDeleted: req.body.isDeleted,
     })
 
-    //TODO: findOne instead of find:
     const subCategories = await SubCategory.find({ 'name': post.subCategoryId, 'gender': profile.gender })
     if (subCategories[0].posts == undefined && subCategories[0].posts == null) {
         subCategories[0].posts = []
@@ -215,20 +213,7 @@ const deletePost = async (req, res) => {
                 res.status(200).send()
             }
         })
-        // PostToDelete.remove((error) => {
-        //     if (error) {
-        //         res.status(400).send({
-        //             'status': 'fail',
-        //             'error': error.message
-        //         })
-        //     }
-        //     else {
-        //         res.status(200).send({
-        //             'status': 'OK',
-        //             'message': 'The post was deleted successfully'
-        //         })
-        //     }
-        // })
+
     } catch (err) {
         res.status(400).send({
             'status': 'fail',
@@ -236,39 +221,7 @@ const deletePost = async (req, res) => {
         })
     }
 
-    // const profile = await Profile.findOne({ userName: profileId })
-    // var array = profile.myPostsListId
-    // let index = array.indexOf(thePostId)
-    // if (index > -1) {
-    //     array.splice(index, 1);
-    // }
-
-    // profile.myPostsListId = array
-
-    // profile.save((error) => {
-    //     if (error) {
-    //         res.status(400).send({
-    //             'status': 'fail',
-    //             'error': error.message
-    //         })
-    //     } else {
-    //         res.status(200)
-    //     }
-    // })
 }
-
-// const getWishList = async (req, res) => {
-
-//     const wishListId = req.params.wishListId
-//     console.log("we are hereeeeeee")
-//     var list = await Post.find()
-
-//     const array = await list.find({_id: {$in:wishListId}});// can't reach the postId
-//     //TODO: return all the relevant posts
-
-//     console.log("we are hereeeeeee")
-
-// }
 
 const getWishList = async (req, res) => {
 
@@ -285,7 +238,7 @@ const getWishList = async (req, res) => {
         const profile = await Profile.findOne({ userName: { $eq: userName } })
         const theList = profile.wishlist
 
-        var theReturnList = await Post.find({ '_id': { $in: theList }, "isDeleted": false})
+        var theReturnList = await Post.find({ '_id': { $in: theList }, "isDeleted": false })
         res.status(200).send(theReturnList)
 
     } catch (err) {
@@ -390,9 +343,9 @@ const getSuitablePosts = async (req, res) => {
         var profiles = null
         // find all the profiles with the same bodyType and gender
         if (gender != "None") {
-            profiles = await Profile.find({ bodyType: { $eq: bodyType }, gender: { $eq: gender }, isDeleted: {$ne: true}})
+            profiles = await Profile.find({ bodyType: { $eq: bodyType }, gender: { $eq: gender }, isDeleted: { $ne: true } })
         } else {
-            profiles = await Profile.find({ bodyType: { $eq: bodyType }, isDeleted: {$ne: true}})
+            profiles = await Profile.find({ bodyType: { $eq: bodyType }, isDeleted: { $ne: true } })
         }
 
         let profilesNamesArr = [];
@@ -438,7 +391,7 @@ const getSuitablePosts = async (req, res) => {
 
                 let thePearson = pearson(vector1, vector2)
 
-                if (thePearson > 0.965) { //TODO: check the threshold
+                if (thePearson > 0.965) {
                     postsForSend.push(posts[t])
                     if (similarProfileId.length == 100) {
                         similarProfileId.slice(1, 100)
@@ -454,14 +407,11 @@ const getSuitablePosts = async (req, res) => {
 
         // need to update the similarProfileId
         // we can decide that every week or month we delete this list so we could check the people again if 
-        // somthing has changed. 
+        // something has changed. 
 
         profile.similarProfileId = similarProfileId
 
-        // console.log("the similar profiles to me: " + similarProfileId)
-
-        //TODO: posts of shoes: 
-        // we take the avarage size the profile wrote to the system, and choose size-1 and size+1 posts.
+        // we take the average size the profile wrote to the system, and choose size-1 and size+1 posts.
 
         let finalList = []
         let shoeSize = parseInt(profile.foot)
@@ -583,8 +533,6 @@ const getSearchPosts = async (req, res) => {
     const price = map.Price
     let priceFrom, priceTo
 
-    console.log("------------------------------------------------------------------")
-
     if (price[0] != "false") {
         priceFrom = parseInt(price[0])
     }
@@ -600,7 +548,6 @@ const getSearchPosts = async (req, res) => {
 
 
     let genderList = []
-    console.log("the size of gender: " + gender.length)
 
     if (gender.length > 0) {
         genderList.push(gender[0])
@@ -613,7 +560,7 @@ const getSearchPosts = async (req, res) => {
         genderList.push("Male")
     }
 
-    // // BodyType and Gender
+    // BodyType and Gender
 
     // first we find all the relevant profiles:
 
@@ -622,26 +569,21 @@ const getSearchPosts = async (req, res) => {
 
     let posts
 
-    if (count == "true") { // it means that no category was choosen - we need to send all the posts. 
-        posts = await Post.find({'isDeleted': false})
+    if (count == "true") { // it means that no category was chosen - we need to send all the posts. 
+        posts = await Post.find({ 'isDeleted': false })
     }
     else {
 
-        const profiles = await Profile.find({ 'bodyType': { $in: bodyTypes }, 'gender': { $in: genderList }, isDeleted: {$ne: true} })
+        const profiles = await Profile.find({ 'bodyType': { $in: bodyTypes }, 'gender': { $in: genderList }, isDeleted: { $ne: true } })
         let profilesId = []
 
         // save the userNames of the relevant profiles: 
         for (let j = 0; j < profiles.length; j++) {
             profilesId.push(profiles[j].userName)
         }
-
-        console.log("th profilesId is: " + profilesId)
-
         posts = await Post.find({ 'size': { $in: sizes }, 'categoryId': { $in: categories }, 'color': { $in: colors }, 'company': { $in: companies }, 'profileId': { $in: profilesId }, 'isDeleted': false })
 
     }
-
-    console.log("the size after sizes: " + posts.length)
 
     //check the price 
 
@@ -683,86 +625,6 @@ const getSearchPosts = async (req, res) => {
         })
     }
 }
-
-//////////////
-
-
-// const getSearchPosts = async (req, res) => {
-
-//     const map = req.body
-
-//     const sizes = map.Sizes
-//     const categories = map.Categories
-//     const colors = map.Colors
-//     const companies = map.Companies
-//     const bodyTypes = map.BodyTypes
-//     const count = map.Count
-//     const price = map.Price
-//     let priceFrom, priceTo
-
-//     if (price[0] != "false") {
-//         priceFrom = parseInt(price[0])
-//     }
-//     else {
-//         priceFrom = price[0] // = false
-//     }
-//     if (price[1] != "false") {
-//         priceTo = parseInt(price[1])
-//     }
-//     else {
-//         priceTo = price[1] // = false
-//     }
-
-//     let posts
-
-//     if (count == "true") { // it means that no category was choosen - we need to send all the posts. 
-//         posts = await Post.find({})
-//     }
-//     else {
-//         posts = await Post.find({ 'size': { $in: sizes }, 'categoryId': { $in: categories }, 'color': { $in: colors }, 'company': { $in: companies } })
-//     }
-
-//     let postsToSned = []
-
-
-//     if (priceFrom != "false" && priceTo != "false") {
-//         for (let i = 0; i < posts.length; i++) {
-//             if (posts[i].price >= priceFrom && posts[i].price <= priceTo) {
-//                 postsToSned.push(posts[i])
-//             }
-//         }
-//     }
-//     else if (priceFrom == "false" && priceTo != "false") {
-//         console.log("we are here now 1")
-//         for (let i = 0; i < posts.length; i++) {
-//             if (posts[i].price <= priceTo) {
-//                 postsToSned.push(posts[i])
-//             }
-//         }
-//     }
-//     else if (priceFrom != "false" && priceTo == "false") {
-//         console.log("we are here now 2")
-//         for (let i = 0; i < posts.length; i++) {
-//             if (posts[i].price >= priceFrom) {
-//                 postsToSned.push(posts[i])
-//             }
-//         }
-//     }
-//     else if (priceFrom == "false" && priceTo == "false") {
-//         postsToSned = posts
-//     }
-
-//     postsToSned = postsToSned.reverse()
-
-//     try {
-//         res.status(200).send(postsToSned)
-//     } catch (err) {
-//         res.status(400).send({
-//             'status': 'failure',
-//             'error': err.message
-//         })
-//     }
-// }
 
 
 const general = async (req, res) => {

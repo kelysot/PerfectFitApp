@@ -31,7 +31,6 @@ if (process.env.NODE_ENV == "development") {
 app.use(bodyParser.urlencoded({ extended: true, limit: '1m' }))
 app.use(bodyParser.json())
 
-// {useNewUrlParser : true}
 mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection
 db.on('error', error => { console.error(error) })
@@ -51,42 +50,40 @@ function deleteSimilar() {
     (function loop() {
 
         var now = new Date()
-        var currentMonth =  parseInt(now.getMonth())
-    
-        if(currentMonth == 11){
-            if(compareMonth == 0){
+        var currentMonth = parseInt(now.getMonth())
+
+        if (currentMonth == 11) {
+            if (compareMonth == 0) {
                 deleteSimilarProfile()
                 compareMonth = currentMonth
                 console.log("inside1")
             }
         }
-        else if(currentMonth > compareMonth) {
+        else if (currentMonth > compareMonth) {
             deleteSimilarProfile().then(
                 console.log("inside")
             )
             compareMonth = currentMonth
         }
 
-        now = new Date();                  
-        var delay = 60000 - (now % 60000); 
-        // setTimeout(loop, delay);
+        now = new Date();
+        var delay = 60000 - (now % 60000);
         setTimeout(loop, 86400000); // delay of a day
 
-        // maybe need setInterval
     })();
 }
 
-async function getProfiles(){
+async function getProfiles() {
     let profiles = Profile.find({})
     return profiles
 }
 
 
-async function deleteSimilarProfile(){ // delete every month the similarProfiles arrays
+async function deleteSimilarProfile() { // delete every month the similarProfiles arrays
 
     let profiles = await getProfiles()
 
-    for(let i=0; i<profiles.length; i++){
+    for (let i = 0; i < profiles.length; i++) {
         profiles[i].similarProfileId = []
         profiles[i].save((error) => {
             if (error) {
@@ -102,52 +99,6 @@ async function deleteSimilarProfile(){ // delete every month the similarProfiles
 
     return true;
 }
-
-
-
-///////////////////////////////////////////////////////
-
-
-
-
-// // Include the node file module
-// var fs = require('fs');
-
-// storage = multer.diskStorage({
-//     destination: './uploads/',
-//     filename: function (req, file, cb) {
-//         return crypto.pseudoRandomBytes(16, function (err, raw) {
-//             if (err) {
-//                 return cb(err);
-//             }
-//             return cb(null, "" + (raw.toString('hex')) + (path.extname(file.originalname)));
-//         });
-//     }
-// });
-
-
-// // Post files
-// app.post("/upload/",
-//     multer({
-//         storage: storage
-//     }).single('upload'), function (req, res) {
-//         console.log(req.file);
-//         console.log(req.body);
-//         res.redirect("/uploads/" + req.file.filename);
-//         console.log(req.file.filename);
-//         return res.status(200).end();
-//     });
-
-// app.get('/upload/:upload', function (req, res) {
-//     file = req.params.upload;
-//     console.log(req.params.upload);
-//     var img = fs.readFileSync(__dirname + "/uploads/" + file);
-//     res.writeHead(200, { 'Content-Type': 'image/png' });
-//     res.end(img, 'binary');
-
-// });
-
-// app.use('/uploadsAdmin',express.static(__dirname + '/uploads'))
 
 /////////////////////////////// Routers ///////////////////////////////
 

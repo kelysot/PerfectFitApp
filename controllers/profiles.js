@@ -467,21 +467,6 @@ const deleteProfile = async (req, res) => {
             }
         })
 
-        // profileToDelete.remove((error) => {
-        //     if (error) {
-        //         res.status(400).send({
-        //             'status': 'fail',
-        //             'error': error.message
-        //         })
-        //     }
-        //     else {
-        //         res.status(200).send({
-        //             'status': 'OK',
-        //             'message': 'The profile was deleted successfully'
-        //         })
-        //     }
-        // })
-
         //Second, we remove from the user itself:
 
         const newUser = await User.findOne({ 'email': email })
