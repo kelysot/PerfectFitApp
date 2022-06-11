@@ -6,7 +6,6 @@ import TopBar from '../../components/TopBar';
 import styled from "styled-components";
 
 function NewCategory() {
-  // const[image,setImage] = useState("");
   let navigate = useNavigate();
   const [newCategory, setNewCategory] = useState({
     name: "",
@@ -49,7 +48,6 @@ function NewCategory() {
         <div className="bottom">
           <div className="left">
             <img src={newCategory.pictureUrl ? newCategory.pictureUrl : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}></img>
-            {/* <img src= {image ? URL.createObjectURL(image) : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"}></img> */}
           </div>
           <div className="right">
             <form onSubmit={(e) => submit(e)}>
@@ -69,10 +67,6 @@ function NewCategory() {
                   <option value="Female">Female</option>
                 </select>
               </div>
-              {/* <div className="formInput">
-                  <label htmlFor="file">Add Image<span className="material-icons-sharp">file_upload</span></label>
-                  <input type="file" onChange={(e) => setImage(e.target.files[0])} id="file" style={{display:"none"}}></input>
-                </div> */}
               <button>Save</button>
             </form>
           </div>

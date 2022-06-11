@@ -34,7 +34,7 @@ function Profiles() {
     </ProfilesStyle>
   )
 };
-//TODO: image from camera have "/" wrong direction 
+
 const columns = [
     { field: 'id', headerName: 'ID', width: 50 },
     { field: 'options' , headerName: 'Image',

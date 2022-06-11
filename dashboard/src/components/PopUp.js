@@ -3,7 +3,6 @@ import styled from "styled-components";
 import axios from 'axios';
 
 function PopUp(props) {
-  //TODO: function
     const deleteRow = () => {
     let location = window.location.href;
     if(!location.includes('&')){
