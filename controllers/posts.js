@@ -391,7 +391,7 @@ const getSuitablePosts = async (req, res) => {
 
                 let thePearson = pearson(vector1, vector2)
 
-                if (thePearson > 0.965) {
+                if (thePearson > 0.981) {
                     postsForSend.push(posts[t])
                     if (similarProfileId.length == 100) {
                         similarProfileId.slice(1, 100)

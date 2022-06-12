@@ -114,6 +114,8 @@ const SingleProfileStyle = styled.div`
 
   @media screen and (max-width: 1280px) {
     width: 90%;
+    min-height: 34rem;
+    height: 34rem;
   }
 
   .singleContainer{
@@ -139,7 +141,7 @@ const SingleProfileStyle = styled.div`
             
             @media screen and (max-width: 1280px) {
               width: 320px;
-              height: 400px;
+              height: 380px;
             }
 
             .image-box{
@@ -155,8 +157,8 @@ const SingleProfileStyle = styled.div`
               overflow: hidden;
 
               @media screen and (max-width: 1280px) {
-                width: 160px;
-                height: 160px;
+                width: 140px;
+                height: 140px;
               }
 
               img{
@@ -227,7 +229,7 @@ const SingleProfileStyle = styled.div`
 
             @media screen and (max-width: 1280px) {
               width: 450px;
-              height: 400px;
+              height: 380px;
             }
           }
         }

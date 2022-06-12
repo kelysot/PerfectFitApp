@@ -162,6 +162,11 @@ const EditAdminStyle = styled.div`
           width: 22rem;
           object-fit: cover;
           border-radius: 20px;
+
+          @media screen and (max-width: 1280px) {
+            width: 20rem;
+            height: 20rem;
+          }
         }
       }
 
@@ -173,6 +178,11 @@ const EditAdminStyle = styled.div`
         box-shadow: 0px 0px 15px 1px rgb(0 0 0 / 18%);
         border-radius: 18px;
         padding: 1rem;
+
+        @media screen and (max-width: 1280px) {
+          width: 20rem;
+          height: 20rem;
+        }
 
         h3{
           font-size: 30px;

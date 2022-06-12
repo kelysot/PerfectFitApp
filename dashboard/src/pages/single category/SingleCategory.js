@@ -81,15 +81,15 @@ function SingleCategory() {
                 <h1 className='title'>parallel category  &amp; Top profiles in the category</h1>
                 <div className='charts'>
                 <ResponsiveContainer  aspect={1.1/1} width={'100%'}>
-                  <BarChart barSize={30} data={amounts.parallelCategory} width={200}>
-                    <XAxis dataKey="name" tick={{fontSize: 12}} />
+                  <BarChart barSize={30} data={amounts.parallelCategory} width={200}  >
+                    <XAxis dataKey="name" tick={{fontSize: 12}}  interval={0} />
                     <YAxis allowDecimals={false} padding={{ top: 20, bottom: 2}} />
                     <Bar dataKey="count" fill="#9665C1" />
                   </BarChart>
                 </ResponsiveContainer>
                 <ResponsiveContainer aspect={1.1/1} width={'100%'}>
-                  <BarChart barSize={30} data={amounts.topProfilesChart}>
-                    <XAxis dataKey="name" tick={{fontSize: 12}} />
+                  <BarChart barSize={30} data={amounts.topProfilesChart} >
+                    <XAxis dataKey="name" tick={{fontSize: 12}} interval={0} />
                     <YAxis allowDecimals={false}  padding={{ top: 20, bottom: 2}} />
                     <Bar dataKey="count" fill="#9665C1" />
                   </BarChart>
@@ -282,6 +282,7 @@ const SingleCategoryStyle = styled.div`
     .bottom{
       width: 90%;
       box-shadow: -7px 6px 4px rgb(0 0 0 / 7%);
+
       .css-3ihp42-MuiDataGrid-root{
         height: 22rem;
 
@@ -291,6 +292,19 @@ const SingleCategoryStyle = styled.div`
 
         @media screen and (max-width: 1400px) {
           height: 10rem;  
+        }
+      }
+
+      .eHPpbu .css-f3jnds-MuiDataGrid-columnHeaders{
+        @media screen and (max-width: 1550px) {
+          min-height: 40px !important;
+          max-height: 0px !important;
+        }
+      }
+
+      .eHPpbu .css-1jbbcbn-MuiDataGrid-columnHeaderTitle{
+        @media screen and (max-width: 1550px) {
+          font-size: 14px;
         }
       }
     }
