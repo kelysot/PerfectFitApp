@@ -152,6 +152,9 @@ const WrapperStyle = styled.div`
         border: none;
         font-size:1rem;
         background-color:white;
+        @media screen and (max-width: 1280px) {
+         width: 14rem;
+        }
 
         span{
             color: var(--color-primary-purple);
@@ -170,6 +173,9 @@ const WrapperStyle = styled.div`
         display: flex;
         color: var(--color-dark-variant);
         gap:1rem;
+        @media screen and (max-width: 1280px) {
+         font-size: 13px;
+        }
 
         img{
             height:58px;
@@ -177,6 +183,10 @@ const WrapperStyle = styled.div`
             border-radius:50%;
             object-fit: cover;
             border: 0.5px solid var(--color-dark-variant);
+            @media screen and (max-width: 1280px) {
+                height:48px;
+                width:48px;
+            }
         }
     }
 

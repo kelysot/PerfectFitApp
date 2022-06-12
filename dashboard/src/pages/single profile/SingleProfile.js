@@ -114,8 +114,6 @@ const SingleProfileStyle = styled.div`
 
   @media screen and (max-width: 1280px) {
     width: 90%;
-    min-height: 34rem;
-    height: 34rem;
   }
 
   .singleContainer{
