@@ -125,6 +125,11 @@ const SettingStyle = styled.div`
           width: 22rem;
           object-fit: cover;
           border-radius: 20px;
+
+          @media screen and (max-width: 1280px) {
+            height: 20rem;
+            width: 20rem;
+          }
         }
       }
 
@@ -136,6 +141,11 @@ const SettingStyle = styled.div`
         box-shadow: 0px 0px 15px 1px rgb(0 0 0 / 18%);
         border-radius: 18px;
         padding: 1rem;
+
+        @media screen and (max-width: 1280px) {
+          height: 20rem;
+          width: 23rem;
+        }
         
         h3{
           font-size: 30px;

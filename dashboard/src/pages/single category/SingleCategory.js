@@ -1,6 +1,6 @@
 import React , {useEffect , useState} from 'react';
 import { Link } from 'react-router-dom';
-import { BarChart, Bar, XAxis, YAxis} from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer} from 'recharts';
 import Table from '../../components/Table';
 import SideBar from "../../components/SideBar";
 import TopBar from "../../components/TopBar";
@@ -78,23 +78,27 @@ function SingleCategory() {
                 </div>
               </div>
               <div className='right'>
-                <h1 className='title'>Comparison between a parallel category  &amp; Top profiles in the category</h1>
+                <h1 className='title'>parallel category  &amp; Top profiles in the category</h1>
                 <div className='charts'>
-                  <BarChart width={300} height={180} data={amounts.parallelCategory}>
-                    <XAxis dataKey="name" />
+                <ResponsiveContainer  aspect={1.1/1} width={'100%'}>
+                  <BarChart barSize={30} data={amounts.parallelCategory} width={200}>
+                    <XAxis dataKey="name" tick={{fontSize: 12}} />
                     <YAxis allowDecimals={false} padding={{ top: 20, bottom: 2}} />
                     <Bar dataKey="count" fill="#9665C1" />
                   </BarChart>
-                  <BarChart width={300} height={180} data={amounts.topProfilesChart}>
-                    <XAxis dataKey="name" />
+                </ResponsiveContainer>
+                <ResponsiveContainer aspect={1.1/1} width={'100%'}>
+                  <BarChart barSize={30} data={amounts.topProfilesChart}>
+                    <XAxis dataKey="name" tick={{fontSize: 12}} />
                     <YAxis allowDecimals={false}  padding={{ top: 20, bottom: 2}} />
                     <Bar dataKey="count" fill="#9665C1" />
                   </BarChart>
+                </ResponsiveContainer>
                 </div>
               </div>
             </div>
             <div className='bottom'>
-              <Table categoriesData={subCategoryData} addNew={singleCategory.isDeleted ? false : true} action={'subCategories'} columns={columns} title={'SubCategory List'} height={26} link={`/categories/newSubCategory/${location}`}/>
+              <Table style={{height: '100%'}} categoriesData={subCategoryData} addNew={singleCategory.isDeleted ? false : true} action={'subCategories'} columns={columns} title={'SubCategory List'} height={26} link={`/categories/newSubCategory/${location}`}/>
             </div>
           </div>
           </>)}
@@ -163,8 +167,8 @@ const SingleCategoryStyle = styled.div`
       width: 100%;
       justify-content: space-evenly;
 
-      @media screen and (max-width: 1400px) {
-        gap: 20px;
+      @media screen and (max-width: 1280px) {
+        height: 13.5rem;
       }
 
       .left{
@@ -173,6 +177,11 @@ const SingleCategoryStyle = styled.div`
         background-color:#ffffffe8;
         position: relative;
         padding: 8px;
+        width: 30rem;
+
+        @media screen and (max-width: 1280px) {
+          width: 25rem;
+        }
 
         @media screen and (max-width: 1400px) {
           padding: 6px;
@@ -204,8 +213,8 @@ const SingleCategoryStyle = styled.div`
             border-radius: 50%;
 
             @media screen and (max-width: 1400px) {
-              height: 100px;
-              width: 100px;
+              height: 80px;
+              width: 80px;
             }
           }
 
@@ -217,6 +226,7 @@ const SingleCategoryStyle = styled.div`
 
               @media screen and (max-width: 1400px) {
                 font-size: 22px;
+                margin: 10px 0px 10px 0px;
               }
             }
 
@@ -253,6 +263,11 @@ const SingleCategoryStyle = styled.div`
         background-color:#ffffffe8;
         align-items: center;
         padding: 10px;
+        width: 30rem;
+
+        @media screen and (max-width: 1280px) {
+          width: 25rem;
+        }
 
         @media screen and (max-width: 1400px) {
           padding: 8px;
@@ -265,10 +280,20 @@ const SingleCategoryStyle = styled.div`
     }
 
     .bottom{
-      width: 97.5%;
+      width: 90%;
       box-shadow: -7px 6px 4px rgb(0 0 0 / 7%);
-    }
+      .css-3ihp42-MuiDataGrid-root{
+        height: 22rem;
 
+        @media screen and (max-width: 1550px) {
+          height: 10rem;  
+        }
+
+        @media screen and (max-width: 1400px) {
+          height: 10rem;  
+        }
+      }
+    }
   }
 `
 

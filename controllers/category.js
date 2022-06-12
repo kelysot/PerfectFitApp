@@ -82,7 +82,6 @@ const editCategory = async (req, res) => {
         })
     }
     try {
-        //TODO: edit only the name of the category and the picture + nav to new category page
         const editCategory = await Category.findById(req.params.id)
         editCategory.name = req.body.name
         editCategory.pictureUrl = req.body.pictureUrl

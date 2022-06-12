@@ -75,7 +75,6 @@ const register = async (req, res) => {
             process.env.REFRESH_TOKEN_SECRET
         )
 
-        console.log("the token: " + accessToken)
         admin.tokens = [accessToken, refreshToken]
 
         newAdmin = await admin.save();
@@ -116,13 +115,7 @@ const login = async (req, res) => {
             process.env.REFRESH_TOKEN_SECRET
         )
 
-
-
-        console.log("the token: " + accessToken)
-        // if (user.tokens == null)
-        //TODO: send the two tokens: access and refresh
         admin.tokens = [accessToken, refreshToken]
-        // else user.tokens.push(refreshToken)
         await admin.save()
 
         res.status(200).send({
@@ -136,7 +129,6 @@ const login = async (req, res) => {
 }
 
 const editAdminDetails = async (req, res) => {
-    console.log("ok")
     try{
         const editAdmin = await Admin.findOne()
         editAdmin.name = req.body.name
@@ -331,5 +323,4 @@ module.exports = {
     getAdminData,
     updateData,
     editAdminDetails
-    // refreshToken
 }

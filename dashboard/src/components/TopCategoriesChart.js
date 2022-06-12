@@ -64,6 +64,14 @@ const TopStyle = styled.div`
 const BottomStyle = styled.div`
   width:100% ;
   aspect-ratio: 1.6/1;
+
+  @media screen and (max-width: 1440px) {
+    aspect-ratio: 1.3/1;
+  }
+
+  @media screen and (max-width: 1280px) {
+    aspect-ratio: 1.3/1;
+  }
 `;
 
 

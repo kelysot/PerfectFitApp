@@ -68,7 +68,7 @@ function Table({categoriesData, title , height, columns , link , action,addNew})
           <h3 className="title">{title}</h3>
           {!addNew ? "" : <Link to={link} className={addNew ? "link" : "notLink" }>Add New </Link>} 
         </div>
-        <DataGrid style={{ height:`${height}vh`}}
+        <DataGrid
             rows={categoriesData}
             columns={action === 'categories' ? columns.concat(actionColumn) : action === 'subCategories' ? columns.concat(actionColumnSubCategory) : columns.concat(actionColumnUsers)}
             pageSize={10}
@@ -124,7 +124,19 @@ const CategoriesTableStyle = styled.div`
       }
     }
 
-    .css-1s0hp0k-MuiDataGrid-columnHeadersInner{ //div all heder of table
+    .css-3ihp42-MuiDataGrid-root{ // all table  
+      height: 39rem;
+
+      @media screen and (max-width: 1550px) {
+        height: 27rem;
+      }
+
+      @media screen and (max-width: 1280px) {
+        height: 23rem;
+      }
+    }
+
+    .css-f3jnds-MuiDataGrid-columnHeaders{ // div all the headers
       background-color: #9795ec87;
       width:100% ;
       display: flex ;

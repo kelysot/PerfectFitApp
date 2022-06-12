@@ -126,7 +126,7 @@ const SingleProfileStyle = styled.div`
           display: flex;
           justify-content: space-around;
           align-items: center;
-          height: 75vh;
+          height: 100%;
 
           .details-card{
             width: 350px;
@@ -136,6 +136,11 @@ const SingleProfileStyle = styled.div`
             border-radius: 20px;
             position: relative;
             overflow: initial;
+            
+            @media screen and (max-width: 1280px) {
+              width: 320px;
+              height: 400px;
+            }
 
             .image-box{
               position: absolute;
@@ -148,6 +153,11 @@ const SingleProfileStyle = styled.div`
               border-radius: 20px;
               box-shadow: 0 36px 44px rgb(0 0 0 / 15%);
               overflow: hidden;
+
+              @media screen and (max-width: 1280px) {
+                width: 160px;
+                height: 160px;
+              }
 
               img{
                 position: absolute;
@@ -214,6 +224,11 @@ const SingleProfileStyle = styled.div`
             background: #fff;
             box-shadow: 0 35px 80px rgba(0,0,0,0.15);
             border-radius: 20px;
+
+            @media screen and (max-width: 1280px) {
+              width: 450px;
+              height: 400px;
+            }
           }
         }
     }

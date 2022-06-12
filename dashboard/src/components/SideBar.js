@@ -6,7 +6,6 @@ function SideBar() {
   return (
     <SideBarStyle>
         <TopStyle>
-          <img src=""></img>
           <StyledLinkLogo to="/home"><h2>Perfect<span>Fit</span></h2></StyledLinkLogo>
         </TopStyle>
         <CenterStyle>
@@ -56,7 +55,8 @@ const SideBarStyle = styled.div`
   border-bottom-left-radius: 15px;
   min-width: 12.5rem;
 
-  @media screen and (max-width: 1400px) {
+  @media screen and (max-width: 1280px) {
+    min-width: 6rem;
   }
 `;
 
@@ -70,6 +70,10 @@ const TopStyle = styled.div`
   h2{
     font-size:2.5rem;
     padding-top:1rem;
+
+    @media screen and (max-width: 1280px) {
+      font-size: 1.5rem;
+    }
     span{
       color: #f3af6b;
     }
@@ -107,10 +111,14 @@ const CenterStyle = styled.div`
     width: 100%;
     border-top-left-radius: 18px;
     border-bottom-left-radius: 18px;
-
+    
     a,h3,span{
       color:var(--color-dark-variant);
       text-decoration:none; ;
+
+      @media screen and (max-width: 1280px) {
+        font-size: 15px;
+      }
     }
 
     &:hover{
@@ -139,5 +147,4 @@ const StyledLink = styled(Link)`
     color:var(--color-primary-purple);
   }
 `
-
 export default SideBar
