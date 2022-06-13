@@ -76,10 +76,10 @@ function SingleProfile() {
                 </div>
               </div>
               <div className='right'>
-              <ResponsiveContainer width="100%" height="100%">
+              <ResponsiveContainer width="100%" height="100%" aspect={1.4/1}>
                 <RadarChart cx="50%" cy="60%" outerRadius="90%" data={dataToChart.length < 3 ? data2 : dataToChart}>
                   {dataToChart.length < 3 ?  "" : <PolarGrid />}
-                  <PolarAngleAxis dataKey="categoryName" />
+                  <PolarAngleAxis dataKey="categoryName"  tick={{ fontSize: 13 }}/>
                   <PolarRadiusAxis />
                   <Radar name="Mike" dataKey="amount" stroke="#8884d8" fill="#8884d8" fillOpacity={0.5} />
                 </RadarChart>
@@ -222,14 +222,14 @@ const SingleProfileStyle = styled.div`
 
           .right {
             width: 550px;
-            height: 470px;
+            height: 430px;
             background: #fff;
             box-shadow: 0 35px 80px rgba(0,0,0,0.15);
             border-radius: 20px;
 
             @media screen and (max-width: 1280px) {
-              width: 450px;
-              height: 380px;
+              width: 500px;
+              height: 375px;
             }
           }
         }

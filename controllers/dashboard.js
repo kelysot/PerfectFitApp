@@ -252,7 +252,7 @@ const getSingleCategory = async (req, res) => {
         createDataToProfilesChat(bestProfilesNames,bestProfilesNumPosts,topProfilesChart)
 
         if(sub.length !== 0)
-            parallelCategory.push({name: 'Male Posts',count: maleCount},{name : 'Female Posts',count: femaleCount})
+            parallelCategory.push({name: 'Male',count: maleCount},{name : 'Female',count: femaleCount})
         else
             parallelCategory.push({name: 'There in no parallel data',count: 0})
 

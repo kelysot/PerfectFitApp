@@ -180,7 +180,7 @@ const EditAdminStyle = styled.div`
         padding: 1rem;
 
         @media screen and (max-width: 1280px) {
-          width: 20rem;
+          width: 24rem;
           height: 20rem;
         }
 
@@ -210,6 +210,10 @@ const EditAdminStyle = styled.div`
             padding: 6px;
             border: none;
             font-size: 15px;
+
+            /* @media screen and (max-width: 1280px) {
+              width: 15rem;
+            } */
           }
         }
 
