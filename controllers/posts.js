@@ -419,15 +419,40 @@ const getSuitablePosts = async (req, res) => {
         let plus = parseInt(shoeSize) + 1
 
         for (let i = 0; i < postsForSend.length; i++) {
+            let flag = false
+            
             if (postsForSend[i].categoryId == "Shoes") {
-                if (shoeSize >= minus && shoeSize <= plus) {
-                    finalList.push(postsForSend[i])
+                const sizeOfs = parseInt(postsForSend[i].size)
+                if (sizeOfs >= minus && sizeOfs <= plus) {
+                    flag = true
+                }
+                else{
+                    flag = false
                 }
             }
-            else {
+            else{
+                flag = true
+            }
+
+            if(postsForSend[i].profileId == userName){
+                flag = true
+            }
+
+            if(flag){
                 finalList.push(postsForSend[i])
             }
         }
+
+        // for (let i = 0; i < postsForSend.length; i++) {
+        //     if (postsForSend[i].categoryId == "Shoes") {
+        //         if (shoeSize >= minus && shoeSize <= plus) {
+        //             finalList.push(postsForSend[i])
+        //         }
+        //     }
+        //     else {
+        //         finalList.push(postsForSend[i])
+        //     }
+        // }
 
         profile.save((error) => {
             if (error) {
